@@ -1,0 +1,38 @@
+{
+  "name": "rockybot",
+  "description": "Just a discord bot xD",
+  "version": "0.13~5",
+  "news": "Zmiany w .help",
+  "releasedate": "20.05.21",
+  "main": "index.js",
+  "beta": "false",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bajojajo-xD/RockyBot.git"
+  },
+  "author": "Bajojajo-xD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bajojajo-xD/RockyBot/issues"
+  },
+  "homepage": "https://github.com/Bajojajo-xD/RockyBot#readme",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "discord-image-generation": "^1.4.9",
+    "discord-reply": "^0.1.2",
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "getos": "^3.2.1",
+    "os": "^0.1.1",
+    "os-utils": "^0.0.14",
+    "pretty-ms": "^7.0.1"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "7"
+  }
+}
