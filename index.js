@@ -1,95 +1,69 @@
-require('discord-reply');
+require("dotenv").config()
 const fs = require('fs');
-const Discord = require('discord.js');
-const client = new Discord.Client();
+require('discord-reply');
+const discord = require('discord.js');
 const chalk = require("chalk");
-require('dotenv').config();
-Discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
-client.commands = new Discord.Collection();
-const { releasedate,version,news,beta } = require("./package.json")
 const express = require('express')
+
+const client = new discord.Client({ disableMentions: 'everyone' });
+
+discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
+
+const { Player } = require('discord-player');
+
+client.player = new Player(client);
+client.config = require('./config/bot')
+client.emotes = client.config.emojis;
+client.playerFilters = client.config.playerFilters;
+client.commands = new discord.Collection();
+client.releasedate = client.config.releasedate
+client.version = client.config.version
+client.news = client.config.news
+client.ownerID = client.config.discord.ownerID
+
+if(client.config.beta = true) {
+client.prefix = client.config.discord.betaprefix;
+client.myID = client.config.discord.myBetaID
+} else {
+client.prefix = client.config.discord.prefix;
+client.myID = client.config.discord.myID
+}
+
+//WebUI
 const app = express()
-
-process.on('unhandledRejection', error => {});
-
 app.get('/', (req, res) => res.send('Dziołam (chyba) XDD'))
-
 app.listen(8080)
 
+//Commands handler
+fs.readdirSync('./commands').filter(dirs => {
+const commands = fs.readdirSync(`./commands/${dirs}`).filter(files => files.endsWith('.js'));
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
-}
-
-if(beta === "true") {
-client.login(process.env.BETATOKEN); var prefix = process.env.BETAPREFIX;
-} else {
-client.login(process.env.TOKEN); var prefix = process.env.PREFIX;
-}
-
-const activities = [
-	//Development
-	`🛠️ v${version}`,
-	"🛠️ Made by BAYOJAYO xD#4798",
-	`🛠️ Nowości w skrócie: ${news}`,
-	`🛠️ Data wydania najnowszej wersji: ${releasedate}`,
-
-	//Podpowiedzi
-	"💡 Pingnij bota, aby wyświetlić podstawowe informacje",
-	"💡 Komenda wideo wysyła śmiszne filmy",
-	"💡 Słyszałeś/aś o komendzie tuskotronic? Albo kamien? xD",
-	"💡 Użyj komendy stonoga, aby go usłyszeć XD",
-
-	//Inne XD
-	"🤠 #ZmienićRząd ",
-	"🤠 Ile to 2+2*2?", 
-	"🤠 ¯\\_(ツ)_/¯" 
-  ];
-
-client.on('ready', () => {
-	
-	console.log(chalk.greenBright(`Logged in as ${client.user.tag}\nBot is ready :)`));
-	setInterval(() => {
-		  const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
-		  const newActivity = activities[randomIndex];
-	  
-		  client.user.setActivity(newActivity);
- 
-		}, 15 * 1000);
-
-})
-
-
-
-
-client.on("message", message => {
-	if (!message.guild) return;
-	if (message.content.includes("@here") || message.content.includes("@everyone")) return false;
-	if (message.content === "<@!838363732631486494>" || message.content === "<@838363732631486494>") {
-		const embed = new Discord.MessageEmbed()
-		.setColor("RANDOM")
-		.setTitle("<a:Black_World:838382299166801921> Mój prefix to `.`")
-		.setDescription("<a:greenverify:837704119086612502> Użyj `.help` aby wyświetlić listę komend")
-		.setThumbnail(client.user.avatarURL())
-		.setFooter(`💡 ${message.author.tag}\n🛠️ v${version}`, message.author.displayAvatarURL())
-		.setTimestamp()
-		message.lineReply(embed)
+for (const file of commands) {
+	const command = require(`./commands/${dirs}/${file}`);
+	console.log(chalk.yellowBright(`Załadowano komendę ${file}`));
+	client.commands.set(command.name.toLowerCase(), command);
 	}
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (!client.commands.has(command)) return;
-
-	try {
-		client.commands.get(command).execute(message, args, command);
-	} catch (error) {
-		console.error(error);
-		message.lineReplyNoMention('<a:Siri_Loading:826383904729989160> Wystąpił problem');
-	} 
 })
 
+const events = fs.readdirSync('./events/normal').filter(file => file.endsWith('.js'));
+const player = fs.readdirSync('./events/player').filter(file => file.endsWith('.js'));
+
+for (const file of events) {
+    console.log(chalk.magentaBright(`Załadowano event ${file} paczki discord.js `));
+    const event = require(`./events/normal/${file}`);
+    client.on(file.split(".")[0], event.bind(null, client));
+};
+
+for (const file of player) {
+	console.log(chalk.cyanBright(`Załadowano event ${file} paczki discord-player`));
+    const event = require(`./events/player/${file}`);
+    client.player.on(file.split(".")[0], event.bind(null, client));
+}
+
+
+//LOGIN
+if(client.config.beta = true) {
+client.login(client.config.discord.betatoken);
+} else {
+client.login(client.config.discord.token);
+}
