@@ -1,11 +1,10 @@
-require('discord-reply');
 const { MessageEmbed } = require('discord.js');
 
   module.exports = {
     name: "clear",
     aliases: ["mc"],
     description: "Czyści podaną liczbę wiadomości",
-    category: 'moderacja',
+    category: 'moderation',
     utilisation: '{prefix}clear [liczba >2 i <99]',
 
     async execute(client, message, args) {
@@ -42,7 +41,7 @@ const { MessageEmbed } = require('discord.js');
                 embed.setColor("#32CD32")
                 embed.setTitle(`${emotes.grverify}  Usunięto ${amount} wiadomości`) 
                 embed.setThumbnail(message.client.user.displayAvatarURL())
-                embed.setImage("https://cdn.discordapp.com/attachments/843892434743722044/844159446455549972/loadingsmall.gif") 
+                embed.setImage("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif") 
                 embed.setDescription(`${emotes.rverify} *Jeśli któraś z wiadomości była starsza niż 14 dni komenda nie powiodła się*\n${client.emotes.staff} *Powered by **message.channel.bulkDelete()***\n\n${client.emotes.ubuntu} XDDD`)
     
                 msg = await message.channel.send(embed)

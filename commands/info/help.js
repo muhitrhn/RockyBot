@@ -1,4 +1,3 @@
-require('discord-reply');
 const { MessageEmbed } = require("discord.js");
 
 
@@ -22,16 +21,16 @@ const { MessageEmbed } = require("discord.js");
 
             const avatar = client.commands.filter(x => x.category == 'avatar').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const muzyka = client.commands.filter(x => x.category == 'muzyka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+            const music = client.commands.filter(x => x.category == 'music').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const moderacja = client.commands.filter(x => x.category == "moderacja").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+            const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
 
             embed.addField(`🤿  Avatar`, avatar)
             embed.addField(`🤣  Beka`, beka)
-            embed.addField(`${emotes.rbverify}  Muzyka`, `${muzyka} ${emotes.magentaDot}  **Dostępne filtry muzyczne | *Użycie filtrów: ${client.prefix}filter <filtr>***\n${client.playerFilters.map((x) => `\`` + x + '`').join(` | `)}`)
+            embed.addField(`${emotes.boombox}  Muzyka`, `${music}\n${emotes.magentaDot}  **Dostępne filtry muzyczne | *Użycie filtrów: ${client.prefix}filter <filtr>***\n${client.playerFilters.map((x) => `\`` + x + '`').join(` | `)}`)
             embed.addField(`${emotes.ubuntu}  Info`, info)
             if(message.member.hasPermission('MANAGE_MESSAGES')){
-                embed.addField(`${emotes.staff}  Moderacja`, moderacja)
+                embed.addField(`${emotes.staff}  Moderacja`, moderation)
             }
 
             embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${client.prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)

@@ -3,15 +3,14 @@ module.exports = {
 activities: [	
     //Development
     `🛠️ v${info.version}`,
-    "🛠️ Made by BAYOJAYO xD#4798",
     `🛠️ Nowości w skrócie: ${info.news}`,
     `🛠️ Data wydania najnowszej wersji: ${info.releasedate}`,
 
     //Podpowiedzi
-    "💡 Pingnij bota, aby wyświetlić podstawowe informacje",
-    "💡 Komenda wideo wysyła śmieszne filmy",
+    "💡 Pingnij bota, aby zobaczyć prefix",
     "💡 Słyszałeś/aś o komendzie tuskotronic? Albo kamien? xD",
-    "💡 Użyj komendy stonoga, aby go usłyszeć XD",
+    "💡 Użyj komendy stonoga, aby go wysłać XD",
+    "💡 Komendy muzyczne już dostępne!",
 
     //Inne XD
     "🤠 #ZmienićRząd ",

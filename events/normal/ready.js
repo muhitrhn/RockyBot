@@ -3,7 +3,7 @@ const chalk = require("chalk");
 module.exports = async (client) => {
 	
 	console.log(chalk.redBright(`-------------------------------------------------`))
-	console.log(chalk.redBright(`|`),chalk.greenBright(`     Zalogowano jako ${client.user.tag}      `),chalk.redBright(`|`));
+	console.log(chalk.redBright(`|`),chalk.greenBright(`       Zalogowano jako ${client.user.tag}         `),chalk.redBright(`|`));
 	console.log(chalk.redBright(`|`),chalk.greenBright(`Aktywny na ${client.guilds.cache.size} serwerach, razem użytkowników ${client.users.cache.size}`),chalk.redBright(`|`));
 	console.log(chalk.redBright(`-------------------------------------------------`))
 	setInterval(() => {

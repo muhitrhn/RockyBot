@@ -2,7 +2,7 @@ module.exports = {
 
     beta: false,
 
-    releasedate: "21.05.21",
-    version: "0.14",
-    news: "Przebudowa bota, nowa komenda help",
+    releasedate: "23.05.21",
+    version: "0.15",
+    news: "Granie na vc już dostępne, użyj .help po więcej!",
 };

@@ -1,4 +1,3 @@
-require('discord-reply');
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {

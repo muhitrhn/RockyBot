@@ -1,4 +1,3 @@
-require('discord-reply');
 const djsVersion = require('discord.js').version
 const { MessageEmbed } = require('discord.js');
 const os = require('os-utils');
@@ -33,8 +32,8 @@ module.exports = {
                 embed.addField(`${emotes.ubuntu} -- SYSTEM -- ${emotes.ubuntu}`,
                  `${emotes.system} **System**: \`${os.os}\`\n${emotes.ubuntu} **Distro**: \`${os.dist}\`\n${emotes.rbverify} **Wersja**: \`${os.release}\`\n${emotes.world} **Czas pracy**: \`${prettyMilliseconds(oss.uptime() * 1000)}\`
                  `)})
-            
-            await embed.addField(`${emotes.gearspin} -- SILNIKI -- ${emotes.gearspin}`,
+            setTimeout(async () => {
+                await embed.addField(`${emotes.gearspin} -- SILNIKI -- ${emotes.gearspin}`,
                 `${emotes.NJS} **Node.js**: \`${process.version}\`\n${emotes.DJS} **Discord.js**: \`v${djsVersion}\`
                 `)
     
@@ -44,6 +43,7 @@ module.exports = {
     
             await message.lineReplyNoMention(embed)
             if(reaction) await reaction.remove()
+            }, 500);
         }, 1000);
   
     }

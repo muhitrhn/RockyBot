@@ -35,7 +35,9 @@ module.exports = {
         gearspin: "<a:gearSpinning:826727876635262977>",
         world: "<a:Black_World:838382299166801921>",
         google: "<a:Google_Loading:826382993948934164>",
-    },
+        question: "<:Question_mark:845341315348430939>",
+        boombox: '<:Boombox:845342914728296529>',
+        },
 
     beta: info.beta,
 
