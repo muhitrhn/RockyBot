@@ -39,10 +39,10 @@ client.prefix = client.config.discord.prefix;
 client.myID = client.config.discord.myID
 }
 
-//WebUI
+/*//WebUI
 const app = express()
 app.get('/', (req, res) => res.send('Dziołam (chyba) XDD'))
-app.listen(8080)
+app.listen(8080) */
 
 //Commands handler
 fs.readdirSync('./commands').filter(dirs => {
