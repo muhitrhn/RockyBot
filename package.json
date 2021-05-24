@@ -6,7 +6,7 @@
   "main": "index.js",
   "beta": "false",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js --max_old_space_size=8192"
   },
   "repository": {
     "type": "git",
