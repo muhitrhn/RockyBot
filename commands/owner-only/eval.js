@@ -12,14 +12,13 @@ module.exports = {
         embed = new MessageEmbed()
         embed.setColor("RED")
         .setTitle("🔒  Komenda niedostępna")
-        .setDescription(`${emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
+        .setDescription(`${client.emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
         .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
         .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
         .setTimestamp()
         message.lineReply(embed)
         .then(msg => {
-          if(reaction) reaction.remove()
-          message.react(emotes.x)
+          message.react(client.emotes.x)
           msg.delete({ timeout: 8000 })
         })
 
