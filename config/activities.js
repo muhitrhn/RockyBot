@@ -10,7 +10,6 @@ activities: [
     "💡 Pingnij bota, aby zobaczyć prefix",
     "💡 Słyszałeś/aś o komendzie tuskotronic? Albo kamien? xD",
     "💡 Użyj komendy stonoga, aby go wysłać XD",
-    "💡 Komendy muzyczne już dostępne!",
 
     //Inne XD
     "🤠 #ZmienićRząd ",

@@ -7,16 +7,31 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
     name: "info",
-    aliases: ["ii"],
+    aliases: [""],
     description: "Sprawdza info o bocie",
-    category: 'info',
+    category: 'owner-only',
     utilisation: '{prefix}info',
 
     async execute(client, message) {
         emotes = client.emotes
         reaction = await message.react(emotes.google)
         embed = new MessageEmbed()
-        .setColor("RANDOM")
+        if(message.author.id !== client.ownerID) {
+            embed.setColor("RED")
+            .setTitle("🔒  Komenda niedostępna")
+            .setDescription(`${emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
+            .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
+            .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+            .setTimestamp()
+            message.lineReply(embed)
+            .then(msg => {
+              if(reaction) reaction.remove()
+              message.react(emotes.x)
+              msg.delete({ timeout: 8000 })
+            })
+
+        } else {
+        embed.setColor("RANDOM")
         .setTitle(`${emotes.system}  Użyto komendy ${message.content}`)
         .setDescription(`${emotes.staff} *Powered by **os**, **os-utils** and **getos** packages*\n${emotes.ubuntu} XDDD\n`)
         .setThumbnail(client.user.avatarURL())          
@@ -45,6 +60,7 @@ module.exports = {
             if(reaction) await reaction.remove()
             }, 500);
         }, 1000);
+    }
   
     }
 }

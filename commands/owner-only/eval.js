@@ -1,0 +1,39 @@
+const { MessageEmbed } = require("discord.js");
+
+module.exports = {
+  name: "eval",
+  aliases: [""],
+  description: "Eval... xD",
+  category: 'owner-only',
+  utilisation: '{prefix}eval {coś}',
+
+  execute(client, message, args) {
+    if(message.author.id !== client.ownerID) {
+        embed.setColor("RED")
+        .setTitle("🔒  Komenda niedostępna")
+        .setDescription(`${emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
+        .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+        .setTimestamp()
+        message.lineReply(embed)
+        .then(msg => {
+          if(reaction) reaction.remove()
+          message.react(emotes.x)
+          msg.delete({ timeout: 8000 })
+        })
+
+    } else {
+    try {
+        const code = args.join(" ");
+        let evaled = eval(code);
+   
+        if (typeof evaled !== "string")
+          evaled = require("util").inspect(evaled);
+   
+        message.lineReplyNoMention(evaled, {code:"xl"});
+      } catch (err) {
+        message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
+      }
+    }
+  }
+}
