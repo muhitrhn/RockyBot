@@ -9,6 +9,7 @@ module.exports = {
 
   execute(client, message, args) {
     if(message.author.id !== client.ownerID) {
+        embed = new MessageEmbed()
         embed.setColor("RED")
         .setTitle("🔒  Komenda niedostępna")
         .setDescription(`${emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
