@@ -5,7 +5,7 @@ module.exports = {
   aliases: [],
   description: "Eval... xD",
   category: 'owner-only',
-  utilisation: '{prefix}eval {coś}\n***Bot0wner only!***',
+  utilisation: '{prefix}eval {coś}',
 
   execute(client, message, args) {
     if(message.author.id !== client.ownerID) {

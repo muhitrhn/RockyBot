@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 
   module.exports = {
     name: "help",
-    aliases: ['h', 'pomoc', 'p'],
+    aliases: ['h', 'pomoc', 'p', 'ih'],
     description: "Pomoc dotycząca bota",
     category: 'info',
     utilisation: '{prefix}help <nazwa komendy>',
@@ -23,7 +23,6 @@ const { MessageEmbed } = require("discord.js");
             const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const ownerOnly = client.commands.filter(x => x.category == "owner-only").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
 
             embed.addField(`🤿  Avatar`, avatar)
             embed.addField(`🤣  Beka`, beka)
@@ -31,16 +30,22 @@ const { MessageEmbed } = require("discord.js");
             if(message.member.hasPermission('MANAGE_MESSAGES')){
                 embed.addField(`${emotes.staff}  Moderacja`, moderation)
             }
-            if(message.author.id === client.ownerID){
-              embed.addField(`${emotes.cpu}  Owner0nly`, ownerOnly)
-            }
             embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${client.prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)
             await message.lineReplyNoMention(embed)
             if(reaction) await reaction.remove()
         } else {
             const command = client.commands.get(args.join(" ").toLowerCase()) || client.commands.find(x => x.aliases && x.aliases.includes(args.join(" ").toLowerCase()));
-            
-            if (!command) {
+
+            if (message.author.id === client.ownerID && args[0].toLowerCase() === "owneronly") {
+              const ownerOnly = client.commands.filter(x => x.category == "owner-only").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+              embed.setTitle(`${emotes.warn}  Lista komend \`Owner 0nly\``)
+              embed.addField(`${emotes.cpu}  Owner0nly`, ownerOnly)
+              embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${client.prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)
+              await message.lineReplyNoMention(embed)
+              if(reaction) await reaction.remove()
+            }
+          
+            else if (!command) {
                   msg = await message.lineReply(emotes.x)
                   message.react(emotes.x)
                   if(reaction) await reaction.remove()
@@ -50,13 +55,33 @@ const { MessageEmbed } = require("discord.js");
                   }, 5500);
                 
             } else {
+              if (command.category === "owner-only"){
+                if (message.author.id === client.ownerID) {
+                  embed.setTitle(`${client.emotes.siri}  Pomoc dotycząca **${command.name}**\n${client.emotes.warn}  komenda \`owner0nly\``)
+                  embed.addField(`Opis`, command.description, true)
+                    embed.addField(`Alias(y)`, command.aliases.length < 1 ? '-' : command.aliases.join(', '), true)
+                    embed.addField(`Użycie`, command.utilisation.replace(`{prefix}`, client.prefix), true)
+                    embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.world}Wymagane argumenty: \`[]\`, opcjonalne argumenty: \`<>\`.`)
+                  await message.lineReplyNoMention(embed)
+                  if(reaction) reaction.remove() 
+                } else {
+                  msg = await message.lineReply(emotes.x)
+                  message.react(emotes.x)
+                  if(reaction) await reaction.remove()
+                  await msg.react("<a:timer6:844672772169138197>")
+                  setTimeout(() => {
+                      msg.delete()
+                  }, 5500);
+                }
+              } else {
               embed.setTitle(`${client.emotes.siri}  Pomoc dotycząca **${command.name}**, już się robi xD`)
               embed.addField(`Opis`, command.description, true)
                 embed.addField(`Alias(y)`, command.aliases.length < 1 ? '-' : command.aliases.join(', '), true)
                 embed.addField(`Użycie`, command.utilisation.replace(`{prefix}`, client.prefix), true)
                 embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.world}Wymagane argumenty: \`[]\`, opcjonalne argumenty: \`<>\`.`)
               await message.lineReplyNoMention(embed)
-              if(reaction) reaction.remove()
+              if(reaction) reaction.remove() 
+            }
             }
       } 
   }

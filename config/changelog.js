@@ -1,27 +1,31 @@
 const client = require(`./emojis`)
 module.exports = {
-   todoList: "850494320988782613",
-   changelog: ` ${client.emojis.yellowDot} **Wersja 0.18:**
 
-   ${client.emojis.world} ***Ukończono 0/6***
+   avVersions: `0.18 ${client.emojis.yellowDot} 0.17`,
+
+   v018: `
+   ${client.emojis.world} ***Ukończono 0/4***
 
    ${client.emojis.blueDot} Komenda **rymowanka**:
    ${client.emojis.rverify} Większa baza rymowanek;
    
    ${client.emojis.blueDot} Komenda **meme**: 
    ${client.emojis.rverify} Wysyłanie memów z jakiejś strony;
-
-   ${client.emojis.blueDot} Komenda **bugreport**: 
-   ${client.emojis.rverify} Opcja zgłaszania błędów z poziomu komend;
    
    ${client.emojis.blueDot} **Ustawienia** serwerowe:
    ${client.emojis.rverify} Podłączenie bazy danych, 
-   ${client.emojis.rverify} Opcja quiet(q) do komend, usuwa embeda z komend wideo itp,
    ${client.emojis.rverify} Zmiana prefixu;
+   `,
    
+   v0171: `    
+   ${client.emojis.yellowDot} **Wersja 0.17~1:** 
+
+   ${client.emojis.blueDot} Komenda **changelog**:
+   ${client.emojis.grverify} Wyświetlanie changelogu wersji;
+   `,
+
+   v017: `
    ${client.emojis.yellowDot} **Wersja 0.17:** 
-    
-   ${client.emojis.world} ***Ukończono 6/6, wydano***
 
    ${client.emojis.blueDot} Komenda **clear**:
    ${client.emojis.grverify} Thunbail usunąć, image -> thunbail po usunięciu, 
@@ -33,5 +37,6 @@ module.exports = {
    ${client.emojis.grverify} Poprawka w embed.setDescription();
    
    ${client.emojis.blueDot} Komenda **rymowanka**:
-   ${client.emojis.grverify} Wysyłanie śmiesznych rymowanek;`,
+   ${client.emojis.grverify} Wysyłanie śmiesznych rymowanek;
+   `,
 }

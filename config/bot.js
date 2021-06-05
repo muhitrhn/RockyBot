@@ -21,7 +21,7 @@ module.exports = {
     releasedate: info.releasedate,
     version: info.version,
     news: info.news,
-    changelog: changelog.changelog,
+    changelog: changelog,
     todoList: changelog.todoList,
 
     discord: {

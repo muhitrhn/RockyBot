@@ -19,6 +19,7 @@ module.exports = {
     siren: "<a:Siren:826730448289923072>",
     grverify: "<a:greenverify:837704119086612502>",
     rverify: "<a:redverify:837704198388056175>",
+    yverify: "<a:Yellow_verify:850849140974944276>",
     gearspin: "<a:gearSpinning:826727876635262977>",
     world: "<a:Black_World:838382299166801921>",
     google: "<a:Google_Loading:826382993948934164>",
