@@ -23,6 +23,7 @@ const { MessageEmbed } = require("discord.js");
             const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+            const ownerOnly = client.commands.filter(x => x.category == "owner-only").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
 
             embed.addField(`🤿  Avatar`, avatar)
             embed.addField(`🤣  Beka`, beka)
@@ -30,7 +31,9 @@ const { MessageEmbed } = require("discord.js");
             if(message.member.hasPermission('MANAGE_MESSAGES')){
                 embed.addField(`${emotes.staff}  Moderacja`, moderation)
             }
-
+            if(message.author.id === client.ownerID){
+              embed.addField(`${emotes.cpu}  Owner0nly`, ownerOnly)
+            }
             embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${client.prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)
             await message.lineReplyNoMention(embed)
             if(reaction) await reaction.remove()

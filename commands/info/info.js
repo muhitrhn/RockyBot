@@ -7,33 +7,18 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
     name: "info",
-    aliases: [""],
+    aliases: ["ii"],
     description: "Sprawdza info o bocie",
-    category: 'owner-only',
+    category: 'info',
     utilisation: '{prefix}info',
 
     async execute(client, message) {
         emotes = client.emotes
         reaction = await message.react(emotes.google)
         embed = new MessageEmbed()
-        if(message.author.id !== client.ownerID) {
-            embed.setColor("RED")
-            .setTitle("🔒  Komenda niedostępna")
-            .setDescription(`${emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
-            .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
-            .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
-            .setTimestamp()
-            message.lineReply(embed)
-            .then(msg => {
-              if(reaction) reaction.remove()
-              message.react(emotes.x)
-              msg.delete({ timeout: 8000 })
-            })
-
-        } else {
         embed.setColor("RANDOM")
         .setTitle(`${emotes.system}  Użyto komendy ${message.content}`)
-        .setDescription(`${emotes.staff} *Powered by **os**, **os-utils** and **getos** packages*\n${emotes.ubuntu} XDDD\n`)
+        .setDescription(`${emotes.staff} *Powered by **os**, **os-utils** and **getos** packages xD*\n`)
         .setThumbnail(client.user.avatarURL())          
         .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
         .setTimestamp()
@@ -55,12 +40,12 @@ module.exports = {
             await embed.addField(`🤖 -- BOT -- 🤖`,
                 `${emotes.world} **Czas pracy**: \`${prettyMilliseconds(os.processUptime() * 1000)}\`\n🏓 **Ping**: \`${client.ws.ping}ms\`\n${emotes.siri} **Prefix**: \`${client.prefix}\`
                 `)   
-    
+
             await message.lineReplyNoMention(embed)
             if(reaction) await reaction.remove()
             }, 500);
         }, 1000);
-    }
+    
   
     }
 }

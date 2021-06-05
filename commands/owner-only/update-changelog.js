@@ -1,11 +1,11 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "eval",
+  name: "update-changelog",
   aliases: [],
-  description: "Eval... xD",
+  description: "Zaktualizuj changelog",
   category: 'owner-only',
-  utilisation: '{prefix}eval {coś}\n***Bot0wner only!***',
+  utilisation: '{prefix}update-changelog\n***Bot0wner only!***',
 
   execute(client, message, args) {
     if(message.author.id !== client.ownerID) {
@@ -23,17 +23,10 @@ module.exports = {
         })
 
     } else {
-    try {
-        const code = args.join(" ");
-        let evaled = eval(code);
-   
-        if (typeof evaled !== "string")
-          evaled = require("util").inspect(evaled);
-   
-        message.channel.send(evaled, {code:"xl"});
-      } catch (err) {
-        message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
-      }
+        const changelog = client.channels.cache.get(client.config.todoList)
+
+        changelog.bulkDelete(99)
+        changelog.send(client.config.changelog)
     }
   }
 }

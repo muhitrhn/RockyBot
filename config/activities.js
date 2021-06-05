@@ -8,8 +8,9 @@ activities: [
 
     //Podpowiedzi
     "💡 Pingnij bota, aby zobaczyć prefix",
-    "💡 Słyszałeś/aś o komendzie tuskotronic? Albo kamien? xD",
-    "💡 Użyj komendy stonoga, aby go wysłać XD",
+    "💡 Użyj help, aby zobaczyć listę komend",
+    "💡 Użyj komendy rymowanka, żeby wysłać losową rymowankę XD",
+    "💡 Jeśli masz problemy z komendą, użyj help {komenda}",
 
     //Inne XD
     "🤠 #ZmienićRząd ",

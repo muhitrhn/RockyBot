@@ -40,14 +40,13 @@ const { MessageEmbed } = require('discord.js');
 
                 embed.setColor("#32CD32")
                 embed.setTitle(`${emotes.grverify}  Usunięto ${amount} wiadomości`) 
-                embed.setThumbnail(message.client.user.displayAvatarURL())
-                embed.setImage("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif") 
-                embed.setDescription(`${emotes.rverify} *Jeśli któraś z wiadomości była starsza niż 14 dni komenda nie powiodła się*\n${client.emotes.staff} *Powered by **message.channel.bulkDelete()***\n\n${client.emotes.ubuntu} XDDD`)
+                embed.setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif") 
+                embed.setDescription(`${emotes.rverify} *Jeśli któraś z wiadomości była starsza niż 14 dni komenda nie powiodła się*\n${client.emotes.staff} *Powered by **message.channel.bulkDelete()** xD*`)
     
                 msg = await message.channel.send(embed)
                 setTimeout(async () => {
                 await msg.delete()
-                }, 5000);                     
+                }, 8000);                     
             }
            }
     }
