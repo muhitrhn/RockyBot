@@ -9,7 +9,7 @@
 >Wysyłanie memów z jakiejś strony;
    
 🎈 **Ustawienia** serwerowe:
->Podłączenie bazy danych, 
+>Podłączenie bazy danych, \n
 >Zmiana prefixu;
 
 ---------------------------
