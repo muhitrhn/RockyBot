@@ -1,4 +1,6 @@
-# 🟠 **Wersja 0.18**
+# 🟠 0.18
+
+🟠 **Wersja 0.18:**
 
 🛠 ***Ukończono 0/4***
 
@@ -8,34 +10,24 @@
 |📕 `Zmiana prefixu`           |                               |                                  |
 
 
-# 🟢 Wersja 0.17~2:
+# 🟢 0.17:
 
-|✨*Bot|
+🟢 **Wersja 0.17~2:**
+
+|✨Bot|
 |---------------------------|
 |📗 `Kompatybilność z kilkoma właścicielami`|
 |📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
 
+🟢 **Wersja 0.17~1:**
 
-🟢 **Wersja 0.17~1:** 
-
-|✨*Bot|
+|✨ Komenda changelog|
 |---------------------------|
-|📗 `Kompatybilność z kilkoma właścicielami`|
-|📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
-
-Komenda **changelog**:
-Wyświetlanie changelogu wersji;
+|📗 `Wyświetlanie changelogu wersji`|
 
 🟢 **Wersja 0.17:** 
 
-Komenda **clear**:
-Thunbail usunąć, image -> thunbail po usunięciu, 
-Zmiana czasu zniknięcia info o usunięciu wiadomości, z 5 na 8 sekund,
-Poprawka w embed.setDescription();
-
-Komenda **info**:
-Ogólnodostępność, 
-Poprawka w embed.setDescription();
-   
-Komenda **rymowanka**:
-Wysyłanie śmiesznych rymowanek;
+|✨ Komenda clear|✨ Komenda info           |✨ Komenda rymowanka                   |
+|---------------------------|-------------------------------|----------------------------------|
+|📗 `Zmiany w embed`|📗 `Ogólnodostępność`       |📗 `Wysyłanie rymowanek`|
+|📗 `Zmiiana czasu zanikania, 5s -> 8s`|📗 `Zmiany w embed`             | 
