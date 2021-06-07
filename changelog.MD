@@ -1,20 +1,20 @@
-**Wersja 0.18**
+#🟠 **Wersja 0.18**
 
-***Ukończono 0/4***
+🛠 ***Ukończono 0/4***
 
-Komenda **rymowanka**:
-Większa baza rymowanek;
+🎈 Komenda **rymowanka**:
+  Większa baza rymowanek;
    
-Komenda **meme**: 
-Wysyłanie memów z jakiejś strony;
+🎈 Komenda **meme**: 
+  Wysyłanie memów z jakiejś strony;
    
-**Ustawienia** serwerowe:
-Podłączenie bazy danych, 
-Zmiana prefixu;
+🎈 **Ustawienia** serwerowe:
+  Podłączenie bazy danych, 
+  Zmiana prefixu;
 
 ---------------------------
 
-**Wersja 0.17~2:** 
+# 🟢 **Wersja 0.17~2:** 
 
 **Bot**:
 Kompatybilność z kilkoma właścicielami,
@@ -25,7 +25,7 @@ Zmieniona komenda changelog; dodano changelog w pliku.
 Komenda **changelog**:
 Wyświetlanie changelogu wersji;
 
-**Wersja 0.17:** 
+🟢 **Wersja 0.17:** 
 
 Komenda **clear**:
 Thunbail usunąć, image -> thunbail po usunięciu, 
