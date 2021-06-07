@@ -13,11 +13,8 @@
 |✨*Bot|
 |---------------------------|
 |📗 `Kompatybilność z kilkoma właścicielami`|
-|📍 `Zmiana prefixu`         |
+|📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
 
-**Bot**:
-Kompatybilność z kilkoma właścicielami,
-Zmieniona komenda changelog; dodano changelog w pliku.
 
 **Wersja 0.17~1:** 
 
