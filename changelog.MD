@@ -3,14 +3,14 @@
 🛠 ***Ukończono 0/4***
 
 🎈 Komenda **rymowanka**:
-  Większa baza rymowanek;
+>Większa baza rymowanek;
    
 🎈 Komenda **meme**: 
-  Wysyłanie memów z jakiejś strony;
+>Wysyłanie memów z jakiejś strony;
    
 🎈 **Ustawienia** serwerowe:
-  Podłączenie bazy danych, 
-  Zmiana prefixu;
+>Podłączenie bazy danych, 
+>Zmiana prefixu;
 
 ---------------------------
 
