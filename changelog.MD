@@ -6,7 +6,7 @@
 
 |✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
-|📕 Podłączenie bazy danych|📕 `Większa baza rymowanek`       |📕 `Wysyłanie memów z jakiejś strony`|
+|📕 `Podłączenie bazy danych`|📕 `Większa baza rymowanek`       |📕 `Wysyłanie memów z jakiejś strony`|
 |📕 `Zmiana prefixu`          
 
 
