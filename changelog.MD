@@ -12,14 +12,12 @@
 
 # 🟢 0.17
 
-🟠 **Patch 3**
-
->🛠 ***Ukończono 1/2***
+🟢 **Patch 3**
 
 |✨Bot| 
 |---------------------------|
 |📗 `Lepsza odpowiedz na ping`|
-|📕 `Zmiany w komendzie changelog`|
+|📗 `Zmiany w komendzie changelog`|
 
 🟢 **Patch 2**
 
