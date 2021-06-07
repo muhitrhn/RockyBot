@@ -2,14 +2,18 @@
 
 🛠 ***Ukończono 0/4***
 
-|✨ **Ustawienia** serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
+|✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
-|📍 `Podłączenie bazy danych`|📍 `Większa baza rymowanek`       |📍 `Wysyłanie memów z jakiejś strony`|
-|📍 `Zmiana prefixu`           |                               |                                  |
+|📕 `Podłączenie bazy danych`|📕 `Większa baza rymowanek`       |📕 `Wysyłanie memów z jakiejś strony`|
+|📕 `Zmiana prefixu`           |                               |                                  |
 
----------------------------
 
 # 🟢 **Wersja 0.17~2:** 
+
+|✨*Bot|
+|---------------------------|
+|📗 `Kompatybilność z kilkoma właścicielami`|
+|📍 `Zmiana prefixu`         |
 
 **Bot**:
 Kompatybilność z kilkoma właścicielami,
