@@ -12,6 +12,12 @@
 
 # 🟢 0.17
 
+🟠 **Patch 3**
+
+|✨Bot|
+|---------------------------|
+|📕 `Lepsiejsza odpowiedz na ping xD`|
+
 🟢 **Patch 2**
 
 |✨Bot|
