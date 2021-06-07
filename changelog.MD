@@ -2,7 +2,7 @@
 
 🟠 **Pierwsze wydanie**
 
-🛠 ***Ukończono 0/4***
+>🛠 ***Ukończono 0/4***
 
 |✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
