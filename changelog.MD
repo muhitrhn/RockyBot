@@ -2,15 +2,10 @@
 
 🛠 ***Ukończono 0/4***
 
-🎈 Komenda **rymowanka**:
->Większa baza rymowanek;
-   
-🎈 Komenda **meme**: 
->Wysyłanie memów z jakiejś strony;
-   
-🎈 **Ustawienia** serwerowe:
->Podłączenie bazy danych, \n
->Zmiana prefixu;
+|🎈 **Ustawienia** serwerowe|🎈 Komenda rymowanka           |🎈 Komenda meme                   |
+|---------------------------|-------------------------------|----------------------------------|
+|`Podłączenie bazy danych`  |`Większa baza rymowanek`       |`Wysyłanie memów z jakiejś strony`|
+|`Zmiana prefixu`           |                               |                                  |
 
 ---------------------------
 
