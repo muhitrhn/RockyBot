@@ -30,4 +30,4 @@
 |✨ Komenda clear|✨ Komenda info           |✨ Komenda rymowanka                   |
 |---------------------------|-------------------------------|----------------------------------|
 |📗 `Zmiany w embed`|📗 `Ogólnodostępność`       |📗 `Wysyłanie rymowanek`|
-|📗 `Zmiiana czasu zanikania, 5s -> 8s`|📗 `Zmiany w embed`             | 
+|📗 `Zmiana czasu zanikania, 5s -> 8s`|📗 `Zmiany w embed`             | 
