@@ -14,11 +14,12 @@
 
 🟠 **Patch 3**
 
->🛠 ***Ukończono 0/1***
+>🛠 ***Ukończono 1/2***
 
-|✨Bot|
+|✨Bot| |
 |---------------------------|
-|📕 `Lepsiejsza odpowiedz na ping xD`|
+|📗 `Lepsza odpowiedz na ping`| 
+|📕 `Zmiany w komendzie changelog`|
 
 🟢 **Patch 2**
 
