@@ -1,6 +1,6 @@
 # 🟠 0.18
 
-🟠 **Wersja 0.18:**
+🟠 **Pierwsze wydanie**
 
 🛠 ***Ukończono 0/4***
 
@@ -10,22 +10,22 @@
 |📕 `Zmiana prefixu`          
 
 
-# 🟢 0.17:
+# 🟢 0.17
 
-🟢 **Wersja 0.17~2:**
+🟢 **Patch 2**
 
 |✨Bot|
 |---------------------------|
 |📗 `Kompatybilność z kilkoma właścicielami`|
 |📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
 
-🟢 **Wersja 0.17~1:**
+🟢 **Patch 1:**
 
 |✨ Komenda changelog|
 |---------------------------|
 |📗 `Wyświetlanie changelogu wersji`|
 
-🟢 **Wersja 0.17:** 
+🟢 **Pierwsze wydanie** 
 
 |✨ Komenda clear|✨ Komenda info           |✨ Komenda rymowanka                   |
 |---------------------------|-------------------------------|----------------------------------|
