@@ -8,7 +8,7 @@
 |📕 `Zmiana prefixu`           |                               |                                  |
 
 
-# 🟢 **Wersja 0.17~2:** 
+# 🟢 Wersja 0.17~2:
 
 |✨*Bot|
 |---------------------------|
@@ -16,7 +16,12 @@
 |📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
 
 
-**Wersja 0.17~1:** 
+🟢 **Wersja 0.17~1:** 
+
+|✨*Bot|
+|---------------------------|
+|📗 `Kompatybilność z kilkoma właścicielami`|
+|📗 `Changelog przeniesiony do pliku, zmieniona komenda`         |
 
 Komenda **changelog**:
 Wyświetlanie changelogu wersji;
