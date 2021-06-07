@@ -16,9 +16,9 @@
 
 >🛠 ***Ukończono 1/2***
 
-|✨Bot| |
+|✨Bot| 
 |---------------------------|
-|📗 `Lepsza odpowiedz na ping`| 
+|📗 `Lepsza odpowiedz na ping`|
 |📕 `Zmiany w komendzie changelog`|
 
 🟢 **Patch 2**
