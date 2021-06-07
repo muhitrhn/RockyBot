@@ -14,6 +14,8 @@
 
 🟠 **Patch 3**
 
+>🛠 ***Ukończono 0/1***
+
 |✨Bot|
 |---------------------------|
 |📕 `Lepsiejsza odpowiedz na ping xD`|
