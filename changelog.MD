@@ -2,7 +2,7 @@
 
 🛠 ***Ukończono 0/4***
 
-|🎈 **Ustawienia** serwerowe|🎈 Komenda rymowanka           |🎈 Komenda meme                   |
+|✨ **Ustawienia** serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
 |📍 `Podłączenie bazy danych`|📍 `Większa baza rymowanek`       |📍 `Wysyłanie memów z jakiejś strony`|
 |📍 `Zmiana prefixu`           |                               |                                  |
