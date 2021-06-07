@@ -4,8 +4,8 @@
 
 |🎈 **Ustawienia** serwerowe|🎈 Komenda rymowanka           |🎈 Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
-|`Podłączenie bazy danych`  |`Większa baza rymowanek`       |`Wysyłanie memów z jakiejś strony`|
-|`Zmiana prefixu`           |                               |                                  |
+|📍 `Podłączenie bazy danych`|📍 `Większa baza rymowanek`       |📍 `Wysyłanie memów z jakiejś strony`|
+|📍 `Zmiana prefixu`           |                               |                                  |
 
 ---------------------------
 
