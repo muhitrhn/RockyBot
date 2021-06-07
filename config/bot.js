@@ -1,6 +1,5 @@
 const info = require('./info')
 const activities = require(`./activities`)
-const changelog = require(`./changelog`)
 const emotes = require(`./emojis`)
 require("dotenv").config()
 
@@ -21,8 +20,7 @@ module.exports = {
     releasedate: info.releasedate,
     version: info.version,
     news: info.news,
-    changelog: changelog,
-    todoList: changelog.todoList,
+    changelog: "https://github.com/Bajojajo-xD/RockyBot/blob/main/changelog.MD",
 
     discord: {
         betatoken: process.env.BETATOKEN,
@@ -31,7 +29,8 @@ module.exports = {
         myID: process.env.myID,
         betaprefix: "!",
         prefix: '.',
-        ownerID: `643084165209784331`,
+        ownerID: info.ownerID,
+        testerID: info.testerID,
         activities: activities.activities,
     },
 };

@@ -16,6 +16,8 @@ client.releasedate = client.config.releasedate
 client.version = client.config.version
 client.news = client.config.news
 client.ownerID = client.config.discord.ownerID
+client.testerID = client.config.discord.testerID
+
 
 if(client.config.beta === true) {
 client.prefix = client.config.discord.betaprefix;

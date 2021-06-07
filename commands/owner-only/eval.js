@@ -8,7 +8,7 @@ module.exports = {
   utilisation: '{prefix}eval {coś}',
 
   execute(client, message, args) {
-    if(message.author.id !== client.ownerID) {
+    if(!client.ownerID.includes(message.author.id)) {
         embed = new MessageEmbed()
         embed.setColor("RED")
         .setTitle("🔒  Komenda niedostępna")

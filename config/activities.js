@@ -3,8 +3,8 @@ module.exports = {
 activities: [	
     //Development
     `🛠️ v${info.version}`,
-    `🛠️ Nowości w skrócie: ${info.news}`,
     `🛠️ Data wydania najnowszej wersji: ${info.releasedate}`,
+    `🛠️ Znajdź mnie na githubie!: ${info.github}`,
 
     //Podpowiedzi
     "💡 Pingnij bota, aby zobaczyć prefix",
