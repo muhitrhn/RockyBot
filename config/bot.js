@@ -13,6 +13,8 @@ module.exports = {
         rymowanka: "850655868529147914",
     },
 
+    ChangesChannel: "851491557160124452",
+
     emojis: emotes.emojis,
 
     beta: info.beta,
@@ -20,7 +22,8 @@ module.exports = {
     releasedate: info.releasedate,
     version: info.version,
     news: info.news,
-    changelog: "https://github.com/Bajojajo-xD/RockyBot/blob/main/changelog.MD",
+    github: info.github,
+    changelog: info.changelog,
 
     discord: {
         betatoken: process.env.BETATOKEN,
