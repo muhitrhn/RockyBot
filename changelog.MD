@@ -2,11 +2,11 @@
 
 🟠 **Pierwsze wydanie**
 
->🛠 ***Ukończono 0/4***
+>🛠 ***Ukończono 2,5/4***
 
 |✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
-|📕 `Podłączenie bazy danych`|📕 `Większa baza rymowanek`       |📕 `Wysyłanie memów z jakiejś strony`|
+|📕📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|
 |📕 `Zmiana prefixu`          
 
 
