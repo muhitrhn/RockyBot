@@ -20,7 +20,7 @@
 
 🟢 **Patch 3**
 
-|✨Bot|✨Changelog|
+|✨Bot|✨Komenda changelog|
 |---------------------------|--------|
 |📗 `Lepsza odpowiedz na ping`|📗 `Zmieniona treść embeda`|
 
