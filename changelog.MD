@@ -2,12 +2,12 @@
 
 🟠 **Pierwsze wydanie**
 
->🛠 ***Ukończono 2,5/4***
+>🛠 ***Ukończono 4/4, ostatnie szlify...***
 
 |✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
-|📕📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|
-|📕 `Zmiana prefixu`          
+|📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|
+|📗 `Zmiana prefixu`          
 
 
 # 🟢 0.17
