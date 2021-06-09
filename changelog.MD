@@ -1,12 +1,11 @@
-# 🟠 0.18
+# 🟢 0.18
 
-🟠 **Pierwsze wydanie**
+🟢 **Pierwsze wydanie**
 
->🛠 ***Ukończono 4/4, ostatnie szlify...***
 
-|✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
-|---------------------------|-------------------------------|----------------------------------|
-|📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|
+|✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |✨Ping|
+|---------------------------|-------------------------------|----------------------------------|-------|
+|📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|📗 `Leciutka zmiana odpowiedzi bota na ping`|
 |📗 `Zmiana prefixu`          
 
 
