@@ -1,5 +1,11 @@
 # 🟢 0.18
 
+🟢 **Patch 1**
+
+|✨ Komenda prefix oraz help|
+|---------------------------|
+|📗 `Zmiana w sprawdzaniu uprawnień` 
+
 🟢 **Pierwsze wydanie**
 
 
