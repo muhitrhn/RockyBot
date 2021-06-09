@@ -7,7 +7,7 @@ module.exports = {
             ],
 
     releasedate: "09.06.21",
-    version: "0.18",
+    version: "0.18~1",
     changelog: "https://github.com/Bajojajo-xD/RockyBot/blob/main/changelog.MD",
     github: "https://github.com/Bajojajo-xD/RockyBot"
 };

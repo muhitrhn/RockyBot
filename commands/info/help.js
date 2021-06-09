@@ -32,7 +32,7 @@ const { MessageEmbed } = require("discord.js");
             if(message.member.hasPermission('MANAGE_MESSAGES')){
                 embed.addField(`${emotes.staff}  Moderacja`, moderation)
             }
-            if(message.member.hasPermission('MANAGE_SERVER')){
+            if(message.member.hasPermission('MANAGE_GUILD')){
               embed.addField(`🛠️  Opcje`, options)
           }
             embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)

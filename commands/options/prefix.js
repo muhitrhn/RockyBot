@@ -17,7 +17,7 @@ module.exports = {
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
     .setTimestamp()
 
-    if(!message.member.hasPermission('MANAGE_SERVER') || !client.ownerID.includes(message.author.id)) {
+    if(!message.member.hasPermission('MANAGE_GUILD') || !client.ownerID.includes(message.author.id)) {
         embed.setColor("RED")
         .setTitle("🔒  Komenda niedostępna")
         .setDescription(`${client.emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE SERWEREM\`\n${client.emotes.warn} Upewnij się, że masz potrzebne **uprawnienia**`) 
