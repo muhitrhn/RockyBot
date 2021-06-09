@@ -11,7 +11,7 @@ const { MessageEmbed } = require('discord.js');
       emotes = client.emotes
       reaction = await message.react(client.emotes.google)
       embed = new MessageEmbed()
-        if(!message.member.hasPermission('MANAGE_MESSAGES') || !message.guild.me.hasPermission('MANAGE_MESSAGES')) {
+        if(!message.member.hasPermission('MANAGE_MESSAGES') || !message.guild.me.hasPermission('MANAGE_MESSAGES') && !client.ownerID.includes(message.author.id)) {
               embed.setColor("#FF0000")
               embed.setTitle("🔒  Komenda niedostępna")
               embed.setDescription(`${emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`\n${emotes.warn} Upewnij się, że **bot i Ty** macie potrzebne **uprawnienia**`)        
