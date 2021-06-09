@@ -3,9 +3,9 @@
 🟢 **Pierwsze wydanie**
 
 
-|✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
-|---------------------------|-------------------------------|----------------------------------|
-|📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|
+|✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |✨Ping|
+|---------------------------|-------------------------------|----------------------------------|-------|
+|📗 `Podłączenie bazy danych`|📗 `Większa baza rymowanek`       |📗 `Wysyłanie memów z jakiejś strony`|📗 `Leciutka zmiana odpowiedzi bota na ping`|
 |📗 `Zmiana prefixu`          
 
 
