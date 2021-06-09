@@ -1,8 +1,7 @@
-# 🟠 0.18
+# 🟢 0.18
 
-🟠 **Pierwsze wydanie**
+🟢 **Pierwsze wydanie**
 
->🛠 ***Ukończono 4/4, ostatnie szlify...***
 
 |✨ Ustawienia serwerowe|✨ Komenda rymowanka           |✨ Komenda meme                   |
 |---------------------------|-------------------------------|----------------------------------|
