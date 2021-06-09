@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "eval",
-  aliases: [],
+  aliases: ["ooe"],
   description: "Eval... xD",
   category: 'owner-only',
   utilisation: '{prefix}eval {coś}',

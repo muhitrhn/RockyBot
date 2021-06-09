@@ -6,8 +6,8 @@ module.exports = {
     testerID: [""
             ],
 
-    releasedate: "07.06.21",
-    version: "0.17~3",
+    releasedate: "09.06.21",
+    version: "0.17~4",
     changelog: "https://github.com/Bajojajo-xD/RockyBot/blob/main/changelog.MD",
     github: "https://github.com/Bajojajo-xD/RockyBot"
 };

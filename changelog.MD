@@ -12,12 +12,18 @@
 
 # 🟢 0.17
 
+🟢 **Patch 4**
+
+|✨Komenda storage| 
+|---------------------------|
+|📗 `Info o dostępnych zasobach do komend`|
+
 🟢 **Patch 3**
 
-|✨Bot| 
-|---------------------------|
-|📗 `Lepsza odpowiedz na ping`|
-|📗 `Zmiany w komendzie changelog`|
+|✨Bot|✨Changelog|
+|---------------------------|--------|
+|📗 `Lepsza odpowiedz na ping`|📗 `Zmieniona treść embeda`|
+
 
 🟢 **Patch 2**
 
