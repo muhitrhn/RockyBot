@@ -44,6 +44,8 @@ module.exports = {
         const rymowanka = await client.channels.cache.get(client.config.attachments.rymowanka).messages.fetch()
         await embed.addField(`📲  Komenda rymowanka: \`${rymowanka.size}\``, "** **")
 
+        await embed.addField(`🎈  Komenda meme: \`Powered by reddit.com\``, "** **")
+
         await embed.addField(`✨  Wszystkich wiadomości z których korzysta bot: \`${wideo.size + tuskotronic.size + stonoga.size + kamien.size + budowa.size + rymowanka.size}\``, "** **")
 
         .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852225393527488533/2906274.png`)

@@ -4,6 +4,11 @@ require('discord-reply');
 const discord = require('discord.js');
 const chalk = require("chalk");
 const express = require('express')
+const mongoURI = process.env.MONGODB_URI
+
+const mongoose = require('mongoose');
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.set('useFindAndModify', false)
 
 const client = new discord.Client({ disableMentions: 'everyone' });
 
@@ -20,10 +25,10 @@ client.testerID = client.config.discord.testerID
 
 
 if(client.config.beta === true) {
-client.prefix = client.config.discord.betaprefix;
+client.defaultPrefix = client.config.discord.betaprefix;
 client.myID = client.config.discord.myBetaID
 } else {
-client.prefix = client.config.discord.prefix;
+client.defaultPrefix = client.config.discord.prefix;
 client.myID = client.config.discord.myID
 }
 

@@ -9,8 +9,9 @@ activities: [
     //Podpowiedzi
     "💡 Pingnij bota, aby zobaczyć prefix",
     "💡 Użyj help, aby zobaczyć listę komend",
-    "💡 Użyj komendy rymowanka, żeby wysłać losową rymowankę XD",
+    "💡 Użyj komendy meme, by wysłać mem",
     "💡 Jeśli masz problemy z komendą, użyj help {komenda}",
+    "💡 Komenda prefix zmienia prefix ;)",
 
     //Inne XD
     "🤠 #ZmienićRząd ",
