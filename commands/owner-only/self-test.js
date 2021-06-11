@@ -37,14 +37,13 @@ module.exports = {
         return;
     }
     //NO PERMS
-    try {
-    if(x === 0) {
-    reactionEmbed.setTitle(`${client.emotes.staff}  Komenda niedostępna`)
-    .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-    .setDescription(`${client.emotes.rverify} Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\``)
-    reaction.edit(reactionEmbed)
-    return;
-    } } catch (error) {}
+     try {
+        if(x === 0) {
+        errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
+        .setDescription(`${client.emotes.grverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+        reaction.edit(errorEmbed)
+        return;
+     } } catch (error) {}
     
     reactionEmbed.setTitle(`${client.emotes.siren}  Przeprowadzanie self-testu...`)
     .setDescription(`**${client.emotes.winLoad} NIE pisz NIC na kanale przeprowadzania self-testu**`)
