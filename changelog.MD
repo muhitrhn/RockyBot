@@ -1,20 +1,24 @@
+# 🟢 0.18.2
+
+🟢 **Pierwsze wydanie**
+
+|✨ Komendy z kategorii avatar|✨ Komenda avatar
+|---------------------------|----------------------------------|
+|📗 `Zmieniona odpowiedź`|📗 `Naprawiono glitch z v0.18.1, polegający na niewyświetlaniu się nieanimowanego avataru`
+|📗 `Proces budowania komendy`|
+|📗 `Lepsze wyświetlanie błędów`|
+
 # 🟢 0.18.1
 
 🟢 **Pierwsze wydanie**
 
 |✨ Komendy z kategorii beka|✨ Reszta komend|✨ Komenda info
 |---------------------------|-------------------------------|----------------------------------|
-|📗 `Zmieniona odpowiedź`|📗 `Naprawiony glitch, polegający na nieanimowaniu avataru w stopce embeda`|📗 `Naprawiony glitch, polegający na wyświetlaniu "undefined" w miejscu prefixu`
+|📗 `Zmieniona odpowiedź`|📗 `Naprawiono glitch, polegający na nieanimowaniu avataru w stopce embeda`|📗 `Naprawiono glitch, polegający na wyświetlaniu "undefined" w miejscu prefixu`
 |📗 `Proces budowania komendy`|
 |📗 `Lepsze wyświetlanie błędów`|
 
 # 🟢 0.18
-
-🟢 **Patch 2**
-
-|✨ Komenda prefix oraz help|
-|---------------------------|
-|📗 `Zmiana w sprawdzaniu uprawnień` 
 
 🟢 **Patch 1**
 

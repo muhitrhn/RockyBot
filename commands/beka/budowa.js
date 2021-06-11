@@ -14,13 +14,13 @@ module.exports = {
     .setTitle(`${client.emotes.winLoad} Praca w toku... 1/3`)
     .setDescription(`${client.emotes.google} Losowanie pliku...`)
     .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
     reaction = await message.lineReplyNoMention(reactionEmbed)
     errorEmbed = new MessageEmbed()
     .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
     .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
     .setColor('RED')
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
 
     //Random video
     try {
@@ -37,7 +37,7 @@ module.exports = {
 
     //2/3
     reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
-    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.google} Tworzenie embeda...`)
+    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.google} Tworzenie wiadomości...`)
     await reaction.edit(reactionEmbed)
 
     //Create embed
@@ -45,17 +45,17 @@ module.exports = {
     embed = new MessageEmbed()
     .setTitle(`${client.emotes.CMDbudowa}  Budowa!`)
     .setColor('RANDOM')
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
     //Error in creating embed
     } catch (error) {
-      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.x} Tworzenie embeda`)
+      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.x} Tworzenie wiadomości`)
       reaction.edit(errorEmbed)
       return;
     }
 
     //3/3
     reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku.. 3/3`)
-    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie embeda\n${client.emotes.google} Załączanie pliku...`)
+    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.google} Załączanie pliku...`)
     await reaction.edit(reactionEmbed)
     
     //Send 
@@ -64,7 +64,7 @@ module.exports = {
     await message.lineReplyNoMention({embed, files: [attachment] })
     //Error in attaching
     } catch (error) {
-      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie embeda\n${client.emotes.x} Załączanie pliku`)
+      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.x} Załączanie pliku`)
       reaction.edit(errorEmbed)
       return;
     }

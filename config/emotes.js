@@ -24,6 +24,7 @@ module.exports = {
     boombox: '<:Boombox:845342914728296529>',
     changelog: "<:changelog:852894595767337000>",
     winLoad: "<a:winload:852916449215512616>",
+    dwnld: "<:dwnld:852962401002717185>",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",
