@@ -14,7 +14,7 @@ module.exports = {
     reaction = await message.react(client.emotes.google)
 
     const embed = new MessageEmbed()
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
     .setTimestamp()
 
     if(!message.member.hasPermission('MANAGE_GUILD') && !client.ownerID.includes(message.author.id)) {

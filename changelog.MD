@@ -1,3 +1,13 @@
+# 🟢 0.18.1
+
+🟢 **Pierwsze wydanie**
+
+|✨ Komendy z kategorii beka|✨ Reszta komend|✨ Komenda info
+|---------------------------|-------------------------------|----------------------------------|
+|📗 `Zmieniona odpowiedź`|📗 `Naprawiony glitch, polegający na nieanimowaniu avataru w stopce embeda`|📗 `Naprawiony glitch, polegający na wyświetlaniu "undefined" w miejscu prefixu`
+|📗 `Proces budowania komendy`|
+|📗 `Lepsze wyświetlanie błędów`|
+
 # 🟢 0.18
 
 🟢 **Patch 2**

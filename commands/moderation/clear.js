@@ -16,7 +16,7 @@ const { MessageEmbed } = require('discord.js');
               embed.setTitle("🔒  Komenda niedostępna")
               embed.setDescription(`${emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`\n${emotes.warn} Upewnij się, że **bot i Ty** macie potrzebne **uprawnienia**`)        
               embed.setImage("https://cdn.discordapp.com/attachments/843892434743722044/844163249041309696/siren.gif")
-              embed.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+              embed.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
               embed.setTimestamp()
               message.lineReply(embed)
               .then(msg => {

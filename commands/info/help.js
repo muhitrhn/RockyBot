@@ -13,7 +13,7 @@ const { MessageEmbed } = require("discord.js");
         reaction = await message.react(emotes.google)
         const embed = new MessageEmbed()
         .setColor('RANDOM')
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
         .setImage("https://cdn.discordapp.com/attachments/783091756593053726/810591417838731315/1JOZT-rbar.gif")
         .setTimestamp()
         if (!args[0]) {

@@ -4,18 +4,15 @@ require('discord-reply');
 const discord = require('discord.js');
 const chalk = require("chalk");
 const express = require('express')
-const mongoURI = process.env.MONGODB_URI
-
 const mongoose = require('mongoose');
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.set('useFindAndModify', false)
+
 
 const client = new discord.Client({ disableMentions: 'everyone' });
 
 discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
 
-client.config = require('./config/bot')
-client.emotes = client.config.emojis;
+client.config = require('./config/main')
+client.emotes = client.config.emotes;
 client.commands = new discord.Collection();
 client.releasedate = client.config.releasedate
 client.version = client.config.version
@@ -23,14 +20,20 @@ client.news = client.config.news
 client.ownerID = client.config.discord.ownerID
 client.testerID = client.config.discord.testerID
 
+client.attachments = client.config.attachments
 
 if(client.config.beta === true) {
 client.defaultPrefix = client.config.discord.betaprefix;
-client.myID = client.config.discord.myBetaID
+client.myID = client.config.discord.myBetaID;
+mongoURI = process.env.MONGODB_URI_BETA
 } else {
 client.defaultPrefix = client.config.discord.prefix;
-client.myID = client.config.discord.myID
+client.myID = client.config.discord.myID;
+mongoURI = process.env.MONGODB_URI
 }
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.set('useFindAndModify', false)
 
 /*//WebUI
 const app = express()

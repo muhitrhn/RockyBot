@@ -1,6 +1,5 @@
 module.exports = {
-    emojis: {
-    ubuntu: '<:ubuntu:837617906971181057>',
+   ubuntu: '<:ubuntu:837617906971181057>',
     warn: '<a:Warning:826731315570278461>',
     system: '<:systemmessageuser:838387012230053917>',
     RAM: "<:RAM:837613245572448266>",
@@ -11,9 +10,7 @@ module.exports = {
     blueDot: "<:LightBlueSmallDot:844561940248395787>",
     DJS: "<:discordjs:837622356901756938>",
     cpu: "<:cpu:837673971947274296>",
-    rbverify: "<a:verifyxd:844299503146106880>",
     x: "<a:vega_x:845253379113484298>",
-    timer6: "<a:timer6:844672772169138197>",
     staff: "<a:Staff:843734135972691968>",
     siri: "<a:Siri_Loading:826383904729989160>",
     siren: "<a:Siren:826730448289923072>",
@@ -25,5 +22,12 @@ module.exports = {
     google: "<a:Google_Loading:826382993948934164>",
     question: "<:Question_mark:845341315348430939>",
     boombox: '<:Boombox:845342914728296529>',
-    },
+    changelog: "<:changelog:852894595767337000>",
+    winLoad: "<a:winload:852916449215512616>",
+
+    CMDbudowa: "🏗️",
+    CMDkamien: "🪨",
+    CMDstonoga: "🛃",
+    CMDtuskotronic: "🐔🥔",
+    CMDwideo: "🎬"
 }

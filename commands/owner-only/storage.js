@@ -14,7 +14,7 @@ module.exports = {
         .setTitle("🔒  Komenda niedostępna")
         .setDescription(`${client.emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
         .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
         .setTimestamp()
         message.lineReply(embed)
         .then(msg => {
@@ -49,7 +49,7 @@ module.exports = {
         await embed.addField(`✨  Wszystkich wiadomości z których korzysta bot: \`${wideo.size + tuskotronic.size + stonoga.size + kamien.size + budowa.size + rymowanka.size}\``, "** **")
 
         .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852225393527488533/2906274.png`)
-        .setFooter(``, message.author.displayAvatarURL())
+        .setFooter(``, message.author.displayAvatarURL({dynamic: true}))
         .setTimestamp()
 
         await message.lineReplyNoMention(embed)

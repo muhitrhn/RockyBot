@@ -12,7 +12,7 @@ module.exports = {
     embed = new MessageEmbed()
     .setColor('RANDOM')
     .setTimestamp()
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}\n`, message.author.avatarURL())
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}\n`, message.author.displayAvatarURL({dynamic: true}))
     .setImage("https://cdn.discordapp.com/attachments/783091756593053726/810591417838731315/1JOZT-rbar.gif")
 
 
@@ -25,8 +25,8 @@ if (!message.mentions.members.size) {
       if (reaction) await reaction.remove()
     //AVATAR
     } else {
-      embed.setDescription(`${client.emotes.system}  Użyto komendy: **${message.content}**\n\n*${client.emotes.grverify} Pobierz avatar: [MAŁY](${message.author.displayAvatarURL()}) | [DUŻY](${message.author.displayAvatarURL()}?size=4096)*`)
-      await message.lineReplyNoMention({embed, files: [`${message.author.displayAvatarURL()}?size=4096`]})
+      embed.setDescription(`${client.emotes.system}  Użyto komendy: **${message.content}**\n\n*${client.emotes.grverify} Pobierz avatar: [MAŁY](${message.author.displayAvatarURL({ dynamic: true, format: "gif" })}) | [DUŻY](${message.author.displayAvatarURL({ dynamic: true, format: "gif" })}?size=4096)*`)
+      await message.lineReplyNoMention({embed, files: [`${message.author.displayAvatarURL({ dynamic: true, format: "gif" })}?size=4096`]})
       if (reaction) await reaction.remove() 
         }
 //SOMEONE MENTIONED
@@ -39,8 +39,8 @@ if (!message.mentions.members.size) {
         if (reaction) await reaction.remove()
        //AVATAR
     } else {
-      embed.setDescription(`${client.emotes.system}  Użyto komendy: **${message.content}**\n\n*${client.emotes.grverify} Pobierz avatar: [MAŁY](${mentioned.displayAvatarURL()}) | [DUŻY](${mentioned.displayAvatarURL()}?size=4096)*`)
-      await message.lineReplyNoMention({embed, files: [`${mentioned.displayAvatarURL()}?size=4096`]})
+      embed.setDescription(`${client.emotes.system}  Użyto komendy: **${message.content}**\n\n*${client.emotes.grverify} Pobierz avatar: [MAŁY](${mentioned.displayAvatarURL({ dynamic: true, format: "gif" })}) | [DUŻY](${mentioned.displayAvatarURL({ dynamic: true, format: "gif" })}?size=4096)*`)
+      await message.lineReplyNoMention({embed, files: [`${mentioned.displayAvatarURL({ dynamic: true, format: "gif" })}?size=4096`]})
       if (reaction) await reaction.remove()
       }
     }

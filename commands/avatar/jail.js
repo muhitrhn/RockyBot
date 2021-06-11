@@ -13,7 +13,7 @@ module.exports = {
         embed = new MessageEmbed()
         .setColor('RANDOM')
         .setTimestamp()
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}\n`, message.author.avatarURL())
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}\n`, message.author.displayAvatarURL({dynamic: true}))
         .setImage("https://cdn.discordapp.com/attachments/783091756593053726/810591417838731315/1JOZT-rbar.gif")
     
     

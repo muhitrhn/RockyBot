@@ -7,20 +7,69 @@ module.exports = {
   category: 'beka',
   utilisation: '{prefix}tuskotronic',
 
-  async execute(client, message) {
-    reaction = await message.react(client.emotes.google)
+  async execute(client, message, args, pf, cmd) {
+
+    //Start; 1/3
+    reactionEmbed = new MessageEmbed()
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/3`)
+    .setDescription(`${client.emotes.google} Losowanie pliku...`)
+    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+    reaction = await message.lineReplyNoMention(reactionEmbed)
+    errorEmbed = new MessageEmbed()
+    .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
+    .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
+    .setColor('RED')
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+
+    //Random rock
+    try {
     var files = [];
-    messages = await client.channels.cache.get(client.config.attachments.tuskotronic).messages.fetch()
+    messages = await client.channels.cache.get(client.attachments.tuskotronic).messages.fetch()
     await messages.forEach(msg => files.push(msg.attachments.array()[0].url))
-    let chosenFile = await files[Math.floor(Math.random() * files.length)] 
-    let embed = new MessageEmbed()
-    embed.setColor('RANDOM')
-    embed.setImage("https://cdn.discordapp.com/attachments/783091756593053726/810591417838731315/1JOZT-rbar.gif")
-    embed.setDescription(`${client.emotes.system}  Użyto komendy **${message.content}**`)
-    embed.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
-    embed.setTimestamp()
+    chosenFile = await files[Math.floor(Math.random() * files.length)] 
+    //Error in generation
+    } catch (error) {
+      errorEmbed.setDescription(`${client.emotes.x} Losowanie pliku`)
+      reaction.edit(errorEmbed)
+      return;
+    }
+
+    //2/3
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
+    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.google} Tworzenie embeda...`)
+    await reaction.edit(reactionEmbed)
+
+    //Create embed
+    try {
+    embed = new MessageEmbed()
+    .setTitle(`${client.emotes.CMDtuskotronic}  Kurczaki, ziemniaki`)
+    .setColor('RANDOM')
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}));
+    //Error in creating embed
+    } catch (error) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.x} Tworzenie embeda`)
+      reaction.edit(errorEmbed)
+      return;
+    }
+
+    //3/3
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku.. 3/3`)
+    .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie embeda\n${client.emotes.google} Załączanie pliku...`)
+    await reaction.edit(reactionEmbed)
+    
+    //Send 
+    try {
     attachment = new MessageAttachment(chosenFile, `tuskotronic.mp4`)
     await message.lineReplyNoMention({embed, files: [attachment] })
-    if(reaction) await reaction.remove()  
+    //Error in attaching
+    } catch (error) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie embeda\n${client.emotes.x} Załączanie pliku`)
+      reaction.edit(errorEmbed)
+      return;
+    }
+
+    //Ready
+    await reaction.delete()
   }
 }

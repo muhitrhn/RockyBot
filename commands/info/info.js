@@ -12,7 +12,7 @@ module.exports = {
     category: 'info',
     utilisation: '{prefix}info',
 
-    async execute(client, message) {
+    async execute(client, message, args, pf) {
         emotes = client.emotes
         reaction = await message.react(emotes.google)
         embed = new MessageEmbed()
@@ -20,7 +20,7 @@ module.exports = {
         .setTitle(`${emotes.system}  Użyto komendy ${message.content}`)
         .setDescription(`${emotes.staff} *Powered by **os**, **os-utils** and **getos** packages xD*\n`)
         .setThumbnail(client.user.avatarURL())          
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
         .setTimestamp()
 
         await os.cpuUsage(async function(v){
@@ -38,7 +38,7 @@ module.exports = {
                 `)
     
             await embed.addField(`🤖 -- BOT -- 🤖`,
-                `${emotes.world} **Czas pracy**: \`${prettyMilliseconds(os.processUptime() * 1000)}\`\n🏓 **Ping**: \`${client.ws.ping}ms\`\n${emotes.siri} **Prefix**: \`${client.prefix}\`
+                `${emotes.world} **Czas pracy**: \`${prettyMilliseconds(os.processUptime() * 1000)}\`\n🏓 **Ping**: \`${client.ws.ping}ms\`\n${emotes.siri} **Prefix**: \`${pf}\`
                 `)   
 
             await message.lineReplyNoMention(embed)
