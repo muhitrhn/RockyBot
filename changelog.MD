@@ -1,8 +1,14 @@
 # 🟢 0.18.2
 
+🟢 **Patch 2**
+
+|✨ Komendy z kategorii OwnerOnly|
+|---------------------------|
+|📗 `Naprawiono glitch w którym proces budowania zawieszał się na sprawdzaniu uprawnień`|
+
 🟢 **Patch 1**
 
-|✨ Komendy z kategorii avatar & beka|✨ Komendy OwnerOnly|
+|✨ Komendy z kategorii avatar & beka|✨ Komendy z kategorii OwnerOnly|
 |---------------------------|----------------------------------|
 |📗 `Proces budowania komendy: zmiana koloru embeda`|📗 `Lekkie zmiany w odpowiedziach`|
 
