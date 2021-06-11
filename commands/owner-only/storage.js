@@ -7,24 +7,53 @@ module.exports = {
   category: 'owner-only',
   utilisation: '{prefix}storage {coś}',
 
-  async execute(client, message, args) {
-    embed = new MessageEmbed()
-    if(!client.ownerID.includes(message.author.id)) {
-        embed.setColor("RED")
-        .setTitle("🔒  Komenda niedostępna")
-        .setDescription(`${client.emotes.warn} Nie jesteś właścicielem bota ¯\\_(ツ)_/¯`)        
-        .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
-        .setTimestamp()
-        message.lineReply(embed)
-        .then(msg => {
-          message.react(client.emotes.x)
-          msg.delete({ timeout: 8000 })
-        })
+  async execute(client, message, args, pf, cmd) {
 
-    } else {
-        embed.setColor(`RANDOM`)
-        .setTitle(`${client.emotes.staff}  Info o dostępnych zasobach`)
+      //Start;
+      reactionEmbed = new MessageEmbed()
+      .setTitle(`${client.emotes.winLoad}  Praca w toku... 1/2`)
+      .setDescription(`${client.emotes.google} Sprawdzanie permisji...`)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor(`BLUE`)
+      reaction = await message.lineReplyNoMention(reactionEmbed)
+      errorEmbed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
+      .setColor('RED')
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
+
+      //Check permissions
+      try {
+        if(client.ownerID.includes(message.author.id)) {
+            x = 1
+        } else {
+            x = 0
+        }
+      } catch (error) {
+        //Error in checking
+            errorEmbed.setDescription(`${client.emotes.x} Sprawdzanie permisji`)
+            reaction.edit(errorEmbed)
+            return;
+      }
+
+      try {
+        if(x === 0) {
+        errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
+        .setDescription(`${client.emotes.grverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+        reaction.edit(reactionEmbed)
+        return;
+        } } catch (error) {}
+
+      //2/2
+      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
+      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.google} Kalkulowanie informacji o komendach...`)
+      await reaction.edit(reactionEmbed)
+
+      try {
+      const embed = new MessageEmbed()
+        .setColor(`RANDOM`)
+        .setTitle(`${client.emotes.staff}  Dostępne zasoby`)
 
         const wideo = await client.channels.cache.get(client.config.attachments.wideo).messages.fetch()
         await embed.addField(`🎬  Komenda wideo: \`${wideo.size}\``, "** **")
@@ -49,10 +78,18 @@ module.exports = {
         await embed.addField(`✨  Wszystkich wiadomości z których korzysta bot: \`${wideo.size + tuskotronic.size + stonoga.size + kamien.size + budowa.size + rymowanka.size}\``, "** **")
 
         .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852225393527488533/2906274.png`)
-        .setFooter(``, message.author.displayAvatarURL({dynamic: true}))
-        .setTimestamp()
-
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+        
         await message.lineReplyNoMention(embed)
-    }
+
+      } catch (error) {
+        errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Kalkulowanie informacji o komendach`)
+        reaction.edit(errorEmbed)
+        return;
+      }
+
+      
+      //READY
+      await reaction.delete()
   }
 }

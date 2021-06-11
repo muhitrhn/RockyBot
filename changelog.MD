@@ -1,5 +1,11 @@
 # 🟢 0.18.2
 
+🟢 **Patch 1**
+
+|✨ Komendy z kategorii avatar & beka|✨ Komendy OwnerOnly|
+|---------------------------|----------------------------------|
+|📗 `Proces budowania komendy: zmiana koloru embeda`|📗 `Lekkie zmiany w odpowiedziach`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Komendy z kategorii avatar|✨ Komenda avatar
