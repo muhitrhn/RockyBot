@@ -1,6 +1,6 @@
 module.exports = {
 
-    beta: true,
+    beta: false,
 
     ownerID: ["643084165209784331"
             ],
