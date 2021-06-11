@@ -41,7 +41,7 @@ module.exports = {
         if(x === 0) {
         errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
         .setDescription(`${client.emotes.grverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
-        reaction.edit(reactionEmbed)
+        reaction.edit(errorEmbed)
         return;
         } } catch (error) {}
 
