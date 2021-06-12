@@ -4,7 +4,7 @@
 
 |✨ Komendy z kategorii avatar i beka|✨ Komenda emoji
 |---------------------------|----------------------------------|
-|📗 `Proces budowania: naprawiono problemy`|📗 `Nowa kategoria komend "nitro", komenda emoji`
+|📗 `Proces budowania: naprawiono problemy (nieznikający proces itp.)`|📗 `Nowa kategoria komend "nitro", komenda emoji`
 
 # 🟢 0.18.2
 
