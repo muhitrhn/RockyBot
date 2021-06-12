@@ -1,3 +1,11 @@
+# 🟢 0.18.3
+
+🟢 **Pierwsze wydanie**
+
+|✨ Komendy z kategorii avatar i beka|✨ Komenda emoji
+|---------------------------|----------------------------------|
+|📗 `Proces budowania: naprawiono problemy`|📗 `Nowa kategoria komend "nitro", komenda emoji`
+
 # 🟢 0.18.2
 
 🟢 **Patch 2**
