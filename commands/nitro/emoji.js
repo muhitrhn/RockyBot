@@ -75,9 +75,9 @@ module.exports = {
       try {
        const embed = new MessageEmbed()
        .setColor('RANDOM')
-       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
-
-       await message.lineReplyNoMention(emoji.toString(), embed)
+       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+        embed.setImage(`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? `gif`: `png`}?size=128`)
+       await message.lineReplyNoMention(embed)
       } catch (err) {
         errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.x} Tworzenie wiadomości`)
         reaction.edit(errorEmbed)

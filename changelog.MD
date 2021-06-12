@@ -1,3 +1,11 @@
+# 🟢 0.18.4
+
+🟢 **Pierwsze wydanie**
+
+|✨ Komenda react|✨ Komenda clear
+|---------------------------|----------------------------------|
+|📗 `Nowa komenda react w kat. nitro, wpisz help react po pomoc`|📗 `Zmieniona komenda clear, nowy system budowy, autowybieranie stylu usuwania, usuwanie wiadomosci starszych niz 14 dni`
+
 # 🟢 0.18.3
 
 🟢 **Pierwsze wydanie**
