@@ -25,6 +25,7 @@ module.exports = {
     changelog: "<:changelog:852894595767337000>",
     winLoad: "<a:winload:852916449215512616>",
     dwnld: "<:dwnld:852962401002717185>",
+    nitro: "<a:nitro:853306174820581406>",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",

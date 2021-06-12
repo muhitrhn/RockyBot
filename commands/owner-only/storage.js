@@ -16,7 +16,7 @@ module.exports = {
       .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setColor(`BLUE`)
-      reaction = await message.lineReplyNoMention(reactionEmbed)
+      const reaction = await message.lineReplyNoMention(reactionEmbed)
       errorEmbed = new MessageEmbed()
       .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
       .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
@@ -39,8 +39,10 @@ module.exports = {
 
       try {
         if(x === 0) {
-        errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-        .setDescription(`${client.emotes.grverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+   errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
+        .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+        .setTitle(`${client.emotes.x}  Znaleziono problemy z permisjami`)
+        .setColor('#FFC000')
         reaction.edit(errorEmbed)
         return;
         } } catch (error) {}

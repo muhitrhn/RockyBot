@@ -22,6 +22,7 @@ const { MessageEmbed } = require("discord.js");
             const avatar = client.commands.filter(x => x.category == 'avatar').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+            const nitro = client.commands.filter(x => x.category == "nitro").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
             const options = client.commands.filter(x => x.category == "options").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
 
@@ -29,6 +30,7 @@ const { MessageEmbed } = require("discord.js");
             embed.addField(`🤿  Avatar`, avatar)
             embed.addField(`🤣  Beka`, beka)
             embed.addField(`${emotes.ubuntu}  Info`, info)
+            embed.addField(`${emotes.nitro}  Nitro`, nitro)
             if(message.member.hasPermission('MANAGE_MESSAGES')){
                 embed.addField(`${emotes.staff}  Moderacja`, moderation)
             }
