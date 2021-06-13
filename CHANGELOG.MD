@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 3**
+
+|✨ Bot|
+|---------------------------|
+|📗 `Lekkie zmiany w kodzie`|
+
 🟢 **Patch 2**
 
 |✨ Komenda newClear|✨ Komenda changelog|
