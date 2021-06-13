@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 5**
+
+|✨ Komendy z kat. nitro|✨ Komenda emoji|
+|---------------------------|-------------|
+|📗 `Nieusuwanie procesu budowania`|📗 `Sprawdzanie uprawnień webhooka`|
+
 🟢 **Patch 4**
 
 |✨ Komenda newClear|✨ Komenda emoji|

@@ -112,8 +112,8 @@ module.exports = {
       }
 
    //READY
-   await reaction.delete() 
-   await message.react(client.emotes.grverify)
-
+   reactionEmbed.setTitle(`${client.emotes.nitro}  Zareagowano`)
+   .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie wiadomości\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Reagowanie`)
+   await reaction.edit(reactionEmbed)
   }
 }

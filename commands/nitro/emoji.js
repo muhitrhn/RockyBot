@@ -8,9 +8,9 @@ module.exports = {
     utilisation: '{prefix}emoji <nazwa emoji>',
     async execute(client, message, args, pf, cmd) {
 
-   //Start; 1/4
+   //Start; 1/5
    reactionEmbed = new MessageEmbed()
-   .setTitle(`${client.emotes.winLoad} Praca w toku... 1/4`)
+   .setTitle(`${client.emotes.winLoad} Praca w toku... 1/5`)
    .setDescription(`${client.emotes.google} Sprawdzanie argumentów...`)
    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
@@ -44,8 +44,8 @@ module.exports = {
         return;
         } } catch (err) {}
 
-      //2/4
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/4`)
+      //2/5
+      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/5`)
       .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.google} Wyszukiwanie emoji...`)
       await reaction.edit(reactionEmbed)
 
@@ -67,8 +67,8 @@ module.exports = {
         return;
     }
 
-    //3/4
-    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/4`)
+    //3/5
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/5`)
     .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.google} Sprawdzanie webhooków...`)
     await reaction.edit(reactionEmbed)
 
@@ -88,26 +88,20 @@ module.exports = {
       return;
     }
 
-    //4/4
-    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 4/4`)
+    //4/5
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 4/5`)
     .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.google} ${x ? `Edytowanie` : `Tworzenie`} webhooka...`)
     await reaction.edit(reactionEmbed)
 
     try {
       if (x === 0) {
-      const webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.avatarURL() })
-      const sended = await webhook.send(emoji.toString())
-      const embed = new MessageEmbed().setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
-      sended.lineReply(embed)
+      webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.avatarURL() })
       }
       else {
-      await myWebhooks.first().edit({
+      webhook = await myWebhooks.first().edit({
           name: message.author.username,
           avatar: message.author.avatarURL(),
         })
-      const sended = await myWebhooks.first().send(emoji.toString())
-      const embed = new MessageEmbed().setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
-      sended.lineReply(embed)
       }
     } catch (err) {
       errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.x} ${x ? `Edytowanie` : `Tworzenie`} webhooka`)
@@ -115,10 +109,31 @@ module.exports = {
       console.log(err)
       return;
     }
+
+    //5/5
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 5/5`)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.google} Sprawdzanie uprawnień webhooka...`)
+    await reaction.edit(reactionEmbed)
+    try {
+    if (message.guild.roles.everyone.permissions.has('USE_EXTERNAL_EMOJIS')) {
+      await webhook.send(emoji.toString())
+    } else {
+    reactionEmbed.setTitle(`${client.emotes.x}  Znaleziono problemy z uprawnieniami`)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka: **Webhook nie może używać emoji z innych serwerów**`)
+    await reaction.edit(reactionEmbed)
+    return;
+    }
+    } catch (err) {
+    errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.x} Sprawdzanie uprawnień webhooka`)
+    await reaction.edit(errorEmbed)
+    console.log(err)
+    return;
+    }
+
      
    //READY
-   await reaction.delete() 
-   try {await message.delete()} catch (err) {}
-
+   reactionEmbed.setTitle(`${client.emotes.nitro}  Wysłano emoji`)
+   .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.grverify} Sprawdzanie uprawnień webhooka`)
+   await reaction.edit(reactionEmbed)
   }
 }
