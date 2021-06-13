@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 1**
+
+|✨ Komenda newClear|
+|---------------------------|
+|📗 `Clear -> newclear, żeby discord mógł naprawić pewien problem; naprawiono glitch z niepoprawnym wyświetlaniem liczby usuniętych wiadomości`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Komenda react|✨ Komenda clear
