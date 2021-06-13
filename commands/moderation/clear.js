@@ -13,8 +13,15 @@ const { MessageEmbed } = require('discord.js');
             if(!message.member.hasPermission('MANAGE_MESSAGES') || !message.guild.me.hasPermission('MANAGE_MESSAGES') && !client.ownerID.includes(message.author.id)) {
                   embed.setColor("#FF0000")
                   embed.setTitle("🔒  Komenda niedostępna")
-                  embed.setDescription(`${emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`\n${emotes.warn} Upewnij się, że **bot i Ty** macie potrzebne **uprawnienia**`)        
+                  embed.setDescription(`${emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`\n${emotes.warn} Upewnij się, że **bot i Ty** macie potrzebne **uprawnienia**`) 
+              
+              //That link not work, that's why embed is broken on mobile app
+              //on pc simply embed don't have image
+              
                   embed.setImage("https://cdn.discordapp.com/attachments/843892434743722044/844163249041309696/siren.gif")
+              
+              
+              
                   embed.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
                   embed.setTimestamp()
                   message.lineReply(embed)
