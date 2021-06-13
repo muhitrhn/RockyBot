@@ -8,7 +8,7 @@ module.exports = {
     utilisation: '{prefix}react <numer wiadomosci, liczac od dolu, mniejszy niż 98> <nazwa emoji>',
     async execute(client, message, args, pf, cmd) {
 
-   //Start; 1/3
+   //Start; 1/4
    reactionEmbed = new MessageEmbed()
    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/4`)
    .setDescription(`${client.emotes.google} Sprawdzanie argumentów...`)

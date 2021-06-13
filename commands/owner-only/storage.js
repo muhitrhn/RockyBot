@@ -82,16 +82,12 @@ module.exports = {
         .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852225393527488533/2906274.png`)
         .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
         
-        await message.lineReplyNoMention(embed)
+        await reaction.edit(embed)
 
       } catch (error) {
         errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Kalkulowanie informacji o komendach`)
         reaction.edit(errorEmbed)
         return;
       }
-
-      
-      //READY
-      await reaction.delete()
   }
 }

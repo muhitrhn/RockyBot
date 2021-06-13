@@ -60,7 +60,7 @@ module.exports = {
         if (typeof evaled !== "string")
           evaled = require("util").inspect(evaled);
    
-        message.channel.send(evaled, {code:"xl"});
+        reaction.edit(evaled, {code:"xl"});
       } catch (error) {
         errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Wykonywanie skryptu\n\n\`\`\`${error}\`\`\``)
         reaction.edit(errorEmbed)
