@@ -118,9 +118,10 @@ module.exports = {
     if (message.guild.roles.everyone.permissions.has('USE_EXTERNAL_EMOJIS')) {
       await webhook.send(emoji.toString())
     } else {
-    reactionEmbed.setTitle(`${client.emotes.x}  Znaleziono problemy z uprawnieniami`)
+    errorEmbed.setTitle(`${client.emotes.x}  Znaleziono problemy z uprawnieniami`)
     .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka: **Webhook nie może używać emoji z innych serwerów**`)
-    await reaction.edit(reactionEmbed)
+    .setColor('#FFC000')
+    await reaction.edit(errorEmbed)
     return;
     }
     } catch (err) {
