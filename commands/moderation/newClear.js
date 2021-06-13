@@ -73,7 +73,7 @@ const { MessageEmbed } = require('discord.js');
           }
    
           } catch (err) {
-           errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Sprawdzanie argumentów...`)
+           errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Sprawdzanie argumentów`)
            reaction.edit(errorEmbed)
            return;
           }

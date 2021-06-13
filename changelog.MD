@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 2**
+
+|✨ Komenda newClear|✨ Komenda changelog|
+|---------------------------|-------------|
+|📗 `Lekka zmiana kodu`|📗 `Proces budowania`|
+
 🟢 **Patch 1**
 
 |✨ Komenda newClear|
