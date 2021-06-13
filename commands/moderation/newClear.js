@@ -149,14 +149,16 @@ const { MessageEmbed } = require('discord.js');
        deletedSlow = await deletedSlow + deleting.size
        toDelete = await []
        }  
-      deletedSlow = await deleting.length } catch (err) {
+      deletedSlow = await deleting.length 
+      message.delete()
+    } catch (err) {
         errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie \`${deletedFast}\` wiadomości szybką metodą\n${client.emotes.x} Usuwanie wiadomości wolną metodą (starsze niż 14 dni)`)
         reaction.edit(errorEmbed)
         return;
        }
 
 
-         reactionEmbed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast + deletedSlow}\` wiadomości`)
+         reactionEmbed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast + deletedSlow}\`/\`${amount}\` wiadomości`)
          .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/853335731615039498/4883451.png`)
          .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie \`${deletedFast}\` wiadomości szybką metodą\n${client.emotes.grverify} Usuwanie \`${deletedSlow}\` wiadomości wolną metodą (starsze niż 14 dni)`)
          .setColor('RANDOM')

@@ -8,9 +8,9 @@ module.exports = {
     utilisation: '{prefix}emoji <nazwa emoji>',
     async execute(client, message, args, pf, cmd) {
 
-   //Start; 1/3
+   //Start; 1/4
    reactionEmbed = new MessageEmbed()
-   .setTitle(`${client.emotes.winLoad} Praca w toku... 1/3`)
+   .setTitle(`${client.emotes.winLoad} Praca w toku... 1/4`)
    .setDescription(`${client.emotes.google} Sprawdzanie argumentów...`)
    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
@@ -44,8 +44,8 @@ module.exports = {
         return;
         } } catch (err) {}
 
-      //2/3
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
+      //2/4
+      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/4`)
       .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.google} Wyszukiwanie emoji...`)
       await reaction.edit(reactionEmbed)
 
@@ -67,25 +67,58 @@ module.exports = {
         return;
     }
 
-    //3/3
-    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/3`)
-    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.google} Tworzenie wiadomości...`)
+    //3/4
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/4`)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.google} Sprawdzanie webhooków...`)
     await reaction.edit(reactionEmbed)
 
-      try {
-       const embed = new MessageEmbed()
-       .setColor('RANDOM')
-       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-        embed.setImage(`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? `gif`: `png`}?size=128`)
-       await message.lineReplyNoMention(embed)
-      } catch (err) {
-        errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.x} Tworzenie wiadomości`)
-        reaction.edit(errorEmbed)
-        return;
+    try {
+      const webhooks = await message.channel.fetchWebhooks()
+      myWebhooks = await webhooks.filter(wbhk => wbhk.owner.id == client.user.id)
+      if (!myWebhooks.first()) {
+        x = 0
       }
+      else {
+        x = 1
+      }
+    } catch (err) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.x} Sprawdzanie webhooków`)
+      reaction.edit(errorEmbed)
+      console.log(err)
+      return;
+    }
 
+    //4/4
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 4/4`)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.google} ${x ? `Edytowanie` : `Tworzenie`} webhooka...`)
+    await reaction.edit(reactionEmbed)
+
+    try {
+      if (x === 0) {
+      const webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.avatarURL() })
+      const sended = await webhook.send(emoji.toString())
+      const embed = new MessageEmbed().setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
+      sended.lineReply(embed)
+      }
+      else {
+      await myWebhooks.first().edit({
+          name: message.author.username,
+          avatar: message.author.avatarURL(),
+        })
+      const sended = await myWebhooks.first().send(emoji.toString())
+      const embed = new MessageEmbed().setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
+      sended.lineReply(embed)
+      }
+    } catch (err) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.x} ${x ? `Edytowanie` : `Tworzenie`} webhooka`)
+      reaction.edit(errorEmbed)
+      console.log(err)
+      return;
+    }
+     
    //READY
    await reaction.delete() 
+   try {await message.delete()} catch (err) {}
 
   }
 }

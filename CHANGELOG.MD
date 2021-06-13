@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 4**
+
+|✨ Komenda newClear|✨ Komenda emoji|
+|---------------------------|-------------|
+|📗 `Usuwanie komendy`|📗 `Tworzenie/edytowanie webhooka, usuwanie komendy`|
+
 🟢 **Patch 3**
 
 |✨ Bot|
