@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["nr"],
     description: 'Reaguje na podaną wiadomość',
     category: 'nitro',
-    utilisation: '{prefix}react <numer wiadomosci, liczac od dolu, mniejszy niż 98> <nazwa emoji>',
+    utilisation: '{prefix}react <numer wiadomosci, liczac od dolu, mniejszy niż 40> <nazwa emoji>',
     async execute(client, message, args, pf, cmd) {
 
    //Start; 1/4
@@ -50,7 +50,7 @@ module.exports = {
       await reaction.edit(reactionEmbed)
 
       try {
-        if (parseInt(args[0]) > 98) {
+        if (parseInt(args[0]) > 40) {
             errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.rverify} Wyszukiwanie wiadomości`)
             .setTitle(`${client.emotes.x}  Za duża liczba (większa od 98)`)
             reaction.edit(errorEmbed)
@@ -113,6 +113,8 @@ module.exports = {
 
    //READY
    reactionEmbed.setTitle(`${client.emotes.nitro}  Zareagowano`)
+   .setThumbnail('https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png')
+   .setColor('GREEN')
    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie wiadomości\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Reagowanie`)
    await reaction.edit(reactionEmbed)
   }

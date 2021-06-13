@@ -1,5 +1,11 @@
 # 🟢 0.18.4
 
+🟢 **Patch 6**
+
+|✨ Komenda react|✨ Komenda emoji|
+|---------------------------|-------------|
+|📗 `Max liczba wiadomosci w gore to teraz 40 aby zapobiec awariom`|📗 `Sprawdzanie uprawnień webhooka: poprawki`|
+
 🟢 **Patch 5**
 
 |✨ Komendy z kat. nitro|✨ Komenda emoji|

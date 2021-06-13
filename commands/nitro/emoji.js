@@ -114,27 +114,69 @@ module.exports = {
     reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 5/5`)
     .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.google} Sprawdzanie uprawnień webhooka...`)
     await reaction.edit(reactionEmbed)
+
     try {
-    if (message.guild.roles.everyone.permissions.has('USE_EXTERNAL_EMOJIS')) {
+    if (message.guild.roles.everyone.permissionsIn(message.channel).has('USE_EXTERNAL_EMOJIS')) {
       await webhook.send(emoji.toString())
+      y = 1
     } else {
-    errorEmbed.setTitle(`${client.emotes.x}  Znaleziono problemy z uprawnieniami`)
-    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka: **Webhook nie może używać emoji z innych serwerów**`)
-    .setColor('#FFC000')
-    await reaction.edit(errorEmbed)
-    return;
+      y = 0
     }
     } catch (err) {
     errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.x} Sprawdzanie uprawnień webhooka`)
     await reaction.edit(errorEmbed)
-    console.log(err)
     return;
     }
 
-     
-   //READY
-   reactionEmbed.setTitle(`${client.emotes.nitro}  Wysłano emoji`)
-   .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.grverify} Sprawdzanie uprawnień webhooka`)
-   await reaction.edit(reactionEmbed)
+    if (y === 1) {
+      //READY
+      reactionEmbed.setTitle(`${client.emotes.nitro}  Wysłano emoji`)
+      .setThumbnail('https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png')
+      .setColor('GREEN')
+      .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.grverify} Sprawdzanie uprawnień webhooka`)
+      await reaction.edit(reactionEmbed)
+      return;
+    }
+
+    //6/5; break requirements
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Omijanie uprawnień... `)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka\n${client.emotes.google} Zmienianie uprawnień kanału...`)
+    await reaction.edit(reactionEmbed)
+
+    try {
+    await message.channel.updateOverwrite(message.guild.roles.everyone, { USE_EXTERNAL_EMOJIS: true })
+    } catch (err) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka\n${client.emotes.rverify} Zmienianie uprawnień kanału: **Nie mam wymaganych uprawnień**`)
+      .setTitle(`${client.emotes.x}  Znaleziono problemy z łamaniem uprawnień`)
+      .setColor('#FFC000')
+      reaction.edit(errorEmbed)
+      console.log(err)
+      return;
+    }
+
+    //7/5; repair role
+    reactionEmbed.setTitle(`${client.emotes.winLoad} Naprawianie uprawnień... `)
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka\n${client.emotes.grverify} Zmienianie uprawnień kanału\n${client.emotes.google} Przywracanie uprawnień kanału...`)
+    await reaction.edit(reactionEmbed)
+
+    try {
+      await webhook.send(emoji.toString())
+      if (message.guild.roles.everyone.permissions.toArray().includes('USE_EXTERNAL_EMOJIS')) {
+        await message.channel.updateOverwrite(message.guild.roles.everyone, { USE_EXTERNAL_EMOJIS: false })
+      } else {
+      await message.channel.updateOverwrite(message.guild.roles.everyone, { USE_EXTERNAL_EMOJIS: null })
+      }
+    } catch (err) {
+      errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka\n${client.emotes.grverify} Zmienianie uprawnień kanału\n${client.emotes.x} Przywracanie uprawnień kanału`)
+      await reaction.edit(errorEmbed)
+      return;
+    }
+
+    reactionEmbed.setTitle(`${client.emotes.nitro}  Wysłano emoji`)
+    .setColor('GREEN')
+    .setThumbnail('https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png')
+    .setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie emoji\n${client.emotes.grverify} Sprawdzanie webhooków\n${client.emotes.grverify} ${x ? `Edytowanie` : `Tworzenie`} webhooka\n${client.emotes.rverify} Sprawdzanie uprawnień webhooka\n${client.emotes.grverify} Zmienianie uprawnień kanału\n${client.emotes.grverify} Przywracanie uprawnień kanału`)
+    await reaction.edit(reactionEmbed)
+    return; 
   }
 }
