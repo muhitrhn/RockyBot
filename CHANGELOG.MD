@@ -1,5 +1,11 @@
 # 🟢 0.18.5
 
+🟢 **Patch 1**
+
+|✨ Komenda react|✨ Komenda newclear|
+|---------------------------|-------------|
+|📗 `Min liczba wiadomości to teraz 1`|📗 `Nie pokazuj liczby wiadomości usuniętych wolno, jeśli jest równa 0`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Wszystkie komendy|✨ Komenda newClear|✨ Komenda eval|✨ Komenda info
