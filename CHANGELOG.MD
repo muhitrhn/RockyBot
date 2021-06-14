@@ -1,3 +1,11 @@
+# 🟢 0.18.5
+
+🟢 **Pierwsze wydanie**
+
+|✨ Wszystkie komendy|✨ Komenda newClear|✨ Komenda eval|✨ Komenda info
+|---------------------------|----------------------------------|--------|----------|
+|📗 `Poprawki w zakresie zmiennych, poprawa wydajności, poprawiony styl kodowania`|📗 `Poprawki w zmiennych, poprawa wydajności`|📗 `Mały bugfix`|📗 `Usunięto, niedługo zostanie dodane kilka komend zastępujących info`
+
 # 🟢 0.18.4
 
 🟢 **Patch 6**

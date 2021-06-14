@@ -5,18 +5,52 @@ module.exports = {
   aliases: ["ip"],
   description: "Sprawdza ping bota",
   category: 'info',
-  utilisation: '{prefix}ping',
+  utilisation: '{prefix}ip',
 
-  async execute(client, message) {
-    reaction = await message.react(client.emotes.google)
-    const embed = new MessageEmbed()
-    .setColor("RANDOM")
-    .setTitle(`🏓  Ping: \`${client.ws.ping}\`ms`)
-    .setThumbnail(client.user.displayAvatarURL({dynamic: true}))
-    embed.setDescription(`${client.emotes.system}  Użyto komendy **${message.content}**\n\n${client.emotes.staff} *Powered by **client.ws.ping***\n${client.emotes.ubuntu} XDDD`)
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
-    embed.setTimestamp()
-    message.lineReplyNoMention(embed)
-    if(reaction) await reaction.remove()
+  async execute(client, message, args, pf, cmd) {
+        
+    //Start; 1/2
+    const reactionEmbed = new MessageEmbed()
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/1`)
+    .setDescription(`${client.emotes.arrr} Testowanie łącza...`)
+    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+    .setColor(`BLUE`)
+
+    const reaction = await message.lineReplyNoMention(reactionEmbed)
+
+    try {
+      const errEmbed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
+      .setColor('RED')
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
+
+      //Ping
+      try {
+        const embed = new MessageEmbed()
+        .setColor("GREEN")
+        .setTitle(`🏓  Ping: \`${client.ws.ping}\`ms`)
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+        .setDescription(`${client.emotes.grverify} Testowanie łącza`)
+        .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/853742046288543764/1545670.png`)
+        await reaction.edit(embed)
+      //Err
+      } catch (err) {
+        errEmbed.setDescription(`${client.emotes.x} Testowanie łącza`)
+        reaction.edit(errEmbed)
+        return;
+      }
+
+    } catch (err) {
+      const embed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Zatrzymano komendę \`${cmd}\` z powodu wycieku błędu`)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854001906962530334/1810746.png`)
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor('RED')
+      try {await reaction.delete()} catch (err) {}
+      await message.channel.send(embed)
+      return;
+    }
   }
 }

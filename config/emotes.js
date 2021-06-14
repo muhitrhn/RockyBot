@@ -1,11 +1,7 @@
 module.exports = {
     ubuntu: '<:ubuntu:837617906971181057>',
     system: '<:systemmessageuser:838387012230053917>',
-    RAM: "<:RAM:837613245572448266>",
-    NJS: "<:nodejs:837619941380718602>",
     motherboard: "<:motherboard:843225362015191061>",
-    magentaDot: "<:MagentaSmallDot:844562735198765096>",
-    DJS: "<:discordjs:837622356901756938>",
     staff: "<a:Staff:843734135972691968>",
     siri: "<a:Siri_Loading:826383904729989160>",
     siren: "<a:Siren:826730448289923072>",
@@ -17,7 +13,6 @@ module.exports = {
     question: "<:Question_mark:845341315348430939>",
     boombox: '<:Boombox:845342914728296529>',
 
-
     warn: '<a:Warning:826731315570278461>',
     nitro: "<a:nitro:853306174820581406>",
     dwnld: "<:dwnld:852962401002717185>",
@@ -27,8 +22,9 @@ module.exports = {
     cpu: "<:cpu:837673971947274296>",
     x: "<a:vega_x:845253379113484298>",
     yellowDot: "<:YellowSmallDot:845043290637860974>",
-    blueDot: "<:LightBlueSmallDot:844561940248395787>",
     trash: "<a:trash_dance:853335179497570324>",
+    lightSabers:"<a:lightsabers:854028547365797958>",
+    arrr: "<a:arrowright:852922342991724564>",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",

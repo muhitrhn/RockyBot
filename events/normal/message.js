@@ -9,21 +9,18 @@ module.exports = async (client, message) => {
 
 	//MENTION
 	const data = await prefixSchema.findOne({
-        GuildID: message.guild.id
-    });
+    GuildID: message.guild.id
+  });
 
-	if(data) { prefix = data.Prefix
-	} else if (!data) prefix = client.defaultPrefix;
+	if(data) prefix = data.Prefix; else if (!data) prefix = client.defaultPrefix;
 
 	if ((message.content === `<@!${client.myID}>` || message.content === `<@${client.myID}>`) && (!message.content.includes("@here") && !message.content.includes("@everyone"))) {
 		const embed = new MessageEmbed()
 		.setColor("YELLOW")
-		.setTitle(`${client.emotes.siri} Hej, jestem online xD`)
-		.setDescription(`${client.emotes.grverify} Użyj \`${prefix}help\` aby wyświetlić listę komend\n${client.emotes.world} Mój prefix na tym serwerze to \`${prefix}\`\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n***Niech kamienna moc będzie z Tobą!***`)
-		.setImage(`https://cdn.discordapp.com/attachments/850848194929492009/851488553125150760/rock.png`)
-		.setThumbnail(client.user.avatarURL())
-		.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL())
-		.setTimestamp()
+		.setTitle(`${client.emotes.lightSabers} Cześć, tu RockyBot `)
+		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n***Niech kamienna moc będzie z Tobą!***`)
+		.setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854040865973469214/4405512.png`)
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));    
 		message.lineReply(embed)
 	}
 

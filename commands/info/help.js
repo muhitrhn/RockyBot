@@ -1,95 +1,95 @@
 const { MessageEmbed } = require("discord.js");
 
 
-  module.exports = {
-    name: "help",
-    aliases: ['h', 'pomoc', 'p', 'ih'],
-    description: "Pomoc dotycząca bota",
-    category: 'info',
-    utilisation: '{prefix}help <nazwa komendy>',
+module.exports = {
+  name: "help",
+  aliases: ['h', 'pomoc', 'p', 'ih'],
+  description: "Pomoc dotycząca bota",
+  category: 'info',
+  utilisation: '{prefix}h <nazwa komendy>',
 
-    async execute(client, message, args, prefix) {  
-        const emotes = client.emotes
-        reaction = await message.react(emotes.google)
-        const embed = new MessageEmbed()
-        .setColor('RANDOM')
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version}`, message.author.displayAvatarURL({dynamic: true}))
-        .setImage("https://cdn.discordapp.com/attachments/783091756593053726/810591417838731315/1JOZT-rbar.gif")
-        .setTimestamp()
-        if (!args[0]) {
-            embed.setTitle(`${emotes.google}  Pomoc przybyła xD`)
+  async execute(client, message, args, pf, cmd) {
+    
+    //Start; 1/5
+    const reactionEmbed = new MessageEmbed()
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/1`)
+    .setDescription(`${client.emotes.arrr} Sprawdzanie argumentów...`)
+    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+    .setColor(`BLUE`)
+    
+    const reaction = await message.lineReplyNoMention(reactionEmbed)
 
-            const avatar = client.commands.filter(x => x.category == 'avatar').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const nitro = client.commands.filter(x => x.category == "nitro").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-            const options = client.commands.filter(x => x.category == "options").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
+    try {
+      const errEmbed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
+      .setColor('RED')
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));    
+      const emotes = client.emotes
 
+      //Check if cmd exists
+      let chkCmd
+      try {
+        chkCmd = client.commands.get(args.join(" ").toLowerCase()) || client.commands.find(x => x.aliases && x.aliases.includes(args.join(" ").toLowerCase()));
+      } catch (err) {
+        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie argumentów`)
+        reaction.edit(errEmbed)
+        return;
+      }
 
-            embed.addField(`🤿  Avatar`, avatar)
-            embed.addField(`🤣  Beka`, beka)
-            embed.addField(`${emotes.ubuntu}  Info`, info)
-            embed.addField(`${emotes.nitro}  Nitro`, nitro)
-            if(message.member.hasPermission('MANAGE_MESSAGES')){
-                embed.addField(`${emotes.staff}  Moderacja`, moderation)
-            }
-            if(message.member.hasPermission('MANAGE_GUILD')){
-              embed.addField(`🛠️  Opcje`, options)
-          }
-            embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)
-            await message.lineReplyNoMention(embed)
-            if(reaction) await reaction.remove()
-        } else {
-            const command = client.commands.get(args.join(" ").toLowerCase()) || client.commands.find(x => x.aliases && x.aliases.includes(args.join(" ").toLowerCase()));
+      const embed = new MessageEmbed()
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor('RANDOM')
+      if (!chkCmd){
+        //No, write list
+        embed.setTitle(`${emotes.lightSabers}  Pomoc przybyła`)
+        
+        const avatar = client.commands.filter(x => x.category == 'avatar').map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const beka = client.commands.filter(x => x.category == 'beka').map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const info = client.commands.filter(x => x.category == 'info').map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const nitro = client.commands.filter(x => x.category == "nitro").map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const moderation = client.commands.filter(x => x.category == "moderation").map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const options = client.commands.filter(x => x.category == "options").map((x) => `\`` + x.name + '`').join(emotes.yellowDot);
+        const ownerOnly = client.commands.filter(x => x.category == "owner-only").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
 
-            if (client.ownerID.includes(message.author.id) && args[0].toLowerCase() === "owneronly") {
-              const ownerOnly = client.commands.filter(x => x.category == "owner-only").map((x) => `\`` + x.name + '`').join(client.emotes.yellowDot);
-              embed.setTitle(`${emotes.warn}  Lista komend \`Owner 0nly\``)
-              embed.addField(`${emotes.cpu}  Owner0nly`, ownerOnly)
-              embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.magentaDot}  **${prefix}help <nazwa komendy>** ~ pomoc z konkretną komendą`)
-              await message.lineReplyNoMention(embed)
-              if(reaction) await reaction.remove()
-            }
-          
-            else if (!command) {
-                  msg = await message.lineReply(emotes.x)
-                  message.react(emotes.x)
-                  if(reaction) await reaction.remove()
-                  await msg.react("<a:timer6:844672772169138197>")
-                  setTimeout(() => {
-                      msg.delete()
-                  }, 5500);
-                
-            } else {
-              if (command.category === "owner-only"){
-                if(client.ownerID.includes(message.author.id)) {
-                  embed.setTitle(`${client.emotes.siri}  Pomoc dotycząca **${command.name}**\n${client.emotes.warn}  komenda \`owner0nly\``)
-                  embed.addField(`Opis`, command.description, true)
-                    embed.addField(`Alias(y)`, command.aliases.length < 1 ? '-' : command.aliases.join(', '), true)
-                    embed.addField(`Użycie`, command.utilisation.replace(`{prefix}`, prefix), true)
-                    embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.world}Wymagane argumenty: \`[]\`, opcjonalne argumenty: \`<>\`.`)
-                  await message.lineReplyNoMention(embed)
-                  if(reaction) reaction.remove() 
-                } else {
-                  msg = await message.lineReply(emotes.x)
-                  message.react(emotes.x)
-                  if(reaction) await reaction.remove()
-                  await msg.react("<a:timer6:844672772169138197>")
-                  setTimeout(() => {
-                      msg.delete()
-                  }, 5500);
-                }
-              } else {
-              embed.setTitle(`${client.emotes.siri}  Pomoc dotycząca **${command.name}**, już się robi xD`)
-              embed.addField(`Opis`, command.description, true)
-                embed.addField(`Alias(y)`, command.aliases.length < 1 ? '-' : command.aliases.join(', '), true)
-                embed.addField(`Użycie`, command.utilisation.replace(`{prefix}`, prefix), true)
-                embed.setDescription(`${emotes.system}  Użyto komendy **${message.content}**\n${emotes.world}Wymagane argumenty: \`[]\`, opcjonalne argumenty: \`<>\`.`)
-              await message.lineReplyNoMention(embed)
-              if(reaction) reaction.remove() 
-            }
-            }
-      } 
+        embed.addField(`🤿  Avatar`, avatar)
+        .addField(`🤣  Beka`, beka)
+        .addField(`${emotes.ubuntu}  Info`, info)
+        .addField(`${emotes.nitro}  Nitro`, nitro)
+        if(message.member.hasPermission('MANAGE_MESSAGES')){
+          embed.addField(`${emotes.staff}  Moderacja`, moderation)
+        }
+        if(message.member.hasPermission('MANAGE_GUILD')){
+          embed.addField(`🛠️  Opcje`, options)
+        }
+        if(client.ownerID.includes(message.author.id)){
+          embed.addField(`${emotes.arrr}  OwnerOnly`, ownerOnly)
+        }
+        embed.setDescription(`${emotes.world}  **${pf}${cmd} <nazwa komendy>** ~ pomoc z konkretną komendą`)
+        
+        await reaction.edit(embed)
+        return;
+
+      } else {
+        embed.setTitle(`${client.emotes.lightSabers}  Pomoc dotycząca **${chkCmd.name}**`)
+        .addField(`🧾 Opis`, chkCmd.description, true)
+        .addField(`📌 Alias(y)`, chkCmd.aliases.length < 1 ? '-' : chkCmd.aliases.join(', '), true)
+        .addField(`🖊️ Użycie`, chkCmd.utilisation.replace(`{prefix}`, pf), true)
+        .setDescription(`${emotes.world} Wymagane argumenty: \`[]\`, opcjonalne argumenty: \`<>\`.`)
+        
+        await reaction.edit(embed)
+        return;
+      }
+    } catch (err) {
+      const embed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Zatrzymano komendę \`${cmd}\` z powodu wycieku błędu`)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854001906962530334/1810746.png`)
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor('RED')
+      try {await reaction.delete()} catch (err) {}
+      await message.channel.send(embed)
+      return;
+    }
   }
 }

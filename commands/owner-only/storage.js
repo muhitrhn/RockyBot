@@ -5,55 +5,58 @@ module.exports = {
   aliases: ["oos"],
   description: "Info o ilosci dostepnych zasobow do komend",
   category: 'owner-only',
-  utilisation: '{prefix}storage {coś}',
+  utilisation: '{prefix}oos {coś}',
 
   async execute(client, message, args, pf, cmd) {
+    
+    //Start; 1/2
+    const reactionEmbed = new MessageEmbed()
+    .setTitle(`${client.emotes.winLoad}  Praca w toku... 1/2`)
+    .setDescription(`${client.emotes.arrr} Sprawdzanie permisji...`)
+    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+    .setColor(`BLUE`)
+    
+    const reaction = await message.lineReplyNoMention(reactionEmbed)
 
-      //Start;
-      reactionEmbed = new MessageEmbed()
-      .setTitle(`${client.emotes.winLoad}  Praca w toku... 1/2`)
-      .setDescription(`${client.emotes.google} Sprawdzanie permisji...`)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setColor(`BLUE`)
-      const reaction = await message.lineReplyNoMention(reactionEmbed)
-      errorEmbed = new MessageEmbed()
+    try {
+      const errEmbed = new MessageEmbed()
       .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
       .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
       .setColor('RED')
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
 
       //Check permissions
+      let permsCheck = 0
       try {
         if(client.ownerID.includes(message.author.id)) {
-            x = 1
-        } else {
-            x = 0
+            permsCheck = 1
         }
-      } catch (error) {
+      } catch (err) {
         //Error in checking
-            errorEmbed.setDescription(`${client.emotes.x} Sprawdzanie permisji`)
-            reaction.edit(errorEmbed)
-            return;
+        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie permisji`)
+        reaction.edit(errEmbed)
+        return;
       }
 
       try {
-        if(x === 0) {
-   errorEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-        .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
-        .setTitle(`${client.emotes.x}  Znaleziono problemy z permisjami`)
-        .setColor('#FFC000')
-        reaction.edit(errorEmbed)
-        return;
-        } } catch (error) {}
+        if(permsCheck === 0) {
+          errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
+          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+          .setTitle(`${client.emotes.x}  Znaleziono problemy z permisjami`)
+          .setColor('#FFC000')
+          reaction.edit(errEmbed)
+          return;
+        } 
+      } catch (err) {}
 
       //2/2
       reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
-      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.google} Kalkulowanie informacji o komendach...`)
+      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.arrr} Kalkulowanie informacji o komendach...`)
       await reaction.edit(reactionEmbed)
 
       try {
-      const embed = new MessageEmbed()
+        const embed = new MessageEmbed()
         .setColor(`RANDOM`)
         .setTitle(`${client.emotes.staff}  Dostępne zasoby`)
 
@@ -84,10 +87,20 @@ module.exports = {
         
         await reaction.edit(embed)
 
-      } catch (error) {
-        errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Kalkulowanie informacji o komendach`)
-        reaction.edit(errorEmbed)
+      } catch (err) {
+        errEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.x} Kalkulowanie informacji o komendach`)
+        reaction.edit(errEmbed)
         return;
       }
+    } catch (err) {
+      const embed = new MessageEmbed()
+      .setTitle(`${client.emotes.warn}  Zatrzymano komendę \`${cmd}\` z powodu wycieku błędu`)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854001906962530334/1810746.png`)
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor('RED')
+      try {await reaction.delete()} catch (err) {}
+      await message.channel.send(embed)
+      return;
+    }
   }
 }
