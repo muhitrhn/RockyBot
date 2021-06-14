@@ -20,7 +20,7 @@ module.exports = {
     if(!message.member.hasPermission('MANAGE_GUILD') && !client.ownerID.includes(message.author.id)) {
         embed.setColor("RED")
         .setTitle("🔒  Komenda niedostępna")
-        .setDescription(`${client.emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE SERWEREM\`\n${client.emotes.warn} Upewnij się, że masz potrzebne **uprawnienia**\n\n${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~1*`) 
+        .setDescription(`${client.emotes.siren} Brakujące uprawnienia: \`ZARZĄDZANIE SERWEREM\`\n${client.emotes.warn} Upewnij się, że masz potrzebne **uprawnienia**\n\n${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~2*`) 
         .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")       
         if(reaction) await reaction.remove()
         message.lineReply(embed)
@@ -31,7 +31,7 @@ module.exports = {
     } else if (!args[0]) {
         embed.setColor("RED")
         .setTitle(`${client.emotes.question}  Jaki prefix chcesz ustawić?`)
-        .setDescription(`${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~1*`)
+        .setDescription(`${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~2*`)
         .setThumbnail("https://cdn.discordapp.com/attachments/837601267827998770/845616959952257104/loading.gif")       
         if(reaction) await reaction.remove()
         message.lineReply(embed)
@@ -60,7 +60,7 @@ module.exports = {
         embed.setColor('GREEN')
         .setTitle(`${client.emotes.grverify}  Zmieniono prefix z \`${oldPrefix}\` na \`${args[0]}\``)
         .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png`)
-        .setDescription(`${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~1*`)
+        .setDescription(`${client.emotes.rverify} *Trwają prace nad zmianą na nowy typ komendy (buildprogress i lepsza wydajność), wyczekuj wersji 0.18.5~2*`)
         message.lineReplyNoMention(embed)
         if(reaction) await reaction.remove()
             

@@ -108,7 +108,7 @@ module.exports = {
         }
           
         if (deletingCache < 99) {
-          await  message.channel.messages.fetch({ limit: deletingCache + 2}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
+          await  message.channel.messages.fetch({ limit: deletingCache + 2 }).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
           const deletable = await toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
 
           const deleting = await message.channel.bulkDelete(deletable, true)
@@ -120,9 +120,23 @@ module.exports = {
         reaction.edit(errEmbed)
         return;
       }
+
+      //Everything deleted
+      let checkIfStop = []
+      await message.channel.messages.fetch({ limit: 5 }).then(msgs => msgs.forEach(msg => checkIfStop.push(msg)))      
+      if(amount - deletedFast === 0 || checkIfStop.length < 3) {
+        reactionEmbed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast}\`/\`${amount}\` wiadomości`)
+        .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/853335731615039498/4883451.png`)
+        .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie wiadomości szybką metodą: **${deletedFast}**`)
+        .setColor('RANDOM')
+        await message.delete()
+        await reaction.edit(reactionEmbed)
+        return;
+      }
+
       //4/4
       reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 4/4`)
-      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie \`${deletedFast}\` wiadomości szybką metodą\n${client.emotes.arrr} Usuwanie \`${amount - deletedFast}\` wiadomości wolną metodą (starsze niż 14 dni)...${amount - deletedFast === 0 ? `` : `\n\n${client.emotes.siren} **Nie pisz NIC na kanale do czasu zakonczenia czyszczenia, może to zająć nawet kilkadziesiąt minut w zależności od liczby wiadomości...**`}`)
+      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie wiadomości szybką metodą: **${deletedFast}**\n${client.emotes.arrr} Próba usunięcia **${amount - deletedFast}** wiadomości wolną metodą (starsze niż 14 dni)...${amount - deletedFast === 0 ? `` : `\n\n${client.emotes.siren} **Nie pisz NIC na kanale do czasu zakonczenia czyszczenia, może to zająć nawet kilkadziesiąt minut w zależności od liczby wiadomości...**`}`)
       await reaction.edit(reactionEmbed)
         
       //SlowDelete
@@ -152,9 +166,9 @@ module.exports = {
           toDelete = []
         }
         deletedSlow = deleting.length
-        message.delete()
+        await message.delete()
       } catch (err) {
-        errEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie \`${deletedFast}\` wiadomości szybką metodą\n${client.emotes.x} Usuwanie wiadomości wolną metodą (starsze niż 14 dni)`)
+        errEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie wiadomości szybką metodą: **${deletedFast}**\n${client.emotes.x} Próba usunięcia **${amount - deletedFast}** wiadomości wolną metodą (starsze niż 14 dni)`)
         reaction.edit(errEmbed)
         return;
       }
@@ -162,7 +176,7 @@ module.exports = {
       //Ready
       reactionEmbed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast + deletedSlow}\`/\`${amount}\` wiadomości`)
       .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/853335731615039498/4883451.png`)
-      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie \`${deletedFast}\` wiadomości szybką metodą\n${client.emotes.grverify} Usuwanie \`${deletedSlow}\` wiadomości wolną metodą (starsze niż 14 dni)`)
+      .setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Usuwanie wiadomości szybką metodą: **${deletedFast}**\n${client.emotes.grverify} Usuwanie wiadomości wolną metodą (starsze niż 14 dni): **${deletedSlow}**`)
       .setColor('RANDOM')
       await reaction.edit(reactionEmbed)
 

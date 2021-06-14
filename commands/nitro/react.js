@@ -57,9 +57,10 @@ module.exports = {
       //FetchMsg
       let msgNumber, msg, mess = []
       try {
-        if (parseInt(args[0]) > 40) {
+        if (parseInt(args[0]) > 40 || parseInt(args[0]) < 1) {
             errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.rverify} Wyszukiwanie wiadomości`)
-            .setTitle(`${client.emotes.x}  Za duża liczba (większa od 98)`)
+            .setTitle(`${client.emotes.x}  Zła liczba wiadomości`)
+            .setColor('#FFC000')
             reaction.edit(errorEmbed)
             return;
         }
