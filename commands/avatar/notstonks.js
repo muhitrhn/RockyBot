@@ -54,7 +54,7 @@ module.exports = {
         //CREATE IMAGE
         let doneAv
         try {
-          doneAv = await new DIG.NotStonk().getImage(`${message.author.displayAvatarURL({ dynamic: false, format: "png" })}?size=4096`)
+          doneAv = await new DIG.NotStonk().getImage(`${message.author.avatarURL({ dynamic: false, format: "png" })}?size=4096`)
         } catch (err) {
           errEmbed.setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Nie znaleziono wzmianek: wybieranie ${message.author}\n${client.emotes.x} Przerabianie avataru`)
           reaction.edit(errEmbed)
@@ -86,7 +86,7 @@ module.exports = {
         //CREATE IMAGE
         let doneAv
         try {
-          doneAv = await new DIG.NotStonk().getImage(`${mentioned.displayAvatarURL({ dynamic: false, format: "png" })}?size=4096`)
+          doneAv = await new DIG.NotStonk().getImage(`${mentioned.avatarURL({ dynamic: false, format: "png" })}?size=4096`)
         } catch (err) {
           errEmbed.setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.x} Przerabianie avataru`)
           reaction.edit(errEmbed)

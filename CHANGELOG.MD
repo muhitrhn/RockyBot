@@ -1,3 +1,9 @@
+# 🟢 0.19
+
+|✨ Komenda guildinfo|✨ Komendy z kategorii avatar|
+|---------------------------|-------------|
+|📗 `Wyświetl info o serwerze`|📗 `Ulepszenie kodu`|
+
 # 🟢 0.18.5
 
 🟢 **Patch 1**
