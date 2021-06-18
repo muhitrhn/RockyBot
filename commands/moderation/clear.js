@@ -45,16 +45,16 @@ module.exports = {
         if(permsCheck === 0) {
           //PermsCheck: missing bot perms
           errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.warn} Sprawdzanie permisji: **Brakujące uprawnienia BOTA: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
-          .setTitle(`${client.emotes.rverify}  Znaleziono problemy z permisjami`)
+          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia BOTA: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z permisjami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
         } else if (permsCheck === 1) {
           //PermsCheck: missing user perms
           errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.warn} Sprawdzanie permisji: **Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
-          .setTitle(`${client.emotes.rverify}  Znaleziono problemy z permisjami`)
+          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z permisjami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
@@ -73,7 +73,7 @@ module.exports = {
         if (isNaN(amount) || amount < 1 || amount > 1000) {
           //No amount/bad amount
           errEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie permisji\n${client.emotes.rverify} Sprawdzanie argumentów: **Zła liczba wiadomości**`)
-          .setTitle(`${client.emotes.x}  Znaleziono problemy z argumentami`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z argumentami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;

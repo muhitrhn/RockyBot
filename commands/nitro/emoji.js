@@ -42,7 +42,7 @@ module.exports = {
         if(argsCheck === 0) {
           //ArgsCheck err
           errEmbed.setDescription(`${client.emotes.rverify} Sprawdzanie argumentów: **Nie napisałeś nazwy emoji**`)
-          .setTitle(`${client.emotes.x}  Znaleziono problemy z argumentami`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z argumentami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
@@ -69,7 +69,7 @@ module.exports = {
       //Emj not found
       if (!emoji) {
         errEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.rverify} Wyszukiwanie emoji: **Nie znaleziono emoji**`)
-        .setTitle(`${client.emotes.x}  Znaleziono problemy z emoji`)
+        .setTitle(`${client.emotes.warn}  Znaleziono problemy z emoji`)
         .setColor('#FFC000')
         reaction.edit(errEmbed)
         return;

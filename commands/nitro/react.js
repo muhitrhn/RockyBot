@@ -42,7 +42,7 @@ module.exports = {
       try {
         if(argsCheck === 0) {
         errorEmbed.setDescription(`${client.emotes.rverify} Sprawdzanie argumentów: **Nie napisałeś nazwy emoji lub numeru wiadomości**`)
-        .setTitle(`${client.emotes.x}  Znaleziono problemy z argumentami`)
+        .setTitle(`${client.emotes.warn}  Znaleziono problemy z argumentami`)
         .setColor('#FFC000')
         reaction.edit(errorEmbed)
         return;
@@ -59,7 +59,7 @@ module.exports = {
       try {
         if (parseInt(args[0]) > 40 || parseInt(args[0]) < 1) {
             errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.rverify} Wyszukiwanie wiadomości`)
-            .setTitle(`${client.emotes.x}  Zła liczba wiadomości`)
+            .setTitle(`${client.emotes.warn}  Zła liczba wiadomości`)
             .setColor('#FFC000')
             reaction.edit(errorEmbed)
             return;
@@ -76,7 +76,7 @@ module.exports = {
       //NoMsg
       if (!msgNumber) {
         errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.rverify} Wyszukiwanie wiadomości: **Nie znaleziono wiadomości**`)
-        .setTitle(`${client.emotes.x}  Znaleziono problemy z szukaniem wiadomości`)
+        .setTitle(`${client.emotes.warn}  Znaleziono problemy z szukaniem wiadomości`)
         .setColor('#FFC000')
         reaction.edit(errorEmbed)
         return;
@@ -102,7 +102,7 @@ module.exports = {
       //Emj not found
       if (!emoji) {
           errorEmbed.setDescription(`${client.emotes.grverify} Sprawdzanie argumentów\n${client.emotes.grverify} Wyszukiwanie wiadomości\n${client.emotes.rverify} Wyszukiwanie emoji: **Nie znaleziono emoji**`)
-          .setTitle(`${client.emotes.x}  Znaleziono problemy z emoji`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z emoji`)
           .setColor('#FFC000')
           reaction.edit(errorEmbed)
           return;

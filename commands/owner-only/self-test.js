@@ -42,8 +42,8 @@ module.exports = {
       try {
         if(permsCheck === 0) {
           errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.warn} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
-          .setTitle(`${client.emotes.rverify}  Znaleziono problemy z permisjami`)
+          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
+          .setTitle(`${client.emotes.warn}  Znaleziono problemy z permisjami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
@@ -115,7 +115,7 @@ module.exports = {
       //Ready
       reactionEmbed.setTitle(`${client.emotes.siri}  Self-test: ukończono`)
       .setDescription(``)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/853002523400208394/1689039.png`)
+      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png`)
       await reaction.edit(reactionEmbed)
     } catch (err) {
       const embed = new MessageEmbed()

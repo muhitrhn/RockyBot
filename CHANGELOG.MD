@@ -1,5 +1,11 @@
 # 🟢 0.19
 
+🟢 **Patch 3**
+
+|✨ Komendy clear|✨ Komendy wymagające uprawnień/wyszukiwania w argumentach|
+|---------------------------|-------------|
+|📗 `W końcu zmieniono rzecz opisaną w patchu 1`|📗 `Poprawiona odpowiedź (zmienione emoji)`|
+
 🟢 **Patch 2**
 
 |✨ Komenda userinfo|
