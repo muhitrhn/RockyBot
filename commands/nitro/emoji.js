@@ -5,7 +5,7 @@ module.exports = {
   aliases: ["ne"],
   description: 'Wysyła emoji o podanej nazwie',
   category: 'nitro',
-  utilisation: '{prefix}ne <nazwa emoji>',
+  utilisation: '{prefix}ne [nazwa emoji]',
   
   async execute(client, message, args, pf, cmd) {
     
@@ -47,7 +47,7 @@ module.exports = {
           reaction.edit(errEmbed)
           return;
         } 
-      } catch (err) {}
+      } catch (err) {return;}
 
       //2/5
       reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/5`)

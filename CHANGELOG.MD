@@ -1,5 +1,13 @@
 # 🟢 0.19
 
+🟢 **Patch 1**
+
+|✨ Komenda userinfo|✨ Komendy z kategorii avatar & budowa|✨ Komendy clear|
+|---------------------------|-------------|--------------------|
+|📗 `Wyświetl info o użytkowniku`|📗 `Lepszy proces budowy komendy`|📗 `Usunięte niedziałające clear, newclear -> clear`|
+
+🟢 **Pierwsze wydanie**
+
 |✨ Komenda guildinfo|✨ Komendy z kategorii avatar|
 |---------------------------|-------------|
 |📗 `Wyświetl info o serwerze`|📗 `Ulepszenie kodu`|

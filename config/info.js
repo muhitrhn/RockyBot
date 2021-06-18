@@ -1,6 +1,6 @@
 module.exports = {
-    releasedate: "15.06.21",
-    version: "0.19",
+    releasedate: "18.06.21",
+    version: "0.19~1",
     changelog: "https://github.com/Bajojajo-xD/RockyBot/blob/main/CHANGELOG.MD",
     github: "https://github.com/Bajojajo-xD/RockyBot"
 };

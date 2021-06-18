@@ -5,7 +5,7 @@ module.exports = {
   aliases: ["nr"],
   description: 'Reaguje na podaną wiadomość',
   category: 'nitro',
-  utilisation: '{prefix}nr <numer wiadomosci, liczac od dolu, mniejszy niż 40> <nazwa emoji>',
+  utilisation: '{prefix}nr [numer wiadomosci, liczac od dolu, mniejszy niż 40] [nazwa emoji]',
   
   async execute(client, message, args, pf, cmd) {
 

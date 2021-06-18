@@ -9,9 +9,9 @@ module.exports = {
 
   async execute(client, message, args, pf, cmd) {
       
-    //Start; 1/2
+    //Start
     const reactionEmbed = new MessageEmbed()
-    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/2`)
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/1`)
     .setDescription(`${client.emotes.arrr} Sprawdzanie aktualnych prac...`)
     .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
@@ -31,20 +31,6 @@ module.exports = {
       try {
         const messages = await client.channels.cache.get(client.config.ChangesChannel).messages.fetch(1)
         await messages.forEach(msg => changes.push(msg.content))
-      //err in check
-      } catch (err) {
-        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie aktualnych prac`)
-        reaction.edit(errEmbed)
-        return;
-      }
-
-      //2/2
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
-      .setDescription(`${changes[0] ? client.emotes.grverify : client.emotes.rverify} Sprawdzanie aktualnych prac\n${client.emotes.arrr} Tworzenie wiadomości...`)
-      await reaction.edit(reactionEmbed)
-
-      //Create embed
-      try {
         const embed = new MessageEmbed()
         .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
         .setColor("RANDOM")
@@ -53,9 +39,9 @@ module.exports = {
         .setDescription(`${client.emotes.changelog} **Changelog dostępny [TUTAJ](${client.config.changelog})**`)
         if (changes[0]) embed.addField(`🛠️ Aktualne prace:`, `${changes[0]}`)
         await reaction.edit(embed)
-      //err in creating embed
+      //err in check
       } catch (err) {
-        errEmbed.setDescription(`${changes[0] ? client.emotes.grverify : client.emotes.rverify} Sprawdzanie aktualnych prac\n${client.emotes.x} Tworzenie wiadomości`)
+        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie aktualnych prac`)
         reaction.edit(errEmbed)
         return;
       }

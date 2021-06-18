@@ -8,10 +8,10 @@ module.exports = {
   utilisation: '{prefix}aa <wzmianka>',
   async execute(client, message, args, pf, cmd) {
 
-    //Start; 1/3
+    //Start
     const reactionEmbed = new MessageEmbed()
-    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/3`)
-    .setDescription(`${client.emotes.arrr} Tworzenie wiadomości...`)
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/2`)
+    .setDescription(`${client.emotes.arrr} Sprawdzanie wzmianek...`)
     .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
     .setColor(`BLUE`)
@@ -25,38 +25,23 @@ module.exports = {
       .setColor('RED')
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
 
-      //CreateMsg
-      let embed
-      try { 
-        embed = new MessageEmbed()
-        .setColor('RANDOM')
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      } catch (err) {
-        errEmbed.setDescription(`${client.emotes.x} Tworzenie wiadomości`)
-        reaction.edit(errEmbed)
-        return;
-      }
-
-      //2/3
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
-      .setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.arrr} Sprawdzanie wzmianek...`)
-      await reaction.edit(reactionEmbed)
-
-
       //NO MENTIONS
       if (!message.mentions.members.size) {
         
-        //3/3
-        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/3`)
-        .setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Nie znaleziono wzmianek: wybieranie ${message.author}\n${client.emotes.arrr} Załączanie avataru...`)
+
+        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
+        .setDescription(`${client.emotes.grverify} Nie znaleziono wzmianek: wybieranie ${message.author}\n${client.emotes.arrr} Załączanie avataru...`)
         await reaction.edit(reactionEmbed)
 
       //ADD AV TO MESSAGE
         try {
-          await embed.setDescription(`${client.emotes.dwnld} Pobierz avatar: [MAŁY](${message.author.avatarURL({ dynamic: true})}) | [DUŻY](${message.author.avatarURL({ dynamic: true})}?size=4096)`)
+          const embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+          .setDescription(`${client.emotes.dwnld} Pobierz avatar: [MAŁY](${message.author.avatarURL({ dynamic: true})}) | [DUŻY](${message.author.avatarURL({ dynamic: true})}?size=4096)`)
           await message.lineReplyNoMention({embed, files: [`${message.author.avatarURL({ dynamic: true })}?size=4096`]})
         } catch (err) {
-          errEmbed.setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Nie znaleziono wzmianek: wybieranie ${message.author}\n${client.emotes.x} Załączanie avataru\n\n${client.emotes.warn} Prawdopodobnie nie masz avataru`)
+          errEmbed.setDescription(`${client.emotes.grverify} Nie znaleziono wzmianek: wybieranie ${message.author}\n${client.emotes.x} Załączanie avataru\n\n${client.emotes.warn} Prawdopodobnie nie masz avataru`)
           reaction.edit(errEmbed)
           return;
         }
@@ -64,17 +49,20 @@ module.exports = {
       //SOMEONE MENTIONED
       } else {
         const mentioned = message.mentions.users.first()
-        //3/3
-        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/3`)
-        .setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.arrr} Załączanie avataru...`)
+
+        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
+        .setDescription(`${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.arrr} Załączanie avataru...`)
         await reaction.edit(reactionEmbed)
 
         //ADD AV TO MESSAGE
         try {
-          embed.setDescription(`${client.emotes.dwnld} Pobierz avatar: [MAŁY](${mentioned.avatarURL({ dynamic: true})}) | [DUŻY](${mentioned.avatarURL({ dynamic: true})}?size=4096)`)
+          const embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+          .setDescription(`${client.emotes.dwnld} Pobierz avatar: [MAŁY](${mentioned.avatarURL({ dynamic: true})}) | [DUŻY](${mentioned.avatarURL({ dynamic: true})}?size=4096)`)
           await message.lineReplyNoMention({embed, files: [`${mentioned.avatarURL({ dynamic: true})}?size=4096`]})
         } catch (err) {
-          errEmbed.setDescription(`${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.x} Załączanie avataru\n\n${client.emotes.warn} Prawdopodobnie ${mentioned} nie ma avataru`)
+          errEmbed.setDescription(`${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.x} Załączanie avataru\n\n${client.emotes.warn} Prawdopodobnie ${mentioned} nie ma avataru`)
           reaction.edit(errEmbed)
           return;
         }

@@ -9,9 +9,9 @@ module.exports = {
 
   async execute(client, message, args, pf, cmd) {
     
-    //Start; 1/3
+    //Start
     const reactionEmbed = new MessageEmbed()
-    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/3`)
+    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/2`)
     .setDescription(`${client.emotes.arrr} Losowanie pliku...`)
     .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
@@ -26,7 +26,7 @@ module.exports = {
       .setColor('RED')
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
 
-      //Random rock
+      //Random video
       let files = [], chosenFile
       try {
         const messages = await client.channels.cache.get(client.attachments.wideo).messages.fetch()
@@ -39,37 +39,21 @@ module.exports = {
         return;
       }
 
-      //2/3
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
-      .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.arrr} Tworzenie wiadomości...`)
-      await reaction.edit(reactionEmbed)
-
-      //Create embed
-      let embed
-      try {
-        embed = new MessageEmbed()
-        .setTitle(`${client.emotes.CMDwideo}  Randomowe wideo xD`)
-        .setColor('RANDOM')
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
-      //err in creating embed
-      } catch (err) {
-        errEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.x} Tworzenie wiadomości`)
-        reaction.edit(errEmbed)
-        return;
-      }
-
-      //3/3
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku.. 3/3`)
-      .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.arrr} Załączanie pliku...`)
+      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku.. 2/2`)
+      .setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.arrr} Załączanie pliku...`)
       await reaction.edit(reactionEmbed)
     
       //Send 
       try {
         const attachment = new MessageAttachment(chosenFile, `wideo.mp4`)
+        const embed = new MessageEmbed()
+        .setTitle(`${client.emotes.CMDwideo}  Randomowe wideo xD`)
+        .setColor('RANDOM')
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
         await message.lineReplyNoMention({embed, files: [attachment] })
       //err in attaching
       } catch (err) {
-        errEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.grverify} Tworzenie wiadomości\n${client.emotes.x} Załączanie pliku`)
+        errEmbed.setDescription(`${client.emotes.grverify} Losowanie pliku\n${client.emotes.x} Załączanie pliku`)
         reaction.edit(errEmbed)
         return;
       }

@@ -29,9 +29,9 @@ module.exports = {
       //PermsCheck
       let permsCheck = 2
       try {
-        if (!message.guild.me.hasPermission('MANAGE_MESSAGES')) {
+        if (!message.guild.me.permissionsIn(message.channel).has('MANAGE_MESSAGES')) {
           permsCheck = 0
-        } else if (!message.member.hasPermission('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
+        } else if (!message.member.permissionsIn(message.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
           permsCheck = 1
         }
       } 
@@ -45,21 +45,21 @@ module.exports = {
         if(permsCheck === 0) {
           //PermsCheck: missing bot perms
           errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia BOTA: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
-          .setTitle(`${client.emotes.x}  Znaleziono problemy z permisjami`)
+          .setDescription(`${client.emotes.warn} Sprawdzanie permisji: **Brakujące uprawnienia BOTA: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+          .setTitle(`${client.emotes.rverify}  Znaleziono problemy z permisjami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
         } else if (permsCheck === 1) {
           //PermsCheck: missing user perms
           errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
-          .setTitle(`${client.emotes.x}  Znaleziono problemy z permisjami`)
+          .setDescription(`${client.emotes.warn} Sprawdzanie permisji: **Brakujące uprawnienia: \`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+          .setTitle(`${client.emotes.rverify}  Znaleziono problemy z permisjami`)
           .setColor('#FFC000')
           reaction.edit(errEmbed)
           return;
         }
-      } catch (err) {}
+      } catch (err) {return;}
       
       //2/4
       reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/4`)
