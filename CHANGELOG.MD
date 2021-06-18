@@ -1,5 +1,12 @@
 # 🟢 0.19
 
+🟢 **Patch 2**
+
+|✨ Komenda userinfo|
+|---------------------------|
+|📗 `Sprawdź użytkownika poprzez id`|
+|📗 `Poprawki przy wyświetlaniu daty`|
+
 🟢 **Patch 1**
 
 |✨ Komenda userinfo|✨ Komendy z kategorii avatar & budowa|✨ Komendy clear|

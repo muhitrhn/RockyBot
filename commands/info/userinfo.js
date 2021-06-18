@@ -5,14 +5,14 @@ module.exports = {
   aliases: ['iui', 'iu', 'ia', 'iai', 'accountinfo'],
   description: "Info o użytkowniku",
   category: 'info',
-  utilisation: '{prefix}iui <wzmianka>',
+  utilisation: '{prefix}iui <wzmianka/id>',
 
   async execute(client, message, args, pf, cmd) {
     
-    //Start; 1/5
+    //Start
     const reactionEmbed = new MessageEmbed()
     .setTitle(`${client.emotes.winLoad} Praca w toku... 1/2`)
-    .setDescription(`${client.emotes.arrr} Sprawdzanie wzmianek...`)
+    .setDescription(`${client.emotes.arrr} Sprawdzanie użytkowników...`)
     .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
     .setColor(`BLUE`)
@@ -26,25 +26,28 @@ module.exports = {
       .setColor('RED')
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));    
 
-      let ifMention = false
-      let mention, mentionMember
+      let mention, mentionMember = message.guild.member(args[0]), ifMention = false
       try {
-        if (!message.mentions.members.size) {
-          mention = message.author
-          mentionMember = message.member
-        } else {
+        if (message.mentions.members.size) {
           mention = message.mentions.users.first()
           mentionMember = message.mentions.members.first()
           ifMention = true
+        } else if (!mentionMember) {
+          mention = message.author
+          mentionMember = message.member
+        } else {
+          mention = client.users.cache.get(args[0])
+          ifMention = true
         }
       } catch (err) {
-        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie wzmianek`)
+        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie wzmianek/id`)
         await reaction.edit(errEmbed)
+        console.log(err)
         return;
       }
 
       reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
-      .setDescription(`${client.emotes.grverify} ${ifMention ?  `Wzmianka: ${mention}` : `Nie znaleziono wzmianek: wybieranie ${message.author}`}\n${client.emotes.arrr} Sprawdzanie informacji o użytkowniku...`)
+      .setDescription(`${client.emotes.grverify} ${ifMention ?  `Znaleziono użytkownika: ${mention}` : `Nie znaleziono użytkowników: wybieranie ${message.author}`}\n${client.emotes.arrr} Sprawdzanie informacji o użytkowniku...`)
       await reaction.edit(reactionEmbed)
 
       try {
@@ -56,7 +59,7 @@ module.exports = {
         .addField(`🔆 Ogólne`, [
           `📎 ID: \`${mention.id}\``,
           `🛡️ ${mention}`,
-          `⏲️ Konto założone (UTC): \`${mention.createdAt.getUTCHours()}:${mention.createdAt.getUTCMinutes()} ┇ ${mention.createdAt.getUTCDate()}.${mention.createdAt.getUTCMonth()+1}.${mention.createdAt.getUTCFullYear()}\``,
+          `⏲️ Konto założone (UTC): \`${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?`0`:``)+parseInt(mention.createdAt.getUTCMinutes())} ┇ ${(mention.createdAt.getUTCDate()<10?`0`:``)+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?`0`:``)+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}\``,
           '\u200b',
           ])
         .addField(`📡 Uprawnienia na tym kanale:`, [
@@ -82,7 +85,7 @@ module.exports = {
 
         await reaction.edit(embed)
       } catch (err) {
-        errEmbed.setDescription(`${client.emotes.grverify} ${ifMention ?  `Wzmianka: ${mention}` : `Nie znaleziono wzmianek: wybieranie ${message.author}`}\n${client.emotes.x} Sprawdzanie informacji o użytkowniku`)
+        errEmbed.setDescription(`${client.emotes.grverify} ${ifMention ?  `Znaleziono użytkownika: ${mention}` : `Nie znaleziono użytkowników: wybieranie ${message.author}`}\n${client.emotes.x} Sprawdzanie informacji o użytkowniku`)
         await reaction.edit(errEmbed)
         console.log(err)
         return;
