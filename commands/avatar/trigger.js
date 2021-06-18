@@ -62,8 +62,8 @@ module.exports = {
       //SOMEONE MENTIONED
       } else {
         const mentioned = message.mentions.users.first()
-        //3/4
-        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 3/3`)
+        
+        reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/3`)
         .setDescription(`${client.emotes.grverify} Wzmianka: ${mentioned}\n${client.emotes.arrr} Przerabianie avataru...`)
         await reaction.edit(reactionEmbed)
     
@@ -83,6 +83,9 @@ module.exports = {
 
         //ATTACH AV
         try {
+          const embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
           const attachment = new MessageAttachment(doneAv, "xD.gif")
           await message.lineReplyNoMention({embed, files: [attachment]})
         } catch (err) {

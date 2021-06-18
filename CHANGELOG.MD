@@ -1,5 +1,11 @@
 # 🟢 0.19
 
+🟢 **Patch 4**
+
+|✨ Komendy z kategorii avatar|
+|---------------------------|
+|📗 `Naprawione załączanie czyjegoś przerobionego avataru przez komendy przerabiające avatary`|
+
 🟢 **Patch 3**
 
 |✨ Komendy clear|✨ Komendy wymagające uprawnień/wyszukiwania w argumentach|
