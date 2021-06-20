@@ -12,7 +12,7 @@ module.exports = {
 
     try {
       let changes = []
-      const messages = await client.channels.cache.get(client.config.ChangesChannel).messages.fetch(1)
+      const messages = await client.channels.cache.get(client.cmds.ChangesChannel).messages.fetch(1)
       await messages.forEach(msg => changes.push(msg.content))
 
       const embed = new MessageEmbed()
