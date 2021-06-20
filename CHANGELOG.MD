@@ -5,6 +5,7 @@
 |✨ Komenda changelog|
 |---------------------------|
 |📗 `Naprawiono komendę`|
+|📗 `Przeniesiono link do przycisku`|
 
 🟢 **Pierwsze wydanie**
 

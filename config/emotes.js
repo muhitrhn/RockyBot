@@ -30,6 +30,7 @@ module.exports = {
     rverify_ID: "837704198388056175",
     dwnld_ID: "852962401002717185",
     arrl_ID: "852922321744166912",
+    changelog_ID: "852894595767337000",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",
