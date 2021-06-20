@@ -1,3 +1,4 @@
+const { MessageActionRow, MessageButton } = require("discord-buttons");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
@@ -9,97 +10,169 @@ module.exports = {
 
   async execute(client, message, args, pf, cmd) {
     
-    //Start
-    const reactionEmbed = new MessageEmbed()
-    .setTitle(`${client.emotes.winLoad} Praca w toku... 1/2`)
-    .setDescription(`${client.emotes.arrr} Sprawdzanie użytkowników...`)
-    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-    .setColor(`BLUE`)
-    
-    const reaction = await message.lineReplyNoMention(reactionEmbed)
+    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
 
     try {
-      const errEmbed = new MessageEmbed()
-      .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
-      .setColor('RED')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));    
-
-      let mention, mentionMember = message.guild.member(args[0]), ifMention = false
-      try {
-        if (message.mentions.members.size) {
-          mention = message.mentions.users.first()
-          mentionMember = message.mentions.members.first()
-          ifMention = true
-        } else if (!mentionMember) {
-          mention = message.author
-          mentionMember = message.member
-        } else {
-          mention = client.users.cache.get(args[0])
-          ifMention = true
-        }
-      } catch (err) {
-        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie wzmianek/id`)
-        await reaction.edit(errEmbed)
-        console.log(err)
-        return;
-      }
-
-      reactionEmbed.setTitle(`${client.emotes.winLoad} Praca w toku... 2/2`)
-      .setDescription(`${client.emotes.grverify} ${ifMention ?  `Znaleziono użytkownika: ${mention}` : `Nie znaleziono użytkowników: wybieranie ${message.author}`}\n${client.emotes.arrr} Sprawdzanie informacji o użytkowniku...`)
-      await reaction.edit(reactionEmbed)
-
-      try {
-        const embed = new MessageEmbed()
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-        .setThumbnail(mention.avatarURL({ dynamic: true }))
-        .setTitle(`${client.emotes.siri} Użytkownik \`${mention.tag}\``)
-        .setColor('RANDOM')
-        .addField(`🔆 Ogólne`, [
-          `📎 ID: \`${mention.id}\``,
-          `🛡️ ${mention}`,
-          `⏲️ Konto założone (UTC): \`${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?`0`:``)+parseInt(mention.createdAt.getUTCMinutes())} ┇ ${(mention.createdAt.getUTCDate()<10?`0`:``)+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?`0`:``)+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}\``,
-          '\u200b',
-          ])
-        .addField(`📡 Uprawnienia na tym kanale:`, [
-          mentionMember.permissions.has('ADMINISTRATOR') ? `${client.emotes.grverify} \`Administrator\`` : (mentionMember.permissionsIn(message.channel).has('VIEW_CHANNEL') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie kanału\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('CREATE_INSTANT_INVITE') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Tworzenie zaproszeń\`' ,
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wysyłanie wiadomości\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('ADD_REACTIONS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Dodawanie reakcji\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('SEND_TTS_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wysyłanie wiadomości TTS\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('MANAGE_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie wiadomościami\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('ATTACH_FILES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Załączanie plików\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('READ_MESSAGE_HISTORY') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie historii czatu\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('USE_EXTERNAL_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Używanie zewnętrznych emoji\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? '' : (mentionMember.permissionsIn(message.channel).has('MENTION_EVERYONE') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Używanie wzmianki \"everyone\"\`',
-        ])
-        .addField(`${client.emotes.staff} Uprawnienia globalne:`, [
-          mentionMember.permissions.has('ADMINISTRATOR') ? `${client.emotes.grverify} \`Administrator\`` : (mentionMember.permissions.has('KICK_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyrzucanie członków\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? `` : (mentionMember.permissions.has('BAN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Banowanie członków\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? `` : (mentionMember.permissions.has('MANAGE_GUILD') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie serwerem\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? `` : (mentionMember.permissions.has('MANAGE_NICKNAMES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie pseudonimami\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? `` : (mentionMember.permissions.has('MANAGE_ROLES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie rolami i permisjami\`',
-          mentionMember.permissions.has('ADMINISTRATOR') ? `` : (mentionMember.permissions.has('MANAGE_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie emoji\`',
-        ])
-
-        await reaction.edit(embed)
-      } catch (err) {
-        errEmbed.setDescription(`${client.emotes.grverify} ${ifMention ?  `Znaleziono użytkownika: ${mention}` : `Nie znaleziono użytkowników: wybieranie ${message.author}`}\n${client.emotes.x} Sprawdzanie informacji o użytkowniku`)
-        await reaction.edit(errEmbed)
-        console.log(err)
-        return;
-      }
       
-    } catch (err) {
-      const embed = new MessageEmbed()
-      .setTitle(`${client.emotes.warn}  Zatrzymano komendę \`${cmd}\` z powodu wycieku błędu`)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854001906962530334/1810746.png`)
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setColor('RED')
-      try {await reaction.delete()} catch (err) {}
-      await message.channel.send(embed)
+      const mention = await client.base.get(`check`).user(client, message, args)
+      const mentionMember = await client.base.get(`check`).member(client, message, args)
+
+      client.commands.get(`userinfo`).main(client, message, mention, reaction, mentionMember, pf, cmd)
       return;
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
     }
-  }
+  },
+
+  async main(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+    try {
+      const embed = new MessageEmbed()
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setTitle(`${client.emotes.siri} Użytkownik \`${mention.tag}\``)
+      if (!color) {embed.setColor('RANDOM')} else {embed.setColor(color)}
+      const embedColor = embed.color
+      embed.addField(`🔆 Ogólne`, [
+        `📎 ID: \`${mention.id}\``,
+        `🛡️ ${mention}`,
+        `⏲️ Konto założone (UTC): \`${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?`0`:``)+parseInt(mention.createdAt.getUTCMinutes())} ┇ ${(mention.createdAt.getUTCDate()<10?`0`:``)+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?`0`:``)+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}\``,
+      ])
+
+      const button = new MessageButton()
+      .setLabel("Permisje kanału")
+      .setStyle("green")
+      .setEmoji("⚒️")
+      .setID("ch_perms")
+      const button2 = new MessageButton()
+      .setLabel("Permisje globalne")
+      .setStyle("blurple")
+      .setEmoji("🛠️")
+      .setID("glob_perms")
+      const buttonRow = new MessageActionRow()
+      .addComponent(button)
+      .addComponent(button2)
+
+      await reaction.edit({embed: embed, component: buttonRow})
+      try {await bt.defer()} catch (err) {}
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ch_perms';
+      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'glob_perms';
+      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
+
+      collector.on('collect', buttonClick => {
+        collector.stop()
+        collector2.stop()
+        client.commands.get(`userinfo`).chPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
+        return;
+      })
+
+      collector2.on('collect', buttonClick => {
+        collector.stop()
+        collector2.stop()
+        client.commands.get(`userinfo`).globPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
+        return;
+      })
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+    }
+
+  }, 
+
+  async chPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+    try {
+      const embed = new MessageEmbed()
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setTitle(`${client.emotes.warn} Uprawnienia na kanale \`${message.channel.name}\` dla \`${mention.tag}\``)
+      .setColor(color)
+      if (mentionMember.permissions.has('ADMINISTRATOR')) {
+        embed.setDescription(`${client.emotes.grverify} \`Administrator\``)
+      }
+      if (!mentionMember.permissions.has('ADMINISTRATOR')) {
+        embed.addField(`📡 Uprawnienia na kanale:`, [
+          (mentionMember.permissionsIn(message.channel).has('VIEW_CHANNEL') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie kanału\`',
+          (mentionMember.permissionsIn(message.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wysyłanie wiadomości\`',
+          (mentionMember.permissionsIn(message.channel).has('ADD_REACTIONS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Dodawanie reakcji\`',
+          (mentionMember.permissionsIn(message.channel).has('SEND_TTS_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wysyłanie wiadomości TTS\`',
+          (mentionMember.permissionsIn(message.channel).has('ATTACH_FILES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Załączanie plików\`',
+          (mentionMember.permissionsIn(message.channel).has('READ_MESSAGE_HISTORY') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie historii czatu\`',
+          (mentionMember.permissionsIn(message.channel).has('USE_EXTERNAL_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Używanie zewnętrznych emoji\`',
+          (mentionMember.permissionsIn(message.channel).has('MENTION_EVERYONE') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Używanie wzmianki \"everyone\"\`',
+          (mentionMember.permissionsIn(message.channel).has('MANAGE_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie wiadomościami\`',
+        ])
+      }
+      const button = new MessageButton()
+      .setLabel("Wróć")
+      .setStyle("grey")
+      .setEmoji(client.emotes.arrl_ID)
+      .setID("back")
+      await reaction.edit({embed: embed, component: button})
+      try {await bt.defer()} catch (err) {}
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back';
+      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+
+      collector.on('collect', buttonClick => {
+        collector.stop()
+        client.commands.get(`userinfo`).main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
+        return;
+      })
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+    }
+  },
+  async globPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+    try {
+      const embed = new MessageEmbed()
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla \`${mention.tag}\``)
+      .setColor(color)
+      if (mentionMember.permissions.has('ADMINISTRATOR')) {
+        embed.setDescription(`${client.emotes.grverify} \`Administrator\``)
+      }
+      if (!mentionMember.permissions.has('ADMINISTRATOR')) {
+        embed.addField(`${client.emotes.staff} Zarządzanie serwerem:`, [
+          (mentionMember.permissions.has('BAN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Banowanie członków\`',
+          (mentionMember.permissions.has('KICK_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyrzucanie członków\`',
+          (mentionMember.permissions.has('VIEW_AUDIT_LOG') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie dziennika zdarzeń\`',
+          (mentionMember.permissions.has('MANAGE_GUILD') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie serwerem\`',
+          (mentionMember.permissions.has('MANAGE_CHANNELS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie kanałami\`',
+          (mentionMember.permissions.has('MANAGE_ROLES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie rolami i permisjami\`',
+          (mentionMember.permissions.has('MANAGE_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie emoji\`',
+          (mentionMember.permissions.has('MANAGE_NICKNAMES') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Zarządzanie pseudonimami\`',
+          (mentionMember.permissions.has('VIEW_GUILD_INSIGHTS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyświetlanie informacji o serwerze\`',
+          (mentionMember.permissions.has('CREATE_INSTANT_INVITE') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Tworzenie szybkich zaproszeń\`',
+        ])
+      }
+
+      if (!mentionMember.permissions.has('ADMINISTRATOR')) {
+        embed.addField(`🗣️ Kanały głosowe`, [
+          (mentionMember.permissions.has('CONNECT') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Łączenie\`',
+          (mentionMember.permissions.has('SPEAK') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Rozmowa\`',
+          (mentionMember.permissions.has('STREAM') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wideo\`',
+          (mentionMember.permissions.has('PRIORITY_SPEAKER') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Priorytetowy rozmówca\`',
+          (mentionMember.permissions.has('DEAFEN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Wyciszanie innych użytkowników\`',
+          (mentionMember.permissions.has('MOVE_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' \`Przenoszenie innych użytkowników\`',
+        ])
+      }
+
+      const button = new MessageButton()
+      .setLabel("Wróć")
+      .setStyle("grey")
+      .setEmoji(client.emotes.arrl_ID)
+      .setID("back")
+      await reaction.edit({embed: embed, component: button})
+      try {await bt.defer()} catch (err) {}
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back';
+      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+
+      collector.on('collect', buttonClick => {
+        collector.stop()
+        client.commands.get(`userinfo`).main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
+        return;
+      })
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+    }
+  },
 }

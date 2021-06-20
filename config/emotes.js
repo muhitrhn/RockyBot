@@ -12,7 +12,6 @@ module.exports = {
     world: "<a:Black_World:838382299166801921>",
     question: "<:Question_mark:845341315348430939>",
     boombox: '<:Boombox:845342914728296529>',
-
     warn: '<a:Warning:826731315570278461>',
     nitro: "<a:nitro:853306174820581406>",
     dwnld: "<:dwnld:852962401002717185>",
@@ -25,6 +24,12 @@ module.exports = {
     trash: "<a:trash_dance:853335179497570324>",
     lightSabers:"<a:lightsabers:854028547365797958>",
     arrr: "<a:arrowright:852922342991724564>",
+    arrl: "<a:arrowleft:852922321744166912>",
+
+    grverify_ID: "837704119086612502",
+    rverify_ID: "837704198388056175",
+    dwnld_ID: "852962401002717185",
+    arrl_ID: "852922321744166912",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",

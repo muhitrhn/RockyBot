@@ -5,9 +5,7 @@ const cmds = require('./cmds')
 require("dotenv").config()
 
 module.exports = {
-    attachments: cmds.commands.attachments,
-
-    ChangesChannel: cmds.commands.ChangesChannel,
+    cmds: cmds.commands,
 
     emotes: emotes,
 
@@ -18,6 +16,7 @@ module.exports = {
     news: info.news,
     github: info.github,
     changelog: info.changelog,
+    author: info.author,
 
     discord: {
         betatoken: process.env.BETATOKEN,

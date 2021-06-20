@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Bajojajo-xD/RockyBot#readme",
   "dependencies": {
     "chalk": "^4.1.1",
+    "discord-buttons": "^3.2.1",
     "discord-image-generation": "^1.4.9",
     "discord-reply": "^0.1.2",
     "discord.js": "^12.5.3",
@@ -27,7 +28,7 @@
     "express": "^4.17.1",
     "getos": "^3.2.1",
     "got": "^11.8.2",
-    "mongoose": "^5.12.13",
+    "mongoose": "^5.12.14",
     "os": "^0.1.1",
     "os-utils": "^0.0.14",
     "pretty-ms": "^7.0.1"

@@ -18,18 +18,18 @@ module.exports = async (client, message) => {
 		const embed = new MessageEmbed()
 		.setColor("YELLOW")
 		.setTitle(`${client.emotes.lightSabers} Cześć, tu RockyBot `)
-		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n***Niech kamienna moc będzie z Tobą!***`)
-		.setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854040865973469214/4405512.png`)
+		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
+		.setThumbnail(client.cmds.pingImg)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));    
-		message.lineReply(embed)
+		message.lineReply({embed: embed})
 	}
 
   if (!message.content.startsWith(prefix)) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/g);
+	const args = message.content.slice(prefix.length).trim().split(" ");
 	const command = args.shift().toLowerCase();
 
 	const cmd = client.commands.get(command) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(command));
 
-	if (cmd) cmd.execute(client, message, args, prefix, command)
+	if (cmd) cmd.execute(client, message, args, prefix, cmd.name)
 }

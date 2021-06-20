@@ -6,66 +6,41 @@ module.exports = {
   description: "Test bota",
   category: 'owner-only',
   utilisation: '{prefix}oot',
-
   async execute(client, message, args, pf, cmd) {
     
-    //Start;
-    const reactionEmbed = new MessageEmbed()
-    .setTitle(`${client.emotes.winLoad}  Przygotowania do testu...`)
-    .setDescription(`${client.emotes.arrr} Sprawdzanie permisji...`)
-    .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852901674997252106/1275442.png`)
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-    .setColor(`BLUE`)
-    
-    const reaction = await message.lineReplyNoMention(reactionEmbed)
+    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
     
     try {
-      const errEmbed = new MessageEmbed()
-      .setTitle(`${client.emotes.warn}  Wystąpił problem z komendą \`${pf}${cmd}\``)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852928290045427733/753345.png`)
-      .setColor('RED')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}));
+      const embed = new MessageEmbed()
+      .setColor('RANDOM')
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
 
-      //Check permissions
-      let permsCheck = 0
-      try {
-      if(client.ownerID.includes(message.author.id)) {
-        permsCheck = 1
-      }
-      } catch (err) {
-        //Error in checking
-        errEmbed.setDescription(`${client.emotes.x} Sprawdzanie permisji`)
-        reaction.edit(errEmbed)
+      if(!client.ownerID.includes(message.author.id)) {
+        embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`)
+        .setDescription(`**...\`WŁAŚCICIEL BOTA\`**`)
+        .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
+        .setColor('#FFC000')
+        await reaction.edit({embed: embed})
         return;
-      }
-      //NO PERMS
-      try {
-        if(permsCheck === 0) {
-          errEmbed.setThumbnail(`https://cdn.discordapp.com/attachments/852928154691567669/852976002178220052/891399.png`)
-          .setDescription(`${client.emotes.rverify} Sprawdzanie permisji: **Brakujące uprawnienia: \`WŁAŚCICIEL BOTA\`**`)
-          .setTitle(`${client.emotes.warn}  Znaleziono problemy z permisjami`)
-          .setColor('#FFC000')
-          reaction.edit(errEmbed)
-          return;
-        } 
-      } catch (err) {}
+      } 
       
-      reactionEmbed.setTitle(`${client.emotes.siren}  Przeprowadzanie self-testu...`)
-      .setDescription(`**${client.emotes.winLoad} NIE pisz NIC na kanale przeprowadzania self-testu**`)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852994981027643442/993845.png`)
-      await reaction.edit(reactionEmbed)
+      embed.setTitle(`${client.emotes.winLoad}  Przeprowadzanie self-testu...`)
+      .setDescription(`**${client.emotes.siren} NIE pisz NIC na kanale przeprowadzania self-testu**`)
+      .setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
+      await reaction.edit({embed: embed})
 
       //Test fetching
       let fetching, fetchingStatus
       try {
-        await message.channel.send(`${client.emotes.warn} fetching messages test, do NOT delete`)
+        await message.channel.send(`Fetching messages test, do NOT delete`)
         await message.channel.messages.fetch({ limit: 1 }).then(msgs => msgs.forEach(msg => fetchingStatus = msg))
         fetching = 1
       } catch (err) {
         fetching = 0
         fetchingStatus = err
       }
-      await reactionEmbed.addField(`${fetching ? client.emotes.grverify : client.emotes.warn}  messages.fetch()`, fetching ? `Brak problemów:\nID: \`${fetchingStatus.id}\`\nTreść: \`${fetchingStatus.content}\`` : `\`\`\`${fetchingStatus}\`\`\``)
+
+      embed.addField(`${fetching ? client.emotes.grverify : client.emotes.warn}  messages.fetch()`, fetching ? `Brak problemów:\nID: \`${fetchingStatus.id}\`\nTreść: \`${fetchingStatus.content}\`` : `\`\`\`${fetchingStatus}\`\`\``)
 
       //Test deleting
       let deleting, deletingStatus
@@ -77,7 +52,8 @@ module.exports = {
         deleting = 0
         deletingStatus = err
       }
-      await reactionEmbed.addField(`${deleting ? client.emotes.grverify : client.emotes.warn}  messages.delete()`, deleting ? `Brak problemów: usunięto` : `\`\`\`${deletingStatus}\`\`\``)
+     
+      embed.addField(`${deleting ? client.emotes.grverify : client.emotes.warn}  messages.delete()`, deleting ? `Brak problemów: usunięto` : `\`\`\`${deletingStatus}\`\`\``)
 
       //Test finding guild
       let findingGuild, findingGuildStatus
@@ -88,7 +64,8 @@ module.exports = {
           findingGuild = 0
           findingGuildStatus = err
       }
-      await reactionEmbed.addField(`${findingGuild ? client.emotes.grverify : client.emotes.warn}  guilds.cache.get()`, findingGuild ? `Brak problemów:\nID: \`${findingGuildStatus.id}\`\nNazwa: \`${findingGuildStatus.name}\`` : `\`\`\`${findingGuildStatus}\`\`\``)
+     
+      embed.addField(`${findingGuild ? client.emotes.grverify : client.emotes.warn}  guilds.cache.get()`, findingGuild ? `Brak problemów:\nID: \`${findingGuildStatus.id}\`\nNazwa: \`${findingGuildStatus.name}\`` : `\`\`\`${findingGuildStatus}\`\`\``)
 
       //Test finding channel
       let findingChannel, findingChannelStatus
@@ -99,7 +76,8 @@ module.exports = {
         findingChannel = 0
         findingChannelStatus = err
       }
-      await reactionEmbed.addField(`${findingChannel ? client.emotes.grverify : client.emotes.warn}  channels.cache.get()`, findingChannel ? `Brak problemów:\nID: \`${findingChannelStatus.id}\`\nNazwa: \`${findingChannelStatus.name}\`` : `\`\`\`${findingChannelStatus}\`\`\``)
+      
+      embed.addField(`${findingChannel ? client.emotes.grverify : client.emotes.warn}  channels.cache.get()`, findingChannel ? `Brak problemów:\nID: \`${findingChannelStatus.id}\`\nNazwa: \`${findingChannelStatus.name}\`` : `\`\`\`${findingChannelStatus}\`\`\``)
       
       //Test finding user
       let findingUser, findingUserStatus
@@ -110,22 +88,15 @@ module.exports = {
         findingUser = 0
         findingUserStatus = err
       }
-      await reactionEmbed.addField(`${findingUser ? client.emotes.grverify : client.emotes.warn}  users.cache.get()`, findingUser ? `Brak problemów:\nID: \`${findingUserStatus.id}\`\nTag: \`${findingUserStatus.tag}\`` : `\`\`\`${findingUserStatus}\`\`\``)
+      embed.addField(`${findingUser ? client.emotes.grverify : client.emotes.warn}  users.cache.get()`, findingUser ? `Brak problemów:\nID: \`${findingUserStatus.id}\`\nTag: \`${findingUserStatus.tag}\`` : `\`\`\`${findingUserStatus}\`\`\``)
 
       //Ready
-      reactionEmbed.setTitle(`${client.emotes.siri}  Self-test: ukończono`)
+      embed.setTitle(`${client.emotes.siri}  Self-test: ukończono`)
       .setDescription(``)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/852278226364792893/190411.png`)
-      await reaction.edit(reactionEmbed)
+      .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
+      try {await reaction.edit({ embed: embed })} catch (err) {await message.channel.send({embed: embed})}
     } catch (err) {
-      const embed = new MessageEmbed()
-      .setTitle(`${client.emotes.warn}  Zatrzymano komendę \`${cmd}\` z powodu wycieku błędu`)
-      .setThumbnail(`https://cdn.discordapp.com/attachments/850848194929492009/854001906962530334/1810746.png`)
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setColor('RED')
-      try {await reaction.delete()} catch (err) {}
-      await message.channel.send(embed)
-      return;
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
     }
   } 
 }

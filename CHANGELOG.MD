@@ -1,3 +1,21 @@
+# 🟢 0.20
+
+🟢 **Pierwsze wydanie**
+
+|✨ Wszystkie komendy|✨ Komenda kick|✨ Komenda ban|
+|---------------------------|----------------|----------|
+|📗 `Zmiana odpowiedzi na wywołanie`|📗 `Wyrzuć użytkownika po id/wzmiance`|📗 `Zbanuj użytkownika po id/wzmiance`
+|📗 `Lepszy handler błędów (z opcją ich zgłaszania)`|
+
+|✨ Komenda clear|✨ Komendy z kategorii avatar|✨ Komenda storage|
+|---------------------------|----------------|----------|
+|📗 `Lepsza animacja przy usuwaniu wiadomości`|📗 `Znajdź avatar użytkownika po id`|📗 `Przeniesiona do kategorii info`|
+|📗 `Potwierdzenie usuwania`|
+
+|✨ Kod bota|✨ Komenda avatar|✨ Kategoria komend "beka"
+|---------------------------|----------------|-----------------|
+|📗 `Usprawnienia, lepsze rozdzielenie na pliki`|📗 `Linki do avataru to teraz przyciski`|📗 `Zmiana nazwy, beka => fun`
+
 # 🟢 0.19
 
 🟢 **Patch 4**
