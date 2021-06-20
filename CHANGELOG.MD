@@ -1,5 +1,11 @@
 # 🟢 0.20
 
+🟢 **Patch 1**
+
+|✨ Komenda changelog|
+|---------------------------|
+|📗 `Naprawiono komendę`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Wszystkie komendy|✨ Komenda kick|✨ Komenda ban|
