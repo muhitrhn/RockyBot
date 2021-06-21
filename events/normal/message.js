@@ -12,7 +12,8 @@ module.exports = async (client, message) => {
     GuildID: message.guild.id
   });
 
-	if(data) prefix = data.Prefix; else if (!data) prefix = client.defaultPrefix;
+  let prefix
+	if(data) prefix = data.Prefix; else prefix = client.defaultPrefix;
 
 	if ((message.content === `<@!${client.myID}>` || message.content === `<@${client.myID}>`) && (!message.content.includes("@here") && !message.content.includes("@everyone"))) {
 		const embed = new MessageEmbed()
