@@ -56,12 +56,15 @@ module.exports = {
       try {await bt.defer()} catch (err) {}
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ch_perms';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'glob_perms';
+      const filter3 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
       const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
         client.commands.get(`userinfo`).chPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
         return;
       })
@@ -69,8 +72,14 @@ module.exports = {
       collector2.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
         client.commands.get(`userinfo`).globPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
         return;
+      })
+
+      collector3.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     } catch (err) {
       await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
@@ -109,13 +118,22 @@ module.exports = {
       await reaction.edit({embed: embed, component: button})
       try {await bt.defer()} catch (err) {}
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back';
+      const filter2 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()
+        collector2.stop()
         client.commands.get(`userinfo`).main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
         return;
       })
+
+      collector2.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+      })
+
     } catch (err) {
       await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
     }
@@ -164,12 +182,20 @@ module.exports = {
       await reaction.edit({embed: embed, component: button})
       try {await bt.defer()} catch (err) {}
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back';
+      const filter2 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()
+        collector2.stop()
         client.commands.get(`userinfo`).main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
         return;
+      })
+
+      collector2.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     } catch (err) {
       await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)

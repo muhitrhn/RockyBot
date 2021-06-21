@@ -109,12 +109,15 @@ module.exports = {
 
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'kick';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
+      const filter3 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
       const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
         
         mentioned.kick({ reason: reasonToProvide })
 
@@ -124,7 +127,7 @@ module.exports = {
         else {
           embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
         }
-        embed.setThumbnail(mentioned.user.avatarURL())
+        embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
         .setImage(client.cmds.moderationImgs.kick[Math.floor(Math.random() * client.cmds.moderationImgs.kick.length)])
 
         reaction.edit({embed: embed})
@@ -134,6 +137,7 @@ module.exports = {
       collector2.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano wyrzucanie użytkownika...`)
         .setDescription(`**...${mentioned}**`)
@@ -141,6 +145,11 @@ module.exports = {
 
         reaction.edit({embed: embed})
         return;
+      })
+      
+      collector3.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })   
       })
 
 

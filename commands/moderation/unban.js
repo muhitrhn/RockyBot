@@ -2,11 +2,11 @@ const { MessageButton, MessageActionRow } = require('discord-buttons');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-  name: "ban",
-  aliases: ["mb"],
-  description: 'Zbanuj kogoś',
+  name: "unban",
+  aliases: ["mub"],
+  description: 'Odbanuj kogoś',
   category: 'moderation',
-  utilisation: '{prefix}mb [wzmianka/id]',
+  utilisation: '{prefix}mub [id]',
   async execute(client, message, args, pf, cmd) {
     
     const reaction = await client.base.get(`cmd`).start(client, message, cmd)
@@ -41,20 +41,12 @@ module.exports = {
         return;
       }
         
-      const mentioned = await client.base.get(`check`).member(client, message, args)
-
-      if (mentioned === message.member) {
+      const bansInGuild = await message.guild.fetchBans()
+      const toUnban = bansInGuild.find(b => b.user.id === args[0])
+      
+      if(!toUnban) {
         embed.setTitle(`${client.emotes.siren}  Nie podano właściwego użytkownika...`)
-        .setDescription(`**...podaj id lub oznacz użytkownika**`)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
-        return;
-      }
-
-      if (!mentioned.bannable) {
-        embed.setTitle(`${client.emotes.warn}  Nie mogę zbanować użytkownika...`)
-        .setDescription(`**...${mentioned}, prawdopodobnie ma rolę wyższą od mojej**`)
+        .setDescription(`**...podaj id użytkownika**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
@@ -62,31 +54,20 @@ module.exports = {
       }
 
       let reason, reasonToProvide
-
-      if (args[0] === mentioned.id || args[0] === `<@${mentioned.id}>` || args[0] === `<@!${mentioned.id}>` ) {
-        if (args[1]) {
-          reason = args.slice(1).join(" ")
-          reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason: " + args.slice(1).join(" ")
-        } else {
-          reason = 0
-          reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason not provided"
-        }
+      if (args[1]) {
+        reason = args.slice(1).join(" ")
+        reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason: " + args.slice(1).join(" ")
       } else {
-        if (args[0]) {
-          reason = args.join(" ")
-          reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason: " + args.join(" ")
-        } else {
-          reason = 0
-          reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason not provided"
-        }
+        reason = 0
+        reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason not provided"
       }
 
-      embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz zbanować...`)
+      embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz odbanować...`)
 
       if (reason === 0)
-        embed.setDescription(`**...użytkownika ${mentioned}, nie podając powodu?**`)
+        embed.setDescription(`**...użytkownika [${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id}), nie podając powodu?**`)
       else {
-        embed.setDescription(`**...użytkownika ${mentioned}, podając powód**\n\n\`${reason}\`**?**`)
+        embed.setDescription(`**...użytkownika [${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id}), podając powód**\n\n\`${reason}\`**?**`)
       }
 
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
@@ -95,7 +76,7 @@ module.exports = {
       .setLabel("TAK")
       .setStyle("red")
       .setEmoji(client.emotes.grverify_ID)
-      .setID(`ban`)
+      .setID(`unban`)
       const button2 = new MessageButton()
       .setLabel("NIE")
       .setStyle("green")
@@ -107,7 +88,7 @@ module.exports = {
 
       reaction.edit({embed: embed, component: buttonRow})
 
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ban';
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'unban';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
       const filter3 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
@@ -119,16 +100,15 @@ module.exports = {
         collector2.stop()
         collector3.stop()
         
-        mentioned.ban({ reason: reasonToProvide })
+        message.guild.members.unban(toUnban.user, { reason: reasonToProvide })
 
-        embed.setTitle(`${client.emotes.staff}  Zbanowano użytkownika...`)
+        embed.setTitle(`${client.emotes.staff}  Odbanowano użytkownika...`)
         if (reason === 0)
-          embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu**`)
+          embed.setDescription(`**...[${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id}), nie podając powodu**`)
         else {
-          embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
+          embed.setDescription(`**...[${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id}), podając powód**\n\n\`${reason}\``)
         }
         embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
-        .setImage(client.cmds.moderationImgs.ban[Math.floor(Math.random() * client.cmds.moderationImgs.ban.length)])
 
         reaction.edit({embed: embed})
         return;
@@ -139,8 +119,8 @@ module.exports = {
         collector2.stop()
         collector3.stop()
 
-        embed.setTitle(`${client.emotes.rverify}  Anulowano banowanie użytkownika...`)
-        .setDescription(`**...${mentioned}**`)
+        embed.setTitle(`${client.emotes.rverify}  Anulowano odbanowanie użytkownika...`)
+        .setDescription(`**...[${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id})**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
         reaction.edit({embed: embed})

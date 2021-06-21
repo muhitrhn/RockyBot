@@ -48,7 +48,9 @@ module.exports = {
     if (reports.includes(cmd)) return;
 
     const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'report_problem';
+    const filter2 = (button) => button.clicker.user.id !== message.author.id;
     const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
+    const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
 
     button.setLabel(`Reported`)
     .setStyle('green')
@@ -57,6 +59,7 @@ module.exports = {
 
     await collector.on('collect', async button2 => {
       collector.stop()
+      collector2.stop()
       await button2.defer();
       await reaction.edit({embed: errEmbed, component: button})
 
@@ -68,6 +71,11 @@ module.exports = {
       .setTimestamp()
       await channel.send(cmd, {embed: bugReportEmbed})    
       return;
+    });
+
+    await collector2.on('collect', async button2 => {
+      const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+      button2.reply.send({ embed: replyEmbed, ephemeral: true })    
     });
   } 
 }

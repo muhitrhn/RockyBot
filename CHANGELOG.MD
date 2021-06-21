@@ -1,3 +1,11 @@
+# 🟢 0.21
+
+🟢 **Pierwsze wydanie**
+
+|✨ Komenda unban|✨ Komendy z przyciskami|
+|---------------------------|---------------------------|
+|📗 `Odbanuj użytkownika po id`|📗 `Odpowiedź na kliknięcie przycisku przez kogoś innego niż autor wiadomości`|
+
 # 🟢 0.20
 
 🟢 **Patch 1**

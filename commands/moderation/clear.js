@@ -76,12 +76,20 @@ module.exports = {
 
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'delete';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
+      const filter3 = (button) => button.clicker.user.id !== message.author.id;
       const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
       const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
+
+      collector3.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })   
+      })
 
       collector2.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano usuwanie...`)
         .setDescription(`**...\`${amount}\` wiadomości**`)
@@ -94,6 +102,7 @@ module.exports = {
       collector.on('collect', buttonClick => {
         collector.stop()
         collector2.stop()
+        collector3.stop()
 
         client.commands.get("clear").clear(client, message, args, pf, cmd, reaction, embed, amount)
         return;
