@@ -1,3 +1,11 @@
+# 🟢 0.21.1
+
+🟢 **Pierwsze wydanie**
+
+|✨ Przyciski|✨ Kod|✨ Komenda userinfo|
+|------------|-------------|-------------|
+|📗 `Zmiana czasu interakcji 20 => 30sek`|📗 `Poprawki w kodzie`|📗 `Przy uprawnieniach administratora nie ma przycisków`|
+
 # 🟢 0.21
 
 🟢 **Pierwsze wydanie**

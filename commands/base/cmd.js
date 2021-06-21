@@ -49,8 +49,8 @@ module.exports = {
 
     const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'report_problem';
     const filter2 = (button) => button.clicker.user.id !== message.author.id;
-    const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
-    const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
+    const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+    const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
 
     button.setLabel(`Reported`)
     .setStyle('green')

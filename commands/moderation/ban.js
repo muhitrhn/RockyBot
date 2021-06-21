@@ -12,9 +12,8 @@ module.exports = {
     const reaction = await client.base.get(`cmd`).start(client, message, cmd)
 
     try {
-      const embed = new MessageEmbed()
-      .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+
+      const button = new MessageButton()
 
       let permsCheck = 2
       if (!message.guild.me.permissionsIn(message.channel).has('BAN_MEMBERS')) {
@@ -23,25 +22,22 @@ module.exports = {
         permsCheck = 1
       }
 
+      const missingPerms = 'BANOWANIE CZŁONKÓW'
       if (permsCheck === 0) {
         //PermsCheck: missing bot perms
-        embed.setTitle(`${client.emotes.siren}  Bot nie ma wymaganych uprawnień...`)
-        .setDescription(`**...\`BANOWANIE CZŁONKÓW\`**`)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('RED')
-        await reaction.edit({embed: embed})
+        const ifBot = 1
+        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms, ifBot)
         return;
       } else if (permsCheck === 1) {
         //PermsCheck: missing user perms
-        embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`)
-        .setDescription(`**...\`BANOWANIE CZŁONKÓW\`**`)
-        .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
+        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms)
         return;
       }
         
       const mentioned = await client.base.get(`check`).member(client, message, args)
+      const embed = new MessageEmbed()
+      .setColor('RANDOM')
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
 
       if (mentioned === message.member) {
         embed.setTitle(`${client.emotes.siren}  Nie podano właściwego użytkownika...`)
@@ -91,8 +87,7 @@ module.exports = {
 
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
-      const button = new MessageButton()
-      .setLabel("TAK")
+      button.setLabel("TAK")
       .setStyle("red")
       .setEmoji(client.emotes.grverify_ID)
       .setID(`ban`)
@@ -110,9 +105,9 @@ module.exports = {
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ban';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
       const filter3 = (button) => button.clicker.user.id !== message.author.id;
-      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
-      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()

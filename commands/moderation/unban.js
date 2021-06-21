@@ -23,21 +23,15 @@ module.exports = {
         permsCheck = 1
       }
 
+      const missingPerms = 'BANOWANIE CZŁONKÓW'
       if (permsCheck === 0) {
         //PermsCheck: missing bot perms
-        embed.setTitle(`${client.emotes.siren}  Bot nie ma wymaganych uprawnień...`)
-        .setDescription(`**...\`BANOWANIE CZŁONKÓW\`**`)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('RED')
-        await reaction.edit({embed: embed})
+        const ifBot = 1
+        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms, ifBot)
         return;
       } else if (permsCheck === 1) {
         //PermsCheck: missing user perms
-        embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`)
-        .setDescription(`**...\`BANOWANIE CZŁONKÓW\`**`)
-        .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
+        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms)
         return;
       }
         
@@ -91,9 +85,9 @@ module.exports = {
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'unban';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
       const filter3 = (button) => button.clicker.user.id !== message.author.id;
-      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
-      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true });
 
       collector.on('collect', buttonClick => {
         collector.stop()

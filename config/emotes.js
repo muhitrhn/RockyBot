@@ -31,6 +31,7 @@ module.exports = {
     dwnld_ID: "852962401002717185",
     arrl_ID: "852922321744166912",
     changelog_ID: "852894595767337000",
+    siren_ID: "826730448289923072",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",

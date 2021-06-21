@@ -31,5 +31,7 @@ module.exports = async (client, message) => {
 
 	const cmd = client.commands.get(command) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(command));
 
-	if (cmd) cmd.execute(client, message, args, prefix, cmd.name)
+	if (!cmd)  return;
+  if (message.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')) cmd.execute(client, message, args, prefix, cmd.name);
+  else message.react(`🔇`)
 }

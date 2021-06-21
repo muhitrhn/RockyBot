@@ -77,9 +77,9 @@ module.exports = {
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'delete';
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
       const filter3 = (button) => button.clicker.user.id !== message.author.id;
-      const collector = reaction.createButtonCollector(filter, { time: 20000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 20000, dispose: true });
-      const collector3 = reaction.createButtonCollector(filter3, { time: 20000, dispose: true });
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true });
 
       collector3.on('collect', buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
