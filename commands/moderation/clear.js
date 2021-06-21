@@ -116,19 +116,21 @@ module.exports = {
   async clear(client, message, args, pf, cmd, reaction, embed, amount) {
     try {
       embed.setTitle(`${client.emotes.winLoad}  Szybkie usuwanie wiadomości...`)
+      .setDescription(``)
       .setThumbnail(client.cmds.moderationImgs.clearInProg[Math.floor(Math.random() * client.cmds.moderationImgs.clearInProg.length)])
       await reaction.edit({embed: embed})
         
       //FastDelete
       let deletedFast = 0, toDelete = []
       let deletingCache = amount
+      let deleting
           
       for (;deletingCache > 98;) {
         await message.channel.messages.fetch({ limit: 100}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
   
-        const deleting = await message.channel.bulkDelete(deletable, true)
-        deletedFast = deletedFast + deleting.size
+        deleting = await message.channel.bulkDelete(deletable, true)
+        deletedFast = deletedFast*1 + deleting.size
         toDelete = []
         deletingCache = deletingCache - deleting.size
         if (deleting.size < 98) {
@@ -138,63 +140,66 @@ module.exports = {
           
       if (deletingCache < 99) {
         await  message.channel.messages.fetch({ limit: deletingCache + 2 }).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
-        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
+        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
 
-        const deleting = await message.channel.bulkDelete(deletable, true)
-        deletedFast = deletedFast + deleting.size
+        deleting = await message.channel.bulkDelete(deletable, true)
+        deletedFast = deletedFast*1 + deleting.size
         toDelete = []
       }
 
+      deletedFast = deletedFast - 1
+
       //Everything deleted
       let checkIfStop = []
-      await message.channel.messages.fetch({ limit: 5 }).then(msgs => msgs.forEach(msg => checkIfStop.push(msg)))      
-      if(amount - deletedFast === 0 || checkIfStop.length < 3) {
+      await message.channel.messages.fetch({ limit: 5 }).then(msgs => msgs.forEach(msg => checkIfStop.push(msg)))
+      if((amount - deletedFast === 0) || (checkIfStop.length < 3)) {
         embed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast}\`/\`${amount}\` wiadomości`)
         .setDescription(``)
         .setThumbnail(client.cmds.moderationImgs.clear)
-        await message.delete()
         await reaction.edit({embed: embed})
         return;
       }
 
-      embed.setTitle(`${client.emotes.winLoad}  Wolne usuwanie pozostałych \`${amount - deletedFast}\` wiadomości...`)
+      embed.setTitle(`${client.emotes.winLoad}  Wolne usuwanie pozostałych \`${amount - deletedFast*1}\` wiadomości...`)
       .setThumbnail(client.cmds.moderationImgs.clearInProg[Math.floor(Math.random() * client.cmds.moderationImgs.clearInProg.length)])
       await reaction.edit({embed: embed})
         
       //SlowDelete
-      let deleting = [], deletedSlow = 0
-      deletingCache = amount - deletedFast
+      deleting = []
+      let deletedSlow = 0;
+      deletingCache = amount - deletedFast;
       toDelete = []
           
       for (;deletingCache > 98;) {
         await message.channel.messages.fetch({ limit: 100}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
-        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
+        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
 
         deletable.forEach(msg => {deleting.push(msg); msg.delete()})
-        deletedSlow = deletedSlow + deleting.size
-        deletingCache = deletingCache - deleting.size
+        deletedSlow = deletedSlow*1 + deleting.length
+        deletingCache = deletingCache - deleting.length
         toDelete = []
+        if (deleting.size < 98) {
+          break;
+        }
       }
-          
-      if (deletingCache === 0) {} 
-          
-      else if (deletingCache < 99) {
-        await  message.channel.messages.fetch({ limit: deletingCache + 2}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
-        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
+                    
+      if (deletingCache < 99) {
+        await  message.channel.messages.fetch({ limit: deletingCache + 1}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
+        const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
 
         deletable.forEach(msg => {deleting.push(msg); msg.delete()})
-        deletedSlow = deletedSlow + deleting.size
+        deletedSlow = deletedSlow*1 + deleting.length
         toDelete = []
       }
-      deletedSlow = deleting.length
-
-      await message.delete()
 
       //Ready
       embed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast + deletedSlow}\`/\`${amount}\` wiadomości`)
       .setDescription(``)
       .setThumbnail(client.cmds.moderationImgs.clear)
       await reaction.edit({embed: embed})
+      deletedFast = 0
+      deletedSlow = 0
+      return;
 
     } catch (err) {
       await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)

@@ -1,5 +1,11 @@
 # 🟢 0.22
 
+🟢 **Patch 2**
+
+|✨ Komenda clear|
+|----------------|
+|📗 `Naprawiono bug, w którym komenda usuwała 2 zamiast 1 wiadomości`|
+
 🟢 **Patch 1**
 
 |✨ Komendy mute, unmute, mutedrole|
