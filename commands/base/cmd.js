@@ -1,8 +1,8 @@
-const { MessageEmbed } = require(`discord.js`) 
-const { MessageButton } = require(`discord-buttons`)
+const { MessageEmbed } = require('discord.js') 
+const { MessageButton } = require('discord-buttons')
 
 module.exports = {
-  name: "cmd",
+  name: 'cmd',
 
   async start(client, message, cmd) {
     const reactionEmbed = new MessageEmbed()
@@ -10,7 +10,7 @@ module.exports = {
     .setDescription(`${client.emotes.gearspin} Poczekaj na wykonanie skryptów komendy \`${cmd}\`...`)
     .setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-    .setColor(`BLUE`)
+    .setColor('BLUE')
     const reaction = message.lineReplyNoMention({embed: reactionEmbed})
     return reaction 
   },
@@ -30,37 +30,37 @@ module.exports = {
 
     const button = new MessageButton()
     if (reports.includes(cmd)) {
-      button.setLabel(`Already reported`)
+      button.setLabel('Already reported')
       .setStyle('green')
-      .setEmoji(`🚀`)
+      .setEmoji('🚀')
       .setDisabled()
-      .setID(`alr_rep`)
+      .setID('alr_rep')
       errEmbed.setDescription(`${client.emotes.rverify} **Zatrzymano wykonywanie komendy**\n\n${client.emotes.gearspin} *Bug już został zgłoszony, trwają prace nad naprawieniem tej funkcji komendy*`)
     } else {
-      button.setLabel(`Report problem`)
-      .setStyle(`red`)
-      .setEmoji(`⚠️`)
-      .setID(`report_problem`)
+      button.setLabel('Report problem')
+      .setStyle('red')
+      .setEmoji('⚠️')
+      .setID('report_problem')
       errEmbed.setDescription(`${client.emotes.rverify} **Zatrzymano wykonywanie komendy**`)
     }
     try {await reaction.edit({embed: errEmbed, component: button})} catch (err) {reaction = await message.channel.send({embed: errEmbed, component: button})}
 
-    if (reports.includes(cmd)) return;
+    if (reports.includes(cmd)) return
 
-    const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'report_problem';
-    const filter2 = (button) => button.clicker.user.id !== message.author.id;
-    const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
-    const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+    const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'report_problem'
+    const filter2 = (button) => button.clicker.user.id !== message.author.id
+    const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
+    const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
 
-    button.setLabel(`Reported`)
+    button.setLabel('Reported')
     .setStyle('green')
-    .setEmoji(`🚀`)
-    .setDisabled();
+    .setEmoji('🚀')
+    .setDisabled()
 
     await collector.on('collect', async button2 => {
       collector.stop()
       collector2.stop()
-      await button2.defer();
+      await button2.defer()
       await reaction.edit({embed: errEmbed, component: button})
 
       const bugReportEmbed = new MessageEmbed()
@@ -70,12 +70,12 @@ module.exports = {
       .setColor('RED')
       .setTimestamp()
       await channel.send(cmd, {embed: bugReportEmbed})    
-      return;
-    });
+      return
+    })
 
     await collector2.on('collect', async button2 => {
       const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
       button2.reply.send({ embed: replyEmbed, ephemeral: true })    
-    });
+    })
   } 
 }

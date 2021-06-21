@@ -1,8 +1,8 @@
-const { MessageButton } = require("discord-buttons")
-const { MessageEmbed } = require("discord.js")
+const { MessageButton } = require('discord-buttons')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = { 
-  name: "check",
+  name: 'check',
   
   async user(client, message, args) {
     let mentioned
@@ -32,30 +32,30 @@ module.exports = {
 
   async missingPerms(client, message, reaction, missingPerms, ifBot) {
     const embed = new MessageEmbed()
-    if (ifBot)  embed.setTitle(`🔒  Bot nie ma wymaganych uprawnień...`).setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-    if (!ifBot) embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`).setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)]);
+    if (ifBot)  embed.setTitle('🔒  Bot nie ma wymaganych uprawnień...').setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+    if (!ifBot) embed.setTitle('🔒  Nie masz wymaganych uprawnień...').setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
     embed.setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
     .setDescription(`**...\`${missingPerms}\`**`)
     .setColor('RED')
 
     const button = new MessageButton()
-    if (!ifBot) button.setLabel("OK")
-    .setStyle("green")
+    if (!ifBot) button.setLabel('OK')
+    .setStyle('green')
     .setEmoji(client.emotes.rverify_ID)
-    .setID(`ok`);
-    else button.setLabel("ADD BOT PERMS")
-    .setStyle("url")
+    .setID('ok')
+    else button.setLabel('ADD BOT PERMS')
+    .setStyle('url')
     .setEmoji(client.emotes.siren_ID)
-    .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.myID}&permissions=8&scope=bot%20applications.commands`);
+    .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.myID}&permissions=8&scope=bot%20applications.commands`)
 
     await reaction.edit({embed: embed, component: button})
 
     if (!ifBot) {
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ok';
-      const filter2 = (button) => button.clicker.user.id !== message.author.id;
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ok'
+      const filter2 = (button) => button.clicker.user.id !== message.author.id
 
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
 
       await collector.on('collect', async buttonClick => {
         await collector.stop()
@@ -63,7 +63,7 @@ module.exports = {
     
         await reaction.delete()
         await message.delete()
-        return;
+        return
       })
     
       await collector2.on('collect', async buttonClick => {

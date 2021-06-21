@@ -1,15 +1,15 @@
-const { MessageButton, MessageActionRow } = require('discord-buttons');
-const { MessageEmbed } = require('discord.js');
+const { MessageButton, MessageActionRow } = require('discord-buttons')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "unban",
-  aliases: ["mub"],
+  name: 'unban',
+  aliases: ['mub'],
   description: 'Odbanuj kogoś',
   category: 'moderation',
   utilisation: '{prefix}mub [id]',
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       const embed = new MessageEmbed()
@@ -27,12 +27,12 @@ module.exports = {
       if (permsCheck === 0) {
         //PermsCheck: missing bot perms
         const ifBot = 1
-        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms, ifBot)
-        return;
+        await client.base.get('check').missingPerms(client, message, reaction, missingPerms, ifBot)
+        return
       } else if (permsCheck === 1) {
         //PermsCheck: missing user perms
-        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms)
-        return;
+        await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
+        return
       }
         
       const bansInGuild = await message.guild.fetchBans()
@@ -40,20 +40,20 @@ module.exports = {
       
       if(!toUnban) {
         embed.setTitle(`${client.emotes.siren}  Nie podano właściwego użytkownika...`)
-        .setDescription(`**...podaj id użytkownika**`)
+        .setDescription('**...podaj id użytkownika**')
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       let reason, reasonToProvide
       if (args[1]) {
-        reason = args.slice(1).join(" ")
-        reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason: " + args.slice(1).join(" ")
+        reason = args.slice(1).join(' ')
+        reasonToProvide = 'Mod: ' + message.author.tag + '┇' + message.author.id + ';  Reason: ' + args.slice(1).join(' ')
       } else {
         reason = 0
-        reasonToProvide = "Mod: " + message.author.tag + "┇" + message.author.id + ";  Reason not provided"
+        reasonToProvide = 'Mod: ' + message.author.tag + '┇' + message.author.id + ';  Reason not provided'
       }
 
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz odbanować...`)
@@ -67,13 +67,13 @@ module.exports = {
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
       const button = new MessageButton()
-      .setLabel("TAK")
-      .setStyle("red")
+      .setLabel('TAK')
+      .setStyle('red')
       .setEmoji(client.emotes.grverify_ID)
-      .setID(`unban`)
+      .setID('unban')
       const button2 = new MessageButton()
-      .setLabel("NIE")
-      .setStyle("green")
+      .setLabel('NIE')
+      .setStyle('green')
       .setEmoji(client.emotes.rverify_ID)
       .setID('cancel')
       const buttonRow = new MessageActionRow()
@@ -82,12 +82,12 @@ module.exports = {
 
       reaction.edit({embed: embed, component: buttonRow})
 
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'unban';
-      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
-      const filter3 = (button) => button.clicker.user.id !== message.author.id;
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
-      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true });
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'unban'
+      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel'
+      const filter3 = (button) => button.clicker.user.id !== message.author.id
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
+      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
       collector.on('collect', buttonClick => {
         collector.stop()
@@ -105,7 +105,7 @@ module.exports = {
         embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
 
         reaction.edit({embed: embed})
-        return;
+        return
       })
 
       collector2.on('collect', buttonClick => {
@@ -118,7 +118,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
         reaction.edit({embed: embed})
-        return;
+        return
       })
 
       collector3.on('collect', buttonClick => {
@@ -127,7 +127,7 @@ module.exports = {
       })
 
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }

@@ -1,14 +1,14 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "emoji",
-  aliases: ["ne"],
+  name: 'emoji',
+  aliases: ['ne'],
   description: 'Wysyła emoji o podanej nazwie',
   category: 'nitro',
   utilisation: '{prefix}ne [nazwa emoji]',
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       const embed = new MessageEmbed()
@@ -20,7 +20,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       } 
 
       let emoji = await client.emojis.cache.find(emojii => emojii.name.toLowerCase().includes(args[0].toLowerCase()))
@@ -30,7 +30,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       //WebhksChk
@@ -65,7 +65,7 @@ module.exports = {
       await reaction.edit({embed: embed})
 
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }

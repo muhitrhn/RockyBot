@@ -1,14 +1,14 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "react",
-  aliases: ["nr"],
+  name: 'react',
+  aliases: ['nr'],
   description: 'Reaguje na podaną wiadomość',
   category: 'nitro',
   utilisation: '{prefix}nr [numer wiadomosci, liczac od dolu, mniejszy niż 40] [nazwa emoji]',
   async execute(client, message, args, pf, cmd) {
 
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       const embed = new MessageEmbed()
@@ -20,7 +20,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
       
       if(!args[1]) {
@@ -28,7 +28,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       const msgNumber = parseInt(args[0])
@@ -36,11 +36,11 @@ module.exports = {
 
       if (msgNumber > 40 || msgNumber < 1 || !msgNumber) {
         embed.setTitle(`${client.emotes.world}  Podano zły numer wiadomości...`)
-        .setDescription(`**...większy od 40, miejszy od 1 lub niewłaściwa liczba**`)
+        .setDescription('**...większy od 40, miejszy od 1 lub niewłaściwa liczba**')
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       if(!emoji) {
@@ -48,7 +48,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       const msg = await message.channel.messages.fetch(msgNumber + 2)
@@ -63,7 +63,7 @@ module.exports = {
       .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       await reaction.edit({embed: embed})
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }

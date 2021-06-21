@@ -1,14 +1,14 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "rymowanka",
-  aliases: ["fr"],
-  description: "Losowa rymowanka xD",
+  name: 'rymowanka',
+  aliases: ['fr'],
+  description: 'Losowa rymowanka xD',
   category: 'fun',
   utilisation: '{prefix}fr',
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       let texts = []
@@ -25,7 +25,7 @@ module.exports = {
       
       await reaction.delete()
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }
