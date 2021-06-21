@@ -1,5 +1,11 @@
 # 🟢 0.22
 
+🟢 **Patch 3**
+
+|✨ Komenda trigger|
+|----------------|
+|📗 `Naprawiono bug, zmieniono rozszerzenie pliku z jpg na gif`|
+
 🟢 **Patch 2**
 
 |✨ Komenda clear|
