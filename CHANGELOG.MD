@@ -1,5 +1,11 @@
 # 🟢 0.22
 
+🟢 **Patch 1**
+
+|✨ Komendy mute, unmute, mutedrole|
+|----------------|
+|📗 `Poprawione odpowiedzi`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Komenda mute|✨ Komenda unmute|✨ Komenda mutedrole|

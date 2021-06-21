@@ -67,7 +67,7 @@ module.exports = {
 
       if(!data) {
         embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
-        .setDescription(`**... roli wyciszenia, użyj \`${pf}gomr [wzmianka/id roli]\` aby ustawić rolę**`)
+        .setDescription(`**...roli wyciszenia, użyj \`${pf}gomr [wzmianka/id roli]\` aby ustawić rolę**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})

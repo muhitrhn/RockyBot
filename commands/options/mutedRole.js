@@ -58,8 +58,8 @@ module.exports = {
 
       newData.save();
 
-      if (oldRole) embed.setTitle(`${client.emotes.nitro} Zmieniono rolę wyciszenia...`).setDescription(`**z <@&${oldRole}> na ${role}**`);
-      else embed.setTitle(`${client.emotes.nitro} Ustawiono rolę wyciszenia...`).setDescription(`**na ${role}**`);
+      if (oldRole) embed.setTitle(`${client.emotes.nitro} Zmieniono rolę wyciszenia...`).setDescription(`**...z <@&${oldRole}> na ${role}**`);
+      else embed.setTitle(`${client.emotes.nitro} Ustawiono rolę wyciszenia...`).setDescription(`**...na ${role}**`);
 
       embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       await reaction.edit({embed: embed})
