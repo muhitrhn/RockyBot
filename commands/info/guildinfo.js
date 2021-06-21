@@ -1,3 +1,4 @@
+const { MessageButton } = require("discord-buttons");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
@@ -11,12 +12,20 @@ module.exports = {
    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
 
     try {
+      client.commands.get(`guildinfo`).main(client, message, args, pf, cmd, reaction)
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+    }
+  },
+
+  async main(client, message, args, pf, cmd, reaction, bt, embedColor) {
+    try {
       const embed = new MessageEmbed()
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setTitle(`${client.emotes.siri} Serwer \`${message.guild.name}\``)
-      .setColor('RANDOM')
-      .addField(`🔆 Ogólne`, [
+      if (embedColor) embed.setColor(embedColor); else embed.setColor('RANDOM');
+      embed.addField(`🔆 Ogólne`, [
         `📎 ID: \`${message.guild.id}\``,
         `⛳ Właściciel: ${message.guild.owner}`,
         '\u200b',
@@ -32,10 +41,73 @@ module.exports = {
         `🔊 Kanałów głosowych: \`${message.guild.channels.cache.filter(channel => channel.type === 'voice').size}\``,
         `🔰 Boostów: \`${message.guild.premiumSubscriptionCount || '0'}\``
       ])
-      const modRoles = message.guild.roles.cache.filter(role => role.permissions.has('MANAGE_MESSAGES') && role.members.filter(member => !member.user.bot).map(x => x)[0]).map(x => `${client.emotes.grverify}${x} ┇ \`${x.id}\``).join(`\n`)
-      if (modRoles[0]) embed.addField(`${client.emotes.staff} Role moderatorów`, `${modRoles}`)
 
-      await reaction.edit({embed: embed})      
+      const button = new MessageButton()
+      .setLabel("Moderatorzy")
+      .setStyle("blurple")
+      .setEmoji(client.emotes.staff_ID)
+      .setID("modders")
+      await reaction.edit({embed: embed, component: button})      
+
+      try {await bt.defer()} catch (err) {}
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'modders';
+      const filter2 = (button) => button.clicker.user.id !== message.author.id;
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+
+      collector.on('collect', buttonClick => {
+        collector.stop()
+        collector2.stop()
+        const embedColor = embed.color
+        client.commands.get(`guildinfo`).modders(client, message, args, pf, cmd, reaction, buttonClick, embedColor)
+        return;
+      })
+
+      collector2.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+      })
+    } catch (err) {
+      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+    }
+  },
+
+  async modders(client, message, args, pf, cmd, reaction, bt, embedColor) {
+    try {
+      const modRoles = message.guild.roles.cache.filter(role => role.permissions.has('MANAGE_MESSAGES') && role.members.filter(member => !member.user.bot).map(x => x)[0]).map(x => `\n${client.emotes.grverify} ${x}\n${x.members.map(y => y).join("\n")}`).join(`\n`)
+      const embed = new MessageEmbed()
+      .setTitle(`${client.emotes.staff} Moderatorzy na serwerze \`${message.guild.name}\``)
+      .setThumbnail(message.guild.iconURL({ dynamic: true }))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setColor(embedColor)
+      const mods = message.guild.members.cache.filter(member => member.permissions.has('MANAGE_MESSAGES') && !member.user.bot).map(x => x).join("\n")
+      if (modRoles[0]) embed.setDescription(modRoles); else embed.setDescription(mods)
+
+      const button = new MessageButton()
+      .setLabel("Wróć")
+      .setStyle("grey")
+      .setEmoji(client.emotes.arrl_ID)
+      .setID("back")
+
+      await reaction.edit({embed: embed, component: button})
+      try {await bt.defer()} catch (err) {}
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back';
+      const filter2 = (button) => button.clicker.user.id !== message.author.id;
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
+
+      collector.on('collect', buttonClick => {
+        collector.stop()
+        collector2.stop()
+        client.commands.get(`guildinfo`).main(client, message, args, pf, cmd, reaction, buttonClick, embedColor)
+        return;
+      })
+
+      collector2.on('collect', buttonClick => {
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+      })
+
     } catch (err) {
       await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
     }

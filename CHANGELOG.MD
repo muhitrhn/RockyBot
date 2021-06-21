@@ -1,5 +1,11 @@
 # 🟢 0.21.1
 
+🟢 **Patch 1**
+
+|✨ Komenda guildinfo|
+|--------------|
+|📗 `Przycisk wyświetlający administratorów`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Przyciski|✨ Kod|✨ Komenda userinfo|

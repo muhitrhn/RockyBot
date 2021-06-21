@@ -51,12 +51,12 @@ module.exports = {
         return;
       } else {
         button.setLabel("Permisje kanału")
-        .setStyle("green")
+        .setStyle("blurple")
         .setEmoji("⚒️")
         .setID("ch_perms")
         const button2 = new MessageButton()
         .setLabel("Permisje globalne")
-        .setStyle("blurple")
+        .setStyle("green")
         .setEmoji("🛠️")
         .setID("glob_perms")
         const buttonRow = new MessageActionRow()

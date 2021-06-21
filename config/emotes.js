@@ -32,6 +32,7 @@ module.exports = {
     arrl_ID: "852922321744166912",
     changelog_ID: "852894595767337000",
     siren_ID: "826730448289923072",
+    staff_ID: "843734135972691968",
 
     CMDbudowa: "🏗️",
     CMDkamien: "🪨",
