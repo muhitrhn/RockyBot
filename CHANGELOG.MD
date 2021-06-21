@@ -1,5 +1,7 @@
 # 🟢 0.22
 
+🟢 **Pierwsze wydanie**
+
 |✨ Komenda mute|✨ Komenda unmute|✨ Komenda mutedrole|
 |----------------|----------------|-------------------------|
 |📗 `Wycisz kogoś`|📗 `Odcisz kogoś`|📗 `Ustaw rolę, którą ma nadawać bot przy użyciu komendy mute`|
