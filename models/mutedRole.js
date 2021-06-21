@@ -7,4 +7,4 @@ const mutedRoleSchema = new mongoose.Schema({
     GuildID: String
 })
 
-const MessageModel = module.exports = mongoose.model('mutedRole', mutedRoleSchema)
+module.exports = mongoose.model('mutedRole', mutedRoleSchema)

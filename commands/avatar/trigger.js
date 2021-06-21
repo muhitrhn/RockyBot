@@ -22,10 +22,10 @@ module.exports = {
       const CreateAv = await new DIG.Triggered().getImage(`${mentioned.avatarURL({ dynamic: false, format: 'png' })}?size=4096`)
       const attachment = new MessageAttachment(CreateAv, 'triggered.gif')
 
-      await message.lineReplyNoMention({embed: embed, files: [CreateAv]})
-      
+      await message.lineReplyNoMention({ embed: embed, files: [attachment]})
+
       //Ready
-      await reaction.delete() 
+      await reaction.delete()
 
     } catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)

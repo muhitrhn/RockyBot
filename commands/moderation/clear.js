@@ -9,7 +9,6 @@ module.exports = {
   utilisation: '{prefix}mc [liczba >0 i <1001]',
 
   async execute(client, message, args, pf, cmd) {
-    
     const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
@@ -41,7 +40,7 @@ module.exports = {
         await reaction.edit({embed: embed})
         return
       }
-        
+
       //ArgsCheck
       const amount = parseInt(args[0])
       if (isNaN(amount) || amount < 1 || amount > 1000) {
@@ -83,10 +82,10 @@ module.exports = {
 
       collector3.on('collect', buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })   
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
-      collector2.on('collect', buttonClick => {
+      collector2.on('collect', () => {
         collector.stop()
         collector2.stop()
         collector3.stop()
@@ -99,7 +98,7 @@ module.exports = {
         return
       })
 
-      collector.on('collect', buttonClick => {
+      collector.on('collect', () => {
         collector.stop()
         collector2.stop()
         collector3.stop()
@@ -119,16 +118,16 @@ module.exports = {
       .setDescription('')
       .setThumbnail(client.cmds.moderationImgs.clearInProg[Math.floor(Math.random() * client.cmds.moderationImgs.clearInProg.length)])
       await reaction.edit({embed: embed})
-        
+
       //FastDelete
       let deletedFast = 0, toDelete = []
       let deletingCache = amount
       let deleting
-          
+
       for (;deletingCache > 98;) {
         await message.channel.messages.fetch({ limit: 100}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id && mssg.id !== message.id)
-  
+
         deleting = await message.channel.bulkDelete(deletable, true)
         deletedFast = deletedFast*1 + deleting.size
         toDelete = []
@@ -137,7 +136,7 @@ module.exports = {
           break
         }
       }
-          
+
       if (deletingCache < 99) {
         await  message.channel.messages.fetch({ limit: deletingCache + 2 }).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
@@ -163,13 +162,13 @@ module.exports = {
       embed.setTitle(`${client.emotes.winLoad}  Wolne usuwanie pozostałych \`${amount - deletedFast*1}\` wiadomości...`)
       .setThumbnail(client.cmds.moderationImgs.clearInProg[Math.floor(Math.random() * client.cmds.moderationImgs.clearInProg.length)])
       await reaction.edit({embed: embed})
-        
+
       //SlowDelete
       deleting = []
       let deletedSlow = 0
       deletingCache = amount - deletedFast
       toDelete = []
-          
+
       for (;deletingCache > 98;) {
         await message.channel.messages.fetch({ limit: 100}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
@@ -182,7 +181,7 @@ module.exports = {
           break
         }
       }
-                    
+
       if (deletingCache < 99) {
         await  message.channel.messages.fetch({ limit: deletingCache + 1}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)

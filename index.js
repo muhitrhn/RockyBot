@@ -2,13 +2,15 @@ require('dotenv').config()
 const fs = require('fs')
 const discord = require('discord.js')
 const chalk = require('chalk')
-const express = require('express')
 const mongoose = require('mongoose')
+
+// WebUI
+// require(./app)
 
 require('discord-reply')
 const client = new discord.Client({ disableMentions: 'everyone' })
 const disbut = require('discord-buttons')
-disbut(client) 
+disbut(client)
 
 discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
 
@@ -24,23 +26,24 @@ client.testerID = client.config.discord.testerID
 
 client.cmds = client.config.cmds
 
-if(client.config.beta === true) {
-client.defaultPrefix = client.config.discord.betaprefix
-client.myID = client.config.discord.myBetaID
-mongoURI = process.env.MONGODB_URI_BETA
+let mongoURI
+
+if (client.config.beta === true) {
+  client.defaultPrefix = client.config.discord.betaprefix
+  client.myID = client.config.discord.myBetaID
+  mongoURI = process.env.MONGODB_URI_BETA
 } else {
-client.defaultPrefix = client.config.discord.prefix
-client.myID = client.config.discord.myID
-mongoURI = process.env.MONGODB_URI
+  client.defaultPrefix = client.config.discord.prefix
+  client.myID = client.config.discord.myID
+  mongoURI = process.env.MONGODB_URI
 }
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.set('useFindAndModify', false)
-
-/*//WebUI
-const app = express()
-app.get('/', (req, res) => res.send('Dziołam (chyba) XDD'))
-app.listen(8080) */
+mongoose.connect(mongoURI, {
+  useCreateIndex: true,
+  useFindAndModify: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 //Commands handler
 fs.readdirSync('./commands').filter(async dirs => {
@@ -74,9 +77,6 @@ for (const file of modules) {
   client.base.set(module.name, module)
 }
 
-//LOGIN
-if(client.config.beta === true) {
-  client.login(client.config.discord.betatoken)
-} else {
-  client.login(client.config.discord.token)
-}
+if (client.config.beta === true) client.login(client.config.discord.betatoken)
+
+else client.login(client.config.discord.token)
