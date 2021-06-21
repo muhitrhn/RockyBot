@@ -1,15 +1,15 @@
-const { MessageEmbed } = require("discord.js");
-const mutedModel = require("../../models/mutedRole")
+const { MessageEmbed } = require('discord.js')
+const mutedModel = require('../../models/mutedRole')
 
 module.exports = {
-  name: "mutedrole",
-  aliases: [`gomr`],
-  description: "Zmień rolę \"wyciszony\"",
+  name: 'mutedrole',
+  aliases: ['gomr'],
+  description: 'Zmień rolę "wyciszony"',
   category: 'options',
   utilisation: '{prefix}gomr [id/wzmianka roli]',
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       const embed = new MessageEmbed()
@@ -18,7 +18,7 @@ module.exports = {
 
       if(!message.member.hasPermission('MANAGE_GUILD') && !client.ownerID.includes(message.author.id)) {
         const missingPerms = 'ZARZĄDZANIE SERWEREM'
-        await client.base.get(`check`).missingPerms(client, message, reaction, missingPerms)
+        await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
       }
 
       let role
@@ -36,12 +36,12 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       const data = await mutedModel.findOne({
         GuildID: message.guild.id
-      }); 
+      }) 
           
       let oldRole
       if (data) {
@@ -56,15 +56,15 @@ module.exports = {
         GuildID: message.guild.id
       })
 
-      newData.save();
+      newData.save()
 
-      if (oldRole) embed.setTitle(`${client.emotes.nitro} Zmieniono rolę wyciszenia...`).setDescription(`**...z <@&${oldRole}> na ${role}**`);
-      else embed.setTitle(`${client.emotes.nitro} Ustawiono rolę wyciszenia...`).setDescription(`**...na ${role}**`);
+      if (oldRole) embed.setTitle(`${client.emotes.nitro} Zmieniono rolę wyciszenia...`).setDescription(`**...z <@&${oldRole}> na ${role}**`)
+      else embed.setTitle(`${client.emotes.nitro} Ustawiono rolę wyciszenia...`).setDescription(`**...na ${role}**`)
 
       embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       await reaction.edit({embed: embed})
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }

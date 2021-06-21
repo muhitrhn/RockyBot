@@ -1,16 +1,16 @@
-const { MessageActionRow, MessageButton } = require('discord-buttons');
-const { MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageButton } = require('discord-buttons')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "clear",
-  aliases: ["mc"],
-  description: "Czyści podaną liczbę wiadomości",
+  name: 'clear',
+  aliases: ['mc'],
+  description: 'Czyści podaną liczbę wiadomości',
   category: 'moderation',
   utilisation: '{prefix}mc [liczba >0 i <1001]',
 
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
       const embed = new MessageEmbed()
@@ -27,19 +27,19 @@ module.exports = {
       if (permsCheck === 0) {
         //PermsCheck: missing bot perms
         embed.setTitle(`${client.emotes.siren}  Bot nie ma wymaganych uprawnień...`)
-        .setDescription(`**...\`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+        .setDescription('**...`ZARZĄDZANIE WIADOMOŚCIAMI`**')
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('RED')
         await reaction.edit({embed: embed})
-        return;
+        return
       } else if (permsCheck === 1) {
         //PermsCheck: missing user perms
-        embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`)
-        .setDescription(`**...\`ZARZĄDZANIE WIADOMOŚCIAMI\`**`)
+        embed.setTitle('🔒  Nie masz wymaganych uprawnień...')
+        .setDescription('**...`ZARZĄDZANIE WIADOMOŚCIAMI`**')
         .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
         
       //ArgsCheck
@@ -47,11 +47,11 @@ module.exports = {
       if (isNaN(amount) || amount < 1 || amount > 1000) {
         //No amount/bad amount
         embed.setTitle(`${client.emotes.world}  Podano złą liczbę wiadomości...`)
-        .setDescription(`**...większa od 1000, mniejszą od 1 lub nie podano liczby**`)
+        .setDescription('**...większa od 1000, mniejszą od 1 lub nie podano liczby**')
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz usunąć...`)
@@ -59,13 +59,13 @@ module.exports = {
       .setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
       const button = new MessageButton()
-      .setLabel("TAK")
-      .setStyle("red")
+      .setLabel('TAK')
+      .setStyle('red')
       .setEmoji(client.emotes.grverify_ID)
-      .setID(`delete`)
+      .setID('delete')
       const button2 = new MessageButton()
-      .setLabel("NIE")
-      .setStyle("green")
+      .setLabel('NIE')
+      .setStyle('green')
       .setEmoji(client.emotes.rverify_ID)
       .setID('cancel')
       const buttonRow = new MessageActionRow()
@@ -74,12 +74,12 @@ module.exports = {
 
       reaction.edit({embed: embed, component: buttonRow})
 
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'delete';
-      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel';
-      const filter3 = (button) => button.clicker.user.id !== message.author.id;
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true });
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true });
-      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true });
+      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'delete'
+      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel'
+      const filter3 = (button) => button.clicker.user.id !== message.author.id
+      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
+      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
+      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
       collector3.on('collect', buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
@@ -96,7 +96,7 @@ module.exports = {
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
         reaction.edit({embed: embed})
-        return;
+        return
       })
 
       collector.on('collect', buttonClick => {
@@ -104,19 +104,19 @@ module.exports = {
         collector2.stop()
         collector3.stop()
 
-        client.commands.get("clear").clear(client, message, args, pf, cmd, reaction, embed, amount)
-        return;
+        client.commands.get('clear').clear(client, message, args, pf, cmd, reaction, embed, amount)
+        return
       })
 
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   },
 
   async clear(client, message, args, pf, cmd, reaction, embed, amount) {
     try {
       embed.setTitle(`${client.emotes.winLoad}  Szybkie usuwanie wiadomości...`)
-      .setDescription(``)
+      .setDescription('')
       .setThumbnail(client.cmds.moderationImgs.clearInProg[Math.floor(Math.random() * client.cmds.moderationImgs.clearInProg.length)])
       await reaction.edit({embed: embed})
         
@@ -134,7 +134,7 @@ module.exports = {
         toDelete = []
         deletingCache = deletingCache - deleting.size
         if (deleting.size < 98) {
-          break;
+          break
         }
       }
           
@@ -154,10 +154,10 @@ module.exports = {
       await message.channel.messages.fetch({ limit: 5 }).then(msgs => msgs.forEach(msg => checkIfStop.push(msg)))
       if((amount - deletedFast === 0) || (checkIfStop.length < 3)) {
         embed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast}\`/\`${amount}\` wiadomości`)
-        .setDescription(``)
+        .setDescription('')
         .setThumbnail(client.cmds.moderationImgs.clear)
         await reaction.edit({embed: embed})
-        return;
+        return
       }
 
       embed.setTitle(`${client.emotes.winLoad}  Wolne usuwanie pozostałych \`${amount - deletedFast*1}\` wiadomości...`)
@@ -166,8 +166,8 @@ module.exports = {
         
       //SlowDelete
       deleting = []
-      let deletedSlow = 0;
-      deletingCache = amount - deletedFast;
+      let deletedSlow = 0
+      deletingCache = amount - deletedFast
       toDelete = []
           
       for (;deletingCache > 98;) {
@@ -179,7 +179,7 @@ module.exports = {
         deletingCache = deletingCache - deleting.length
         toDelete = []
         if (deleting.size < 98) {
-          break;
+          break
         }
       }
                     
@@ -194,15 +194,15 @@ module.exports = {
 
       //Ready
       embed.setTitle(`${client.emotes.trash}  Usunięto \`${deletedFast + deletedSlow}\`/\`${amount}\` wiadomości`)
-      .setDescription(``)
+      .setDescription('')
       .setThumbnail(client.cmds.moderationImgs.clear)
       await reaction.edit({embed: embed})
       deletedFast = 0
       deletedSlow = 0
-      return;
+      return
 
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
 }

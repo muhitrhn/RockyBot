@@ -6,7 +6,8 @@
   "main": "index.js",
   "beta": "false",
   "scripts": {
-    "start": "node index.js --max_old_space_size=8192"
+    "start": "node index.js --max_old_space_size=8192",
+    "lint": "yarn run eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,7 @@
     "os-utils": "^0.0.14",
     "pretty-ms": "^7.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.29.0"
+  }
 }

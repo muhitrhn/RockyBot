@@ -1,4 +1,4 @@
-const info = require(`./info`)
+const info = require('./info')
 module.exports = {
 activities: [	
     //Development
@@ -7,13 +7,13 @@ activities: [
     `🛠️ Znajdź mnie na githubie!: ${info.github}`,
 
     //Podpowiedzi
-    "💡 Pingnij bota, aby zobaczyć prefix",
-    "💡 Użyj help, aby zobaczyć listę komend",
-    "💡 Użyj komendy rymowanka, żeby wysłać losową rymowankę XD",
-    "💡 Jeśli masz problemy z komendą, użyj help {komenda}",
+    '💡 Pingnij bota, aby zobaczyć prefix',
+    '💡 Użyj help, aby zobaczyć listę komend',
+    '💡 Użyj komendy rymowanka, żeby wysłać losową rymowankę XD',
+    '💡 Jeśli masz problemy z komendą, użyj help {komenda}',
 
     //Inne XD
-    "🤠 #ZmienićRząd ",
-    "🤠 Ile to 2+2*2?", 
-    "🤠 ¯\\_(ツ)_/¯" ]
+    '🤠 #ZmienićRząd ',
+    '🤠 Ile to 2+2*2?', 
+    '🤠 ¯\\_(ツ)_/¯' ]
 }

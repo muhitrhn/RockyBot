@@ -1,8 +1,8 @@
 const info = require('./info')
-const activities = require(`./activities`)
-const emotes = require(`./emotes`)
+const activities = require('./activities')
+const emotes = require('./emotes')
 const cmds = require('./cmds')
-require("dotenv").config()
+require('dotenv').config()
 
 module.exports = {
     cmds: cmds.commands,
@@ -29,4 +29,4 @@ module.exports = {
         testerID: cmds.testerID,
         activities: activities.activities,
     },
-};
+}

@@ -1,14 +1,14 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: "test",
-  aliases: ["oost", "oot", "selftest"],
-  description: "Test bota",
+  name: 'test',
+  aliases: ['oost', 'oot', 'selftest'],
+  description: 'Test bota',
   category: 'owner-only',
   utilisation: '{prefix}oot',
   async execute(client, message, args, pf, cmd) {
     
-    const reaction = await client.base.get(`cmd`).start(client, message, cmd)
+    const reaction = await client.base.get('cmd').start(client, message, cmd)
     
     try {
       const embed = new MessageEmbed()
@@ -16,12 +16,12 @@ module.exports = {
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
 
       if(!client.ownerID.includes(message.author.id)) {
-        embed.setTitle(`🔒  Nie masz wymaganych uprawnień...`)
-        .setDescription(`**...\`WŁAŚCICIEL BOTA\`**`)
+        embed.setTitle('🔒  Nie masz wymaganych uprawnień...')
+        .setDescription('**...`WŁAŚCICIEL BOTA`**')
         .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
-        return;
+        return
       } 
       
       embed.setTitle(`${client.emotes.winLoad}  Przeprowadzanie self-testu...`)
@@ -32,7 +32,7 @@ module.exports = {
       //Test fetching
       let fetching, fetchingStatus
       try {
-        await message.channel.send(`Fetching messages test, do NOT delete`)
+        await message.channel.send('Fetching messages test, do NOT delete')
         await message.channel.messages.fetch({ limit: 1 }).then(msgs => msgs.forEach(msg => fetchingStatus = msg))
         fetching = 1
       } catch (err) {
@@ -53,7 +53,7 @@ module.exports = {
         deletingStatus = err
       }
      
-      embed.addField(`${deleting ? client.emotes.grverify : client.emotes.warn}  messages.delete()`, deleting ? `Brak problemów: usunięto` : `\`\`\`${deletingStatus}\`\`\``)
+      embed.addField(`${deleting ? client.emotes.grverify : client.emotes.warn}  messages.delete()`, deleting ? 'Brak problemów: usunięto' : `\`\`\`${deletingStatus}\`\`\``)
 
       //Test finding guild
       let findingGuild, findingGuildStatus
@@ -92,11 +92,11 @@ module.exports = {
 
       //Ready
       embed.setTitle(`${client.emotes.siri}  Self-test: ukończono`)
-      .setDescription(``)
+      .setDescription('')
       .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       try {await reaction.edit({ embed: embed })} catch (err) {await message.channel.send({embed: embed})}
     } catch (err) {
-      await client.base.get(`cmd`).error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   } 
 }
