@@ -1,4 +1,4 @@
-const { MessageEmbed,MessageAttachment } = require('discord.js')
+const { MessageEmbed, MessageAttachment } = require('discord.js')
 const got = require('got')
 
 module.exports = {

@@ -8,7 +8,7 @@ module.exports = {
   category: 'info',
   utilisation: '{prefix}igi',
   async execute(client, message, args, pf, cmd) {
-    
+
    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
@@ -29,7 +29,7 @@ module.exports = {
         `📎 **ID**: \`${message.guild.id}\``,
         `⛳ **Właściciel**: \`${message.guild.owner.user.tag}\``,
         `⏲️ **Utworzono** (UTC): \`${message.guild.createdAt.getUTCHours()}:${(message.guild.createdAt.getUTCMinutes()<10?'0':'')+parseInt(message.guild.createdAt.getUTCMinutes())} ┇ ${(message.guild.createdAt.getUTCDate()<10?'0':'')+parseInt(message.guild.createdAt.getUTCDate())}.${((message.guild.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(message.guild.createdAt.getUTCMonth()+1)}.${message.guild.createdAt.getUTCFullYear()}\``,
-        '\u200b',
+        '\u200b'
       ])
       .addField(`${client.emotes.world} <-- Statystyki -->`, [
         `**🪃 Roli**: \`${message.guild.roles.cache.size}\``,
@@ -48,8 +48,9 @@ module.exports = {
       .setStyle('blurple')
       .setEmoji(client.emotes.staff_ID)
       .setID('modders')
-      await reaction.edit({embed: embed, component: button})      
+      await reaction.edit({embed: embed, component: button})
 
+      // eslint-disable-next-line no-empty
       try {await bt.defer()} catch (err) {}
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'modders'
       const filter2 = (button) => button.clicker.user.id !== message.author.id
@@ -91,6 +92,7 @@ module.exports = {
       .setID('back')
 
       await reaction.edit({embed: embed, component: button})
+      // eslint-disable-next-line no-empty
       try {await bt.defer()} catch (err) {}
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back'
       const filter2 = (button) => button.clicker.user.id !== message.author.id

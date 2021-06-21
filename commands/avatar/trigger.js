@@ -23,9 +23,9 @@ module.exports = {
       const attachment = new MessageAttachment(CreateAv, 'triggered.gif')
 
       await message.lineReplyNoMention({embed: embed, files: [attachment]})
-      
+
       //Ready
-      await reaction.delete() 
+      await reaction.delete()
 
     } catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)

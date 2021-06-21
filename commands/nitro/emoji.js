@@ -53,7 +53,7 @@ module.exports = {
         //Edit webhook
         webhook = await myWebhooks.first().edit({
         name: message.author.username,
-        avatar: message.author.avatarURL(),
+        avatar: message.author.avatarURL()
         })
       }
 

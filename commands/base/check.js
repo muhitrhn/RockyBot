@@ -1,9 +1,9 @@
 const { MessageButton } = require('discord-buttons')
 const { MessageEmbed } = require('discord.js')
 
-module.exports = { 
+module.exports = {
   name: 'check',
-  
+
   async user(client, message, args) {
     let mentioned
     //NO MENTIONS
@@ -16,7 +16,7 @@ module.exports = {
       mentioned = message.author
     }
     return mentioned
-  }, 
+  },
 
   async member(client, message, args) {
     let mentionMember = message.guild.member(args[0]), mentioned
@@ -57,18 +57,18 @@ module.exports = {
       const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
 
-      await collector.on('collect', async buttonClick => {
+      await collector.on('collect', async () => {
         await collector.stop()
         await collector2.stop()
-    
+
         await reaction.delete()
         await message.delete()
         return
       })
-    
+
       await collector2.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })   
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     }
   }

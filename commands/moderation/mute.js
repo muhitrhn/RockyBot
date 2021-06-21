@@ -9,7 +9,6 @@ module.exports = {
   category: 'moderation',
   utilisation: '{prefix}mm [wzmianka/id]',
   async execute(client, message, args, pf, cmd) {
-    
     const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
@@ -35,7 +34,7 @@ module.exports = {
         await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
         return
       }
-        
+
       const mentioned = await client.base.get('check').member(client, message, args)
       const embed = new MessageEmbed()
       .setColor('RANDOM')
@@ -134,11 +133,11 @@ module.exports = {
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
       const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
-      collector.on('collect', async buttonClick => {
+      collector.on('collect', async () => {
         collector.stop()
         collector2.stop()
         collector3.stop()
-        
+
         try {
           await mentioned.roles.add(role, {reason: reasonToProvide})
         } catch (err) {
@@ -163,7 +162,7 @@ module.exports = {
         return
       })
 
-      collector2.on('collect', buttonClick => {
+      collector2.on('collect', () => {
         collector.stop()
         collector2.stop()
         collector3.stop()
@@ -178,7 +177,7 @@ module.exports = {
 
       collector3.on('collect', buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })   
+        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
     } catch (err) {
@@ -186,4 +185,3 @@ module.exports = {
     }
   }
 }
-

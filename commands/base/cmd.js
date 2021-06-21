@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js') 
+const { MessageEmbed } = require('discord.js')
 const { MessageButton } = require('discord-buttons')
 
 module.exports = {
@@ -12,9 +12,9 @@ module.exports = {
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
     .setColor('BLUE')
     const reaction = message.lineReplyNoMention({embed: reactionEmbed})
-    return reaction 
+    return reaction
   },
-  
+
   async error(client, message, pf, cmd, reaction, err) {
     const errEmbed = new MessageEmbed()
     .setTitle(`${client.emotes.world}  Komenda \`${pf}${cmd}\` napotkała problem`)
@@ -69,13 +69,13 @@ module.exports = {
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Bugreport Engine`, message.author.avatarURL({dynamic: true}))
       .setColor('RED')
       .setTimestamp()
-      await channel.send(cmd, {embed: bugReportEmbed})    
+      await channel.send(cmd, {embed: bugReportEmbed})
       return
     })
 
     await collector2.on('collect', async button2 => {
-      const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-      button2.reply.send({ embed: replyEmbed, ephemeral: true })    
+      const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, button2.clicker.user.avatarURL({dynamic: true}))
+      button2.reply.send({ embed: replyEmbed, ephemeral: true })
     })
-  } 
+  }
 }

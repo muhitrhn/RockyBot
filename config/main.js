@@ -27,6 +27,6 @@ module.exports = {
         prefix: cmds.commands.prefix,
         ownerID: cmds.ownerID,
         testerID: cmds.testerID,
-        activities: activities.activities,
-    },
+        activities: activities.activities
+    }
 }
