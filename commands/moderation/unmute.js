@@ -15,23 +15,17 @@ module.exports = {
 
       const button = new MessageButton()
 
-      let permsCheck = 2
       if (!message.guild.me.permissionsIn(message.channel).has('MANAGE_ROLES')) {
-        permsCheck = 0
-      } else if (!message.member.permissionsIn(message.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
-        permsCheck = 1
-      }
-
-      if (permsCheck === 0) {
         //PermsCheck: missing bot perms
         const missingPerms = 'ZARZĄDZANIE ROLAMI'
         const ifBot = 1
-        await client.base.get('check').missingPerms(client, message, reaction, missingPerms, ifBot)
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms, ifBot)
         return
-      } else if (permsCheck === 1) {
+      } 
+      else if (!message.member.permissionsIn(message.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
         //PermsCheck: missing user perms
         const missingPerms = 'ZARZĄDZANIE WIADOMOŚCIAMI'
-        await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms)
         return
       }
 
@@ -53,7 +47,7 @@ module.exports = {
         GuildID: message.guild.id
       })
       let role
-      if(data) role = message.guild.roles.cache.get(data.Role)
+      if(data) role = await message.guild.roles.cache.get(data.Role)
 
       if(!data) {
         embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
@@ -100,15 +94,13 @@ module.exports = {
           reasonToProvide = 'Mod: ' + message.author.tag + '┇' + message.author.id + ';  Reason not provided'
         }
       }
-
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz odciszyć...`)
-
-      if (reason === 0)
+      if (reason === 0) {
         embed.setDescription(`**...użytkownika ${mentioned}, nie podając powodu?**`)
+      }
       else {
         embed.setDescription(`**...użytkownika ${mentioned}, podając powód**\n\n\`${reason}\`**?**`)
       }
-
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
       button.setLabel('TAK')
@@ -124,7 +116,7 @@ module.exports = {
       .addComponent(button)
       .addComponent(button2)
 
-      reaction.edit({embed: embed, component: buttonRow})
+      await reaction.edit({embed: embed, component: buttonRow})
 
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'mute'
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel'
@@ -134,13 +126,14 @@ module.exports = {
       const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
       collector.on('collect', async () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
         try {
           await mentioned.roles.remove(role, {reason: reasonToProvide})
-        } catch (err) {
+        } 
+        catch (err) {
           embed.setTitle(`${client.emotes.warn}  Nie mogę odciszyć użytkownika...`)
           .setDescription(`**...${mentioned}, prawdopodobnie rola wyciszenia jest wyższa od mojej**`)
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
@@ -150,37 +143,38 @@ module.exports = {
         }
 
         embed.setTitle(`${client.emotes.staff}  Odciszono użytkownika...`)
-        if (reason === 0)
+        if (reason === 0) {
           embed.setDescription(`**...${mentioned}, nie podając powodu**`)
+        }
         else {
           embed.setDescription(`**...${mentioned}, podając powód**\n\n\`${reason}\``)
         }
-
         embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
 
         await reaction.edit({embed: embed})
         return
       })
 
-      collector2.on('collect', () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+      collector2.on('collect', async () => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano odciszenie użytkownika...`)
         .setDescription(`**...${mentioned}**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
-        reaction.edit({embed: embed})
+        await reaction.edit({embed: embed})
         return
       })
 
-      collector3.on('collect', buttonClick => {
+      collector3.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

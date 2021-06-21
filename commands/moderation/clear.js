@@ -16,28 +16,16 @@ module.exports = {
       .setColor('RANDOM')
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
 
-      let permsCheck = 2
+      const missingPerms = 'ZARZĄDZANIE WIADOMOŚCIAMI'
       if (!message.guild.me.permissionsIn(message.channel).has('MANAGE_MESSAGES')) {
-        permsCheck = 0
-      } else if (!message.member.permissionsIn(message.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
-        permsCheck = 1
-      }
-
-      if (permsCheck === 0) {
         //PermsCheck: missing bot perms
-        embed.setTitle(`${client.emotes.siren}  Bot nie ma wymaganych uprawnień...`)
-        .setDescription('**...`ZARZĄDZANIE WIADOMOŚCIAMI`**')
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('RED')
-        await reaction.edit({embed: embed})
+        const ifBot = 1
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms, ifBot)
         return
-      } else if (permsCheck === 1) {
+      } 
+      else if (!message.member.permissionsIn(message.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(message.author.id)) {
         //PermsCheck: missing user perms
-        embed.setTitle('🔒  Nie masz wymaganych uprawnień...')
-        .setDescription('**...`ZARZĄDZANIE WIADOMOŚCIAMI`**')
-        .setThumbnail(client.cmds.lockedImgs[Math.floor(Math.random() * client.cmds.lockedImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms)
         return
       }
 
@@ -71,7 +59,7 @@ module.exports = {
       .addComponent(button)
       .addComponent(button2)
 
-      reaction.edit({embed: embed, component: buttonRow})
+      await reaction.edit({embed: embed, component: buttonRow})
 
       const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'delete'
       const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'cancel'
@@ -80,34 +68,35 @@ module.exports = {
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
       const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
-      collector3.on('collect', buttonClick => {
+      collector3.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
-      collector2.on('collect', () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+      collector2.on('collect', async () => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano usuwanie...`)
         .setDescription(`**...\`${amount}\` wiadomości**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
-        reaction.edit({embed: embed})
+        await reaction.edit({embed: embed})
         return
       })
 
-      collector.on('collect', () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+      collector.on('collect', async () => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
-        client.commands.get('clear').clear(client, message, args, pf, cmd, reaction, embed, amount)
+        await client.commands.get('clear').clear(client, message, args, pf, cmd, reaction, embed, amount)
         return
       })
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   },
@@ -138,7 +127,7 @@ module.exports = {
       }
 
       if (deletingCache < 99) {
-        await  message.channel.messages.fetch({ limit: deletingCache + 2 }).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
+        await message.channel.messages.fetch({ limit: deletingCache + 2 }).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
 
         deleting = await message.channel.bulkDelete(deletable, true)
@@ -183,7 +172,7 @@ module.exports = {
       }
 
       if (deletingCache < 99) {
-        await  message.channel.messages.fetch({ limit: deletingCache + 1}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
+        await message.channel.messages.fetch({ limit: deletingCache + 1}).then(msgs => msgs.forEach(msg => toDelete.push(msg)))
         const deletable = toDelete.filter(mssg => mssg.id !== reaction.id)
 
         deletable.forEach(msg => {deleting.push(msg); msg.delete()})
@@ -196,11 +185,10 @@ module.exports = {
       .setDescription('')
       .setThumbnail(client.cmds.moderationImgs.clear)
       await reaction.edit({embed: embed})
-      deletedFast = 0
-      deletedSlow = 0
       return
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

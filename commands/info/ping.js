@@ -17,7 +17,8 @@ module.exports = {
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setThumbnail(client.cmds.infoImgs.ping)
       await reaction.edit({embed: embed})
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

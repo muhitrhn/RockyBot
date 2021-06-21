@@ -45,7 +45,8 @@ module.exports = {
       await reaction.delete()
       reply.edit({embed: embed, component: buttonRow})
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

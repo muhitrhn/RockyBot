@@ -29,7 +29,8 @@ module.exports = {
       if (changes[0]) embed.addField('🛠️ Aktualne prace:', `${changes[0]}`)
 
       await reaction.edit({embed: embed, component: button})
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

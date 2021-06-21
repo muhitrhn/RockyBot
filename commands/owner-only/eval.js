@@ -26,14 +26,16 @@ module.exports = {
 
       //EVAL
       const code = args.join(' ')
-      let evaled = eval(code)
+      let evaled = await eval(code)
    
-      if (typeof evaled !== 'string')
-      evaled = require('util').inspect(evaled)
+      if (typeof evaled !== 'string') {
+        evaled = require('util').inspect(await evaled)
+      }
    
-      reaction.edit(evaled, {code:'xl'})
+      await reaction.edit(evaled, {code:'xl'})
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

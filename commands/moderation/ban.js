@@ -14,22 +14,16 @@ module.exports = {
 
       const button = new MessageButton()
 
-      let permsCheck = 2
-      if (!message.guild.me.permissionsIn(message.channel).has('BAN_MEMBERS')) {
-        permsCheck = 0
-      } else if (!message.member.permissionsIn(message.channel).has('BAN_MEMBERS')  && !client.ownerID.includes(message.author.id)) {
-        permsCheck = 1
-      }
-
       const missingPerms = 'BANOWANIE CZŁONKÓW'
-      if (permsCheck === 0) {
+      if (!message.guild.me.permissionsIn(message.channel).has('BAN_MEMBERS')) {
         //PermsCheck: missing bot perms
         const ifBot = 1
-        await client.base.get('check').missingPerms(client, message, reaction, missingPerms, ifBot)
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms, ifBot)
         return
-      } else if (permsCheck === 1) {
+      } 
+      else if (!message.member.permissionsIn(message.channel).has('BAN_MEMBERS')  && !client.ownerID.includes(message.author.id)) {
         //PermsCheck: missing user perms
-        await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms)
         return
       }
 
@@ -57,7 +51,6 @@ module.exports = {
       }
 
       let reason, reasonToProvide
-
       if (args[0] === mentioned.id || args[0] === `<@${mentioned.id}>` || args[0] === `<@!${mentioned.id}>` ) {
         if (args[1]) {
           reason = args.slice(1).join(' ')
@@ -77,13 +70,12 @@ module.exports = {
       }
 
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz zbanować...`)
-
-      if (reason === 0)
+      if (reason === 0) {
         embed.setDescription(`**...użytkownika ${mentioned}, nie podając powodu?**`)
+      }
       else {
         embed.setDescription(`**...użytkownika ${mentioned}, podając powód**\n\n\`${reason}\`**?**`)
       }
-
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
       button.setLabel('TAK')
@@ -108,45 +100,47 @@ module.exports = {
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
       const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
-      collector.on('collect', () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+      collector.on('collect', async () => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
-        mentioned.ban({ reason: reasonToProvide })
+        await mentioned.ban({ reason: reasonToProvide })
 
         embed.setTitle(`${client.emotes.staff}  Zbanowano użytkownika...`)
-        if (reason === 0)
+        if (reason === 0) {
           embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu**`)
+        }
         else {
           embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
         }
         embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
         .setImage(client.cmds.moderationImgs.ban[Math.floor(Math.random() * client.cmds.moderationImgs.ban.length)])
 
-        reaction.edit({embed: embed})
+        await reaction.edit({embed: embed})
         return
       })
 
-      collector2.on('collect', () => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
+      collector2.on('collect', async () => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano banowanie użytkownika...`)
         .setDescription(`**...${mentioned}**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
-        reaction.edit({embed: embed})
+        await reaction.edit({embed: embed})
         return
       })
 
-      collector3.on('collect', buttonClick => {
+      collector3.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

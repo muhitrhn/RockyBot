@@ -1,5 +1,11 @@
 # 🟢 0.22
 
+🟢 **Patch 4**
+
+|✨ Komendy|✨ DevOnly|
+|----------------|----------------|
+|📗 `Naprawiono wszystkie błędy w składni odpowiedzi`|📗 `Dodano ESLint` (z pomocą [Oskara](https://github.com/OKarpinski))|
+
 🟢 **Patch 3**
 
 |✨ Komenda trigger|

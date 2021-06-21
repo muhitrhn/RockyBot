@@ -35,7 +35,8 @@ module.exports = {
         await message.channel.send('Fetching messages test, do NOT delete')
         await message.channel.messages.fetch({ limit: 1 }).then(msgs => msgs.forEach(msg => fetchingStatus = msg))
         fetching = 1
-      } catch (err) {
+      } 
+      catch (err) {
         fetching = 0
         fetchingStatus = err
       }
@@ -48,7 +49,8 @@ module.exports = {
         await message.channel.send(`${client.emotes.warn} autodelete test, do NOT delete`)
         await message.channel.messages.fetch({ limit: 2}).then(msgs => msgs.forEach(msg => {msg.delete()}))
         deleting = 1
-      } catch (err) {
+      } 
+      catch (err) {
         deleting = 0
         deletingStatus = err
       }
@@ -60,9 +62,10 @@ module.exports = {
       try {
         findingGuildStatus = await client.guilds.cache.get(message.guild.id)
         findingGuild = 1
-      } catch (err) {
-          findingGuild = 0
-          findingGuildStatus = err
+      } 
+      catch (err) {
+        findingGuild = 0
+        findingGuildStatus = err
       }
      
       embed.addField(`${findingGuild ? client.emotes.grverify : client.emotes.warn}  guilds.cache.get()`, findingGuild ? `Brak problemów:\nID: \`${findingGuildStatus.id}\`\nNazwa: \`${findingGuildStatus.name}\`` : `\`\`\`${findingGuildStatus}\`\`\``)
@@ -72,7 +75,8 @@ module.exports = {
       try {
         findingChannelStatus = await client.channels.cache.get(message.channel.id)
         findingChannel = 1
-      } catch (err) {
+      } 
+      catch (err) {
         findingChannel = 0
         findingChannelStatus = err
       }
@@ -84,7 +88,8 @@ module.exports = {
       try {
         findingUserStatus = await client.users.cache.get(message.author.id)
         findingUser = 1
-      } catch (err) {
+      } 
+      catch (err) {
         findingUser = 0
         findingUserStatus = err
       }
@@ -95,7 +100,8 @@ module.exports = {
       .setDescription('')
       .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       try {await reaction.edit({ embed: embed })} catch (err) {await message.channel.send({embed: embed})}
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   } 

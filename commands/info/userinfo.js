@@ -29,15 +29,15 @@ module.exports = {
       const embed = new MessageEmbed()
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setThumbnail(mention.avatarURL({ dynamic: true }))
-      .setTitle(`${client.emotes.siri} Użytkownik \`${mention.tag}\``)
+      .setTitle(`💻  Użytkownik ${mention.tag}`)
       if (!color) {embed.setColor('RANDOM')} else {embed.setColor(color)}
       const embedColor = embed.color
       embed.setDescription([
         `🛡️ **${mention}**`,
-        `📎 **ID**: \`${mention.id}\``,
-        mentionMember.nickname ? `${client.emotes.arrr} **Nick**: ${mentionMember.nickname}\n` : '',
-        `⏲️ **Konto założone** (UTC): \`${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?'0':'')+parseInt(mention.createdAt.getUTCMinutes())} ┇ ${(mention.createdAt.getUTCDate()<10?'0':'')+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}\``,
-        `${client.emotes.grverify} **Dołączono do serwera** (UTC): \`${mentionMember.joinedAt.getUTCHours()}:${(mentionMember.joinedAt.getUTCMinutes()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMinutes())} ┇ ${(mentionMember.joinedAt.getUTCDate()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCDate())}.${((mentionMember.joinedAt.getUTCMonth()+1)<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMonth()+1)}.${mentionMember.joinedAt.getUTCFullYear()}\` `
+        `📎 ID: **${mention.id}**`,
+        mentionMember.nickname ? `${client.emotes.grverify} Nick: **${mentionMember.nickname}**\n` : '',
+        `⏲️ Konto założone (UTC): **${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?'0':'')+parseInt(mention.createdAt.getUTCMinutes())}┇${(mention.createdAt.getUTCDate()<10?'0':'')+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}**`,
+        `${client.emotes.world} Dołączono do serwera (UTC): **${mentionMember.joinedAt.getUTCHours()}:${(mentionMember.joinedAt.getUTCMinutes()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMinutes())}┇${(mentionMember.joinedAt.getUTCDate()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCDate())}.${((mentionMember.joinedAt.getUTCMonth()+1)<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMonth()+1)}.${mentionMember.joinedAt.getUTCFullYear()}**`
       ])
 
       const button = new MessageButton()
@@ -49,7 +49,8 @@ module.exports = {
         .setDisabled()
         await reaction.edit({embed: embed, component: button})
         return
-      } else {
+      } 
+      else {
         button.setLabel('Permisje kanału')
         .setStyle('blurple')
         .setEmoji('⚒️')
@@ -73,27 +74,28 @@ module.exports = {
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
       const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
 
-      collector.on('collect', buttonClick => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
-        client.commands.get('userinfo').chPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
+      collector.on('collect', async buttonClick => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
+        await client.commands.get('userinfo').chPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
         return
       })
 
-      collector2.on('collect', buttonClick => {
-        collector.stop()
-        collector2.stop()
-        collector3.stop()
-        client.commands.get('userinfo').globPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
+      collector2.on('collect', async buttonClick => {
+        await collector.stop()
+        await collector2.stop()
+        await collector3.stop()
+        await client.commands.get('userinfo').globPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
         return
       })
 
-      collector3.on('collect', buttonClick => {
+      collector3.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
 
@@ -104,12 +106,12 @@ module.exports = {
       const embed = new MessageEmbed()
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setThumbnail(mention.avatarURL({ dynamic: true }))
-      .setTitle(`${client.emotes.warn} Uprawnienia na kanale \`${message.channel.name}\` dla \`${mention.tag}\``)
+      .setTitle(`${client.emotes.warn} Uprawnienia na kanale ${message.channel.name} dla ${mention.tag}`)
       .setColor(color)
 
       embed.addField('📡 Uprawnienia na kanale:', [
         (mentionMember.permissionsIn(message.channel).has('VIEW_CHANNEL') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie kanału',
-        (mentionMember.permissionsIn(message.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomościclear',
+        (mentionMember.permissionsIn(message.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości',
         (mentionMember.permissionsIn(message.channel).has('ADD_REACTIONS') ? client.emotes.grverify : client.emotes.rverify) +  ' Dodawanie reakcji',
         (mentionMember.permissionsIn(message.channel).has('SEND_TTS_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości TTS',
         (mentionMember.permissionsIn(message.channel).has('ATTACH_FILES') ? client.emotes.grverify : client.emotes.rverify) +  ' Załączanie plików',
@@ -132,19 +134,20 @@ module.exports = {
       const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
       const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
 
-      collector.on('collect', buttonClick => {
-        collector.stop()
-        collector2.stop()
-        client.commands.get('userinfo').main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
+      collector.on('collect', async buttonClick => {
+        await collector.stop()
+        await collector2.stop()
+        await client.commands.get('userinfo').main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
         return
       })
 
-      collector2.on('collect', buttonClick => {
+      collector2.on('collect', async buttonClick => {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   },
@@ -153,7 +156,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
       .setThumbnail(mention.avatarURL({ dynamic: true }))
-      .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla \`${mention.tag}\``)
+      .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla ${mention.tag}`)
       .setColor(color)
 
       embed.addField(`${client.emotes.staff} Zarządzanie serwerem:`, [
@@ -203,7 +206,8 @@ module.exports = {
         const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
         buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

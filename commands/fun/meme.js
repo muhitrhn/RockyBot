@@ -12,7 +12,6 @@ module.exports = {
     const reaction = await client.base.get('cmd').start(client, message, cmd)
 
     try {
-
       let memeUrl, memeImage, memeTitle, memeUpvotes, memeNumComments
       await got('https://www.reddit.com/r/memes/random/.json')
       .then(async response => {
@@ -37,8 +36,8 @@ module.exports = {
 
       //Ready
       await reaction.delete()
-
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

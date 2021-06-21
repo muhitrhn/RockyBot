@@ -24,7 +24,8 @@ module.exports = {
       await message.lineReplyNoMention({embed: embed})     
       
       await reaction.delete()
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

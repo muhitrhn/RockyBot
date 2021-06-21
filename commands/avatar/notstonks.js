@@ -26,7 +26,8 @@ module.exports = {
       //Ready
       await reaction.delete() 
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

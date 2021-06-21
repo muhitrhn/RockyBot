@@ -45,7 +45,8 @@ module.exports = {
        
       await reaction.edit({embed: embed})
 
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }

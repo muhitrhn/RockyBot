@@ -52,7 +52,8 @@ module.exports = {
       .setDescription(`**z \`${oldPrefix}\` na \`${args[0]}\``)
       .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       await reaction.edit({embed: embed})
-    } catch (err) {
+    } 
+    catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
     }
   }
