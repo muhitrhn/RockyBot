@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 
 const mutedRoleSchema = new mongoose.Schema({
-    Role: {
-        type: String
-    },
+    Role: String,
     GuildID: String
 })
 
-module.exports = mongoose.model('mutedRole', mutedRoleSchema)
+module.exports = mongoose.model('mutedroles', mutedRoleSchema)

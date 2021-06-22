@@ -20,7 +20,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setTitle(`${client.emotes.CMDstonoga}  Zbyszek!`)
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       await message.lineReplyNoMention({embed: embed, files: [attachment] })     
       
       await reaction.delete()

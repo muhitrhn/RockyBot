@@ -13,7 +13,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       if(!client.ownerID.includes(message.author.id)) {
         embed.setTitle('🔒  Nie masz wymaganych uprawnień...')

@@ -32,7 +32,7 @@ module.exports = {
       const mentioned = await client.base.get('check').member(client, message, args)
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       if (mentioned === message.member) {
         embed.setTitle(`${client.emotes.siren}  Nie podano właściwego użytkownika...`)
@@ -45,7 +45,7 @@ module.exports = {
 
       if (!mentioned.manageable) {
         embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć użytkownika...`)
-        .setDescription(`**...${mentioned}, prawdopodobnie ma rolę wyższą od mojej**`)
+        .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), prawdopodobnie ma rolę wyższą od mojej**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
@@ -97,10 +97,10 @@ module.exports = {
 
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz wyciszyć...`)
       if (reason === 0) {
-        embed.setDescription(`**...użytkownika ${mentioned}, nie podając powodu?**`)
+        embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu?**`)
       }
       else {
-        embed.setDescription(`**...użytkownika ${mentioned}, podając powód**\n\n\`${reason}\`**?**`)
+        embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\`**?**`)
       }
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
@@ -136,7 +136,7 @@ module.exports = {
         } 
         catch (err) {
           embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć użytkownika...`)
-          .setDescription(`**...${mentioned}, prawdopodobnie rola wyciszenia jest wyższa od mojej**`)
+          .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), prawdopodobnie rola wyciszenia jest wyższa od mojej**`)
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           .setColor('#FFC000')
           await reaction.edit({embed: embed})
@@ -145,12 +145,12 @@ module.exports = {
 
         embed.setTitle(`${client.emotes.staff}  Wyciszono użytkownika...`)
         if (reason === 0) {
-          embed.setDescription(`**...${mentioned}, nie podając powodu**`)
+          embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu**`)
         }
         else {
-          embed.setDescription(`**...${mentioned}, podając powód**\n\n\`${reason}\``)
+          embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
         }
-        embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
+        embed.setThumbnail(mentioned.user.displayAvatarURL())
 
         await reaction.edit({embed: embed})
         return
@@ -170,7 +170,7 @@ module.exports = {
       })
 
       collector3.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 

@@ -14,7 +14,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       const missingPerms = 'WYRZUCANIE CZŁONKÓW'
       if (!message.guild.me.permissionsIn(message.channel).has('KICK_MEMBERS')) {
@@ -42,7 +42,7 @@ module.exports = {
 
       if (!mentioned.kickable) {
         embed.setTitle(`${client.emotes.warn}  Nie mogę wyrzucić użytkownika...`)
-        .setDescription(`**...${mentioned}, prawdopodobnie ma rolę wyższą od mojej**`)
+        .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), prawdopodobnie ma rolę wyższą od mojej**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
         .setColor('#FFC000')
         await reaction.edit({embed: embed})
@@ -71,10 +71,10 @@ module.exports = {
       embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz wyrzucić...`)
 
       if (reason === 0) {
-        embed.setDescription(`**...użytkownika ${mentioned}, nie podając powodu?**`)
+        embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu?**`)
       }
       else {
-        embed.setDescription(`**...użytkownika ${mentioned}, podając powód**\n\n\`${reason}\`**?**`)
+        embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\`**?**`)
       }
       embed.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
 
@@ -115,7 +115,7 @@ module.exports = {
         else {
           embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
         }
-        embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
+        embed.setThumbnail(mentioned.user.displayAvatarURL())
         .setImage(client.cmds.moderationImgs.kick[Math.floor(Math.random() * client.cmds.moderationImgs.kick.length)])
 
         await reaction.edit({embed: embed})
@@ -128,7 +128,7 @@ module.exports = {
         await collector3.stop()
 
         embed.setTitle(`${client.emotes.rverify}  Anulowano wyrzucanie użytkownika...`)
-        .setDescription(`**...${mentioned}**`)
+        .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
 
         await reaction.edit({embed: embed})
@@ -136,7 +136,7 @@ module.exports = {
       })
 
       collector3.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 

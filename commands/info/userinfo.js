@@ -27,8 +27,8 @@ module.exports = {
   async main(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
     try {
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
+      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
       .setTitle(`💻  Użytkownik ${mention.tag}`)
       if (!color) {embed.setColor('RANDOM')} else {embed.setColor(color)}
       const embedColor = embed.color
@@ -91,7 +91,7 @@ module.exports = {
       })
 
       collector3.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     } 
@@ -104,8 +104,8 @@ module.exports = {
   async chPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
     try {
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
+      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
       .setTitle(`${client.emotes.warn} Uprawnienia na kanale ${message.channel.name} dla ${mention.tag}`)
       .setColor(color)
 
@@ -142,7 +142,7 @@ module.exports = {
       })
 
       collector2.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 
@@ -154,8 +154,8 @@ module.exports = {
   async globPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
     try {
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
-      .setThumbnail(mention.avatarURL({ dynamic: true }))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
+      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
       .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla ${mention.tag}`)
       .setColor(color)
 
@@ -203,7 +203,7 @@ module.exports = {
       })
 
       collector2.on('collect', buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     } 

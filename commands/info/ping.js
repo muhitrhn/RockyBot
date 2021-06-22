@@ -14,7 +14,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setColor('GREEN')
       .setTitle(`🏓  Ping: \`${client.ws.ping}\`ms`)
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setThumbnail(client.cmds.infoImgs.ping)
       await reaction.edit({embed: embed})
     } 

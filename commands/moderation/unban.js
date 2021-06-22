@@ -14,7 +14,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       const missingPerms = 'BANOWANIE CZŁONKÓW'
       if (!message.guild.me.permissionsIn(message.channel).has('BAN_MEMBERS')) {
@@ -97,7 +97,7 @@ module.exports = {
         else {
           embed.setDescription(`**...[${toUnban.user.tag}](https://discord.com/users/${toUnban.user.id}), podając powód**\n\n\`${reason}\``)
         }
-        embed.setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
+        embed.setThumbnail(toUnban.user.displayAvatarURL())
 
         await reaction.edit({embed: embed})
         return
@@ -117,7 +117,7 @@ module.exports = {
       })
 
       collector3.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 

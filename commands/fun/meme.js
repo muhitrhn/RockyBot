@@ -31,7 +31,7 @@ module.exports = {
         .setColor('RANDOM')
         .setTitle(`${memeTitle}\n👍 ${memeUpvotes} 💬 ${memeNumComments}`)
         .setURL(memeUrl)
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
         await message.lineReplyNoMention({embed, files: [attachment] })
 
       //Ready

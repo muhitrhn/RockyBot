@@ -13,7 +13,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       if(!args[0]) {
         embed.setTitle(`${client.emotes.world}  Brak informacji na którą wiadomość odpowiedzieć`)

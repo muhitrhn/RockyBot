@@ -20,7 +20,7 @@ module.exports = async (client, message) => {
 		.setTitle(`${client.emotes.lightSabers} Cześć, tu RockyBot `)
 		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
 		.setThumbnail(client.cmds.pingImg)
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 		message.lineReply({embed: embed})
 	}
 

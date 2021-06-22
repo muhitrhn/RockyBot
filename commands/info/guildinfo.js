@@ -21,7 +21,7 @@ module.exports = {
   async main(client, message, args, pf, cmd, reaction, bt, embedColor) {
     try {
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setDescription('')
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setTitle(`🖥️  Serwer **${message.guild.name}**`)
@@ -67,7 +67,7 @@ module.exports = {
       })
 
       collector2.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     } catch (err) {
@@ -81,7 +81,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setTitle(`${client.emotes.staff} Moderatorzy na serwerze ${message.guild.name}`)
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setColor(embedColor)
       const mods = message.guild.members.cache.filter(member => member.permissions.has('MANAGE_MESSAGES') && !member.user.bot).map(y => client.emotes.yellowDot + ' ' + y.user.tag).join('\n')
       if (modRoles[0]) embed.setDescription(`${client.emotes.rverify} *Role z uprawnieniami \`ZARZĄDZANIE WIADOMOŚCIAMI\`*\n\n${modRoles}`); else embed.setDescription(`${client.emotes.rverify} *Użytkownicy z uprawnieniami \`ZARZĄDZANIE WIADOMOŚCIAMI\`*\n\n${mods}`)
@@ -108,7 +108,7 @@ module.exports = {
       })
 
       collector2.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
         await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
       })
 

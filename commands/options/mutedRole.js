@@ -14,7 +14,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       if(!message.member.hasPermission('MANAGE_GUILD') && !client.ownerID.includes(message.author.id)) {
         const missingPerms = 'ZARZĄDZANIE SERWEREM'
@@ -57,7 +57,7 @@ module.exports = {
         GuildID: message.guild.id
       })
 
-      newData.save()
+      await newData.save()
 
       if (oldRole) {
         embed.setTitle(`${client.emotes.nitro} Zmieniono rolę wyciszenia...`).setDescription(`**...z <@&${oldRole}> na ${role}**`)

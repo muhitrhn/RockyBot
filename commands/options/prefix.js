@@ -14,7 +14,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       const oldPrefix = pf
 
@@ -46,10 +46,10 @@ module.exports = {
         GuildID: message.guild.id
       })
 
-      newData.save()
+      await newData.save()
 
       embed.setTitle(`${client.emotes.nitro} Zmieniono prefix...`)
-      .setDescription(`**z \`${oldPrefix}\` na \`${args[0]}\``)
+      .setDescription(`**z \`${oldPrefix}\` na \`${args[0]}\`**`)
       .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
       await reaction.edit({embed: embed})
     } 

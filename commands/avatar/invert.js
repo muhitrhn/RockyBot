@@ -14,12 +14,12 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       const mentioned = await client.base.get('check').user(client, message, args)
 
       //Create DIG image and attach
-      const CreateAv = await new DIG.Invert().getImage(`${mentioned.avatarURL({ dynamic: false, format: 'png' })}?size=4096`)
+      const CreateAv = await new DIG.Invert().getImage(`${mentioned.displayAvatarURL({ dynamic: false, format: 'png' })}?size=4096`)
 
       await message.lineReplyNoMention({embed: embed, files: [CreateAv]})
       

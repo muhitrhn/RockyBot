@@ -40,7 +40,7 @@ if (client.config.beta === true) {
 
 mongoose.connect(mongoURI, {
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

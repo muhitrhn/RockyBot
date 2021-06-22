@@ -17,7 +17,7 @@ module.exports = {
       await messages.forEach(msg => changes.push(msg.content))
 
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setColor('RANDOM')
       .setTitle(`${client.emotes.cpu}  Używana wersja: ${client.version}`)
       .setThumbnail(client.cmds.infoImgs.changelog)

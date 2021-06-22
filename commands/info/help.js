@@ -15,7 +15,7 @@ module.exports = {
       const emotes = client.emotes
 
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setColor('RANDOM')
 
       if (!chkCmd){

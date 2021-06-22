@@ -14,7 +14,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setTitle(`${client.emotes.staff}  Dostępne zasoby`)
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       
       embed.addField('** **', '** **')
 
@@ -41,7 +41,6 @@ module.exports = {
       embed.addField(`✨  Wszystkich wiadomości z których korzysta bot: \`${wideo.size + tuskotronic.size + stonoga.size + kamien.size + budowa.size + rymowanka.size}\``, '** **')
 
       .setThumbnail(client.cmds.infoImgs.storage)
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
        
       await reaction.edit({embed: embed})
 

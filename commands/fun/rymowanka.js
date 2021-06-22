@@ -19,7 +19,7 @@ module.exports = {
       const embed = new MessageEmbed()
       .setTitle(text)
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
       .setThumbnail(client.cmds.funImgs.rymowanka)
       await message.lineReplyNoMention({embed: embed})     
       

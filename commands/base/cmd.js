@@ -9,7 +9,7 @@ module.exports = {
     .setTitle(`${client.emotes.winLoad} Praca w toku...`)
     .setDescription(`${client.emotes.gearspin} Poczekaj na wykonanie skryptów komendy \`${cmd}\`...`)
     .setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
-    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+    .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
     .setColor('BLUE')
     const reaction = await message.lineReplyNoMention({embed: reactionEmbed})
     return reaction
@@ -21,7 +21,7 @@ module.exports = {
       .setTitle(`${client.emotes.world}  Komenda \`${pf}${cmd}\` napotkała problem`)
       .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
       .setColor('RED')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Bugreport Engine`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Bugreport Engine`, message.author.displayAvatarURL({dynamic: true}))
 
       const channel = await client.channels.cache.get(client.config.cmds.BugReportChannel)
 
@@ -67,7 +67,7 @@ module.exports = {
         const bugReportEmbed = new MessageEmbed()
         .setTitle(`${client.emotes.siren} Zgłoszono problem w komendzie \`${cmd}\``)
         .setDescription(`${client.emotes.arrr} **Serwer**: \`${message.guild.name}\`, \`${message.guild.id}\`\n${client.emotes.gearspin} **Log**: \`\`\`${err}\`\`\``)
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Bugreport Engine`, message.author.avatarURL({dynamic: true}))
+        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Bugreport Engine`, message.author.displayAvatarURL({dynamic: true}))
         .setColor('RED')
         .setTimestamp()
         await channel.send(cmd, {embed: bugReportEmbed})
@@ -75,7 +75,7 @@ module.exports = {
       })
 
       await collector2.on('collect', async button2 => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, button2.clicker.user.avatarURL({dynamic: true}))
+        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, button2.clicker.user.displayAvatarURL({dynamic: true}))
         await button2.reply.send({ embed: replyEmbed, ephemeral: true })
       })
     }

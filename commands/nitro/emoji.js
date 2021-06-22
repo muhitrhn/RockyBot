@@ -13,7 +13,7 @@ module.exports = {
     try {
       const embed = new MessageEmbed()
       .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.avatarURL({dynamic: true}))
+      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 
       if(!args[0]) {
         embed.setTitle(`${client.emotes.world}  Nie napisałeś, jakiego emoji użyć`)
@@ -47,13 +47,13 @@ module.exports = {
       let webhook
       if (webhksCheck === 0) {
         //Create webhook
-        webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.avatarURL() })
+        webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.displayAvatarURL() })
       }
       else {
         //Edit webhook
         webhook = await myWebhooks.first().edit({
         name: message.author.username,
-        avatar: message.author.avatarURL()
+        avatar: message.author.displayAvatarURL()
         })
       }
 
