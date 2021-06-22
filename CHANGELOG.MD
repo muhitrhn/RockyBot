@@ -10,7 +10,7 @@
 
 |✨ Komenda warn|✨ Komenda warnlist|✨ Komenda warndelete|
 |----------------|----------------|----------------|
-|📗 `Ostrzeż kogoś`|📗 `Wyświetl listę kogoś warnów`|📗 `Usuń warna po globalnym id lub usun wszystkie warny uzytkownika (pod id/wzmiance)`|
+|📗 `Ostrzeż kogoś`|📗 `Wyświetl listę kogoś warnów`|📗 `Usuń warna po id lub usun wszystkie warny uzytkownika (po id/wzmiance)`|
 
 # 🟢 0.22
 
