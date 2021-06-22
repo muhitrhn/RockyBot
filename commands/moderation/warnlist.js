@@ -42,7 +42,7 @@ module.exports = {
       let warns = [] 
       const warnsPage = warnDatas.slice(5*(page-1), page*5)
       warnsPage.forEach(y => {
-        warns.push(`**#${num}**: Moderator${message.guild.member(y.ModID) ? `: **[${message.guild.member(y.ModID).user.tag}` : `o id: **[${y.modID}`}](https://discord.com/users/${y.modID})**\n${client.emotes.grverify} Powód: **${y.Reason}**\n${client.emotes.yellowDot} Globalne ID: **${y.GlobID}**\n\n`)
+        warns.push(`**#${num}**: Moderator${message.guild.member(y.ModID) ? `: **[${message.guild.member(y.ModID).user.tag}` : `o id: **[${y.ModID}`}](https://discord.com/users/${y.ModID})**\n${client.emotes.grverify} Powód: **${y.Reason}**\n||${client.emotes.yellowDot} ID: **${y._id}**||\n\n`)
         num = num + 1
       })  
       const embedDesc = warns.map(x => x).join(' ')

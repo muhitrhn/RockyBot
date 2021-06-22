@@ -7,7 +7,7 @@ module.exports = {
   aliases: ['mwd', 'mwr', 'warnremove', 'warndelete'],
   description: 'Nadaj ostrzeżenie',
   category: 'moderation',
-  utilisation: '{prefix}mwd [globID warna/(wzmianka/id) użytkownika] ',
+  utilisation: '{prefix}mwd [ID warna/(wzmianka/id) użytkownika] ',
   async execute(client, message, args, pf, cmd) {
 
     const reaction = await client.base.get('cmd').start(client, message, cmd)
@@ -95,20 +95,13 @@ module.exports = {
         return
       }
       else {
-        if (!parseInt(args[0])) {
-          embed.setTitle(`${client.emotes.grverify}  Nie znaleziono warna...`)
-          .setDescription(`**...o globalnym ID ${args[0]}**`)
-          .setColor('RANDOM')
-          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-          await reaction.edit({ embed: embed })
-          return
-        }
-
-        const warn = await warnModel.findOne({ GuildID: message.guild.id, GlobID: args[0] })
-
-        if (!warn) {
+        let warn
+        try {
+          warn = await warnModel.findOne({ GuildID: message.guild.id, _id: args[0] })
+        } 
+        catch (err) {
           embed.setTitle(`${client.emotes.grverify}  Na tym serwerze nie znaleziono warna...`)
-          .setDescription(`**...o globalnym ID ${args[0]}**`)
+          .setDescription(`**...o ID ${args[0]}**`)
           .setColor('RANDOM')
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           await reaction.edit({ embed: embed })
@@ -116,10 +109,10 @@ module.exports = {
         }
 
         embed.setTitle(`${client.emotes.staff}  Usunięto warna...`)
-        .setDescription(`**...użytkownika${message.guild.member(warn.User) ? ` [${message.guild.member(warn.User).user.tag}` : `o id [${warn.User}`}](https://discord.com/users/${warn.User})** z powodem **${warn.Reason}** o globalnym ID **${warn.GlobID}**`)
+        .setDescription(`**...użytkownika${message.guild.member(warn.User) ? ` [${message.guild.member(warn.User).user.tag}` : `o id [${warn.User}`}](https://discord.com/users/${warn.User})** z powodem **${warn.Reason}**`)
         .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
 
-        await warnModel.findOneAndRemove({ GuildID: message.guild.id, GlobID: args[0] })
+        await warnModel.findOneAndRemove({ GuildID: message.guild.id, _id: args[0] })
 
         await reaction.edit({embed: embed})
         return

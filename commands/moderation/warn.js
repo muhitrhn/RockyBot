@@ -42,25 +42,24 @@ module.exports = {
         await reaction.edit({embed: embed})
         return
       }
-      const maxID = await warnModel.find().sort('-GlobID')
       const userWarns = await warnModel.find({ GuildID: message.guild.id, User: mentioned.id })
-
       let newData = new warnModel({
         User: mentioned.id,
-        GlobID: maxID[0]?maxID[0].GlobID + 1:1,
         Reason: args.slice(1).join(' '),
         ModID: message.author.id,
         GuildID: message.guild.id
       })
 
-      await newData.save()
+      let warnID
+      await newData.save(async function(err, id) {
+        warnID = id._id
+        embed.setTitle(`${client.emotes.staff}  Zwarnowano użytkownika...`)
+        .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**\n${client.emotes.gearspin} Numer ostrzeżenia: **${userWarns?userWarns.length + 1:1}**\n${client.emotes.grverify} Powód: **${args.slice(1).join(' ')}**\n||${client.emotes.yellowDot} ID: **${warnID}**||\n\n${client.emotes.siri} Moderator: ⬇️`)
+        .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
 
-      embed.setTitle(`${client.emotes.staff}  Zwarnowano użytkownika...`)
-      .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**\n${client.emotes.gearspin} Numer ostrzeżenia: **${userWarns?userWarns.length + 1:1}**\n${client.emotes.grverify} Powód: **${args.slice(1).join(' ')}**\n${client.emotes.yellowDot} Globalne ID: **${maxID[0]?maxID[0].GlobID + 1:1}**\n\n${client.emotes.siri} Moderator: ⬇️`)
-      .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
-
-      await reaction.edit({embed: embed})
-      return
+        await reaction.edit({embed: embed})
+        return
+     })
     } 
     catch (err) {
       await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
