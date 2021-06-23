@@ -49,6 +49,8 @@ module.exports = async (client) => {
   } else {
     callbackUrl = `${domain.protocol}//${domain.host}${config.dashboard.port == 80 ? '' : `:${config.dashboard.port}`}/callback`
   }
+
+  client.dashURL = callbackUrl
   
   // This line is to inform users where the system will begin redirecting the users.
   // And can be removed.
