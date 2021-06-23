@@ -1,0 +1,26 @@
+<%- include("partials/header", { bot, user, path, title: `Settings | ${guild.name}` }) %>
+
+<div class="container-sm center"  style="margin-top: 30px;">
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <% if (alert) { %>
+      <div class="alert alert-success" role="alert">
+        <%= alert %>
+      </div>
+    <% } %>
+    <center>
+      <h1><%= guild.name %></h1><br />
+      <%- guild.icon ? `<img src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon.startsWith('a_') ? guild.icon + '.gif' : guild.icon}" class="card-img-top" style="max-width: 18rem; border-radius: 25px">` : "" %>
+    </center>
+    <hr>
+    <form method="POST">
+      <center>
+      <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px; border-radius: 0px 50px 50px 0px;">🛠️ Prefix</p>
+      <input type="text" class="form-control" name="prefix" style="border-radius: 25px;" value="<%= settings.prefix %>" placeholder="Tu wpisz prefix">
+      <br><button type="submit" class="btn btn-primary text-white" style="border-radius: 30px;">📫 Zapisz</button>
+      <p class="h6" style="margin-bottom: 0.5rem; margin-top: 10px;"><i>Inne opcje już niedługo</i></p>
+      </center>
+    </form>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

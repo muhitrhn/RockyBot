@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const mutedModel = require('../../models/mutedRole')
+const settingsModel = require('../../models/settings')
 
 module.exports = {
   name: 'mutedrole',
@@ -40,22 +40,28 @@ module.exports = {
         return
       }
 
-      const data = await mutedModel.findOne({
+      const data = await settingsModel.findOne({
         GuildID: message.guild.id
       }) 
           
-      let oldRole
-      if (data) {
-        oldRole = data.Role
-        await mutedModel.findOneAndRemove({
+      let oldRole, newData
+      if (!data) {      
+        newData = new settingsModel({
+          MutedRole: role.id,
+          GuildID: message.guild.id
+        })
+      } else {
+        oldRole = data.MutedRole
+        newData = new settingsModel({
+          Prefix: data.Prefix,
+          MutedRole: role.id,
+          GuildID: message.guild.id
+        })
+
+        await settingsModel.findOneAndRemove({
           GuildID: message.guild.id
         }) 
       }
-
-      let newData = new mutedModel({
-        Role: role.id,
-        GuildID: message.guild.id
-      })
 
       await newData.save()
 

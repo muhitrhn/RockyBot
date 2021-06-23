@@ -1,3 +1,12 @@
+# 🟢 0.24
+
+🟢 **Pierwsze wydanie**
+
+|✨ Dashboard|✨ Połączenie z bazą danych|
+|---------------------|---------------------|
+|📗 `Strona bota i prowizoryczny dashboard ze zmianą prefixu (pingnij bota po link)`|📗 `Wszystkie ustawienia dla serwera trzymane są w 1 pliku`|
+
+
 # 🟢 0.23
 
 🟢 **Patch 2**

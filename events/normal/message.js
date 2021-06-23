@@ -1,13 +1,13 @@
 require('discord-reply')
 const { MessageEmbed } = require('discord.js')
-const prefixSchema = require('../../models/prefix')
+const settingsSchema = require('../../models/settings')
 
 module.exports = async (client, message) => {
 
 	if (!message.guild || message.author.bot) return
 
 	//MENTION
-	const data = await prefixSchema.findOne({
+	const data = await settingsSchema.findOne({
     GuildID: message.guild.id
   })
 
@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 		const embed = new MessageEmbed()
 		.setColor('YELLOW')
 		.setTitle(`${client.emotes.lightSabers} Cześć, tu RockyBot `)
-		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n*${client.emotes.staff} Tak w ogóle to **jestem [open source](${client.config.github})***\n\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
+		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n**${client.emotes.staff} Moja strona: ${client.config.dashboard.domain}**\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
 		.setThumbnail(client.cmds.pingImg)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 		message.lineReply({embed: embed})

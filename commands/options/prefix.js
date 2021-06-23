@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const prefixModel = require('../../models/prefix')
+const settingsModel = require('../../models/settings')
 
 module.exports = {
   name: 'prefix',
@@ -31,20 +31,27 @@ module.exports = {
         return
       }
 
-      const data = await prefixModel.findOne({
+      const data = await settingsModel.findOne({
         GuildID: message.guild.id
       }) 
           
-      if (data) {
-        await prefixModel.findOneAndRemove({
+      let newData
+      if (!data) {      
+        newData = new settingsModel({
+          Prefix: args[0],
+          GuildID: message.guild.id
+        })
+      } else {
+         newData = new settingsModel({
+          Prefix: args[0],
+          MutedRole: data.MutedRole,
+          GuildID: message.guild.id
+        })
+
+        await settingsModel.findOneAndRemove({
           GuildID: message.guild.id
         }) 
       }
-
-      let newData = new prefixModel({
-        Prefix: args[0],
-        GuildID: message.guild.id
-      })
 
       await newData.save()
 

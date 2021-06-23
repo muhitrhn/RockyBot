@@ -27,6 +27,14 @@ module.exports = {
         prefix: cmds.commands.prefix,
         ownerID: cmds.ownerID,
         testerID: cmds.testerID,
-        activities: activities.activities
+        activities: activities.activities,
+        BetaClientSecret: process.env.BETAclientSECRET,
+        clientSecret: process.env.clientSECRET
+    },
+
+    dashboard: {
+      domain: 'https://discord-bot-rocky.herokuapp.com/',
+      port: 8080,
+      usingCustomDomain: false
     }
 }

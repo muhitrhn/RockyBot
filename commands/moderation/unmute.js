@@ -1,6 +1,6 @@
 const { MessageButton, MessageActionRow } = require('discord-buttons')
 const { MessageEmbed } = require('discord.js')
-const mutedSchema = require('../../models/mutedRole')
+const mutedSchema = require('../../models/settings')
 
 module.exports = {
   name: 'unmute',
@@ -49,7 +49,7 @@ module.exports = {
       let role
       if(data) role = await message.guild.roles.cache.get(data.Role)
 
-      if(!data) {
+      if(!role) {
         embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
         .setDescription(`**...roli wyciszenia, użyj \`${pf}gomr [wzmianka/id roli]\`, aby ustawić rolę**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])

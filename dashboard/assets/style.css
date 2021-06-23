@@ -1,0 +1,15 @@
+/* 
+  Style.css file is linked in the header template, therefore
+  it is applied to every page of our application.
+  Write some style to begin.
+*/
+nav {
+  background-color: black;
+}
+
+
+body {
+  background-image: url('./images/background-mainSite.png');
+  background-size: auto;
+  background-position: center;
+}

@@ -1,0 +1,40 @@
+<%- include("partials/header", { bot, user, path, title: "Home" }) %>
+
+<div class="container-sm" style="margin-top: 25px">
+<center>
+  <div style="max-width: 12rem; border-radius: 40px; min-height: 12em; max-height: 12em; background-color: black;">
+    <img src="<%= bot.user.displayAvatarURL() %>" style="border-radius: 25px; min-width: 10em; margin-top: 1em;">
+  </div>
+  <br />
+  <div class="card d-grid gap-2 col-20 mx-auto text-white" style="background-color: rgb(9, 66, 83); max-height: 20pc; max-width: 40pc; border-radius: 20px;">
+    <h2 class="card-body"><b>Witaj na stronie głównej Rocky Bota!</b></h2>
+    <p class="card-description"><i>Użyj przycisku poniżej, aby dodać bota na serwer.</i></p>
+  </div>
+  <br />
+  <a class="btn btn-danger text-white" style="border-radius: 30px; min-width: 25em;" href="<%= `https://discord.com/api/oauth2/authorize?client_id=${bot.myID}&permissions=8&scope=bot%20applications.commands` %>">🚀 Zaproś bota</a>
+</center>
+</div>
+<br />
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+  <div class="column">
+    <div class="card" style="justify-content: center; max-width: 18em; margin: 2pc; min-width: 18em; min-height: 24em; border-radius: 45px;">
+      <center>      
+        <h5>🎪 Bot jest open source</h5>
+        <img src="./images/github.png" class="card-image" style="border-radius: 20px; max-width: 15em; min-width: 15em; margin-top: 1em;"><br /><br />
+        <a href="<%= bot.config.github %>" class=" btn btn-info text-white" style="border-radius: 30px">GitHub</a>
+      </center>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card" style="justify-content: center; max-width: 18em; margin: 2pc; min-width: 18em; min-height: 24em; border-radius: 45px; float: right;">
+      <center>      
+      <h5>🖥️ Panel z opcjami</h5>
+      <img src="./images/panel.png" class="card-image" style="border-radius: 20px; max-width: 15em; min-width: 15em; margin-top: 1em;"><br /><br />
+      <a href="/dashboard" class=" btn btn-info text-white" style="border-radius: 30px">Panel</a>
+    </center>
+    </div>
+  </div>
+</div>
+
+
+<%- include("partials/footer") %>

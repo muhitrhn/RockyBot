@@ -4,13 +4,11 @@ const discord = require('discord.js')
 const chalk = require('chalk')
 const mongoose = require('mongoose')
 
-// WebUI
-// require(./app)
-
 require('discord-reply')
 const client = new discord.Client({ disableMentions: 'everyone' })
 const disbut = require('discord-buttons')
 disbut(client)
+require('./dashboard/dashboard')
 
 discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
 
