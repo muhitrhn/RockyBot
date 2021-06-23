@@ -34,7 +34,7 @@ module.exports = {
 
     dashboard: {
       domain: 'https://discord-bot-rocky.herokuapp.com',
-      port: process.env.PORT,
+      port: 80,
       usingCustomDomain: false
     }
 }
