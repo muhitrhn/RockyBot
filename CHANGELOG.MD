@@ -1,5 +1,18 @@
 # 🟢 0.24
 
+🟢 **Patch 1**
+
+|✨ Prefix i mutedRole|
+|---------------------|
+|📗 `Komendy nie sypią błędami i znów są dostepne tylko dla użytkowników z odpowiednimi uprawnieniami`|
+
+🟢 **Hotfix 1**
+
+|✨ Dashboard|
+|---------------------|
+|📗 `Dashboard się wyświetla`|
+|📗 `Można bez problemu się zalogować`|
+
 🟢 **Pierwsze wydanie**
 
 |✨ Dashboard|✨ Połączenie z bazą danych|
