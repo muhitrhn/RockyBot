@@ -20,7 +20,7 @@ module.exports = {
 
       if(!message.member.hasPermission('MANAGE_GUILD') && !client.ownerID.includes(message.author.id)) {
         const missingPerms = 'ZARZĄDZANIE SERWEREM'
-        await client.base.get('check').missingPerms(client, message, reaction, missingPerms)
+        await client.base.get('check').missingPerms(client, message, args, pf, cmd, reaction, missingPerms)
         return;
       }
 
