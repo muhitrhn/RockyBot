@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 		const embed = new MessageEmbed()
 		.setColor('YELLOW')
 		.setTitle(`${client.emotes.lightSabers} Cześć, tu RockyBot `)
-		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n**${client.emotes.staff} Moja strona: ${client.config.dashURL}**\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
+		.setDescription(`${client.emotes.grverify} Mój prefix na tym serwerze to \`${prefix}\`\n${client.emotes.world} Użyj \`${prefix}help\` aby wyświetlić listę komend\n\n**${client.emotes.staff} Moja strona: ${client.dashURL}**\n**${client.emotes.gearspin} Made by [ME](https://discord.com/users/${client.config.author})**`)
 		.setThumbnail(client.cmds.pingImg)
     .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
 		message.lineReply({embed: embed})
