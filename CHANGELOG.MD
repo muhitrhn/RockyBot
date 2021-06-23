@@ -1,5 +1,11 @@
 # 🟢 0.23
 
+🟢 **Patch 2**
+
+|✨ Komenda warnlist|
+|---------------------|
+|📗 `Przeniesiono do kategorii info`|
+
 🟢 **Patch 1**
 
 |✨ Silnik warnów|

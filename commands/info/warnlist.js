@@ -6,7 +6,7 @@ module.exports = {
   name: 'warnlist',
   aliases: ['mwl'],
   description: 'Wyświetl ostrzeżenia',
-  category: 'moderation',
+  category: 'info',
   utilisation: '{prefix}mwl [wzmianka/id]',
   async execute(client, message, args, pf, cmd) {
     const reaction = await client.base.get('cmd').start(client, message, cmd)
