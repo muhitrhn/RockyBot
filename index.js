@@ -8,7 +8,6 @@ require('discord-reply')
 const client = new discord.Client({ disableMentions: 'everyone' })
 const disbut = require('discord-buttons')
 disbut(client)
-require('./dashboard/dashboard')
 
 discord.Constants.DefaultOptions.ws.properties.$browser = 'Discord Android'
 
@@ -70,7 +69,7 @@ for (const file of events) {
 const modules = fs.readdirSync('./commands/base').filter(file => file.endsWith('.js'))
 
 for (const file of modules) {
-  console.log(chalk.greenBright(`Załadowano bazowy moduł ${file}`))
+  console.log(chalk.blueBright(`Załadowano bazowy moduł ${file}`))
   const module = require(`./commands/base/${file}`)
   client.base.set(module.name, module)
 }

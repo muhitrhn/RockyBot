@@ -2,6 +2,12 @@
 
 🟢 **Patch 1**
 
+|✨ Dashboard|
+|---------------------|
+|📗 `Dashboard ma teraz oddzielny hosting, przez co można aktualizować go oddzielnie` (zobacz [DASHBOARD](https://github.com/Bajojajo-xD/RockyBotDash))|
+
+🟢 **Patch 1**
+
 |✨ Prefix i mutedRole|
 |---------------------|
 |📗 `Komendy nie sypią błędami i znów są dostepne tylko dla użytkowników z odpowiednimi uprawnieniami`|
