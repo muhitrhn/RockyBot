@@ -31,7 +31,7 @@ module.exports = {
         const ownerOnly = client.commands.filter(x => x.category == 'owner-only').map((x) => '`' + x.name + '`').join(client.emotes.yellowDot)
 
         embed.addField('🤿  Avatar', avatar)
-        .addField('🤣  Beka', fun)
+        .addField('🤣  Fun', fun)
         .addField(`${emotes.ubuntu}  Info`, info)
         .addField(`${emotes.nitro}  Nitro`, nitro)
         if(message.member.hasPermission('MANAGE_MESSAGES')){

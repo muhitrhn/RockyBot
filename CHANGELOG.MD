@@ -1,5 +1,11 @@
 # 🟢 0.24
 
+🟢 **Patch 3**
+
+|✨ Komenda help|
+|---------------------|
+|📗 `Zmiana nazwy kategorii "beka" na "fun", teraz komendy mają alias rozpoczynający się "f" zamiast "b"`|
+
 🟢 **Patch 2**
 
 |✨ Dashboard|
