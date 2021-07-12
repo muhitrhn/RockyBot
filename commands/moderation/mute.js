@@ -57,7 +57,7 @@ module.exports = {
       })
 
       let role
-      if(data) role = await message.guild.roles.cache.get(data.Role)
+      if(data) role = await message.guild.roles.cache.get(data.MutedRole)
 
       if(!role) {
         embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)

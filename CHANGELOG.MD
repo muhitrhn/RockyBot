@@ -1,5 +1,11 @@
 # 🟢 0.24
 
+🟢 **Patch 4**
+
+|✨ Komenda mute|
+|---------------------|
+|📗 `Naprawiono`|
+
 🟢 **Patch 3**
 
 |✨ Komenda help|
