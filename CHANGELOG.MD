@@ -1,5 +1,11 @@
 # 🟢 0.24
 
+🟢 **Patch 5**
+
+|✨ Komenda unmute|✨ Bot|
+|---------------------|---------------------|
+|📗 `Naprawiono`|📗 `Zaktualizowano paczki`|
+
 🟢 **Patch 4**
 
 |✨ Komenda mute|

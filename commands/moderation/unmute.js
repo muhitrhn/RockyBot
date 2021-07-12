@@ -58,7 +58,7 @@ module.exports = {
         return
       }
 
-      if (!mentioned.roles.cache.some(role => role.id === data.Role)) {
+      if (!mentioned.roles.cache.some(role => role.id === data.MutedRole)) {
         embed.setTitle(`${client.emotes.warn}  Użytkownik nie jest wyciszony,...`)
         .setDescription(`**...użyj \`${pf}mm ${mentioned.id}\` aby go wyciszyć**`)
         .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
