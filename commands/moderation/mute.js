@@ -68,7 +68,7 @@ module.exports = {
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           .setColor('#FFC000')
 
-        return interaction.reply({embed: embed, ephemeral: true})
+        return interaction.reply({embeds: [embed], ephemeral: true})
       }
 
       await interaction.defer()
@@ -145,7 +145,7 @@ module.exports = {
               embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
             }
 
-          return interaction.editReply({embeds: [embed]})
+          return interaction.editReply({embeds: [embed], components: []})
         }
       })
     } catch (err) {
