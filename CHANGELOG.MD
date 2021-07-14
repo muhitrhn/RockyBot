@@ -1,5 +1,10 @@
 # 🟢 0.30
 
+🟢 **Patch 2**
+|✨ Komenda mute i unmute|
+|--------------------------|
+|📗 `Naprawiono wyciszenie i odciszenie`|
+
 🟢 **Patch 1**
 
 |✨ Bot|✨ Komenda meme|✨ Ping bota|

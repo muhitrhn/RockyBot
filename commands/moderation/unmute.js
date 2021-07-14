@@ -44,14 +44,13 @@ module.exports = {
 
       if(!role) {
         embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
-          .setDescription('**...roli wyciszenia, użyj `/mutedrole` jeśli masz uprawnienie \'ZARZĄDZANIE SERWEREM\', aby ustawić rolę**')
+          .setDescription('**...roli wyciszenia, użyj `/settings mutedrole` jeśli masz uprawnienie \'ZARZĄDZANIE SERWEREM\', aby ustawić rolę**')
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           .setColor('#FFC000')
 
         return interaction.reply({embeds: [embed], ephemeral: true})
       }
 
-      await mentioned.roles.fetch()
       if (!mentioned.roles.cache.some(role => role.id === data.Role)) {
         embed.setTitle(`${client.emotes.warn}  Użytkownik nie jest wyciszony,...`)
           .setDescription('**...użyj `/mute` aby go wyciszyć**')
