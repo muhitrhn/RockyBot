@@ -1,37 +1,33 @@
-const { MessageButton } = require('discord-buttons')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 
 module.exports = {
-  name: 'changelog',
-  aliases: ['ic'],
-  description: 'Pokaż changelog',
-  category: 'info',
-  utilisation: '{prefix}ic',
-  async execute(client, message, args, pf, cmd) {
 
-    const reaction = await client.base.get('cmd').start(client, message, cmd)
-
+  async execute(client, interaction) {
     try {
+      await interaction.defer()
+
       let changes = []
-      const messages = await client.channels.cache.get(client.cmds.ChangesChannel).messages.fetch(1)
-      await messages.forEach(msg => changes.push(msg.content))
+      await client.channels.cache.get(client.cmds.ChangesChannel).messages.fetch(1).then(async msgs => msgs.forEach(msg => changes.push(msg.content)))
 
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
-      .setColor('RANDOM')
-      .setTitle(`${client.emotes.cpu}  Używana wersja: ${client.version}`)
-      .setThumbnail(client.cmds.infoImgs.changelog)
-      const button = new MessageButton()
-      .setLabel('CHANGELOG')
-      .setStyle('url')
-      .setEmoji(client.emotes.changelog_ID)
-      .setURL(client.config.changelog)
-      if (changes[0]) embed.addField('🛠️ Aktualne prace:', `${changes[0]}`)
+        .setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
+        .setColor('RANDOM')
+        .setTitle(`${client.emotes.cpu}  Używana wersja: ${client.version}`)
+        .setThumbnail(client.cmds.infoImgs.changelog)
+        if (changes[0]) embed.addField('🛠️ Aktualne prace:', `${changes[0]}`)
 
-      await reaction.edit({embed: embed, component: button})
+      const button = new MessageButton()
+        .setStyle('LINK')
+        .setEmoji(client.emotes.changelog_ID)
+        .setLabel('CHANGELOG')
+        .setURL(client.config.changelog)
+
+      const buttonRow = new MessageActionRow().addComponents([button])
+
+      return await interaction.editReply({embeds: [embed], components: [buttonRow]})
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
   }
 }

@@ -2,33 +2,23 @@ const { MessageEmbed } = require('discord.js')
 const DIG = require('discord-image-generation')
 
 module.exports = {
-  name: 'delete',
-  aliases: ['ad'],
-  description: '"Usuń" kogoś XD',
-  category: 'avatar',
-  utilisation: '{prefix}ad <wzmianka/id>',
-  async execute(client, message, args, pf, cmd) {
-
-    const reaction = await client.base.get('cmd').start(client, message, cmd)
-
+  
+  async execute(client, interaction) {
     try {
-      const embed = new MessageEmbed()
-      .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
+      await interaction.defer()
 
-      const mentioned = await client.base.get('check').user(client, message, args)
+      const mentioned = interaction.options.map(x => x.options)[0] ? interaction.options.map(x => x.options)[0].map(x => x.user)[0] : interaction.user
 
-      //Create DIG image and attach
       const CreateAv = await new DIG.Delete().getImage(`${mentioned.displayAvatarURL({ dynamic: false, format: 'png' })}?size=4096`)
 
-      await message.lineReplyNoMention({embed: embed, files: [CreateAv]})
-      
-      //Ready
-      await reaction.delete() 
+      const embed = new MessageEmbed()
+        .setColor('RANDOM')
+        .setFooter(`💡 ${mentioned.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.displayAvatarURL({dynamic: true}))
 
+      return interaction.editReply({embeds: [embed], files: [CreateAv]})
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
   }
 }

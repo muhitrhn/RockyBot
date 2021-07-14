@@ -1,41 +1,28 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: 'emoji',
-  aliases: ['ne'],
-  description: 'Wysyła emoji o podanej nazwie',
-  category: 'nitro',
-  utilisation: '{prefix}ne [nazwa emoji]',
-  async execute(client, message, args, pf, cmd) {
-    
-    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
+  async execute(client, interaction) {
     try {
       const embed = new MessageEmbed()
-      .setColor('RANDOM')
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
+        .setColor('RANDOM')
+        .setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
-      if(!args[0]) {
-        embed.setTitle(`${client.emotes.world}  Nie napisałeś, jakiego emoji użyć`)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
-        return
-      } 
-
-      let emoji = await client.emojis.cache.find(emojii => emojii.name.toLowerCase().includes(args[0].toLowerCase()))
+      let emoji = await client.emojis.cache.find(emojii => emojii.name.toLowerCase().includes(interaction.options.map(x => x.options)[0].map(x => x.value)[0].toLowerCase()))
 
       if (!emoji) {
-        embed.setTitle(`${client.emotes.world}  Nie znaleziono emoji o nazwie \`${args[0]}\``)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setColor('#FFC000')
-        await reaction.edit({embed: embed})
-        return
+        embed.setTitle(`${client.emotes.world}  Nie znaleziono emoji o nazwie \`${interaction.options.map(x => x.options)[0].map(x => x.value)[0].toLowerCase()}\``)
+          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+          .setColor('#FFC000')
+
+        return interaction.reply({embeds: [embed], ephemeral: true})
       }
 
+      await interaction.defer()
+
       //WebhksChk
-      const webhooks = await message.channel.fetchWebhooks()
-      let myWebhooks = await webhooks.filter(wbhk => wbhk.owner.id == client.user.id)
+      const webhooks = await interaction.channel.fetchWebhooks()
+      let myWebhooks = await webhooks.filter(wbhk => wbhk.owner.id === client.user.id)
       let webhksCheck
       if (!myWebhooks.first()) {
         webhksCheck = 0
@@ -47,26 +34,26 @@ module.exports = {
       let webhook
       if (webhksCheck === 0) {
         //Create webhook
-        webhook = await message.channel.createWebhook(message.author.username, { avatar: message.author.displayAvatarURL() })
+        webhook = await interaction.channel.createWebhook(interaction.user.username, { avatar: interaction.user.displayAvatarURL() })
       }
       else {
         //Edit webhook
         webhook = await myWebhooks.first().edit({
-        name: message.author.username,
-        avatar: message.author.displayAvatarURL()
+          name: interaction.user.username,
+          avatar: interaction.user.displayAvatarURL()
         })
       }
 
       await webhook.send(emoji.toString())
 
       embed.setTitle(`${client.emotes.nitro} Wysłano emoji...`)
-      .setDescription(`**...o nazwie \`${emoji.name}\`**`)
-      .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
-      await reaction.edit({embed: embed})
+        .setDescription(`**...o nazwie \`${emoji.name}\`**`)
+        .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])
 
+      return interaction.editReply({embeds: [embed]})
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
   }
 }

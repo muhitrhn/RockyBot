@@ -2,18 +2,16 @@ module.exports = {
 
     beta: false,
 
+    deleteCommandsFirst: true,
+    refreshDiscordCmds: true,
+
     ownerID: ['643084165209784331'
             ],
     testerID: [''
             ],
 
-    
-
     commands: {
         ChangesChannel: '851491557160124452',
-        prefix: '.',
-        betaPrefix: '!',
-        BugReportChannel: '855759589201936404',
 
         attachments: {
             wideo: '845271742637539358',

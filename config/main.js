@@ -5,6 +5,11 @@ const cmds = require('./cmds')
 require('dotenv').config()
 
 module.exports = {
+
+    deleteCommandsFirst: cmds.deleteCommandsFirst,
+    refreshDiscordCmds: cmds.refreshDiscordCmds,
+
+
     cmds: cmds.commands,
 
     emotes: emotes,

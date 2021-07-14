@@ -22,10 +22,9 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
-    "discord-buttons": "3.x",
+    "discord-api-types": "^0.19.0-next.4a83629.1626224118",
     "discord-image-generation": "^1.4.9",
-    "discord-reply": "^0.1.2",
-    "discord.js": "^12.5.3",
+    "discord.js": "discordjs/discord.js",
     "dotenv": "^10.0.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
@@ -38,6 +37,6 @@
     "pretty-ms": "^7.0.1"
   },
   "devDependencies": {
-    "eslint": "^7.29.0"
+    "eslint": "^7.30.0"
   }
 }

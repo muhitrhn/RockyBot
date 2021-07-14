@@ -2,16 +2,11 @@ const { MessageEmbed, MessageAttachment } = require('discord.js')
 const got = require('got')
 
 module.exports = {
-  name: 'meme',
-  aliases: ['mem', 'fm'],
-  description: 'Losowy mem',
-  category: 'fun',
-  utilisation: '{prefix}fm',
-  async execute(client, message, args, pf, cmd) {
-    
-    const reaction = await client.base.get('cmd').start(client, message, cmd)
 
+  async execute(client, interaction) {
     try {
+      await interaction.defer()
+
       let memeUrl, memeImage, memeTitle, memeUpvotes, memeNumComments
       await got('https://www.reddit.com/r/memes/random/.json')
       .then(async response => {
@@ -25,20 +20,18 @@ module.exports = {
         memeUpvotes = post.data.ups
         memeNumComments = post.data.num_comments
       })
+      const attachment = new MessageAttachment(memeImage, 'image.gif')
 
-        const attachment = new MessageAttachment(memeImage, 'image.gif')
-        const embed = new MessageEmbed()
+      const embed = new MessageEmbed()
         .setColor('RANDOM')
         .setTitle(`${memeTitle}\n👍 ${memeUpvotes} 💬 ${memeNumComments}`)
         .setURL(memeUrl)
-        .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
-        await message.lineReplyNoMention({embed, files: [attachment] })
-
-      //Ready
-      await reaction.delete()
+        .setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
+      
+      return interaction.editReply({embeds: [embed], files: [attachment]})
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
   }
 }

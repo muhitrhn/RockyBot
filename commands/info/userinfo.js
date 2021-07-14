@@ -1,214 +1,202 @@
-const { MessageActionRow, MessageButton } = require('discord-buttons')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector } = require('discord.js')
 
 module.exports = {
-  name: 'userinfo',
-  aliases: ['iui', 'iu', 'ia', 'iai', 'accountinfo'],
-  description: 'Info o użytkowniku',
-  category: 'info',
-  utilisation: '{prefix}iui <wzmianka/id>',
 
-  async execute(client, message, args, pf, cmd) {
-
-    const reaction = await client.base.get('cmd').start(client, message, cmd)
-
+  async execute(client, interaction) {
     try {
+      await interaction.defer()
 
-      const mention = await client.base.get('check').user(client, message, args)
-      const mentionMember = await client.base.get('check').member(client, message, args)
+      const mentioned = interaction.options.map(x => x.options)[0] ? interaction.options.map(x => x.options)[0].map(x => x.member)[0] : interaction.member
 
-      client.commands.get('userinfo').main(client, message, mention, reaction, mentionMember, pf, cmd)
-      return
+      return client.commands.get('infouserinfo.js').main(client, interaction, mentioned)
     } catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
+
   },
 
-  async main(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+  async main(client, interaction, mentioned, bt, color) {
     try {
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
-      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
-      .setTitle(`💻  Użytkownik ${mention.tag}`)
-      if (!color) {embed.setColor('RANDOM')} else {embed.setColor(color)}
-      const embedColor = embed.color
-      embed.setDescription([
-        `🛡️ **${mention}**`,
-        `📎 ID: **${mention.id}**`,
-        mentionMember.nickname ? `${client.emotes.grverify} Nick: **${mentionMember.nickname}**\n` : '',
-        `⏲️ Konto założone (UTC): **${mention.createdAt.getUTCHours()}:${(mention.createdAt.getUTCMinutes()<10?'0':'')+parseInt(mention.createdAt.getUTCMinutes())}┇${(mention.createdAt.getUTCDate()<10?'0':'')+parseInt(mention.createdAt.getUTCDate())}.${((mention.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(mention.createdAt.getUTCMonth()+1)}.${mention.createdAt.getUTCFullYear()}**`,
-        `${client.emotes.world} Dołączono do serwera (UTC): **${mentionMember.joinedAt.getUTCHours()}:${(mentionMember.joinedAt.getUTCMinutes()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMinutes())}┇${(mentionMember.joinedAt.getUTCDate()<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCDate())}.${((mentionMember.joinedAt.getUTCMonth()+1)<10?'0':'')+parseInt(mentionMember.joinedAt.getUTCMonth()+1)}.${mentionMember.joinedAt.getUTCFullYear()}**`
-      ])
+        .setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
+        .setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }))
+        .setTitle(`💻  Użytkownik ${mentioned.user.tag}`)
+        .setDescription(
+          `🛡️ **${mentioned}**` + '\n' +
+          `📎 ID: **${mentioned.user.id}**` + '\n' + 
+          `${mentioned.nickname ? `${client.emotes.grverify} Nick: **${mentioned.nickname}**\n` : ''}` + '\n' +
+          `⏲️ Konto założone (UTC): **${mentioned.user.createdAt.getUTCHours()}:${(mentioned.user.createdAt.getUTCMinutes()<10?'0':'')+parseInt(mentioned.user.createdAt.getUTCMinutes())}┇${(mentioned.user.createdAt.getUTCDate()<10?'0':'')+parseInt(mentioned.user.createdAt.getUTCDate())}.${((mentioned.user.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(mentioned.user.createdAt.getUTCMonth()+1)}.${mentioned.user.createdAt.getUTCFullYear()}**` + '\n' +
+          `${client.emotes.world} Dołączono do serwera (UTC): **${mentioned.joinedAt.getUTCHours()}:${(mentioned.joinedAt.getUTCMinutes()<10?'0':'')+parseInt(mentioned.joinedAt.getUTCMinutes())}┇${(mentioned.joinedAt.getUTCDate()<10?'0':'')+parseInt(mentioned.joinedAt.getUTCDate())}.${((mentioned.joinedAt.getUTCMonth()+1)<10?'0':'')+parseInt(mentioned.joinedAt.getUTCMonth()+1)}.${mentioned.joinedAt.getUTCFullYear()}**`
+        )
+        color ? embed.setColor(color) : embed.setColor('RANDOM'); const embedColor = embed.color
 
-      const button = new MessageButton()
-      if (mentionMember.permissions.has('ADMINISTRATOR')) {
-        button.setLabel('Administrator')
-        .setStyle('red')
-        .setEmoji(client.emotes.grverify_ID)
-        .setID('ch_perms')
-        .setDisabled()
-        await reaction.edit({embed: embed, component: button})
-        return
+      if (mentioned.permissions.has('ADMINISTRATOR')) {
+        const button = new MessageButton()
+          .setLabel('Administrator')
+          .setStyle('DANGER')
+          .setEmoji(client.emotes.grverify_ID)
+          .setCustomId('ch_perms')
+          .setDisabled(true)
+
+        const messageRow = new MessageActionRow().addComponents([button])
+
+        return interaction.editReply({embeds: [embed], components: [messageRow]})
       } 
-      else {
-        button.setLabel('Permisje kanału')
-        .setStyle('blurple')
+      
+      const button = new MessageButton()
+        .setLabel('Permisje kanału')
+        .setStyle('PRIMARY')
         .setEmoji('⚒️')
-        .setID('ch_perms')
-        const button2 = new MessageButton()
+        .setCustomId('ch_perms')
+
+      const button2 = new MessageButton()
         .setLabel('Permisje globalne')
-        .setStyle('green')
+        .setStyle('SUCCESS')
         .setEmoji('🛠️')
-        .setID('glob_perms')
-        const buttonRow = new MessageActionRow()
-        .addComponent(button)
-        .addComponent(button2)
-        await reaction.edit({embed: embed, component: buttonRow})
-      }
+        .setCustomId('glob_perms')
+
+      const messageRow = new MessageActionRow().addComponents([button, button2])
+
       // eslint-disable-next-line no-empty
-      try {await bt.defer()} catch (err) {}
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'ch_perms'
-      const filter2 = (button) => button.clicker.user.id === message.author.id && button.id === 'glob_perms'
-      const filter3 = (button) => button.clicker.user.id !== message.author.id
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
-      const collector3 = reaction.createButtonCollector(filter3, { time: 30000, dispose: true })
+      try {await bt.deferUpdate()} catch (err) {} 
 
+      const reply = await interaction.editReply({embeds: [embed], components: [messageRow]})
+
+      const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
       collector.on('collect', async buttonClick => {
-        await collector.stop()
-        await collector2.stop()
-        await collector3.stop()
-        await client.commands.get('userinfo').chPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
-        return
-      })
+        if (buttonClick.user.id !== interaction.user.id) {
+          const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
+          
+          await buttonClick.reply.send({ embeds: [replyEmbed], ephemeral: true })
+        } 
+        else if (buttonClick.customId === 'ch_perms') {
+          collector.stop()
 
-      collector2.on('collect', async buttonClick => {
-        await collector.stop()
-        await collector2.stop()
-        await collector3.stop()
-        await client.commands.get('userinfo').globPerms(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, embedColor)
-        return
-      })
+          return client.commands.get('infouserinfo.js').chPerms(client, interaction, mentioned, buttonClick, embedColor)
+        } 
+        else if (buttonClick.customId === 'glob_perms') {
+          collector.stop()
 
-      collector3.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
-        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+          return client.commands.get('infouserinfo.js').globPerms(client, interaction, mentioned, buttonClick, embedColor)
+        }
       })
-    } 
+    }
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
 
   },
 
-  async chPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+  async chPerms(client, interaction, mentioned, bt, color) {
     try {
+      const perms = [
+        (mentioned.permissionsIn(interaction.channel).has('VIEW_CHANNEL') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie kanału',
+        (mentioned.permissionsIn(interaction.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości',
+        (mentioned.permissionsIn(interaction.channel).has('ADD_REACTIONS') ? client.emotes.grverify : client.emotes.rverify) +  ' Dodawanie reakcji',
+        (mentioned.permissionsIn(interaction.channel).has('SEND_TTS_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości TTS',
+        (mentioned.permissionsIn(interaction.channel).has('ATTACH_FILES') ? client.emotes.grverify : client.emotes.rverify) +  ' Załączanie plików',
+        (mentioned.permissionsIn(interaction.channel).has('READ_MESSAGE_HISTORY') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie historii czatu',
+        (mentioned.permissionsIn(interaction.channel).has('USE_EXTERNAL_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' Używanie zewnętrznych emoji',
+        (mentioned.permissionsIn(interaction.channel).has('MENTION_EVERYONE') ? client.emotes.grverify : client.emotes.rverify) +  ' Używanie wzmianki "everyone"',
+        (mentioned.permissionsIn(interaction.channel).has('MANAGE_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie wiadomościami'
+      ]
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
-      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
-      .setTitle(`${client.emotes.warn} Uprawnienia na kanale ${message.channel.name} dla ${mention.tag}`)
-      .setColor(color)
-
-      embed.addField('📡 Uprawnienia na kanale:', [
-        (mentionMember.permissionsIn(message.channel).has('VIEW_CHANNEL') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie kanału',
-        (mentionMember.permissionsIn(message.channel).has('SEND_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości',
-        (mentionMember.permissionsIn(message.channel).has('ADD_REACTIONS') ? client.emotes.grverify : client.emotes.rverify) +  ' Dodawanie reakcji',
-        (mentionMember.permissionsIn(message.channel).has('SEND_TTS_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Wysyłanie wiadomości TTS',
-        (mentionMember.permissionsIn(message.channel).has('ATTACH_FILES') ? client.emotes.grverify : client.emotes.rverify) +  ' Załączanie plików',
-        (mentionMember.permissionsIn(message.channel).has('READ_MESSAGE_HISTORY') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie historii czatu',
-        (mentionMember.permissionsIn(message.channel).has('USE_EXTERNAL_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' Używanie zewnętrznych emoji',
-        (mentionMember.permissionsIn(message.channel).has('MENTION_EVERYONE') ? client.emotes.grverify : client.emotes.rverify) +  ' Używanie wzmianki "everyone"',
-        (mentionMember.permissionsIn(message.channel).has('MANAGE_MESSAGES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie wiadomościami'
-      ])
+        .setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
+        .setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }))
+        .setTitle(`${client.emotes.warn} Uprawnienia na kanale ${interaction.channel.name} dla ${mentioned.user.tag}`)
+        .setColor(color)
+        .addField('📡 Uprawnienia na kanale:', perms.join('\n'))
 
       const button = new MessageButton()
-      .setLabel('Wróć')
-      .setStyle('grey')
-      .setEmoji(client.emotes.arrl_ID)
-      .setID('back')
-      await reaction.edit({embed: embed, component: button})
-      // eslint-disable-next-line no-empty
-      try {await bt.defer()} catch (err) {}
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back'
-      const filter2 = (button) => button.clicker.user.id !== message.author.id
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
+        .setLabel('Wróć')
+        .setStyle('SECONDARY')
+        .setEmoji(client.emotes.arrl_ID)
+        .setCustomId('back')
 
+      const messageRow = new MessageActionRow().addComponents([button])
+
+      await bt.deferUpdate()
+
+      const reply = await interaction.editReply({embeds: [embed], components: [messageRow]})
+      
+      const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
       collector.on('collect', async buttonClick => {
-        await collector.stop()
-        await collector2.stop()
-        await client.commands.get('userinfo').main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
-        return
+        if (buttonClick.user.id !== interaction.user.id) {
+          const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
+          
+          await buttonClick.reply.send({ embeds: [replyEmbed], ephemeral: true })
+        } 
+        else if (buttonClick.customId === 'back'){
+          collector.stop()
+          
+          return client.commands.get('infouserinfo.js').main(client, interaction, mentioned, buttonClick, color)
+        }
       })
-
-      collector2.on('collect', async buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
-        await buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
-      })
-
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      await client.base.get('cmd').error(client, interaction, err)
     }
   },
-  async globPerms(client, message, mention, reaction, mentionMember, pf, cmd, bt, color) {
+
+  async globPerms(client, interaction, mentioned, bt, color) {
     try {
+      const serverperms = [
+        (mentioned.permissions.has('BAN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Banowanie członków',
+        (mentioned.permissions.has('KICK_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyrzucanie członków',
+        (mentioned.permissions.has('VIEW_AUDIT_LOG') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie dziennika zdarzeń',
+        (mentioned.permissions.has('MANAGE_GUILD') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie serwerem',
+        (mentioned.permissions.has('MANAGE_CHANNELS') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie kanałami',
+        (mentioned.permissions.has('MANAGE_ROLES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie rolami i permisjami',
+        (mentioned.permissions.has('MANAGE_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie emoji',
+        (mentioned.permissions.has('MANAGE_NICKNAMES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie pseudonimami',
+        (mentioned.permissions.has('VIEW_GUILD_INSIGHTS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie informacji o serwerze',
+        (mentioned.permissions.has('CREATE_INSTANT_INVITE') ? client.emotes.grverify : client.emotes.rverify) +  ' Tworzenie szybkich zaproszeń'
+      ]
+      const voiceperms = [
+        (mentioned.permissions.has('CONNECT') ? client.emotes.grverify : client.emotes.rverify) +  ' Łączenie',
+        (mentioned.permissions.has('SPEAK') ? client.emotes.grverify : client.emotes.rverify) +  ' Rozmowa',
+        (mentioned.permissions.has('STREAM') ? client.emotes.grverify : client.emotes.rverify) +  ' Wideo',
+        (mentioned.permissions.has('PRIORITY_SPEAKER') ? client.emotes.grverify : client.emotes.rverify) +  ' Priorytetowy rozmówca',
+        (mentioned.permissions.has('DEAFEN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyciszanie innych użytkowników',
+        (mentioned.permissions.has('MOVE_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Przenoszenie innych użytkowników'
+      ]
       const embed = new MessageEmbed()
-      .setFooter(`💡 ${message.author.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, message.author.displayAvatarURL({dynamic: true}))
-      .setThumbnail(mention.displayAvatarURL({ dynamic: true }))
-      .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla ${mention.tag}`)
-      .setColor(color)
+        .setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
+        .setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }))
+        .setTitle(`${client.emotes.world} Uprawnienia na serwerze dla ${mentioned.user.tag}`)
+        .setColor(color)
+        .addField(`${client.emotes.staff} Zarządzanie serwerem:`, serverperms.join('\n'))
 
-      embed.addField(`${client.emotes.staff} Zarządzanie serwerem:`, [
-        (mentionMember.permissions.has('BAN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Banowanie członków',
-        (mentionMember.permissions.has('KICK_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyrzucanie członków',
-        (mentionMember.permissions.has('VIEW_AUDIT_LOG') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie dziennika zdarzeń',
-        (mentionMember.permissions.has('MANAGE_GUILD') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie serwerem',
-        (mentionMember.permissions.has('MANAGE_CHANNELS') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie kanałami',
-        (mentionMember.permissions.has('MANAGE_ROLES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie rolami i permisjami',
-        (mentionMember.permissions.has('MANAGE_EMOJIS') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie emoji',
-        (mentionMember.permissions.has('MANAGE_NICKNAMES') ? client.emotes.grverify : client.emotes.rverify) +  ' Zarządzanie pseudonimami',
-        (mentionMember.permissions.has('VIEW_GUILD_INSIGHTS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyświetlanie informacji o serwerze',
-        (mentionMember.permissions.has('CREATE_INSTANT_INVITE') ? client.emotes.grverify : client.emotes.rverify) +  ' Tworzenie szybkich zaproszeń'
-      ])
-
-      embed.addField('🗣️ Kanały głosowe', [
-        (mentionMember.permissions.has('CONNECT') ? client.emotes.grverify : client.emotes.rverify) +  ' Łączenie',
-        (mentionMember.permissions.has('SPEAK') ? client.emotes.grverify : client.emotes.rverify) +  ' Rozmowa',
-        (mentionMember.permissions.has('STREAM') ? client.emotes.grverify : client.emotes.rverify) +  ' Wideo',
-        (mentionMember.permissions.has('PRIORITY_SPEAKER') ? client.emotes.grverify : client.emotes.rverify) +  ' Priorytetowy rozmówca',
-        (mentionMember.permissions.has('DEAFEN_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Wyciszanie innych użytkowników',
-        (mentionMember.permissions.has('MOVE_MEMBERS') ? client.emotes.grverify : client.emotes.rverify) +  ' Przenoszenie innych użytkowników'
-      ])
-
+        .addField('🗣️ Kanały głosowe', voiceperms.join('\n'))
 
       const button = new MessageButton()
-      .setLabel('Wróć')
-      .setStyle('grey')
-      .setEmoji(client.emotes.arrl_ID)
-      .setID('back')
-      await reaction.edit({embed: embed, component: button})
-      // eslint-disable-next-line no-empty
-      try {await bt.defer()} catch (err) {}
-      const filter = (button) => button.clicker.user.id === message.author.id && button.id === 'back'
-      const filter2 = (button) => button.clicker.user.id !== message.author.id
-      const collector = reaction.createButtonCollector(filter, { time: 30000, dispose: true })
-      const collector2 = reaction.createButtonCollector(filter2, { time: 30000, dispose: true })
+        .setLabel('Wróć')
+        .setStyle('SECONDARY')
+        .setEmoji(client.emotes.arrl_ID)
+        .setCustomId('back')
 
-      collector.on('collect', buttonClick => {
-        collector.stop()
-        collector2.stop()
-        client.commands.get('userinfo').main(client, message, mention, reaction, mentionMember, pf, cmd, buttonClick, color)
-        return
-      })
+      const messageRow = new MessageActionRow().addComponents([button])
+      
+      await bt.deferUpdate()
 
-      collector2.on('collect', buttonClick => {
-        const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® Reply Engine 2021`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
-        buttonClick.reply.send({ embed: replyEmbed, ephemeral: true })
+      const reply = await interaction.editReply({embeds: [embed], components: [messageRow]})
+
+      const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
+      collector.on('collect', async buttonClick => {
+        if (buttonClick.user.id !== interaction.user.id) {
+          const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.clicker.user.displayAvatarURL({dynamic: true}))
+          
+          await buttonClick.reply.send({ embeds: [replyEmbed], ephemeral: true })
+        } 
+        else if (buttonClick.customId === 'back'){
+          collector.stop()
+          
+          return client.commands.get('infouserinfo.js').main(client, interaction, mentioned, buttonClick, color)
+        }
       })
     } 
     catch (err) {
-      await client.base.get('cmd').error(client, message, pf, cmd, reaction, err)
+      return client.base.get('cmd').error(client, interaction, err)
     }
   }
 }

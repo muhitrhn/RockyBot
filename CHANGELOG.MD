@@ -1,3 +1,12 @@
+# 🟢 0.30
+
+🟢 **Pierwsze wydanie**
+
+|✨ Bot|✨ Komendy|✨ Aktualizacje|
+|---------------------|---------------------|---------------------|
+|📗 `Przeprojektowany bot`|📗 `Przeniesiono wszystkie komendy do slash komend`|📗 `discord.js 12 => 13`|
+|                        |                                            |📗 `discord-buttons i discord-reply usunięte, nowe discord.js wspiera funkcje natywnie`
+
 # 🟢 0.24
 
 🟢 **Patch 5**
