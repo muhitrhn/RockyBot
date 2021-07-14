@@ -1,9 +1,9 @@
 # 🟢 0.30
 
 🟢 **Patch 2**
-|✨ Komenda mute i unmute|
-|--------------------------|
-|📗 `Naprawiono wyciszenie i odciszenie`|
+|✨ Komenda mute i unmute|✨ Komendy z kategorii moderation|
+|--------------------------|--------------------------|
+|📗 `Naprawiono wyciszenie i odciszenie`|📗 `Kategoria moderation => mod`|
 
 🟢 **Patch 1**
 

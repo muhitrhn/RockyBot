@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'moderation',
+  name: 'mod',
 
   async redirect(client, interaction) {
     let command
@@ -14,7 +14,7 @@ module.exports = {
 
   createCMD(client) {
     client.application.commands.create({
-      name: 'moderation',
+      name: 'mod',
       description: 'Kategoria moderacja',
       options: [
 

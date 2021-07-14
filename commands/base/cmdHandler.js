@@ -61,9 +61,9 @@ module.exports = {
       }
     })
 
-      const commands = fs.readdirSync('./commands/moderation/warn').filter(files => files.endsWith('.js') && !files.startsWith('.'))
+      const commands = fs.readdirSync('./commands/mod/warn').filter(files => files.endsWith('.js') && !files.startsWith('.'))
       for (const file of commands) {
-        const command = require(`../moderation/warn/${file}`)
+        const command = require(`../mod/warn/${file}`)
         await client.commands.set(`moderationwarn${file}`, command)
       }
     

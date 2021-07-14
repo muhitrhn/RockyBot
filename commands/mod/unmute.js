@@ -51,9 +51,9 @@ module.exports = {
         return interaction.reply({embeds: [embed], ephemeral: true})
       }
 
-      if (!mentioned.roles.cache.some(role => role.id === data.Role)) {
+      if (!mentioned.roles.cache.some(role => role.id === data.MutedRole)) {
         embed.setTitle(`${client.emotes.warn}  Użytkownik nie jest wyciszony,...`)
-          .setDescription('**...użyj `/mute` aby go wyciszyć**')
+          .setDescription('**...użyj `/moderation mute` aby go wyciszyć**')
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           .setColor('#FFC000')
           
@@ -117,7 +117,7 @@ module.exports = {
               .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), rola wyciszenia jest wyższa od mojej, jeśli masz odpowiednie uprawnienia, przestaw w ustawieniach moją rolę ponad rolę wyciszenia**`)
               .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
               .setColor('#FFC000')
-            return interaction.editReply({embeds: [embed]})
+            return interaction.editReply({embeds: [embed], components: []})
           }
 
           embed.setTitle(`${client.emotes.staff}  Odciszono użytkownika...`)

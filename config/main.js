@@ -6,8 +6,8 @@ require('dotenv').config()
 
 module.exports = {
 
-    deleteCommandsFirst: cmds.deleteCommandsFirst,
-    refreshDiscordCmds: cmds.refreshDiscordCmds,
+    deleteCommandsFirst: info.deleteCommandsFirst,
+    refreshDiscordCmds: info.refreshDiscordCmds,
 
 
     cmds: cmds.commands,

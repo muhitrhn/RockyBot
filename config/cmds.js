@@ -2,9 +2,6 @@ module.exports = {
 
     beta: false,
 
-    deleteCommandsFirst: false,
-    refreshDiscordCmds: false,
-
     ownerID: ['643084165209784331'
             ],
     testerID: [''
