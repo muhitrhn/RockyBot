@@ -9,7 +9,7 @@ module.exports = {
 
       const mentioned = interaction.options.map(x => x.options)[0].map(x => x.options)[0] ? interaction.options.map(x => x.options)[0].map(x => x.options)[0].map(x => x.member)[0] : interaction.member
 
-      return client.commands.get('moderationwarnlist.js').list(client, interaction, mentioned)
+      return client.commands.get('modwarnlist.js').list(client, interaction, mentioned)
     }
     catch (err) {
       return client.base.get('cmd').error(client, interaction, err)
@@ -95,13 +95,13 @@ module.exports = {
           collector.stop()
           
           const pageToProv = page + 1
-          return client.commands.get('moderation/warnlist').list(client, interaction, mentioned, pageToProv, buttonClick, embed.color)
+          return client.commands.get('modwarnlist').list(client, interaction, mentioned, pageToProv, buttonClick, embed.color)
         } 
         else if (buttonClick.customId === 'back') {
           collector.stop()
 
           const pageToProv = page - 1
-          return client.commands.get('moderation/warnlist').list(client, interaction, mentioned, pageToProv, buttonClick, embed.color)
+          return client.commands.get('modwarnlist').list(client, interaction, mentioned, pageToProv, buttonClick, embed.color)
         }
       })
     }
