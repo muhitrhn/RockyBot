@@ -1,34 +1,15 @@
-const { MessageEmbed } = require("discord.js")
-
 module.exports = {
   name: 'moderation',
 
   async redirect(client, interaction) {
-    try {
-      let command
-      if (interaction.options.map(x => x.name)[0] === 'warn') {
-        command = require('./warn/'+ interaction.options.map(x => x.options)[0].map(x => x.name)[0])
-      } 
-      else {
-        command = require('./' + interaction.options.map(x => x.name)[0])
-      }
-      await command.execute(client, interaction)
+    let command
+    if (interaction.options.map(x => x.name)[0] === 'warn') {
+      command = require('./warn/'+ interaction.options.map(x => x.options)[0].map(x => x.name)[0])
     } 
-    catch (err) {
-      const errEmbed = new MessageEmbed()
-        .setTitle(`${client.emotes.world}  Nie znaleziono komendy...`)
-        .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-        .setDescription('...to nie problem z komendą, wystąpił wewnętrzny błąd handlera')
-        .setColor('RED')
-        .setFooter(`💡 ${interaction.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 AntiCrash Engine`, interaction.user.displayAvatarURL({dynamic: true}))
-
-      try {
-        await interaction.editReply({embeds: [errEmbed], components: []})
-      } 
-      catch (err) {
-        await interaction.reply({embeds: [errEmbed], components: []})
-      }
+    else {
+      command = require('./' + interaction.options.map(x => x.name)[0])
     }
+    await command.execute(client, interaction)
   },
 
   createCMD(client) {

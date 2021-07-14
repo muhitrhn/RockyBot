@@ -3,9 +3,12 @@ const got = require('got')
 
 module.exports = {
 
-  async execute(client, interaction) {
+  async execute(client, interaction, tryCache) {
+    if (!tryCache) tryCache = 1
+    else tryCache = tryCache + 1
     try {
-      await interaction.defer()
+      // eslint-disable-next-line no-empty
+      try {await interaction.defer()} catch (err) {}
 
       let memeUrl, memeImage, memeTitle, memeUpvotes, memeNumComments
       await got('https://www.reddit.com/r/memes/random/.json')
@@ -31,6 +34,9 @@ module.exports = {
       return interaction.editReply({embeds: [embed], files: [attachment]})
     } 
     catch (err) {
+      if(tryCache < 5) {
+        return client.commands.get('funmeme.js').execute(client, interaction, tryCache)
+      }
       return client.base.get('cmd').error(client, interaction, err)
     }
   }
