@@ -4,7 +4,7 @@
 
 |✨ Bot|✨ Komenda meme|✨ Ping bota|
 |---------------------|---------------------|---------------------|
-|📗 `Zmieniony handling błędów`|📗 `Gdy reddit odrzuci połączenie, komenda jeszcze 3x próbuje wygenerować mema, dopiero przy piątym błędzie "wyrzuca" błąd`|📗 `Bot podpowie w jaki sposób naprawić wyświetlanie się komend na serwerze|
+|📗 `Zmieniony handling błędów`|📗 `Gdy reddit odrzuci połączenie, komenda jeszcze 3x próbuje wygenerować mema, dopiero przy piątym błędzie "wyrzuca" błąd`|📗 `Bot podpowie w jaki sposób naprawić wyświetlanie się komend na serwerze`|
 
 🟢 **Pierwsze wydanie**
 
