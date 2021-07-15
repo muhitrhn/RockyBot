@@ -1,5 +1,11 @@
 # 🟢 0.31
 
+🟢 **Patch 2**
+
+|✨ Komenda fun kamień|
+|----------------------|
+|📗 `Naprawiono`|
+
 🟢 **Patch 1**
 
 |✨ Komendy|✨ Komenda settings mutedrole|✨ Komendy mod warn|

@@ -27,8 +27,8 @@ module.exports = {
           GuildID: interaction.guild.id
         },
         {
-          MutedRole: role.id,
-        }); 
+          MutedRole: role.id
+        }) 
       }
       else {  
         const newData = new settingsModel({
