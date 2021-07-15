@@ -14,7 +14,7 @@ module.exports = {
 
     emotes: emotes,
 
-    beta: cmds.beta,
+    beta: false,
 
     releasedate: info.releasedate,
     version: info.version,

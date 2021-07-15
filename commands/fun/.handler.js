@@ -44,6 +44,28 @@ module.exports = {
           type: 1,
         },
 
+        //Ship command
+
+        {
+          name: 'ship',
+          description: '💕 Zobacz, jak bardzo są w sobie zakochani',
+          type: 1,
+          options: [
+            {
+              type: "STRING",
+              name: 'opcja',
+              description: 'Pierwsza rzecz/osoba do sprawdzenia',
+              required: false
+            },
+            {
+              type: "STRING",
+              name: 'opcja2',
+              description: 'Druga rzecz/osoba do sprawdzenia',
+              required: false
+            }
+          ]
+        },
+
         //Stonoga command
 
         {

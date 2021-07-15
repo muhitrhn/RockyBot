@@ -1,7 +1,5 @@
 module.exports = {
 
-    beta: false,
-
     ownerID: ['643084165209784331'
             ],
     testerID: [''
@@ -20,7 +18,11 @@ module.exports = {
         },
 
         funImgs: {
-          rymowanka: 'https://cdn.discordapp.com/attachments/850848194929492009/855758106569736222/thumbnail.png'
+          rymowanka: 'https://cdn.discordapp.com/attachments/850848194929492009/855758106569736222/thumbnail.png',
+          ship: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865138277069881415/serce.jpg',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865138284287098900/serce2.jpg'
+          ]
         },
 
         infoImgs: {

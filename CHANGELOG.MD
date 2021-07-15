@@ -1,3 +1,9 @@
+# 🟢 0.31
+
+|✨ Komenda fun ship|
+|-----------------------|
+|📗 `Shipuj kogo lub co chcesz z kim lub czym chcesz, opcjonalnie nie wpisuj nic żeby wylosować partnera`|
+
 # 🟢 0.30
 
 🟢 **Patch 3**
