@@ -22,7 +22,7 @@ module.exports = {
             {
               type: 'ROLE',
               name: 'rola',
-              description: 'Rola, którą mam ustawić jako rolę wyciszenia',
+              description: '📜 Rola, którą mam ustawić jako rolę wyciszenia',
               required: true
             }
           ]

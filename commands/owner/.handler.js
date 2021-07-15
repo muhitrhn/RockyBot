@@ -22,7 +22,7 @@ module.exports = {
             {
               type: 'STRING',
               name: 'kod',
-              description: 'Kod do wykonania',
+              description: '🆒 KOD do wykonania',
               required: true
             }
           ]
