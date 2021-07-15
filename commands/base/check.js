@@ -13,9 +13,9 @@ module.exports = {
         .setColor('RED')
 
       try {
-        return interaction.editReply({embeds: [embed], ephemeral: true})
+        await interaction.editReply({embeds: [embed], ephemeral: true})
       } catch (err) {
-        return interaction.reply({embeds: [embed], ephemeral: true})
+        await interaction.reply({embeds: [embed], ephemeral: true})
       }
     } 
     catch (err) {
