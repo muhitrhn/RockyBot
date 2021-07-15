@@ -9,14 +9,14 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'owner',
-      description: 'Kategoria owner',
+      description: '⚠️ Kategoria owner',
       options: [
 
         //Eval command
 
         {
           name: 'eval',
-          description: 'TYLKO DLA WŁAŚCICIELA',
+          description: '⚠️ TYLKO DLA WŁAŚCICIELA',
           type: 1, 
           options: [
             {

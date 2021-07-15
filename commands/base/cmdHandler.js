@@ -66,21 +66,5 @@ module.exports = {
         const command = require(`../mod/warn/${file}`)
         await client.commands.set(`modwarn${file}`, command)
       }
-    
-
-    // Fast change 1 command
-    
-    /* await client.application.commands.create({
-      name: `avatar`,
-      description: 'Wyślij kogoś avatar',
-      options: [
-        {
-          type: 'MENTIONABLE',
-          name: '1',
-          description: 'Użytkownik do komendy',
-          required: false
-        }
-      ]
-    }) // */
   }
 }

@@ -9,20 +9,20 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'avatar',
-      description: 'Kategoria avatar',
+      description: '🖼️ Kategoria avatar',
       options: [
 
         //Avatar command
 
         {
           name: 'send',
-          description: 'Wyślij czyjś avatar',
+          description: '🖼️ Wyślij czyjś avatar',
           type: 1,
           options: [
               {
                 type: 'USER',
                 name: 'użytkownik',
-                description: 'Użytkownik, którego avatar chcesz zobaczyć',
+                description: '👥 Użytkownik, którego avatar chcesz zobaczyć',
                 required: false
               }
           ]   
@@ -32,13 +32,13 @@ module.exports = {
 
         {        
           name: 'delete',
-          description: 'Nie lubisz kogoś? To usuń jego lub siebie xD',
+          description: '❌ Nie lubisz kogoś? To usuń jego lub siebie xD',
           type: 1,
           options: [
               {
                 type: 'USER',
                 name: 'użytkownik',
-                description: 'Użytkownik, którego chcesz usunąć',
+                description: '👥 Użytkownik, którego chcesz usunąć',
                 required: false
               }
           ]
@@ -48,13 +48,13 @@ module.exports = {
 
         {
           name: 'invert',
-          description: 'Odwróć kolorki swojego lub czyjegoś avatara',
+          description: '👾 Odwróć kolorki swojego lub czyjegoś avatara',
           type: 1,
           options: [
               {
                 type: 'USER',
                 name: 'użytkownik',
-                description: 'Użytkownik, w którego avatarze chcesz odwrócić kolory',
+                description: '👥 Użytkownik, w którego avatarze chcesz odwrócić kolory',
                 required: false
               }
           ]
@@ -64,13 +64,13 @@ module.exports = {
 
         {
           name: 'jail',
-          description: 'Zamknij siebie lub kogoś w więzieniu',
+          description: '🏚️ Zamknij siebie lub kogoś w więzieniu',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego chcesz zamknąć w więzieniu',
+              description: '👥 Użytkownik, którego chcesz zamknąć w więzieniu',
               required: false
             }
           ]
@@ -80,13 +80,13 @@ module.exports = {
 
         {
           name: 'notstonks',
-          description: 'Nie stonks 🙄',
+          description: '↘️ Nie stonks',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego avatar chcesz przerobić na nie stonks',
+              description: '👥 Użytkownik, którego avatar chcesz przerobić na nie stonks',
               required: false
             }
           ]
@@ -96,13 +96,13 @@ module.exports = {
 
         {
           name: 'stonks',
-          description: 'Stonks! 😁',
+          description: '↗️ Stonks!',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego avatar chcesz przerobić na stonks',
+              description: '👥 Użytkownik, którego avatar chcesz przerobić na stonks',
               required: false
             }
           ]
@@ -112,13 +112,13 @@ module.exports = {
 
         {
           name: 'trigger',
-          description: 'Wkurz siebie lub kogoś xD',
+          description: '🤬 Wkurz siebie lub kogoś xD',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Oznacz użytkownika, którego chcesz wkurzyć',
+              description: '👥 Użytkownik, którego chcesz wkurzyć',
               required: false
             }
           ]

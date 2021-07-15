@@ -9,14 +9,14 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'fun',
-      description: 'Kategoria fun',
+      description: '😂 Kategoria fun',
       options: [
 
         //Budowa command
 
         {
           name: 'budowa',
-          description: 'Budowa! BUDOWA!',
+          description: '🏗️ Budowa! BUDOWA!',
           type: 1, 
         },
 
@@ -24,7 +24,7 @@ module.exports = {
 
         {        
           name: 'kamień',
-          description: 'Wyślij kamień',
+          description: '🪨 Wyślij kamień',
           type: 1,
         },
 
@@ -32,7 +32,7 @@ module.exports = {
 
         {
           name: 'meme',
-          description: 'Losowy mem',
+          description: '🖼️ Losowy mem',
           type: 1,
         },
 
@@ -40,7 +40,7 @@ module.exports = {
 
         {
           name: 'rymowanka',
-          description: 'Wyślij losową rymowankę',
+          description: '🔡 Wyślij losową rymowankę',
           type: 1,
         },
 
@@ -54,13 +54,13 @@ module.exports = {
             {
               type: "STRING",
               name: 'opcja',
-              description: 'Pierwsza rzecz/osoba do sprawdzenia',
+              description: '🌎 Pierwsza rzecz/osoba do sprawdzenia',
               required: false
             },
             {
               type: "STRING",
               name: 'opcja2',
-              description: 'Druga rzecz/osoba do sprawdzenia',
+              description: '🌎 Druga rzecz/osoba do sprawdzenia',
               required: false
             }
           ]
@@ -70,7 +70,7 @@ module.exports = {
 
         {
           name: 'stonoga',
-          description: 'Zbychu Stonoga, kto go nie zna xD',
+          description: '🛃 Zbychu Stonoga, kto go nie zna xD',
           type: 1,
         },
 
@@ -78,7 +78,7 @@ module.exports = {
 
         {
           name: 'tuskotronic',
-          description: 'Kurczaki, ziemniaki... Kto nie zna tej piosenki? xD',
+          description: '🥔 Kurczaki, ziemniaki... Kto nie zna tej piosenki? xD',
           type: 1,
         },
 
@@ -86,7 +86,7 @@ module.exports = {
 
         {
           name: 'wideo',
-          description: 'Wyślij śmieszne wideo',
+          description: '🎬 Wyślij śmieszne wideo',
           type: 1,
         }
 

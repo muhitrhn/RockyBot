@@ -9,20 +9,20 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'nitro',
-      description: 'Kategoria nitro',
+      description: '🔰 Kategoria nitro',
       options: [
 
         //Emoji command
 
         {
           name: 'emoji',
-          description: 'Wyślij customowe emoji',
+          description: '💬 Wyślij customowe emoji',
           type: 1, 
           options: [
             {
               type: 'STRING',
               name: 'nazwa',
-              description: 'Część lub cała nazwa emoji, które mam wysłać',
+              description: '📛 Część lub cała nazwa emoji, które mam wysłać',
               required: true
             }
           ]
@@ -32,19 +32,19 @@ module.exports = {
 
         {
           name: 'react',
-          description: 'Zareaguj na wiadomość',
+          description: '📤 Zareaguj na wiadomość',
           type: 1,
           options: [
             {
               type: 'INTEGER',
               name: 'numer',
-              description: 'Numer wiadomości, NIE WIĘKSZY NIŻ 40, licząc od dołu',
+              description: '🔢 Numer wiadomości, NIE WIĘKSZY NIŻ 40, licząc od dołu',
               required: true
             },
             {
               type: 'STRING',
               name: 'nazwa',
-              description: 'Nazwa lub część nazwy emoji, którego mam użyć',
+              description: '📛 Nazwa lub część nazwy emoji, którego mam użyć',
               required: true
             }
           ]

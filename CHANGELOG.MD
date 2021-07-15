@@ -1,5 +1,13 @@
 # 🟢 0.31
 
+🟢 **Patch 1**
+
+|✨ Komendy|✨ Komenda settings mutedrole|✨ Komendy mod warn|
+|----------------------|-----------------------|-----------------------|
+|📗 `Dodano emoji do opisów`|📗 `Ulepszone połączenie z mongodb`|📗 `delete => delete-by-id, dodano delete-by-user`|
+
+🟢 **Pierwsze wydanie**
+
 |✨ Komenda fun ship|
 |-----------------------|
 |📗 `Shipuj kogo lub co chcesz z kim lub czym chcesz, opcjonalnie nie wpisuj nic żeby wylosować partnera`|

@@ -9,14 +9,14 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'settings',
-      description: 'Kategoria ustawienia',
+      description: '⚙️ Kategoria ustawienia',
       options: [
 
         //Eval command
 
         {
           name: 'mutedrole',
-          description: 'Ustaw rolę wyciszenia na serwerze',
+          description: '🔇 Ustaw rolę wyciszenia na serwerze',
           type: 1, 
           options: [
             {

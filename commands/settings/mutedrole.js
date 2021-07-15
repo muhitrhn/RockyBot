@@ -23,17 +23,21 @@ module.exports = {
       }) 
           
       if (data) {
-        await settingsModel.findOneAndRemove({
+        await settingsModel.findOneAndUpdate({
           GuildID: interaction.guild.id
-        }) 
-      }     
-      
-      const newData = new settingsModel({
-        MutedRole: role.id,
-        GuildID: interaction.guild.id
-      })
+        },
+        {
+          MutedRole: role.id,
+        }); 
+      }
+      else {  
+        const newData = new settingsModel({
+          MutedRole: role.id,
+          GuildID: interaction.guild.id
+        })
+        await newData.save()
+      }
 
-      await newData.save()
 
       embed.setTitle(`${client.emotes.nitro} Ustawiono rolę wyciszenia...`).setDescription(`**...na ${role}**`)
         .setThumbnail(client.cmds.doneImgs[Math.floor(Math.random() * client.cmds.doneImgs.length)])

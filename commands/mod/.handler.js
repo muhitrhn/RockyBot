@@ -15,26 +15,26 @@ module.exports = {
   createCMD(client) {
     client.application.commands.create({
       name: 'mod',
-      description: 'Kategoria moderacja',
+      description: '🛠️ Kategoria moderacja',
       options: [
 
         //Ban command
 
         {
           name: 'ban',
-          description: 'Zbanuj oznaczonego użytkownika',
+          description: '🔐🚷 Zbanuj oznaczonego użytkownika',
           type: 1, 
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego mam zbanować',
+              description: '👥 Użytkownik, którego mam zbanować',
               required: true
             },
             {
               type: 'STRING',
               name: 'powód',
-              description: 'Powód bana',
+              description: '❔ Powód bana',
               required: false
             }
           ]
@@ -44,13 +44,13 @@ module.exports = {
 
         {
           name: 'clear',
-          description: 'Wyczyść wiadomości',
+          description: '🔐♻️ Wyczyść wiadomości',
           type: 1,
           options: [
             {
               type: 'INTEGER',
               name: 'liczba',
-              description: 'Liczba między 1 a 1000 (liczba wiadomości do usunięcia)',
+              description: '🔢 Liczba między 1 a 1000 (liczba wiadomości do usunięcia)',
               required: true
             }
           ]
@@ -60,19 +60,19 @@ module.exports = {
 
         {
           name: 'kick',
-          description: 'Wyrzuć oznaczonego użytkownika',
+          description: '🔐🚀 Wyrzuć oznaczonego użytkownika',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego mam wyrzucić',
+              description: '👥 Użytkownik, którego mam wyrzucić',
               required: true
             },
             {
               type: 'STRING',
               name: 'powód',
-              description: 'Powód wyrzucenia',
+              description: '❔ Powód wyrzucenia',
               required: false
             }
           ]
@@ -82,19 +82,19 @@ module.exports = {
 
         {
           name: 'mute',
-          description: 'Wycisz oznaczonego użytkownika',
+          description: '🔐🔇 Wycisz oznaczonego użytkownika',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego mam wyciszyć',
+              description: '👥 Użytkownik, którego mam wyciszyć',
               required: true
             },
             {
               type: 'STRING',
               name: 'powód',
-              description: 'Powód wyciszenia',
+              description: '❔ Powód wyciszenia',
               required: false
             }
           ]
@@ -104,19 +104,19 @@ module.exports = {
 
         {
           name: 'unban',
-          description: 'Odbanuj kogoś',
+          description: '🔐✅ Odbanuj kogoś',
           type: 1,
           options: [
             {
               type: 'STRING',
               name: 'id',
-              description: 'ID użytkownika, którego mam odbanować',
+              description: '🆔 ID użytkownika, którego mam odbanować',
               required: true
             },
             {
               type: 'STRING',
               name: 'powód',
-              description: 'Powód odbanowania',
+              description: '❔ Powód odbanowania',
               required: false
             }
           ]
@@ -126,19 +126,19 @@ module.exports = {
 
         {
           name: 'unmute',
-          description: 'Odcisz oznaczonego użytkownika',
+          description: '🔐🔉 Odcisz oznaczonego użytkownika',
           type: 1,
           options: [
             {
               type: 'USER',
               name: 'użytkownik',
-              description: 'Użytkownik, którego mam odciszyć',
+              description: '👥 Użytkownik, którego mam odciszyć',
               required: true
             },
             {
               type: 'STRING',
               name: 'powód',
-              description: 'Powód odciszenia',
+              description: '❔ Powód odciszenia',
               required: false
             }
           ]
@@ -148,7 +148,7 @@ module.exports = {
 
         {
           name: 'warn',
-          description: 'Ostrzeżenia',
+          description: '❗ Ostrzeżenia',
           type: 2,
           options: [
 
@@ -156,35 +156,19 @@ module.exports = {
 
             {
               name: 'add',
-              description: 'Ostrzeż kogoś',
+              description: '🔐❗ Ostrzeż kogoś',
               type: 1,
               options: [
                 {
                   type: 'USER',
                   name: 'użytkownik',
-                  description: 'Użytkownik, którego mam ostrzec',
+                  description: '👥 Użytkownik, którego mam ostrzec',
                   required: true
                 },
                 {
                   type: 'STRING',
                   name: 'powód',
-                  description: 'Powód ostrzeżenia',
-                  required: true
-                }
-              ]
-            },
-
-            //Clear warns
-
-            {
-              name: 'clear',
-              description: 'Wyczyść czyjeś ostrzeżenia',
-              type: 1,
-              options: [
-                {
-                  type: 'USER',
-                  name: 'użytkownik',
-                  description: 'Użytkownik, którego listę warnów chcesz wyczyścić',
+                  description: '❔ Powód ostrzeżenia',
                   required: true
                 }
               ]
@@ -193,14 +177,30 @@ module.exports = {
             //Delete warn
 
             {
-              name: 'delete',
-              description: 'Usuń ostrzeżenie',
+              name: 'delete-by-id',
+              description: '🔐♻️ Usuń ostrzeżenie',
               type: 1,
               options: [
                 {
                   type: 'STRING',
                   name: 'id',
-                  description: 'ID warna',
+                  description: '🆔 ID warna',
+                  required: true
+                }
+              ]
+            },
+
+            //Clear warns
+
+            {
+              name: 'delete-by-user',
+              description: '🔐♻️ Wyczyść czyjeś ostrzeżenia',
+              type: 1,
+              options: [
+                {
+                  type: 'USER',
+                  name: 'użytkownik',
+                  description: '👥 Użytkownik, którego listę warnów chcesz wyczyścić',
                   required: true
                 }
               ]
@@ -210,13 +210,13 @@ module.exports = {
 
             {
               name: 'list',
-              description: 'Czyjaś lub Twoja lista ostrzeżeń',
+              description: '🧾 Czyjaś lub Twoja lista ostrzeżeń',
               type: 1,
               options: [
                 {
                   type: 'USER',
                   name: 'użytkownik',
-                  description: 'Użytkownik, którego listę warnów chcesz zobaczyć',
+                  description: '👥 Użytkownik, którego listę warnów chcesz zobaczyć',
                   required: false
                 }
               ]
