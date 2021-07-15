@@ -45,14 +45,7 @@ module.exports = {
       //Everything chosen
       const toShip1 = interaction.options.map(x => x.options)[0].map(x => x.value)[0]
       const toShip2 = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
-      let ship = Math.floor(Math.random() * (100)) + 1
-
-      let ships = []
-      await client.channels.cache.get(client.cmds.funOptions.shipsChannel).messages.fetch().then(async msgs => msgs.forEach(msg => ships.push(msg.content)))
-
-      if (ships.includes(toShip1.toLowerCase() + ' x ' + toShip2.toLowerCase()) || ships.includes(toShip2.toLowerCase() + ' x ' + toShip1.toLowerCase())) {
-          ship = Math.floor(Math.random() * (5)) + 91
-      }
+      let ship = Math.floor(Math.random() * 100) + 1
 
       embed.setDescription(toShip1.toString() + ' + ' + toShip2.toString() + ' =  **' + ship + '%**')
         .setThumbnail(client.cmds.funImgs.ship[Math.floor(Math.random() * client.cmds.funImgs.ship.length)])

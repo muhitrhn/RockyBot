@@ -17,10 +17,6 @@ module.exports = {
             rymowanka: '850655868529147914'
         },
 
-        funOptions: {
-          shipsChannel: '865179001407275029'
-        },
-
         funImgs: {
           rymowanka: 'https://cdn.discordapp.com/attachments/850848194929492009/855758106569736222/thumbnail.png',
           ship: [
