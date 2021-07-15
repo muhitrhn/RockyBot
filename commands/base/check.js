@@ -12,7 +12,11 @@ module.exports = {
         .setDescription(`**...${missingPerms}**`)
         .setColor('RED')
 
-      return interaction.editReply({embeds: [embed]})
+      try {
+        return interaction.editReply({embeds: [embed], ephemeral: true})
+      } catch (err) {
+        return interaction.reply({embeds: [embed], ephemeral: true})
+      }
     } 
     catch (err) {
       return client.base.get('cmd').error(client, interaction, err)

@@ -1,5 +1,11 @@
 # 🟢 0.31
 
+🟢 **Patch 3**
+
+|✨ Komendy wymagające uprawnień|
+|----------------------|
+|📗 `Naprawiono odpowiadanie z informacją o braku uprawnień`|
+
 🟢 **Patch 2**
 
 |✨ Komenda fun kamień|
