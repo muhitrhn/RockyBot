@@ -7,10 +7,10 @@ activities: [
     `🛠️ Znajdź mnie na githubie!: ${info.github}`,
 
     //Podpowiedzi
-    '💡 Pingnij bota, aby zobaczyć prefix',
-    '💡 Użyj help, aby zobaczyć listę komend',
-    '💡 Użyj komendy rymowanka, żeby wysłać losową rymowankę XD',
-    '💡 Jeśli masz problemy z komendą, użyj help {komenda}',
+    '💡 Użyj /help, aby zobaczyć listę komend',
+    '💡 Użyj komendy /fun rymowanka, żeby wysłać losową rymowankę XD',
+    '💡 Użyj komendy /avatar trigger, żeby kogoś zdenerwować',
+    '💡 Jeśli nie możesz znaleźć komend, użyj /info help',
 
     //Inne XD
     '🤠 #ZmienićRząd ',

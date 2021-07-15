@@ -1,5 +1,10 @@
 # 🟢 0.30
 
+🟢 **Patch 3**
+|✨ Komenda mod warn delete|✨ Bot|
+|----------------------|-----------------------|
+|📗 `Naprawiono błędy w znajdywaniu warnów`|📗 `Zmienione custom statusy`|
+
 🟢 **Patch 2**
 |✨ Komenda mute i unmute|✨ Komendy z kategorii moderation|
 |--------------------------|--------------------------|

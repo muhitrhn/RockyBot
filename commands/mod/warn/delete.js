@@ -17,8 +17,11 @@ module.exports = {
         .setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
       
       let warn
-
-      warn = await warnModel.findOne({ GuildID: interaction.guild.id, _id: interaction.options.map(x => x.options)[0].map(x => x.options)[0].map(x => x.value)[0]})
+      try {
+        warn = await warnModel.findOne({ GuildID: interaction.guild.id, _id: interaction.options.map(x => x.options)[0].map(x => x.options)[0].map(x => x.value)[0]})
+      } catch (err) {
+        warn = 0
+      }
  
 
       if(!warn) {
@@ -31,8 +34,6 @@ module.exports = {
       }
 
       await interaction.defer()
-
-      
 
       await warnModel.findOneAndRemove({ GuildID: interaction.guild.id, _id: interaction.options.map(x => x.options)[0].map(x => x.options)[0].map(x => x.value)[0]})
 
