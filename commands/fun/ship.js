@@ -17,7 +17,7 @@ module.exports = {
 
       //No options chosen
       if (!optionCheck) {
-        const guildMembers = interaction.guild.members.cache.filter(user => user.id !== interaction.user.id).map(x => x)
+        const guildMembers = interaction.guild.members.cache.filter(user => user.id !== interaction.user.id && !user.bot).map(x => x)
 
         const userToShip = guildMembers[Math.floor(Math.random() * guildMembers.length)] 
         const ship = Math.floor(Math.random() * (100)) + 1
@@ -32,10 +32,8 @@ module.exports = {
 
       //Only 1 option chosen
       if (!option2Check) {
-        let toShip = interaction.guild.members.cache.get(interaction.options.map(x => x.options)[0].map(x => x.value)[0])
-        if (!toShip) {
-          toShip = interaction.options.map(x => x.options)[0].map(x => x.value)[0]
-        }
+        const toShip = interaction.options.map(x => x.options)[0].map(x => x.value)[0]
+        
         const ship = Math.floor(Math.random() * (100)) + 1
 
         embed.setDescription(interaction.user.toString() + ' + ' + toShip.toString() + ' =  **' + ship + '%**')
@@ -45,15 +43,16 @@ module.exports = {
       }
 
       //Everything chosen
-      let toShip1 = interaction.guild.members.cache.get(interaction.options.map(x => x.options)[0].map(x => x.value)[0])
-      if (!toShip1) {
-        toShip1 = interaction.options.map(x => x.options)[0].map(x => x.value)[0]
+      const toShip1 = interaction.options.map(x => x.options)[0].map(x => x.value)[0]
+      const toShip2 = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
+      let ship = Math.floor(Math.random() * (100)) + 1
+
+      let ships = []
+      await client.channels.cache.get(client.cmds.funOptions.shipsChannel).messages.fetch().then(async msgs => msgs.forEach(msg => ships.push(msg.content)))
+
+      if (ships.includes(toShip1.toLowerCase() + ' x ' + toShip2.toLowerCase()) || ships.includes(toShip2.toLowerCase() + ' x ' + toShip1.toLowerCase())) {
+          ship = Math.floor(Math.random() * (5)) + 91
       }
-      let toShip2 = interaction.guild.members.cache.get(interaction.options.map(x => x.options)[0].map(x => x.value)[1])
-      if (!toShip2) {
-          toShip2 = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
-        }
-      const ship = Math.floor(Math.random() * (100)) + 1
 
       embed.setDescription(toShip1.toString() + ' + ' + toShip2.toString() + ' =  **' + ship + '%**')
         .setThumbnail(client.cmds.funImgs.ship[Math.floor(Math.random() * client.cmds.funImgs.ship.length)])
