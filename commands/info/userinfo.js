@@ -8,7 +8,7 @@ module.exports = {
 
       const mentioned = interaction.options.map(x => x.options)[0] ? interaction.options.map(x => x.options)[0].map(x => x.member)[0] : interaction.member
 
-      return client.commands.get('infouserinfo.js').main(client, interaction, mentioned)
+      return this.main(client, interaction, mentioned)
     } catch (err) {
       return client.base.get('cmd').error(client, interaction, err)
     }
@@ -72,12 +72,12 @@ module.exports = {
         else if (buttonClick.customId === 'ch_perms') {
           collector.stop()
 
-          return client.commands.get('infouserinfo.js').chPerms(client, interaction, mentioned, buttonClick, embedColor)
+          return this.chPerms(client, interaction, mentioned, buttonClick, embedColor)
         } 
         else if (buttonClick.customId === 'glob_perms') {
           collector.stop()
 
-          return client.commands.get('infouserinfo.js').globPerms(client, interaction, mentioned, buttonClick, embedColor)
+          return this.globPerms(client, interaction, mentioned, buttonClick, embedColor)
         }
       })
     }
@@ -129,7 +129,7 @@ module.exports = {
         else if (buttonClick.customId === 'back'){
           collector.stop()
           
-          return client.commands.get('infouserinfo.js').main(client, interaction, mentioned, buttonClick, color)
+          return this.main(client, interaction, mentioned, buttonClick, color)
         }
       })
     } 
@@ -191,7 +191,7 @@ module.exports = {
         else if (buttonClick.customId === 'back'){
           collector.stop()
           
-          return client.commands.get('infouserinfo.js').main(client, interaction, mentioned, buttonClick, color)
+          return this.main(client, interaction, mentioned, buttonClick, color)
         }
       })
     } 

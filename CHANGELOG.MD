@@ -1,3 +1,9 @@
+# 🟢 0.33
+
+|✨ Komendy userinfo, guildinfo, clear i warnlist|✨ Kategoria music|
+|-------------------------------|-------------------------------|
+|📗 `Poprawiona interakcja przycisków`|📗 `Graj muzykę na kanale głosowym! Obsługuje spotify i youtube`|
+
 # 🟢 0.31
 
 🟢 **Patch 3**

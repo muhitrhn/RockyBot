@@ -79,7 +79,7 @@ module.exports = {
         else if (buttonClick.customId === 'delete') {
           collector.stop()
           
-          return client.commands.get('modclear.js').clear(client, interaction, reply, embed, amount)
+          return this.clear(client, interaction, reply, embed, amount)
         }
       })
 
@@ -126,7 +126,7 @@ module.exports = {
 
       embed.setTitle(`${client.emotes.trash}  Usunięto \`${deleted}\`/\`${amount}\` wiadomości`)
         .setDescription(`*${client.emotes.gearspin} Wiadomości starsze niż 14 dni nie mogą zostać usunięte*`)
-        .setThumbnail(client.cmds.moderationImgs.clear)
+        .setThumbnail(client.cmds.moderationImgs.clear[Math.floor(Math.random() * client.cmds.moderationImgs.clear.length)])
 
       return interaction.editReply({embeds: [embed]})      
     }

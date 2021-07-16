@@ -37,7 +37,9 @@ module.exports = {
             'https://cdn.discordapp.com/attachments/850848194929492009/856236942006288384/recycle-icon.gif',
             'https://cdn.discordapp.com/attachments/850848194929492009/856236949483945994/funny-trash-playing.gif'
           ],
-          clear: 'https://cdn.discordapp.com/attachments/850848194929492009/853335731615039498/4883451.png',
+          clear: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/853335731615039498/4883451.png'
+          ],
 
           ban: [
             'https://cdn.discordapp.com/attachments/850848194929492009/856254010902315089/ban2.gif',
@@ -49,6 +51,40 @@ module.exports = {
 
           kick: [
             'https://cdn.discordapp.com/attachments/850848194929492009/856260420275535913/kick1.gif'
+          ]
+        },
+
+        musicImgs: {
+          add: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865322141041557524/add.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865322142577065994/add2.png'
+          ],
+          back: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865549685091074048/back.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865549687011541012/back2.png'
+          ],
+          play: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865322137781796914/play2.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865322143804555264/play.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865483407781134336/play3.png'
+          ],
+          skip: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865323254699917353/skip.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865323256525488138/skip2.png'
+          ],
+          repeat: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865324341411053609/repeat.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865324342756769802/repeat2.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865324343742562304/repeat3.png'
+          ],
+          queue: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865325671437565962/queue.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865325673378480169/queue2.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865325675304058920/queue3.png'
+          ],
+          pause: [
+            'https://cdn.discordapp.com/attachments/850848194929492009/865483734957424650/pause1.png',
+            'https://cdn.discordapp.com/attachments/850848194929492009/865483735041441832/pause.png'
           ]
         },
 

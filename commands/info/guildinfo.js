@@ -6,7 +6,7 @@ module.exports = {
     try {
       await interaction.defer()
 
-      return client.commands.get('infoguildinfo.js').main(client, interaction)
+      return this.main(client, interaction)
     } catch (err) {
       return client.base.get('cmd').error(client, interaction, err)
     }
@@ -66,7 +66,7 @@ module.exports = {
           collector.stop()
 
           const embedColor = embed.color
-          return client.commands.get('infoguildinfo.js').modders(client, interaction, buttonClick, embedColor)
+          return this.modders(client, interaction, buttonClick, embedColor)
         }
       })
     } catch (err) {
@@ -115,7 +115,7 @@ module.exports = {
           collector.stop()
 
           const embedColor = embed.color
-          return client.commands.get('infoguildinfo.js').main(client, interaction, buttonClick, embedColor)
+          return this.main(client, interaction, buttonClick, embedColor)
         }
       })
     } 

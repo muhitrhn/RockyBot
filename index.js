@@ -21,6 +21,7 @@ const client = new discord.Client({ intents:
   ws: {properties: {$browser: 'Discord Android'}}})
 
 client.base = new discord.Collection()
+client.queue = new Map()
 client.config = require('./config/main')
 client.emotes = client.config.emotes
 client.commands = new discord.Collection()
