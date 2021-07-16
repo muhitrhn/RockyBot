@@ -6,5 +6,5 @@ module.exports = {
     github: 'https://github.com/Bajojajo-xD/RockyBot/',
 
     deleteCommandsFirst: false,
-    refreshDiscordCmds: true
+    refreshDiscordCmds: false
 }
