@@ -163,7 +163,7 @@ module.exports = {
         })
         serverQueue.player.on('error', () => {return})
 
-        const checkch = setInterval(async () => {
+     /*   const checkch = setInterval(async () => {
           if(!voiceChannel.members.filter(x => x.user.id !== client.user.id).map(x => x)[0]) {
             const embed = new MessageEmbed()
               .setColor('RANDOM')
@@ -175,9 +175,9 @@ module.exports = {
             await serverQueue.textChannel.send({embeds: [embed]})
             await serverQueue.connection.destroy()
             client.queue.delete(interaction.guild.id)
-            return clearInterval(checkch)
+            clearInterval(checkch)
           }
-        }, 1000)
+        }, 1 * 60000) */
 
         if (cache) {
           for (const spotifyData of playlist) {
