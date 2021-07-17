@@ -1,7 +1,8 @@
-const sendOptions = require('./send')
-const deleteOptions = require('./delete')
+import { options as send } from './send'
+import { options as deleteCmd } from './delete'
+import { options as trigger } from './trigger'
 
-module.exports = {
+export = {
   name: 'avatar',
 
   async redirect(client, interaction) {
@@ -14,14 +15,9 @@ module.exports = {
       name: 'avatar',
       description: '🖼️ Kategoria avatar',
       options: [
-
-        //Avatar command
-
-        sendOptions.options,
-
-        //Delete command
-
-        deleteOptions.options,
+        send,
+        deleteCmd,
+        trigger,
 
         //Invert command
 
@@ -86,23 +82,6 @@ module.exports = {
             }
           ]
         },
-
-        //Trigger command
-
-        {
-          name: 'trigger',
-          description: '🤬 Wkurz siebie lub kogoś xD',
-          type: 1,
-          options: [
-            {
-              type: 'USER',
-              name: 'użytkownik',
-              description: '👥 Użytkownik, którego chcesz wkurzyć',
-              required: false
-            }
-          ]
-        }
-
       ]
     })
   },

@@ -46,4 +46,4 @@ const options = {
   ]
 }
 
-export = { execute, options }
+export { execute, options }
