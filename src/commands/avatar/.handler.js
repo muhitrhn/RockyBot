@@ -1,3 +1,6 @@
+const sendOptions = require('./send')
+const deleteOptions = require('./delete')
+
 module.exports = {
   name: 'avatar',
 
@@ -14,35 +17,11 @@ module.exports = {
 
         //Avatar command
 
-        {
-          name: 'send',
-          description: '🖼️ Wyślij czyjś avatar',
-          type: 1,
-          options: [
-              {
-                type: 'USER',
-                name: 'użytkownik',
-                description: '👥 Użytkownik, którego avatar chcesz zobaczyć',
-                required: false
-              }
-          ]   
-        },
+        sendOptions.options,
 
         //Delete command
 
-        {        
-          name: 'delete',
-          description: '❌ Nie lubisz kogoś? To usuń jego lub siebie xD',
-          type: 1,
-          options: [
-              {
-                type: 'USER',
-                name: 'użytkownik',
-                description: '👥 Użytkownik, którego chcesz usunąć',
-                required: false
-              }
-          ]
-        },
+        deleteOptions.options,
 
         //Invert command
 

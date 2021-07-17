@@ -6,8 +6,10 @@
   "main": "index.js",
   "beta": "false",
   "scripts": {
-    "start": "node index.js --max_old_space_size=8192",
-    "lint": "eslint . --fix"
+    "start": "node dist/index.js --max_old_space_size=8192",
+    "lint": "eslint . --fix",
+    "build": "tsc",
+    "dev": "yarn build && yarn start"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "discord.js": "discordjs/discord.js",
     "dotenv": "^10.0.0",
     "ejs": "^3.0.2",
+    "esbuild": "^0.12.15",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "ffmpeg-static": "^4.4.0",
@@ -40,6 +43,7 @@
     "pretty-ms": "^7.0.1",
     "spotify-url-info": "^2.2.3",
     "tweetnacl": "^1.0.3",
+    "typescript": "^4.3.5",
     "youtube-sr": "^4.1.7",
     "yt-search": "^2.9.0",
     "ytdl-core": "^4.8.3"
