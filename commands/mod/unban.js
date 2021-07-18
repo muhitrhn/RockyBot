@@ -31,6 +31,8 @@ module.exports = {
         return interaction.reply({embeds: [embed], ephemeral: true})
       }
 
+      await interaction.defer()
+
       let reason, reasonToProvide
       if (interaction.options.map(x => x.options)[0].map(x => x)[1]) {
         reason = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
