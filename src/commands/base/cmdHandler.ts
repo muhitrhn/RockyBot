@@ -1,10 +1,12 @@
 import fs from 'fs'
 import chalk from 'chalk'
 import { config, handlers } from '../..'
+import { Client } from 'discord.js'
 
-const refreshDiscordCmds = async function(client: any) {
+async function refreshDiscordCmds(client: Client) {
 
   if (config.deleteCommandsFirst) {
+    // @ts-ignore  
     await client.application.commands.set([])
   }
 
@@ -14,7 +16,7 @@ const refreshDiscordCmds = async function(client: any) {
     const commands = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of commands) {
-      const { createCMD } = await import(`../${dirs}/${file}`)
+      const { createCMD } = require(`../${dirs}/${file}`)
       if (dirs === 'base') return
       try {
         await createCMD(client)
@@ -27,7 +29,7 @@ const refreshDiscordCmds = async function(client: any) {
   })
 }
 
-const refreshCache = async function() {
+async function refreshCache() {
 
   console.log(chalk.whiteBright('Dodawanie handlerów...'))
 
@@ -35,7 +37,7 @@ const refreshCache = async function() {
     const handlerss = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of handlerss) {
-      const handler = await import(`../${dirs}/${file}`)
+      const handler = require(`../${dirs}/${file}`)
       if (dirs === 'base') return
       if (!handler.name) {
         console.log(chalk.red(`Handler folderu ${dirs} nie został dodany do pamięci podręcznej`))
@@ -48,7 +50,5 @@ const refreshCache = async function() {
   })
 }
 
-export {
-  refreshDiscordCmds, refreshCache
-}
+export { refreshDiscordCmds, refreshCache }
 

@@ -1,13 +1,14 @@
+import { Client } from "discord.js"
 import fs from "fs"
 import { error } from "../base/cmd"
 
 export = {
   name: 'fun',
 
-  async redirect(client: any, interaction: any) {
+  async redirect(client: Client, interaction: any) {
     try {
-      const command = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
-      await command.execute(client, interaction)
+      const { execute } = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
+      await execute(client, interaction)
     } catch (err) {
       error(interaction, err)
     }

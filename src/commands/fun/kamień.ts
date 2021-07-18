@@ -1,12 +1,12 @@
-import { MessageEmbed, MessageAttachment } from 'discord.js'
+import { MessageEmbed, MessageAttachment, Client } from 'discord.js'
 import { config } from "../.."
   
-async function execute(client: any, interaction: any) {
+async function execute(client: Client, interaction: any) {
   await interaction.defer()
 
   let files: any = []
-  const msgs: any = await client.channels.cache.get(config.cmds.attachments.kamien).messages.fetch()
-  msgs.forEach((msg: any) => files.push(msg.attachments.array()[0].url))
+  // @ts-ignore  
+  await client.channels.cache.get(config.cmds.attachments.kamien).messages.fetch().forEach((msg: any) => files.push(msg.attachments.array()[0].url))
 
   const chosenFile = await files[Math.floor(Math.random() * files.length)] 
   const attachment = new MessageAttachment(chosenFile, 'kamien.png')
