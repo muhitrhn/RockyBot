@@ -15,7 +15,7 @@ module.exports = {
         return client.base.get('check').missingPerms(client, interaction, missingPerms)
       }
 
-      const bansInGuild = await interaction.guild.fetchBans()
+      const bansInGuild = await interaction.guild.bans.fetch()
       const toUnban = bansInGuild.find(b => b.user.id === interaction.options.map(x => x.options)[0].map(x => x.value)[0])
 
       const embed = new MessageEmbed()
