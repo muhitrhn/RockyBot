@@ -3,10 +3,10 @@ import fs from 'fs'
 import chalk from 'chalk'
 import mongoose from 'mongoose'
 import { Client, Collection } from 'discord.js'
-
 import config from './config/main'
 
-const client = new Client({ intents:
+const client = new Client({ 
+  intents:
   [
     'GUILDS',
     'GUILD_MEMBERS',
@@ -24,18 +24,14 @@ const client = new Client({ intents:
   ws: {
     properties: {
       $browser: 'Discord Android'
-    }
+    },
   }
 })
 
-const base: Collection<any, any> = new Collection()
 const queue = new Map()
 const emotes = config.emotes
-const commands: Collection<any, any> = new Collection()
 const handlers: Collection<any, any> = new Collection()
-const releasedate = config.releasedate
 const version = config.version
-const news = config.news
 const ownerID = config.discord.ownerID
 const testerID = config.discord.testerID
 const cmds = config.cmds
@@ -55,20 +51,12 @@ mongoose.connect(mongoURI || '', {
   useUnifiedTopology: true
 })
 
-const events = fs.readdirSync('./events/normal')
+const events = fs.readdirSync('./src/events/normal')
 
 for (const file of events) {
   console.log(chalk.magentaBright(`Załadowano event ${file} paczki discord.js `))
   const event = require(`./events/normal/${file}`)
   client.on(file.split('.')[0], event.bind(null, client))
-}
-
-const modules = fs.readdirSync('./commands/base')
-
-for (const file of modules) {
-  console.log(chalk.blueBright(`Załadowano bazowy moduł ${file}`))
-  const module = require(`./commands/base/${file}`)
-  base.set(module.name, module)
 }
 
 if (config.beta === true) {
@@ -80,6 +68,5 @@ else {
 }
 
 export {
-  base, queue, config, emotes, commands, handlers,
-  releasedate, version, news, ownerID, testerID, cmds
+  queue, config, emotes, handlers, version, ownerID, testerID, cmds
 }
