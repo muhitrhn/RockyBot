@@ -4,7 +4,7 @@ export = {
   name: 'avatar',
 
   async redirect(interaction: any) {
-    import { error } from '../base/cmd'
+    import { error } from "../base/cmd"
     try {
       const command = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
       await command.execute(interaction)
