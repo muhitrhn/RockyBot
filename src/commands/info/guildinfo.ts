@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable, Client } from 'discord.js'
 import { config } from '../..';
 
-async function execute(this: any, client: any, interaction: any) {
+async function execute(this: any, client: Client, interaction: any) {
   await interaction.defer()
 
   return this.main(client, interaction)
@@ -112,7 +112,8 @@ async function modders(this: any, client: Client, interaction: any, bt: MessageB
       collector.stop()
 
       const embedColor = embed.color
-      return this.main(client, interaction, buttonClick, embedColor)
+      this.main(client, interaction, buttonClick, embedColor)
+      return
     }
   })
 }
