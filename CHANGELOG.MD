@@ -1,5 +1,12 @@
 # 🟢 0.33
 
+🟢 **Patch 1**
+|✨ Komenda mod unban|
+|----------------------|
+|📗 `Naprawiono`|
+
+🟢 **Pierwsze wydanie**
+
 |✨ Komendy userinfo, guildinfo, clear i warnlist|✨ Kategoria music|
 |-------------------------------|-------------------------------|
 |📗 `Poprawiona interakcja przycisków`|📗 `Graj muzykę na kanale głosowym! Obsługuje spotify i youtube`|
