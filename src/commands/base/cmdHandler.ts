@@ -11,7 +11,7 @@ const refreshDiscordCmds = async function(client: any) {
   console.log(chalk.whiteBright('Aktualizowanie bazy danych discorda...'))
 
   fs.readdirSync('./src/commands').filter(async dirs => {
-    const commands = fs.readdirSync(`.src//commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
+    const commands = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of commands) {
       const { createCMD } = await import(`../${dirs}/${file}`)

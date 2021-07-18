@@ -21,12 +21,12 @@ const options = {
   description: '👾 Odwróć kolorki swojego lub czyjegoś avatara',
   type: 1,
   options: [
-      {
-        type: 'USER',
-        name: 'użytkownik',
-        description: '👥 Użytkownik, w którego avatarze chcesz odwrócić kolory',
-        required: false
-      }
+    {
+      type: 'USER',
+      name: 'użytkownik',
+      description: '👥 Użytkownik, w którego avatarze chcesz odwrócić kolory',
+      required: false
+    }
   ]
 }
 

@@ -6,5 +6,5 @@ export = {
     github: 'https://github.com/Bajojajo-xD/RockyBot/',
 
     deleteCommandsFirst: false,
-    refreshDiscordCmds: false
+    refreshDiscordCmds: true
 }

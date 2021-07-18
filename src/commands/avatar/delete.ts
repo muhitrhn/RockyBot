@@ -21,12 +21,12 @@ const options = {
   description: '❌ Nie lubisz kogoś? To usuń jego lub siebie xD',
   type: 1,
   options: [
-      {
-        type: 'USER',
-        name: 'użytkownik',
-        description: '👥 Użytkownik, którego chcesz usunąć',
-        required: false
-      }
+    {
+      type: 'USER',
+      name: 'użytkownik',
+      description: '👥 Użytkownik, którego chcesz usunąć',
+      required: false
+    }
   ]
 }
 

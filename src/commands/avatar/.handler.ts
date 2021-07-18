@@ -18,6 +18,7 @@ export = {
 
     let optionsToProv = []
     for (const file of cmds) {
+      if (file === '.handler.ts') return
       const { options } = require(`./${file}`)
       optionsToProv.push(options)
     }
