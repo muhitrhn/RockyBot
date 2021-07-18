@@ -1,4 +1,4 @@
-module.exports = {
+export = {
     ubuntu: '<:ubuntu:837617906971181057>',
     system: '<:systemmessageuser:838387012230053917>',
     motherboard: '<:motherboard:843225362015191061>',

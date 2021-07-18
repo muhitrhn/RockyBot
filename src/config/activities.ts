@@ -1,5 +1,5 @@
-const info = require('./info')
-module.exports = {
+import info from './mainCfg'
+export = {
 activities: [	
     //Development
     `🛠️ v${info.version}`,

@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 
     ownerID: ['643084165209784331'
             ],

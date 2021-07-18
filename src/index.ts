@@ -3,7 +3,7 @@ import fs from 'fs'
 import chalk from 'chalk'
 import mongoose from 'mongoose'
 import { Client, Collection } from 'discord.js'
-import config from './config/main'
+import config from './config/.handler'
 
 const client = new Client({ 
   intents:
@@ -29,12 +29,7 @@ const client = new Client({
 })
 
 const queue = new Map()
-const emotes = config.emotes
 const handlers: Collection<any, any> = new Collection()
-const version = config.version
-const ownerID = config.discord.ownerID
-const testerID = config.discord.testerID
-const cmds = config.cmds
 
 let mongoURI
 
@@ -68,5 +63,5 @@ else {
 }
 
 export {
-  queue, config, emotes, handlers, version, ownerID, testerID, cmds
+  queue, config, handlers, 
 }
