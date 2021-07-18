@@ -13,7 +13,7 @@ const refreshDiscordCmds = async function(client: any) {
   console.log(chalk.whiteBright('Aktualizowanie bazy danych discorda...'))
 
   fs.readdirSync('./src/commands').filter(async dirs => {
-    const commands = fs.readdirSync(`.src//commands/${dirs}`).filter(files => files.endsWith('.js') && files.startsWith('.'))
+    const commands = fs.readdirSync(`.src//commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of commands) {
       const { createCMD } = await import(`../${dirs}/${file}`)
@@ -34,7 +34,7 @@ const refreshCache = async function() {
   console.log(chalk.whiteBright('Dodawanie handlerów...'))
 
   fs.readdirSync('./src/commands').filter(async dirs => {
-    const handlerss = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.js') && files.startsWith('.'))
+    const handlerss = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of handlerss) {
       const handler = await import(`../${dirs}/${file}`)

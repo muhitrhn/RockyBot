@@ -1171,7 +1171,7 @@ discord-image-generation@^1.4.9:
 
 discord.js@discordjs/discord.js:
   version "13.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/98c60789a2bc38a9939b2493c3e9346eb0a0446e"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/4d53d0fd115e3a31e7a431c5dece8fc251c2115d"
   dependencies:
     "@discordjs/builders" "^0.2.0"
     "@discordjs/collection" "^0.1.6"
