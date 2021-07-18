@@ -2,8 +2,6 @@ import fs from 'fs'
 import chalk from 'chalk'
 import { config, handlers } from '../..'
 
-const name = 'cmdHandler'
-
 const refreshDiscordCmds = async function(client: any) {
 
   if (config.deleteCommandsFirst) {
@@ -51,6 +49,6 @@ const refreshCache = async function() {
 }
 
 export {
-  name, refreshDiscordCmds, refreshCache
+  refreshDiscordCmds, refreshCache
 }
 

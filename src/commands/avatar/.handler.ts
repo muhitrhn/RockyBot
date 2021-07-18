@@ -1,10 +1,10 @@
 import fs from "fs"
+import { error } from "../base/cmd"
 
 export = {
   name: 'avatar',
 
-  async redirect(interaction: any) {
-    import { error } from "../base/cmd"
+  async redirect(o: any, interaction: any) {
     try {
       const command = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
       await command.execute(interaction)
@@ -16,15 +16,15 @@ export = {
   createCMD(client: any) {
     const cmds = fs.readdirSync('./src/commands/avatar')
 
-    let option = []
+    let optionsToProv = []
     for (const file of cmds) {
       const { options } = require(`./${file}`)
-      option.push(options)
+      optionsToProv.push(options)
     }
     client.application.commands.create({
       name: 'avatar',
       description: '🖼️ Kategoria avatar',
-      options: option 
+      options: optionsToProv 
     })
   },
 

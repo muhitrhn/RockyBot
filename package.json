@@ -28,7 +28,7 @@
     "chalk": "^4.1.1",
     "discord-api-types": "discordjs/discord-api-types",
     "discord-image-generation": "^1.4.9",
-    "discord.js": "discordjs/discord.js",
+    "discord.js": "^13.0.0-dev.4d53d0f.1626609771",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.4.0",

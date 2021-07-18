@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { config, handlers } from '../..'
 
-module.exports = async (client: any, interaction: { guild: any; user: { bot: any; tag: any; displayAvatarURL: (arg0: { dynamic: boolean }) => string }; type: string; commandName: any; editReply: (arg0: { embeds: MessageEmbed[]; components: any[] }) => any; reply: (arg0: { embeds: MessageEmbed[]; components: any[] }) => any }) => {
+module.exports = async (client: any, interaction: any) => {
 
 	if (!interaction.guild || interaction.user.bot) return
 

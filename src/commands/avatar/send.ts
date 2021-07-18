@@ -24,7 +24,7 @@ async function execute(interaction: any) {
     .setColor('RANDOM')
     .setFooter(`💡 ${mentioned.tag}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, mentioned.displayAvatarURL({dynamic: true}))
 
-  return interaction.editReply({embeds: [embed], files: [`${mentioned.displayAvatarURL({ dynamic: true })}?size=4096`], components: [actionRow] })
+  await interaction.editReply({embeds: [embed], files: [`${mentioned.displayAvatarURL({ dynamic: true })}?size=4096`], components: [actionRow] })
 }
 
 const options = {

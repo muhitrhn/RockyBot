@@ -1,3 +1,35 @@
+import fs from "fs"
+import { error } from "../base/cmd"
+
+export = {
+  name: 'fun',
+
+  async redirect(client: any, interaction: any) {
+    try {
+      const command = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
+      await command.execute(client, interaction)
+    } catch (err) {
+      error(interaction, err)
+    }
+  },
+
+  createCMD(client: any) {
+    const cmds = fs.readdirSync('./src/commands/fun')
+
+    let optionsToProv = []
+    for (const file of cmds) {
+      const { options } = require(`./${file}`)
+      optionsToProv.push(options)
+    }
+    client.application.commands.create({
+      name: 'fun',
+      description: '😂 Kategoria fun',
+      options: optionsToProv 
+    })
+  },
+
+}
+/*
 module.exports = {
   name: 'fun',
 
@@ -12,13 +44,6 @@ module.exports = {
       description: '😂 Kategoria fun',
       options: [
 
-        //Budowa command
-
-        {
-          name: 'budowa',
-          description: '🏗️ Budowa! BUDOWA!',
-          type: 1, 
-        },
 
         //Kamien command
 
@@ -94,4 +119,4 @@ module.exports = {
     })
   },
 
-}
+} */
