@@ -16,7 +16,7 @@ module.exports = {
       }
 
       const bansInGuild = await interaction.guild.bans.fetch()
-      const toUnban = bansInGuild.find(b => b.user.id === interaction.options.map(x => x.options)[0].map(x => x.value)[0])
+      const toUnban = bansInGuild.find(b => b.user.id === interaction.options.map(x => x.options)[0].map(x => x.value)[0].trim())
 
       const embed = new MessageEmbed()
         .setColor('RANDOM')
@@ -24,7 +24,7 @@ module.exports = {
 
       if(!toUnban) {
         embed.setTitle(`${client.emotes.warn}  Nie znaleziono zbanowanego użytkownika..`)
-          .setDescription(`**...o ID \`${interaction.options.map(x => x.options)[0].map(x => x.value)[0]}\``)
+          .setDescription(`**...o ID \`${interaction.options.map(x => x.options)[0].map(x => x.value)[0].trim()}\`**`)
           .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
           .setColor('#FFC000')
 
