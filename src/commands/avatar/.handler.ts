@@ -1,4 +1,8 @@
-module.exports = {
+import { options as send } from './send'
+import { options as deleteCmd } from './delete'
+import { options as trigger } from './trigger'
+
+export = {
   name: 'avatar',
 
   async redirect(client, interaction) {
@@ -11,38 +15,9 @@ module.exports = {
       name: 'avatar',
       description: '🖼️ Kategoria avatar',
       options: [
-
-        //Avatar command
-
-        {
-          name: 'send',
-          description: '🖼️ Wyślij czyjś avatar',
-          type: 1,
-          options: [
-              {
-                type: 'USER',
-                name: 'użytkownik',
-                description: '👥 Użytkownik, którego avatar chcesz zobaczyć',
-                required: false
-              }
-          ]   
-        },
-
-        //Delete command
-
-        {        
-          name: 'delete',
-          description: '❌ Nie lubisz kogoś? To usuń jego lub siebie xD',
-          type: 1,
-          options: [
-              {
-                type: 'USER',
-                name: 'użytkownik',
-                description: '👥 Użytkownik, którego chcesz usunąć',
-                required: false
-              }
-          ]
-        },
+        send,
+        deleteCmd,
+        trigger,
 
         //Invert command
 
@@ -107,23 +82,6 @@ module.exports = {
             }
           ]
         },
-
-        //Trigger command
-
-        {
-          name: 'trigger',
-          description: '🤬 Wkurz siebie lub kogoś xD',
-          type: 1,
-          options: [
-            {
-              type: 'USER',
-              name: 'użytkownik',
-              description: '👥 Użytkownik, którego chcesz wkurzyć',
-              required: false
-            }
-          ]
-        }
-
       ]
     })
   },
