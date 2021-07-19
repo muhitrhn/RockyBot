@@ -26,6 +26,15 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
+  if (serverQueue.songs.length < interaction.options.getInteger('numer', true) || interaction.options.getInteger('numer', true) < 1) {
+    embed.setTitle(`${config.emotes.world}  Nie znaleziono podanego numeru utworu`)
+      .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
+      .setColor('#FFC000')
+
+    await interaction.reply({embeds: [embed], ephemeral: true})
+    return
+  }
+
   if (!serverQueue.repeatMode) {
     serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 1)
   }
