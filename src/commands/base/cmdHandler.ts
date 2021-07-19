@@ -7,12 +7,14 @@ async function refreshDiscordCmds(client: Client) {
 
   console.log(chalk.whiteBright('Aktualizowanie bazy danych discorda...'))
 
+  // client.application?.commands.set([])
+
   fs.readdirSync('./src/commands').filter(async dirs => {
     const commands = fs.readdirSync(`./src/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
 
     for (const file of commands) {
-      const { createCMD } = require(`../${dirs}/${file}`)
       if (dirs === 'base') return
+      const { createCMD } = require(`../${dirs}/${file}`)
       try {
         await createCMD(client)
         console.log(chalk.yellowBright(`Dodano grupę ${dirs} do bazy discorda`))

@@ -30,25 +30,29 @@ async function redirect(interaction: CommandInteraction) {
   }
 }
 
-function createCMD(client: any) {
-  let optionsToProv = []
-  fs.readdirSync(`./src/commands/${name}`).filter((x: any) => !x.endsWith('.ts')).filter(async dir => {
-    const otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter((x: any) => {x.endsWith('.ts')})
-    for (const file of otherHandlers) {
-      if (file !== '.handler.ts') return
-      const { options } = require(`./${file}`)
-      optionsToProv.push(options())
-    }
+async function createCMD(client: any) {
+  let optionsToProv = [], otherHandlers: any, dirr: any
+  fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.ts')).filter(async dir => {
+    otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter(x => x.startsWith('.handler'))
+    dirr = dir
   })
-
-  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => files.endsWith('.ts'))
-    for (const file of cmds) {
-      if (file === '.handler.ts') return
-      const { options } = require(`./${file}`)
-      optionsToProv.push(options)
-    }
   
-  client.application.commands.create({
+  if(otherHandlers) {
+    for (const file of otherHandlers) {
+      const { options } = require(`./${dirr}/${file}`)
+      const toProv = await options()
+      optionsToProv.push(toProv)
+    }
+  }
+
+  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.handler.ts') && files.endsWith('.ts'))
+  for (const file of cmds) {
+    const { options } = require(`./${file}`)
+    optionsToProv.push(options)
+  }
+
+  
+  await client.application.commands.create({
     name: name,
     description: description,
     options: optionsToProv 
@@ -56,63 +60,3 @@ function createCMD(client: any) {
 }
 
 export = { name, redirect, createCMD }
-
-
-/*
-  module.exports = {
-    name: 'music',
-
-    async redirect(client, interaction) {
-      let command
-      if (interaction.options.map(x => x.name)[0] === 'repeat') {
-        command = require('./repeat/'+ interaction.options.map(x => x.options)[0].map(x => x.value)[0])
-      } 
-      else if (interaction.options.map(x => x.name)[0] === 'queue') {
-        command = require('./queue/'+ interaction.options.map(x => x.options)[0].map(x => x.name)[0])
-      } 
-      else {
-        command = require('./' + interaction.options.map(x => x.name)[0])
-      }
-      await command.execute(client, interaction)
-    },
-
-    createCMD(client) {
-      client.application.commands.create({
-        name: 'music',
-        description: '🎵 Kategoria muzyka',
-        options: [
-
-          //Back command
-
-          
-
-          //Pause command
-
-          
-
-          //Play command
-
-          
-
-
-          //Resume command
-
-          
-
-          //Skip command
-
-          
-          //Stop command
-
-          
-
-          //Repeat command
-
-         
-
-        ]
-      })
-    },
-
-  }
-*/

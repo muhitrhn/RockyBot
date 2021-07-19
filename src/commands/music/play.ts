@@ -193,32 +193,53 @@ async function execute(interaction: CommandInteraction) {
             clearInterval(checkch)
           }
         }, 1 * 60000) */
-  } 
 
-  if (cache) {
-    //@ts-ignore
-    for (const spotifyData of playlist) {
-      embed.setDescription(`**...kanału ${voiceChannel.toString()}**\n\n${config.emotes.google} *Użyłeś linku do playlisty spotify, teraz wyszukuję każdy utwór na youtube...*\n${config.emotes.gearspin} Ukończono: **${progress}%**`)
-      await interaction.editReply({embeds: [embed]})
+    if (cache) {
+      //@ts-ignore
+      for (const spotifyData of playlist) {
+        embed.setDescription(`**...kanału ${voiceChannel.toString()}**\n\n${config.emotes.google} *Użyłeś linku do playlisty spotify, teraz wyszukuję każdy utwór na youtube...*\n${config.emotes.gearspin} Ukończono: **${progress}%**`)
+        await interaction.editReply({embeds: [embed]})
 
-      //@ts-ignore
-      const song = await YouTube.search(spotifyData.name + ' - ' + spotifyData.artists[0].name)
-      songs.push({
-        title: song[0].title,
-        length: prettyMs(song[0].duration),
-        id: song[0].id
-      })
-      //@ts-ignore
-      progress = Math.round(100-cache/playlist.length*100)
-      cache = cache - 1
-    }
+        //@ts-ignore
+        const song = await YouTube.search(spotifyData.name + ' - ' + spotifyData.artists[0].name)
+        songs.push({
+          title: song[0].title,
+          length: prettyMs(song[0].duration),
+          id: song[0].id
+        })
+        //@ts-ignore
+        progress = Math.round(100-cache/playlist.length*100)
+        cache = cache - 1
+      }
+    }      
   }
 
-  if (serverQueue) {
+  else {
+    if (cache) {
+      //@ts-ignore
+      for (const spotifyData of playlist) {
+        embed.setDescription(`**...kanału ${voiceChannel.toString()}**\n\n${config.emotes.google} *Użyłeś linku do playlisty spotify, teraz wyszukuję każdy utwór na youtube...*\n${config.emotes.gearspin} Ukończono: **${progress}%**`)
+        await interaction.editReply({embeds: [embed]})
+  
+        //@ts-ignore
+        const song = await YouTube.search(spotifyData.name + ' - ' + spotifyData.artists[0].name)
+        songs.push({
+          title: song[0].title,
+          length: prettyMs(song[0].duration),
+          id: song[0].id
+        })
+        //@ts-ignore
+        progress = Math.round(100-cache/playlist.length*100)
+        cache = cache - 1
+      }
+    }
+
     songs.forEach(song => {
       serverQueue.songs.push(song)
     })
   }
+
+  
 
   if (type === 'spotify_playlist' || type === 'youtube_playlist') {
     embed.setTitle(`${config.emotes.grverify} Dodałem \`${songs.length}\` utworów...`)
@@ -270,17 +291,9 @@ async function play(interaction: CommandInteraction) {
     return queue.delete(interaction.guildId)
   }
 
-  let songId = song.id
-      
-  if (song.author) {
-    const toPlay = await YouTube.search(song.title + ' - ' + song.author)
-    songId = toPlay[0].id
-  }
-
-  const resource = createAudioResource(ytdl(songId, { filter: 'audioonly' }), {
+  const resource = createAudioResource(ytdl(song.id, { filter: 'audioonly' }), {
     inputType: StreamType.Arbitrary
   })
-
 
   await serverQueue.player.play(resource)
 
@@ -302,7 +315,7 @@ const options = {
     {
       type: 'STRING',
       name: 'muzyka',
-      description: '📛 Nazwa/link do playlisy/utworu youtube/spotify',
+      description: '📛 Nazwa lub link do playlisy/utworu na youtube/spotify',
       required: true
     }
   ]

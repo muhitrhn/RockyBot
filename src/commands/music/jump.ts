@@ -1,5 +1,5 @@
 import { CommandInteraction, MessageEmbed }from 'discord.js'
-import { queue, config } from '../../..'
+import { queue, config } from '../..'
 
 async function execute(interaction: CommandInteraction) {
   const serverQueue = queue.get(interaction.guildId)
@@ -26,7 +26,7 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
-  if (serverQueue.songs.length < interaction.options.getInteger('numer', true) || interaction.options.getInteger('numer', true) < 1) {
+  if (serverQueue.songs.length - 1 < interaction.options.getInteger('numer', true) || interaction.options.getInteger('numer', true) < 1) {
     embed.setTitle(`${config.emotes.world}  Nie znaleziono podanego numeru utworu`)
       .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
       .setColor('#FFC000')
@@ -35,23 +35,24 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
-  if (!serverQueue.repeatMode) {
-    serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 1)
-  }
-  else if (serverQueue.repeatMode === 'queue') {
-    const shifted = serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 2)
-    serverQueue.songs.push(shifted)
+  if (!serverQueue.repeatMode || serverQueue.repeatMode === 'queue') {
+    const spliced = serverQueue.songs.splice(0, interaction.options.getInteger('numer', true) - 1)
+    for (const unsplice of spliced) {
+      serverQueue.songs.push(unsplice)
+    }
   }
   else if (serverQueue.repeatMode === 'track') {
-    const shifted = serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 1)
-    serverQueue.songs.push(shifted)
+    const spliced = serverQueue.songs.splice(0, interaction.options.getInteger('numer', true))
+    for (const unsplice of spliced) {
+      serverQueue.songs.push(unsplice)
+    }
   } 
 
   serverQueue.player.stop()
 
-  embed.setTitle(`♻️ Usunąłem utwór \`${deletedSong.title}\`...`)
-    .setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])
-    .setDescription(`**...z numerem \`${interaction.options.getInteger('numer', true)}\`, trwający \`${deletedSong.length}\`**`)
+  embed.setTitle(`⤵️ Przesunąłem kolejkę...`)
+    .setThumbnail(config.cmds.musicImgs.skip[Math.floor(Math.random() * config.cmds.musicImgs.skip.length)])
+    .setDescription(`**...o \`${interaction.options.getInteger('numer', true)}\` utworów**`)
     .setColor('RANDOM')
     .setFooter(`💡 Utworów w kolejce: ${serverQueue.songs.length}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
@@ -60,11 +61,11 @@ async function execute(interaction: CommandInteraction) {
   if (interaction.channelId !== serverQueue.textChannel.id) {
     await serverQueue.textChannel.send({embeds: [embed]})
   }
-} 
+}
 
 const options = {
-  name: 'delete',
-  description: '♻️ Usuń konkretny utwór',
+  name: 'jump',
+  description: '⤵️ Przeskocz na konkretny utwór',
   type: 1, 
   options: [
     {

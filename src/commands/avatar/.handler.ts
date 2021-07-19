@@ -29,25 +29,29 @@ async function redirect(interaction: CommandInteraction) {
   }
 }
 
-function createCMD(client: any) {
-  let optionsToProv = []
-  fs.readdirSync(`./src/commands/${name}`).filter((x: any) => !x.endsWith('.ts')).filter(async dir => {
-    const otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter((x: any) => {x.endsWith('.ts')})
-    for (const file of otherHandlers) {
-      if (file !== '.handler.ts') return
-      const { options } = require(`./${file}`)
-      optionsToProv.push(options())
-    }
+async function createCMD(client: any) {
+  let optionsToProv = [], otherHandlers: any, dirr: any
+  fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.ts')).filter(async dir => {
+    otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter(x => x.startsWith('.handler'))
+    dirr = dir
   })
 
-  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => files.endsWith('.ts'))
-    for (const file of cmds) {
-      if (file === '.handler.ts') return
-      const { options } = require(`./${file}`)
-      optionsToProv.push(options)
+  if(otherHandlers) {
+    for (const file of otherHandlers) {
+      const { options } = require(`./${dirr}/${file}`)
+      const toProv = await options()
+      optionsToProv.push(toProv)
     }
+  }
+
+  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.handler.ts') && files.endsWith('.ts'))
+  for (const file of cmds) {
+    const { options } = require(`./${file}`)
+    optionsToProv.push(options)
+  }
+
   
-  client.application.commands.create({
+  await client.application.commands.create({
     name: name,
     description: description,
     options: optionsToProv 

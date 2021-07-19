@@ -32,8 +32,6 @@ async function execute(interaction: CommandInteraction) {
 }
 
 async function list(interaction: CommandInteraction, page: any, bt: any, embedColor: any, embedThumbnail: any){
-  const embed = new MessageEmbed()
-    .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
   if (!page) page = 1
   let num = (page*5)-4
@@ -53,8 +51,11 @@ async function list(interaction: CommandInteraction, page: any, bt: any, embedCo
   }
 
   const embedDesc = songs.map((x: any) => x).join(' ')
-  embed.setTitle(`${config.emotes.grverify}  Kolejka...`)
+  
+  const embed = new MessageEmbed()
+    .setTitle(`${config.emotes.grverify}  Kolejka...`)
     .setDescription(`**...kanału ${queue.get(interaction.guildId).voiceChannel}**\n\n🔁 Powtarzanie kolejki: ${queue.get(interaction.guildId).repeatMode === 'queue' ? config.emotes.grverify : config.emotes.rverify}\n🔂 Powtarzanie utworu: ${queue.get(interaction.guildId).repeatMode === 'track' ? config.emotes.grverify : config.emotes.rverify}\n\n${config.emotes.boombox} Teraz gram: **${nowPlay.title}**┇***${nowPlay.length}***\n\n` + embedDesc + `${config.emotes.gearspin} ***Strona*** ***${page}***/***${maxPage}***`)
+    .setFooter(`💡 Utworów w kolejce: ${thisQueue.length + 1}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
     embedColor ? embed.setColor(embedColor) : embed.setColor('RANDOM')
     embedThumbnail ? embed.setThumbnail(embedThumbnail) : embed.setThumbnail(config.cmds.musicImgs.queue[Math.floor(Math.random() * config.cmds.musicImgs.queue.length)])
 
