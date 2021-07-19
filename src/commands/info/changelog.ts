@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageButton, MessageActionRow, Client } from 'discord.js'
-import { config } from "../.."
+import { client, config } from "../.."
 
-async function execute(client: Client, interaction: any) {
+async function execute(interaction: any) {
   await interaction.defer()
 
   let changes: any = []

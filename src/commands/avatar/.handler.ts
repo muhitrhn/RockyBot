@@ -5,7 +5,7 @@ import { error } from "../base/cmd"
 export = {
   name: 'avatar',
 
-  async redirect(o: Client, interaction: any) {
+  async redirect(interaction: any) {
     try {
       const { execute } = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
       await execute(interaction)

@@ -1,9 +1,9 @@
-import { MessageEmbed, MessageAttachment, Client } from 'discord.js'
+import { MessageEmbed, MessageAttachment } from 'discord.js'
 import got from 'got'
 import { config } from "../.."
 import { error } from "../base/cmd"
 
-async function execute(this: any, o: Client, interaction: any, tryCache: any) {
+async function execute(this: any, interaction: any, tryCache: any) {
   if (!tryCache) tryCache = 1
   else tryCache = tryCache + 1
   try {
@@ -35,7 +35,7 @@ async function execute(this: any, o: Client, interaction: any, tryCache: any) {
   } 
   catch (err) {
     if(tryCache < 5) {
-      this.execute(o, interaction, tryCache)
+      this.execute(interaction, tryCache)
     }
     error(interaction, err)
   }

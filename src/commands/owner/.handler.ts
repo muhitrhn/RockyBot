@@ -2,7 +2,7 @@ import fs from "fs"
 import { error } from "../base/cmd"
 
 export = {
-  name: 'info',
+  name: 'owner',
 
   async redirect(interaction: any) {
     try {
@@ -14,7 +14,7 @@ export = {
   },
 
   createCMD(client: any) {
-    const cmds = fs.readdirSync('./src/commands/info')
+    const cmds = fs.readdirSync('./src/commands/owner')
 
     let optionsToProv = []
     for (const file of cmds) {
@@ -23,9 +23,33 @@ export = {
       optionsToProv.push(options)
     }
     client.application.commands.create({
-      name: 'info',
-      description: '❓ Kategoria info',
+      name: 'owner',
+      description: '⚠️ Kategoria owner',
       options: optionsToProv 
+    })
+  },
+
+}
+
+module.exports = {
+  name: 'owner',
+
+  async redirect(client, interaction) {
+    const command = require('./' + interaction.options.map(x => x.name)[0])
+    await command.execute(client, interaction)
+  },
+
+  createCMD(client) {
+    client.application.commands.create({
+      name: 'owner',
+      description: '⚠️ Kategoria owner',
+      options: [
+
+        //Eval command
+
+        
+
+      ]
     })
   },
 

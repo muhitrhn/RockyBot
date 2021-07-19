@@ -2,7 +2,7 @@ import fs from "fs"
 import { error } from "../base/cmd"
 
 export = {
-  name: 'info',
+  name: 'nitro',
 
   async redirect(interaction: any) {
     try {
@@ -14,7 +14,7 @@ export = {
   },
 
   createCMD(client: any) {
-    const cmds = fs.readdirSync('./src/commands/info')
+    const cmds = fs.readdirSync('./src/commands/nitro')
 
     let optionsToProv = []
     for (const file of cmds) {
@@ -23,8 +23,8 @@ export = {
       optionsToProv.push(options)
     }
     client.application.commands.create({
-      name: 'info',
-      description: '❓ Kategoria info',
+      name: 'nitro',
+      description: '🔰 Kategoria nitro',
       options: optionsToProv 
     })
   },

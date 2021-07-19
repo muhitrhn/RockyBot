@@ -5,10 +5,10 @@ import { error } from "../base/cmd"
 export = {
   name: 'fun',
 
-  async redirect(client: Client, interaction: any) {
+  async redirect(interaction: any) {
     try {
       const { execute } = require('./' + interaction.options.map((x: { name: any }) => x.name)[0])
-      await execute(client, interaction)
+      await execute(interaction)
     } catch (err) {
       error(interaction, err)
     }

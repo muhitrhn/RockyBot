@@ -1,7 +1,7 @@
-import { Client, MessageEmbed } from 'discord.js'
-import { config } from '../..'
+import { MessageEmbed } from 'discord.js'
+import { client, config } from "../.."
 
-async function execute(client: Client, interaction: any) {
+async function execute(interaction: any) {
   await interaction.defer()
 
   // @ts-ignore 

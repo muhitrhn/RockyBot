@@ -1,7 +1,7 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 import { config } from '../..'
 
-async function execute(o: Client, interaction: any) {
+async function execute(interaction: any) {
   
   const embed = new MessageEmbed()
     .setColor('#FFC000')

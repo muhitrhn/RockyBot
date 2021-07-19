@@ -63,5 +63,5 @@ else {
 }
 
 export {
-  queue, config, handlers, 
+  client, queue, config, handlers, 
 }

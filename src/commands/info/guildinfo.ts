@@ -1,13 +1,13 @@
-import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable, Client } from 'discord.js'
-import { config } from '../..';
+import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable } from 'discord.js'
+import { client, config } from "../.."
 
-async function execute(this: any, client: Client, interaction: any) {
+async function execute(this: any, interaction: any) {
   await interaction.defer()
 
-  return this.main(client, interaction)
+  return this.main(interaction)
 }
 
-async function main(this: any, client: Client, interaction: any, bt: MessageButton, embedColor: ColorResolvable) {
+async function main(this: any, interaction: any, bt: MessageButton, embedColor: ColorResolvable) {
   await interaction.guild.members.fetch(); await interaction.guild.emojis.fetch();  await interaction.guild.channels.fetch()
   
   const embed = new MessageEmbed().setDescription('')
@@ -65,12 +65,12 @@ async function main(this: any, client: Client, interaction: any, bt: MessageButt
       collector.stop()
 
       const embedColor = embed.color
-      this.modders(client, interaction, buttonClick, embedColor)
+      this.modders(interaction, buttonClick, embedColor)
     }
   })
 }
 
-async function modders(this: any, client: Client, interaction: any, bt: MessageButton, embedColor: ColorResolvable) {
+async function modders(this: any, interaction: any, bt: MessageButton, embedColor: ColorResolvable) {
   const mods = await interaction.guild.roles.cache.filter((role: any) => role.permissions.has('MANAGE_MESSAGES') && role.members.filter((member: any) => !member.user.bot).array()[0]).map((x: any) => `\n${config.emotes.grverify} **${x}**:\n${x.members.filter((y: any) => !y.user.bot).map((y: any) => config.emotes.yellowDot + ' ' + y.user.tag).join('\n')}`).join('\n')
   
   const embed = new MessageEmbed()
@@ -112,7 +112,7 @@ async function modders(this: any, client: Client, interaction: any, bt: MessageB
       collector.stop()
 
       const embedColor = embed.color
-      this.main(client, interaction, buttonClick, embedColor)
+      this.main(interaction, buttonClick, embedColor)
       return
     }
   })

@@ -1,7 +1,7 @@
-import { MessageEmbed, MessageAttachment, Client } from 'discord.js'
-import { config } from "../.."
+import { MessageEmbed, MessageAttachment } from 'discord.js'
+import { client, config } from "../.."
   
-async function execute(client: Client, interaction: any) {
+async function execute(interaction: any) {
   await interaction.defer()
 
   let files: any = []

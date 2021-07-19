@@ -1,7 +1,7 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 import { config } from "../.."
   
-async function execute(o: Client, interaction: any) {
+async function execute(interaction: any) {
   await interaction.defer()
 
   await interaction.guild.members.fetch()

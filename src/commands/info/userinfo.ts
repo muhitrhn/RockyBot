@@ -1,15 +1,15 @@
-import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, Client, ColorResolvable } from 'discord.js'
-import { config } from '../..'
+import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable } from 'discord.js'
+import { client, config } from "../.."
 
-async function execute(this: any, client: Client, interaction: any) {
+async function execute(this: any, interaction: any) {
   await interaction.defer()
 
   const mentioned = interaction.options.map((x: any) => x.options)[0] ? interaction.options.map((x: any) => x.options)[0].map((x: any) => x.member)[0] : interaction.member
 
-  await this.main(client, interaction, mentioned)
+  await this.main(interaction, mentioned)
 }
 
-async function main(this: any, client: Client, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable) {
+async function main(this: any, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable) {
   const embed = new MessageEmbed()
     .setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
     .setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }))
@@ -70,20 +70,20 @@ async function main(this: any, client: Client, interaction: any, mentioned: any,
     else if (buttonClick.customId === 'ch_perms') {
       collector.stop()
 
-      this.chPerms(client, interaction, mentioned, buttonClick, embedColor)
+      this.chPerms(interaction, mentioned, buttonClick, embedColor)
       return
     } 
     // @ts-ignore  
     else if (buttonClick.customId === 'glob_perms') {
       collector.stop()
 
-      this.globPerms(client, interaction, mentioned, buttonClick, embedColor)
+      this.globPerms(interaction, mentioned, buttonClick, embedColor)
       return
     }
   })
 }
 
-async function chPerms(this: any, client: Client, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable)  {
+async function chPerms(this: any, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable)  {
   const perms = [
     (mentioned.permissionsIn(interaction.channel).has('VIEW_CHANNEL') ? config.emotes.grverify : config.emotes.rverify) +  ' Wyświetlanie kanału',
     (mentioned.permissionsIn(interaction.channel).has('SEND_MESSAGES') ? config.emotes.grverify : config.emotes.rverify) +  ' Wysyłanie wiadomości',
@@ -129,13 +129,13 @@ async function chPerms(this: any, client: Client, interaction: any, mentioned: a
     else if (buttonClick.customId === 'back'){
       collector.stop()
           
-      this.main(client, interaction, mentioned, buttonClick, color)
+      this.main(interaction, mentioned, buttonClick, color)
       return
     }
   })
 }
 
-async function globPerms(this: any, client: Client, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable)  {
+async function globPerms(this: any, interaction: any, mentioned: any, bt: MessageButton, color: ColorResolvable)  {
   const serverperms = [
     (mentioned.permissions.has('BAN_MEMBERS') ? config.emotes.grverify : config.emotes.rverify) +  ' Banowanie członków',
     (mentioned.permissions.has('KICK_MEMBERS') ? config.emotes.grverify : config.emotes.rverify) +  ' Wyrzucanie członków',
@@ -192,7 +192,7 @@ async function globPerms(this: any, client: Client, interaction: any, mentioned:
     else if (buttonClick.customId === 'back'){
       collector.stop()
           
-      this.main(client, interaction, mentioned, buttonClick, color)
+      this.main(interaction, mentioned, buttonClick, color)
       return
     }
   }) 
