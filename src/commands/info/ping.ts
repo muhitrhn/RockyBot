@@ -1,7 +1,7 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { client, config } from "../.."
 
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
   const embed = new MessageEmbed()

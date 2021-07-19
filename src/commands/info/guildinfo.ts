@@ -1,41 +1,43 @@
-import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable } from 'discord.js'
+import { MessageEmbed, MessageButton, MessageActionRow, InteractionCollector, ColorResolvable, CommandInteraction } from 'discord.js'
 import { client, config } from "../.."
 
-async function execute(this: any, interaction: any) {
+async function execute(this: any, interaction: CommandInteraction) {
   await interaction.defer()
 
   return this.main(interaction)
 }
 
-async function main(this: any, interaction: any, bt: MessageButton, embedColor: ColorResolvable) {
-  await interaction.guild.members.fetch(); await interaction.guild.emojis.fetch();  await interaction.guild.channels.fetch()
+async function main(this: any, interaction: CommandInteraction, bt: MessageButton, embedColor: ColorResolvable) {
+  await interaction.guild?.members.fetch(); await interaction.guild?.emojis.fetch();  await interaction.guild?.channels.fetch()
   
   const embed = new MessageEmbed().setDescription('')
     .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
+    //@ts-ignore
     .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-    .setTitle(`🖥️  Serwer **${interaction.guild.name}**`)
+    .setTitle(`🖥️  Serwer **${interaction.guild?.name}**`)
     embedColor ? embed.setColor(embedColor) : embed.setColor('RANDOM')
     embed.addField(
       '🔆 <-- Ogólne -->', 
 
-      `📎 ID: **${interaction.guild.id}**` + '\n' +
+      `📎 ID: **${interaction.guildId}**` + '\n' +
       // @ts-ignore  
       `⛳ Właściciel: **${client.users.cache.get(interaction.guild.ownerId).tag}**` + '\n' +
-      `⏲️ Utworzono (UTC): **${interaction.guild.createdAt.getUTCHours()}:${(interaction.guild.createdAt.getUTCMinutes()<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCMinutes())}┇${(interaction.guild.createdAt.getUTCDate()<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCDate())}.${((interaction.guild.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCMonth()+1)}.${interaction.guild.createdAt.getUTCFullYear()}**` +
+      //@ts-ignore
+      `⏲️ Utworzono (UTC): **${interaction.guild?.createdAt.getUTCHours()}:${(interaction.guild.createdAt.getUTCMinutes()<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCMinutes())}┇${(interaction.guild.createdAt.getUTCDate()<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCDate())}.${((interaction.guild.createdAt.getUTCMonth()+1)<10?'0':'')+parseInt(interaction.guild.createdAt.getUTCMonth()+1)}.${interaction.guild.createdAt.getUTCFullYear()}**` +
       '\u200b'
     )
     .addField(
       `${config.emotes.world} <-- Statystyki -->`,
 
-      `🪃 Roli: **${interaction.guild.roles.cache.size}**` + '\n' +
-      `${config.emotes.cpu} Emoji ogółem: **${interaction.guild.emojis.cache.size}**` + '\n' +
-      `${config.emotes.changelog} Normalnych emoji: **${interaction.guild.emojis.cache.filter((emoji: any) => !emoji.animated).size}**` + '\n' +
-      `${config.emotes.nitro} Animowanych emoji: **${interaction.guild.emojis.cache.filter((emoji: any) => emoji.animated).size}**` + '\n' +
-      `👥 Ludzi: **${interaction.guild.members.cache.filter((member: any) => !member.user.bot).size}**` + '\n' +
-      `🤖 Botów: **${interaction.guild.members.cache.filter((member: any) => member.user.bot).size}**` + '\n' +
-      `✍️ Kanałow tekstowych: **${interaction.guild.channels.cache.filter((channel: any) => channel.type === 'text').size}**` + '\n' +
-      `🔊 Kanałów głosowych: **${interaction.guild.channels.cache.filter((channel: any) => channel.type === 'voice').size}**` + '\n' +
-      `🔰 Boostów: **${interaction.guild.premiumSubscriptionCount || '0'}**`
+      `🪃 Roli: **${interaction.guild?.roles.cache.size}**` + '\n' +
+      `${config.emotes.cpu} Emoji ogółem: **${interaction.guild?.emojis.cache.size}**` + '\n' +
+      `${config.emotes.changelog} Normalnych emoji: **${interaction.guild?.emojis.cache.filter((emoji: any) => !emoji.animated).size}**` + '\n' +
+      `${config.emotes.nitro} Animowanych emoji: **${interaction.guild?.emojis.cache.filter((emoji: any) => emoji.animated).size}**` + '\n' +
+      `👥 Ludzi: **${interaction.guild?.members.cache.filter((member: any) => !member.user.bot).size}**` + '\n' +
+      `🤖 Botów: **${interaction.guild?.members.cache.filter((member: any) => member.user.bot).size}**` + '\n' +
+      `✍️ Kanałow tekstowych: **${interaction.guild?.channels.cache.filter((channel: any) => channel.type === 'text').size}**` + '\n' +
+      `🔊 Kanałów głosowych: **${interaction.guild?.channels.cache.filter((channel: any) => channel.type === 'voice').size}**` + '\n' +
+      `🔰 Boostów: **${interaction.guild?.premiumSubscriptionCount || '0'}**`
     )
 
   const button = new MessageButton()
@@ -52,6 +54,7 @@ async function main(this: any, interaction: any, bt: MessageButton, embedColor: 
 
   const reply = await interaction.editReply({embeds: [embed], components: [buttonRow]})
 
+  //@ts-ignore
   const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
   collector.on('collect', async buttonClick => {
     if (buttonClick.user.id !== interaction.user.id) {

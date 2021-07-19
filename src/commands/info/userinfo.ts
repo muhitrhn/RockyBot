@@ -4,7 +4,10 @@ import { client, config } from "../.."
 async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
-  const mentioned = interaction.options.getMember('użytkownik') ? interaction.options.getMember('użytkownik') : interaction.member
+  const user = interaction.options.getUser('użytkownik') ? interaction.options.getUser('użytkownik') : interaction.user
+  await interaction.guild?.members.fetch()
+  //@ts-ignore
+  const mentioned = interaction.guild?.members.cache.get(user.id)
   main(interaction, mentioned, null, null)
 }
 

@@ -1,7 +1,7 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { config } from '../..'
 
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   
   const embed = new MessageEmbed()
     .setColor('#FFC000')

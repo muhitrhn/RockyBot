@@ -1,10 +1,10 @@
-import { MessageEmbed, MessageButton, MessageActionRow } from 'discord.js'
+import { MessageEmbed, MessageButton, MessageActionRow, CommandInteraction } from 'discord.js'
 import { config } from '../..'
 
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
-  const mentioned = interaction.options.map((x: any) => x.options)[0] ? interaction.options.map((x: any) => x.options)[0].map((x: any) => x.user)[0] : interaction.user
+  const mentioned = interaction.options.getUser('użytkownik') ? interaction.options.getUser('użytkownik', true) : interaction.user
 
   const button = new MessageButton()
     .setStyle('LINK')

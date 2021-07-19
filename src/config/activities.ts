@@ -1,4 +1,4 @@
-import info from './mainCfg'
+import info from './maincfg'
 export = {
 activities: [	
     //Development

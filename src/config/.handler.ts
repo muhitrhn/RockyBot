@@ -1,4 +1,4 @@
-import mainCfg from './mainCfg'
+import mainCfg from './maincfg'
 import activities from './activities'
 import emotes from './emotes'
 import cmds from './cmds'
