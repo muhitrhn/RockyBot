@@ -1,7 +1,7 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { config } from '../..'
 
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   const embed = new MessageEmbed()
     .setColor('RANDOM')
     .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
@@ -19,14 +19,14 @@ async function execute(interaction: any) {
   await interaction.defer()
 
   //EVAL
-  const code = interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0]
+  const code = interaction.options.getString('kod', true)
   let evaled: any = await eval(code)
    
   if (typeof evaled !== 'string') {
     evaled = require('util').inspect(await evaled)
   }
    
-  await interaction.editReply(evaled, {code:'xl'})
+  await interaction.editReply({content: `\`\`\`${evaled}\`\`\``})
 }
 
 const options = {

@@ -5,6 +5,5 @@ export = {
     changelog: 'https://github.com/Bajojajo-xD/RockyBot/blob/main/CHANGELOG.MD',
     github: 'https://github.com/Bajojajo-xD/RockyBot/',
 
-    deleteCommandsFirst: false,
     refreshDiscordCmds: false
 }

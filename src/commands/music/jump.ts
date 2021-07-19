@@ -26,9 +26,19 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
-  const deletedSong = serverQueue.songs[interaction.options.getInteger('numer', true)]
+  if (!serverQueue.repeatMode) {
+    serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 1)
+  }
+  else if (serverQueue.repeatMode === 'queue') {
+    const shifted = serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 2)
+    serverQueue.songs.push(shifted)
+  }
+  else if (serverQueue.repeatMode === 'track') {
+    const shifted = serverQueue.songs.shift(interaction.options.getInteger('numer', true) - 1)
+    serverQueue.songs.push(shifted)
+  } 
 
-  delete serverQueue.songs[interaction.options.getInteger('numer', true)]
+  serverQueue.player.stop()
 
   embed.setTitle(`♻️ Usunąłem utwór \`${deletedSong.title}\`...`)
     .setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])

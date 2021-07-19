@@ -3,153 +3,153 @@ const mutedSchema = require('../../models/settings')
 
 module.exports = {
 
-  async execute(client, interaction) {
-    try {
-      if (!interaction.guild.me.permissionsIn(interaction.channel).has('MANAGE_ROLES')) {
-        //PermsCheck: missing bot perms
-        const missingPerms = 'ZARZĄDZANIE ROLAMI'
+	async execute(client, interaction) {
+		try {
+			if (!interaction.guild.me.permissionsIn(interaction.channel).has('MANAGE_ROLES')) {
+				//PermsCheck: missing bot perms
+				const missingPerms = 'ZARZĄDZANIE ROLAMI'
 
-        const ifBot = 1
-        return client.base.get('check').missingPerms(client, interaction, missingPerms, ifBot)
-      } 
-      else if (!interaction.member.permissionsIn(interaction.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(interaction.author.id)) {
-        //PermsCheck: missing user perms
-        const missingPerms = 'ZARZĄDZANIE WIADOMOŚCIAMI'
+				const ifBot = 1
+				return client.base.get('check').missingPerms(client, interaction, missingPerms, ifBot)
+			} 
+			else if (!interaction.member.permissionsIn(interaction.channel).has('MANAGE_MESSAGES')  && !client.ownerID.includes(interaction.author.id)) {
+				//PermsCheck: missing user perms
+				const missingPerms = 'ZARZĄDZANIE WIADOMOŚCIAMI'
 
-        return client.base.get('check').missingPerms(client, interaction, missingPerms)
-      }
+				return client.base.get('check').missingPerms(client, interaction, missingPerms)
+			}
 
-      const mentioned = interaction.options.map(x => x.options)[0].map(x => x.member)[0]
+			const mentioned = interaction.options.map(x => x.options)[0].map(x => x.member)[0]
 
-      const embed = new MessageEmbed()
-        .setColor('RANDOM')
-        .setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
+			const embed = new MessageEmbed()
+				.setColor('RANDOM')
+				.setFooter(`💡 ${mentioned.user.tag}\n🛠️ v${client.version} ┇ ⚡ RockyBot® 2021`, mentioned.user.displayAvatarURL({dynamic: true}))
 
-      if (mentioned.permissions.has('MANAGE_MESSAGES')) {
-        embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć...`)
-          .setDescription(`**...moderatora [${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**, ma uprawnienie 'ZARZĄDZANIE WIADOMOŚCIAMI'`)
-          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-          .setColor('#FFC000')
+			if (mentioned.permissions.has('MANAGE_MESSAGES')) {
+				embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć...`)
+					.setDescription(`**...moderatora [${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**, ma uprawnienie 'ZARZĄDZANIE WIADOMOŚCIAMI'`)
+					.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+					.setColor('#FFC000')
 
-        return interaction.reply({embeds: [embed], ephemeral: true})
-      }
+				return interaction.reply({embeds: [embed], ephemeral: true})
+			}
 
-      if (!mentioned.manageable) {
-        embed.setTitle(`${client.emotes.warn}  Moja rola jest za niska...`)
-          .setDescription(`**...aby nałożyć rolę wyciszenia na [${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**`)
-          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-          .setColor('#FFC000')
+			if (!mentioned.manageable) {
+				embed.setTitle(`${client.emotes.warn}  Moja rola jest za niska...`)
+					.setDescription(`**...aby nałożyć rolę wyciszenia na [${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**`)
+					.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+					.setColor('#FFC000')
 
-        return interaction.reply({embeds: [embed], ephemeral: true})
-      }
+				return interaction.reply({embeds: [embed], ephemeral: true})
+			}
 
-      const data = await mutedSchema.findOne({
-        GuildID: interaction.guild.id
-      })
+			const data = await mutedSchema.findOne({
+				GuildID: interaction.guild.id
+			})
 
-      let role
-      if(data){
-        await interaction.guild.roles.fetch()
-        role = await interaction.guild.roles.cache.get(data.MutedRole)
-      } 
+			let role
+			if(data){
+				await interaction.guild.roles.fetch()
+				role = await interaction.guild.roles.cache.get(data.MutedRole)
+			} 
 
-      if(!role) {
-        embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
-          .setDescription('**...roli wyciszenia, użyj `/settings mutedrole` jeśli masz uprawnienie \'ZARZĄDZANIE SERWEREM\', aby ustawić rolę**')
-          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-          .setColor('#FFC000')
+			if(!role) {
+				embed.setTitle(`${client.emotes.warn}  Ten serwer nie ma ustawionej...`)
+					.setDescription('**...roli wyciszenia, użyj `/settings mutedrole` jeśli masz uprawnienie \'ZARZĄDZANIE SERWEREM\', aby ustawić rolę**')
+					.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+					.setColor('#FFC000')
 
-        return interaction.reply({embeds: [embed], ephemeral: true})
-      }
+				return interaction.reply({embeds: [embed], ephemeral: true})
+			}
 
-      if (mentioned.roles.cache.some(role => role.id === data.MutedRole)) {
-        embed.setTitle(`${client.emotes.warn}  Użytkownik jest już wyciszony,...`)
-          .setDescription('**...użyj `/moderation unmute` aby usunąć wyciszenie**')
-          .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-          .setColor('#FFC000')
+			if (mentioned.roles.cache.some(role => role.id === data.MutedRole)) {
+				embed.setTitle(`${client.emotes.warn}  Użytkownik jest już wyciszony,...`)
+					.setDescription('**...użyj `/moderation unmute` aby usunąć wyciszenie**')
+					.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+					.setColor('#FFC000')
 
-        return interaction.reply({embeds: [embed], ephemeral: true})
-      }
+				return interaction.reply({embeds: [embed], ephemeral: true})
+			}
 
-      await interaction.defer()
+			await interaction.defer()
 
-      let reason, reasonToProvide
-      if (interaction.options.map(x => x.options)[0].map(x => x)[1]) {
-        reason = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
-        reasonToProvide = 'Mod: ' + interaction.user.tag + '┇' + interaction.user.id + ';  Reason: ' + interaction.options.map(x => x.options)[0].map(x => x.value)[1]
-      } 
-      else {
-        reason = 0
-        reasonToProvide = 'Mod: ' + interaction.user.tag + '┇' + interaction.user.id + ';  Reason not provided' 
-      }
+			let reason, reasonToProvide
+			if (interaction.options.map(x => x.options)[0].map(x => x)[1]) {
+				reason = interaction.options.map(x => x.options)[0].map(x => x.value)[1]
+				reasonToProvide = 'Mod: ' + interaction.user.tag + '┇' + interaction.user.id + ';  Reason: ' + interaction.options.map(x => x.options)[0].map(x => x.value)[1]
+			} 
+			else {
+				reason = 0
+				reasonToProvide = 'Mod: ' + interaction.user.tag + '┇' + interaction.user.id + ';  Reason not provided' 
+			}
 
-      embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz wyciszyć...`)
-        .setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
-        if (reason === 0) {
-          embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu?**`)
-        }
-        else {
-          embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\`**?**`)
-        }
+			embed.setTitle(`${client.emotes.siren}  Czy na pewno chcesz wyciszyć...`)
+				.setThumbnail(client.cmds.loadingImgs[Math.floor(Math.random() * client.cmds.loadingImgs.length)])
+			if (reason === 0) {
+				embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu?**`)
+			}
+			else {
+				embed.setDescription(`**...użytkownika [${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\`**?**`)
+			}
 
-      const button = new MessageButton()
-        .setLabel('TAK')
-        .setStyle('DANGER')
-        .setEmoji(client.emotes.grverify_ID)
-        .setCustomId('mute')
+			const button = new MessageButton()
+				.setLabel('TAK')
+				.setStyle('DANGER')
+				.setEmoji(client.emotes.grverify_ID)
+				.setCustomId('mute')
 
-      const button2 = new MessageButton()
-        .setLabel('NIE')
-        .setStyle('SUCCESS')
-        .setEmoji(client.emotes.rverify_ID)
-        .setCustomId('cancel')
+			const button2 = new MessageButton()
+				.setLabel('NIE')
+				.setStyle('SUCCESS')
+				.setEmoji(client.emotes.rverify_ID)
+				.setCustomId('cancel')
 
-      const buttonRow = new MessageActionRow().addComponents([button, button2])
+			const buttonRow = new MessageActionRow().addComponents([button, button2])
 
-      const reply = await interaction.editReply({embeds: [embed], components: [buttonRow]})
+			const reply = await interaction.editReply({embeds: [embed], components: [buttonRow]})
 
-      const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
-      collector.on('collect', async buttonClick => {
-        if (buttonClick.user.id !== interaction.user.id) {
-          const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.user.displayAvatarURL({dynamic: true}))
+			const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
+			collector.on('collect', async buttonClick => {
+				if (buttonClick.user.id !== interaction.user.id) {
+					const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${client.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${client.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, buttonClick.user.displayAvatarURL({dynamic: true}))
           
-          await buttonClick.reply({ embeds: [replyEmbed], ephemeral: true })
-        } 
-        else if (buttonClick.customId === 'cancel') {
-          collector.stop()
+					await buttonClick.reply({ embeds: [replyEmbed], ephemeral: true })
+				} 
+				else if (buttonClick.customId === 'cancel') {
+					collector.stop()
           
-          embed.setTitle(`${client.emotes.rverify}  Anulowano wyciszenie użytkownika...`)
-            .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**`)
-            .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+					embed.setTitle(`${client.emotes.rverify}  Anulowano wyciszenie użytkownika...`)
+						.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id})**`)
+						.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
   
-          return interaction.editReply({embeds: [embed], components: []})
-        } 
-        else if (buttonClick.customId === 'mute') {
-          try {
-            await mentioned.roles.add(role, {reason: reasonToProvide})
-          } 
-          catch (err) {
-            embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć użytkownika...`)
-              .setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), rola wyciszenia jest wyższa od mojej, jeśli masz odpowiednie uprawnienia, przestaw w ustawieniach moją rolę ponad rolę wyciszenia**`)
-              .setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
-              .setColor('#FFC000')
-            return interaction.editReply({embeds: [embed], components: []})
-          }
+					return interaction.editReply({embeds: [embed], components: []})
+				} 
+				else if (buttonClick.customId === 'mute') {
+					try {
+						await mentioned.roles.add(role, {reason: reasonToProvide})
+					} 
+					catch (err) {
+						embed.setTitle(`${client.emotes.warn}  Nie mogę wyciszyć użytkownika...`)
+							.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), rola wyciszenia jest wyższa od mojej, jeśli masz odpowiednie uprawnienia, przestaw w ustawieniach moją rolę ponad rolę wyciszenia**`)
+							.setThumbnail(client.cmds.errorImgs[Math.floor(Math.random() * client.cmds.errorImgs.length)])
+							.setColor('#FFC000')
+						return interaction.editReply({embeds: [embed], components: []})
+					}
 
-          embed.setTitle(`${client.emotes.staff}  Wyciszono użytkownika...`)
-            .setThumbnail(mentioned.user.displayAvatarURL())
-            if (reason === 0) {
-              embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu**`)
-            }
-            else {
-              embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
-            }
+					embed.setTitle(`${client.emotes.staff}  Wyciszono użytkownika...`)
+						.setThumbnail(mentioned.user.displayAvatarURL())
+					if (reason === 0) {
+						embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), nie podając powodu**`)
+					}
+					else {
+						embed.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.id}), podając powód**\n\n\`${reason}\``)
+					}
 
-          return interaction.editReply({embeds: [embed], components: []})
-        }
-      })
-    } catch (err) {
-      return client.base.get('cmd').error(client, interaction, err)
-    }
-  }
+					return interaction.editReply({embeds: [embed], components: []})
+				}
+			})
+		} catch (err) {
+			return client.base.get('cmd').error(client, interaction, err)
+		}
+	}
 }

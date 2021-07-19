@@ -16,3 +16,5 @@ async function options() {
     options: optionsToProv
   }
 }
+
+export { options }

@@ -1,12 +1,13 @@
-import { MessageEmbed }from 'discord.js'
+import { CommandInteraction, MessageEmbed }from 'discord.js'
 import { queue, config } from '../../..'
 
-async function execute(interaction: any) {
-  const serverQueue = queue.get(interaction.guild.id)
+async function execute(interaction: CommandInteraction) {
+  const serverQueue = queue.get(interaction.guildId)
   const embed = new MessageEmbed()
     .setColor('RANDOM')
     .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
+  //@ts-ignore
   if (!interaction.member.voice.channel) {
     embed.setTitle(`${config.emotes.world}  Nie jesteś na kanale głosowym`)
       .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
@@ -36,7 +37,7 @@ async function execute(interaction: any) {
 
   await interaction.reply({embeds: [embed]})
 
-  if (interaction.channel.id !== serverQueue.textChannel.id) {
+  if (interaction.channelId !== serverQueue.textChannel.id) {
     await serverQueue.textChannel.send({embeds: [embed]})
   }
 } 

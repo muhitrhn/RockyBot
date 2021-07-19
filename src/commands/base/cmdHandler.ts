@@ -5,11 +5,6 @@ import { Client } from 'discord.js'
 
 async function refreshDiscordCmds(client: Client) {
 
-  if (config.deleteCommandsFirst) {
-    // @ts-ignore  
-    await client.application.commands.set([])
-  }
-
   console.log(chalk.whiteBright('Aktualizowanie bazy danych discorda...'))
 
   fs.readdirSync('./src/commands').filter(async dirs => {

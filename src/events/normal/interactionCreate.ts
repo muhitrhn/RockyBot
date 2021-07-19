@@ -1,14 +1,14 @@
 import { MessageEmbed } from 'discord.js'
 import { config, handlers } from '../..'
 
-module.exports = async (client: any, interaction: any) => {
+module.exports = async (o: any, interaction: any) => {
 
 	if (!interaction.guild || interaction.user.bot) return
 
   if (interaction.type !== 'APPLICATION_COMMAND') return
   try {
     const { redirect } = handlers.get(interaction.commandName)
-    redirect(client, interaction)
+    redirect(interaction)
   } 
   catch (err) {
     const errEmbed = new MessageEmbed()

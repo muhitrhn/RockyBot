@@ -1,5 +1,5 @@
-import { CommandInteraction, MessageEmbed }from 'discord.js'
-import { queue, config } from '../../..'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
+import { config, queue } from '../..'
 
 async function execute(interaction: CommandInteraction) {
   const serverQueue = queue.get(interaction.guildId)
@@ -16,7 +16,7 @@ async function execute(interaction: CommandInteraction) {
     await interaction.reply({embeds: [embed], ephemeral: true})
     return
   }
-      
+
   if (!serverQueue) {
     embed.setTitle(`${config.emotes.world}  Nie gram na tym kanale`)
       .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
@@ -26,13 +26,26 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
-  const deletedSong = serverQueue.songs[interaction.options.getInteger('numer', true)]
+  if (!serverQueue.repeatMode) {
+    serverQueue.player.stop()
+  } 
+  else if (serverQueue.repeatMode === 'queue') {
+    serverQueue.player.stop()
+  } 
+  else if (serverQueue.repeatMode === 'track') {
+    if (serverQueue.songs[1]) {
+      serverQueue.songs.push(serverQueue.songs[0])
+      serverQueue.songs.shift()
 
-  delete serverQueue.songs[interaction.options.getInteger('numer', true)]
+      serverQueue.player.stop()
+    } 
+    else {
+      serverQueue.player.stop()
+    }
+  } 
 
-  embed.setTitle(`♻️ Usunąłem utwór \`${deletedSong.title}\`...`)
-    .setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])
-    .setDescription(`**...z numerem \`${interaction.options.getInteger('numer', true)}\`, trwający \`${deletedSong.length}\`**`)
+  embed.setTitle('⏭️ Pominąłem utwór')
+    .setThumbnail(config.cmds.musicImgs.skip[Math.floor(Math.random() * config.cmds.musicImgs.skip.length)])
     .setColor('RANDOM')
     .setFooter(`💡 Utworów w kolejce: ${serverQueue.songs.length}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
@@ -41,20 +54,12 @@ async function execute(interaction: CommandInteraction) {
   if (interaction.channelId !== serverQueue.textChannel.id) {
     await serverQueue.textChannel.send({embeds: [embed]})
   }
-} 
+}
 
 const options = {
-  name: 'delete',
-  description: '♻️ Usuń konkretny utwór',
+  name: 'skip',
+  description: '⏭️ Pomiń utwór',
   type: 1, 
-  options: [
-    {
-      type: 'INTEGER',
-      name: 'numer',
-      description: '🔢 Numer utworu z playlisty (komenda /music queue view)',
-      required: true
-    }
-  ]
 }
 
 export { execute, options }

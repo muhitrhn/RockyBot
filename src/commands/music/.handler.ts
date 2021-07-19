@@ -1,59 +1,62 @@
+import { CommandInteraction } from "discord.js"
 import fs from "fs"
 import { error } from "../base/cmd"
 
-export = {
-  name: 'music',
+const name = 'music'
+const description = '🎵 Kategoria muzyka'
 
-  async redirect(interaction: any) {
+async function redirect(interaction: CommandInteraction) {
+  try {
+    let subcommand: boolean = false
     try {
-      const cmdss = fs.readdirSync('./src/commands/music')
-      const cmds = cmdss.filter((x: any) => {x.endsWith('.ts')})
-      const dirs = cmdss.filter((x: any) => {!x.endsWith('.ts')})
-
-      if (cmds.includes(interaction.options.map((x: { name: any }) => x.name)[0])) {
-        const { execute } = require('./' + interaction.options.map((x: any) => x.name)[0])
-        await execute(interaction)
-      } 
-      else if (dirs.includes(interaction.options.map((x: { name: any }) => x.name)[0])) {
-        const { execute } = require('./' + `${interaction.options.map((x: any) => x.name)[0]}/` + interaction.options.map((x: any) => x.name)[0].map((x: any) => x.name)[0])
-        await execute(interaction)
+      const jo = interaction.options.getSubCommandGroup()
+      if (jo) {
+        subcommand = true
       }
-    } catch (err) {
-      error(interaction, err)
+    } catch (err) {}
+     
+    if (subcommand) {
+      const { execute } = require('./' + `${interaction.options.getSubCommandGroup()}/` + interaction.options.getSubCommand())
+      await execute(interaction)
     }
-  },
+    else {
+      const { execute } = require('./' + interaction.options.getSubCommand())
+      await execute(interaction)
+    }
+  } 
+  catch (err) {
+    error(interaction, err)
+    console.log(err)
+  }
+}
 
-  createCMD(client: any) {
-    const cmdss = fs.readdirSync('./src/commands/music')
-    const cmds = cmdss.filter((x: any) => {x.endsWith('.ts')})
-    const dirs = cmdss.filter((x: any) => {!x.endsWith('.ts')})
+function createCMD(client: any) {
+  let optionsToProv = []
+  fs.readdirSync(`./src/commands/${name}`).filter((x: any) => !x.endsWith('.ts')).filter(async dir => {
+    const otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter((x: any) => {x.endsWith('.ts')})
+    for (const file of otherHandlers) {
+      if (file !== '.handler.ts') return
+      const { options } = require(`./${file}`)
+      optionsToProv.push(options())
+    }
+  })
 
-    let optionsToProv = []
+  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => files.endsWith('.ts'))
     for (const file of cmds) {
       if (file === '.handler.ts') return
       const { options } = require(`./${file}`)
       optionsToProv.push(options)
     }
-
-    for (const dir of dirs) {
-      const otherHandlerss = fs.readdirSync(`./src/commands/music/${dir}`)
-      const otherHandlers = otherHandlerss.filter((x: any) => {x.endsWith('.ts')})
-      for (const file of otherHandlers) {
-        if (file !== '.handler.ts') return
-        const { options } = require(`./${file}`)
-        optionsToProv.push(options())
-      }
-    }
-    
-
-    client.application.commands.create({
-      name: 'nitro',
-      description: '🔰 Kategoria nitro',
-      options: optionsToProv 
-    })
-  },
-
+  
+  client.application.commands.create({
+    name: name,
+    description: description,
+    options: optionsToProv 
+  })
 }
+
+export = { name, redirect, createCMD }
+
 
 /*
   module.exports = {
@@ -81,115 +84,31 @@ export = {
 
           //Back command
 
-          {
-            name: 'back',
-            description: '⏮️ Cofnij utwór',
-            type: 1, 
-          },
+          
 
           //Pause command
 
-          {
-            name: 'pause',
-            description: '⏸️ Zatrzymaj muzykę',
-            type: 1, 
-          },
+          
 
           //Play command
 
-          {
-            name: 'play',
-            description: '🎵 Zagraj muzykę',
-            type: 1, 
-            options: [
-              {
-                type: 'STRING',
-                name: 'muzyka',
-                description: '📛 Nazwa/link do playlisy/utworu youtube/spotify',
-                required: true
-              }
-            ]
-          },
+          
 
-          //Queue command
-
-          {
-            name: 'queue',
-            description: '🔢 Kolejka odtwarzania',
-            type: 2,
-            options: [
-
-              //Queue view command
-
-              {
-                name: 'view',
-                description: '🔢 Wyświetl kolejkę odtwarzania',
-                type: 1
-              },
-
-              //Queue clear command
-
-              
-
-              //Queue Delete command
-
-              
-            ]
-          },
 
           //Resume command
 
-          {
-            name: 'resume',
-            description: '▶️ Wznów grę',
-            type: 1, 
-          },
+          
 
           //Skip command
 
-          {
-            name: 'skip',
-            description: '⏭️ Pomiń utwór',
-            type: 1, 
-          },
-
+          
           //Stop command
 
-          {
-            name: 'stop',
-            description: '🛑 Wyczyść kolejkę i skończ grać',
-            type: 1, 
-          },
+          
 
           //Repeat command
 
-          {
-            name: 'repeat',
-            description: '🔁 Zmień tryb powtarzania utworu',
-            type: 1,
-            options: [
-              {
-                name: 'typ',
-                description: '🔁 Zmień tryb powtarzania utworu',
-                type: 'STRING',
-                required: true,
-                choices: [
-                  {
-                    name: '❌ Disable',
-                    value: 'disable'
-                  },
-                  {
-                    name: '🔁 Queue (default)',
-                    value: 'queue'
-                  },
-                  {
-                    name: '🔂 Track',
-                    value: 'track'
-                  },
-                ]
-              }
-            ] 
-          },
+         
 
         ]
       })

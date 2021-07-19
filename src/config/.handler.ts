@@ -6,7 +6,6 @@ require('dotenv').config()
 
 export = {
 
-    deleteCommandsFirst: mainCfg.deleteCommandsFirst,
     refreshDiscordCmds: mainCfg.refreshDiscordCmds,
 
     cmds: cmds.commands,

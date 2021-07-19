@@ -1,16 +1,16 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { client, config } from "../.."
 
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   
   const embed = new MessageEmbed()
     .setColor('RANDOM')
     .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
-  let emoji = client.emojis.cache.find((emojii: any) => emojii.name.toLowerCase().includes(interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0].toLowerCase()))
+  let emoji = client.emojis.cache.find((emojii: any) => emojii.name.toLowerCase().includes(interaction.options.getString('nazwa', true).toLowerCase()))
   
   if (!emoji) {
-    embed.setTitle(`${config.emotes.world}  Nie znaleziono emoji o nazwie \`${interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0].toLowerCase()}\``)
+    embed.setTitle(`${config.emotes.world}  Nie znaleziono emoji o nazwie \`${interaction.options.getString('nazwa', true).toLowerCase()}\``)
       .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
       .setColor('#FFC000')
 
@@ -21,6 +21,7 @@ async function execute(interaction: any) {
   await interaction.defer()
 
   //WebhksChk
+  // @ts-ignore
   const webhooks = await interaction.channel.fetchWebhooks()
   // @ts-ignore
   const myWebhooks = await webhooks.filter((wbhk: any) => wbhk.owner.id === client.user.id)
@@ -35,6 +36,7 @@ async function execute(interaction: any) {
   let webhook
   if (webhksCheck === 0) {
     //Create webhook
+    // @ts-ignore
     webhook = await interaction.channel.createWebhook(interaction.user.username, { avatar: interaction.user.displayAvatarURL() })
   }
   else {

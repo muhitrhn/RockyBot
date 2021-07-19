@@ -1169,10 +1169,9 @@ discord-image-generation@^1.4.9:
     gifencoder "^2.0.1"
     jimp "^0.16.1"
 
-discord.js@^13.0.0-dev.4d53d0f.1626609771:
-  version "13.0.0-dev.4d53d0f.1626609771"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.4d53d0f.1626609771.tgz#d996c5b3d0bd37027c8656fd00982579698ca893"
-  integrity sha512-5NZYFPbTDu6vw/V++0YsyadWlZ0WGakah4ENsBmsH61Us8VLfFsmuKfG3TBNexn2PADlXWx4Lb2YCLLvR3q57A==
+discord.js@discordjs/discord.js:
+  version "13.0.0-dev"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/77784aca431709ff3c17095bd06f9e4016fbd11d"
   dependencies:
     "@discordjs/builders" "^0.2.0"
     "@discordjs/collection" "^0.1.6"
