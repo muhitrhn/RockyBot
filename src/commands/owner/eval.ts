@@ -20,13 +20,19 @@ async function execute(interaction: CommandInteraction) {
 
   //EVAL
   const code = interaction.options.getString('kod', true)
-  let evaled: any = await eval(code)
-   
-  if (typeof evaled !== 'string') {
-    evaled = require('util').inspect(await evaled)
+  let evaled: any
+  try {
+    evaled = await eval(code)
+    
+    if (typeof evaled !== 'string') {
+      evaled = require('util').inspect(await evaled)
+    }
+  }
+  catch (err) {
+    evaled = `\`\`\`js\n${err}\`\`\``
   }
    
-  await interaction.editReply({content: `\`\`\`${evaled}\`\`\``})
+  await interaction.editReply({content: evaled})
 }
 
 const options = {

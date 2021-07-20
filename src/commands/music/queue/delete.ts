@@ -37,7 +37,7 @@ async function execute(interaction: CommandInteraction) {
 
   const deletedSong = serverQueue.songs[interaction.options.getInteger('numer', true)]
 
-  delete serverQueue.songs[interaction.options.getInteger('numer', true)]
+  serverQueue.songs.splice(interaction.options.getInteger('numer', true), 1)
 
   embed.setTitle(`♻️ Usunąłem utwór \`${deletedSong.title}\`...`)
     .setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])
@@ -50,7 +50,7 @@ async function execute(interaction: CommandInteraction) {
   if (interaction.channelId !== serverQueue.textChannel.id) {
     await serverQueue.textChannel.send({embeds: [embed]})
   }
-} 
+}
 
 const options = {
   name: 'delete',

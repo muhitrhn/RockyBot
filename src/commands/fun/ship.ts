@@ -1,22 +1,23 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { config } from "../.."
   
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
-  await interaction.guild.members.fetch()
+  await interaction.guild?.members.fetch()
 
   const embed = new MessageEmbed()
     .setTitle('Sprawdzone 💗')
     .setColor('#FFC0CB')
     .setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
-  const optionCheck = interaction.options.map((x: any) => x.options)[0] ? interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0] ? true : false : false
+  const optionCheck = interaction.options.getString('opcja') ? true : false
 
   //No options chosen
   if (!optionCheck) {
-    const guildMembers = interaction.guild.members.cache.filter((user: any) => user.id !== interaction.user.id && !user.bot).array()
+    const guildMembers = interaction.guild?.members.cache.filter((user: any) => user.id !== interaction.user.id && !user.bot).array()
 
+    //@ts-ignore
     const userToShip = guildMembers[Math.floor(Math.random() * guildMembers.length)] 
     const ship = Math.floor(Math.random() * (100)) + 1
 
@@ -27,11 +28,11 @@ async function execute(interaction: any) {
     return
   }
 
-  const option2Check = interaction.options.map((x: any) => x.options)[0].array()[1] ? interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[1] ? true : false : false
+  const option2Check = interaction.options.getString('opcja2') ? true : false
 
   //Only 1 option chosen
   if (!option2Check) {
-    const toShip = interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0]
+    const toShip = interaction.options.getString('opcja', true)
         
     const ship = Math.floor(Math.random() * (100)) + 1
 
@@ -43,8 +44,8 @@ async function execute(interaction: any) {
   }
 
   //Everything chosen
-  const toShip1 = interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[0]
-  const toShip2 = interaction.options.map((x: any) => x.options)[0].map((x: any) => x.value)[1]
+  const toShip1 = interaction.options.getString('opcja', true)
+  const toShip2 = interaction.options.getString('opcja2', true)
   const ship = Math.floor(Math.random() * 100) + 1
 
   embed.setDescription(toShip1.toString() + ' + ' + toShip2.toString() + ' =  **' + ship + '%**')

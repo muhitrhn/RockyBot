@@ -1,12 +1,12 @@
-import { MessageEmbed } from 'discord.js'
+import { CommandInteraction, MessageEmbed } from 'discord.js'
 import {client, config } from "../.."
   
-async function execute(interaction: any) {
+async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
   let texts: any = []
   // @ts-ignore  
-  await client.channels.cache.get(config.cmds.attachments.rymowanka).messages.fetch().forEach((msg: any) => texts.push(msg.attachments.array()[0].url))
+  await client.channels.cache.get(config.cmds.attachments.rymowanka).messages.fetch().then(msgs => msgs.forEach((msg: any) => texts.push(msg.content)))
 
   const text = await texts[Math.floor(Math.random() * texts.length)] 
 
