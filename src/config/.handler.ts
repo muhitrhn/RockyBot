@@ -12,7 +12,7 @@ export = {
 
     emotes: emotes,
 
-    beta: true,
+    beta: false,
 
     releasedate: mainCfg.releasedate,
     version: mainCfg.version,
