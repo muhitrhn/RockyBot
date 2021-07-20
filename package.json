@@ -8,7 +8,6 @@
   "scripts": {
     "start": "ts-node src/index.ts --max_old_space_size=8192",
     "lint": "eslint . --fix",
-    "build": "tsc",
     "dev": "yarn build && yarn start"
   },
   "repository": {
