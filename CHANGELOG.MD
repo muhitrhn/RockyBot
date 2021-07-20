@@ -1,5 +1,13 @@
 # 🟢 0.34
 
+🟢 **Patch 1**
+
+|✨ Komenda queue repeat queue/track|✨ Bot|
+|-------------------------------|-------------------------------|
+|📗 `Poprawka w zdjęciu w komendzie`|📗 `Poprawki w kodzie, naprawiony deployment na heroku`|
+
+🟢 **Pierwsze wydanie**
+
 |✨ Komenda music jump|✨ Bot|
 |-------------------------------|-------------------------------|
 |📗 `Przeskocz do konkretnego utworu`|📗 `Konwersja do typescript, poprawa kodu`|
@@ -7,6 +15,7 @@
 # 🟢 0.33
 
 🟢 **Patch 1**
+
 |✨ Komenda mod unban|
 |----------------------|
 |📗 `Naprawiono`|

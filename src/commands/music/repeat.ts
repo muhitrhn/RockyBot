@@ -30,20 +30,22 @@ async function execute(interaction: CommandInteraction) {
     serverQueue.repeatMode = null
       
     embed.setTitle('❌ Usunąłem powtarzanie czegokolwiek')
+      .setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])
   }
   else if (interaction.options.get('typ')?.value === 'queue') {
     serverQueue.repeatMode = 'queue'
       
 	  embed.setTitle('🔁 Włączyłem powtarzanie kolejki')
+      .setThumbnail(config.cmds.musicImgs.repeat[Math.floor(Math.random() * config.cmds.musicImgs.repeat.length)])
   }
   else if (interaction.options.get('typ')?.value === 'track') {
     serverQueue.repeatMode = 'track'
       
 	  embed.setTitle('🔂 Włączyłem powtarzanie utworu')
+      .setThumbnail(config.cmds.musicImgs.repeat[Math.floor(Math.random() * config.cmds.musicImgs.repeat.length)])
   }
 
-  embed.setThumbnail(config.cmds.moderationImgs.clear[Math.floor(Math.random() * config.cmds.moderationImgs.clear.length)])
-		.setColor('RANDOM')
+  embed.setColor('RANDOM')
 		.setFooter(`💡 Utworów w kolejce: ${serverQueue.songs.length}\n🛠️ v${config.version} ┇ ⚡ RockyBot® 2021`, interaction.user.displayAvatarURL({dynamic: true}))
 
   await interaction.reply({embeds: [embed]})
