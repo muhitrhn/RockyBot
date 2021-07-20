@@ -46,7 +46,7 @@ mongoose.connect(mongoURI || '', {
   useUnifiedTopology: true
 })
 
-const events = fs.readdirSync('./src/events/normal')
+const events = fs.readdirSync('./dist/events/normal')
 
 for (const file of events) {
   console.log(chalk.magentaBright(`Załadowano event ${file} paczki discord.js `))

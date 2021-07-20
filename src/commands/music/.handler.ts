@@ -32,8 +32,8 @@ async function redirect(interaction: CommandInteraction) {
 
 async function createCMD(client: any) {
   let optionsToProv = [], otherHandlers: any, dirr: any
-  fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.ts')).filter(async dir => {
-    otherHandlers = fs.readdirSync(`./src/commands/${name}/${dir}`).filter(x => x.startsWith('.handler'))
+  fs.readdirSync(`./dist/commands/${name}`).filter(files => !files.endsWith('.js')).filter(async dir => {
+    otherHandlers = fs.readdirSync(`./dist/commands/${name}/${dir}`).filter(x => x.startsWith('.handler'))
     dirr = dir
   })
   
@@ -45,7 +45,7 @@ async function createCMD(client: any) {
     }
   }
 
-  const cmds = fs.readdirSync(`./src/commands/${name}`).filter(files => !files.endsWith('.handler.ts') && files.endsWith('.ts'))
+  const cmds = fs.readdirSync(`./dist/commands/${name}`).filter(files => !files.startsWith('.handler') && files.endsWith('.js'))
   for (const file of cmds) {
     const { options } = require(`./${file}`)
     optionsToProv.push(options)

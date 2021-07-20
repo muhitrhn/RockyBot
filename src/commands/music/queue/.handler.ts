@@ -1,7 +1,7 @@
 import fs from "fs"
 
 async function options() {
-  const cmds = fs.readdirSync('./src/commands/music/queue').filter(file => !file.startsWith('.handler.ts'))
+  const cmds = fs.readdirSync('./dist/commands/music/queue').filter(file => !file.startsWith('.handler'))
   let optionsToProv = []
   
   for (const file of cmds) {
