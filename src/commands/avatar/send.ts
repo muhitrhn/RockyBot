@@ -8,13 +8,13 @@ async function execute(interaction: CommandInteraction) {
 
   const button = new MessageButton()
     .setStyle('LINK')
-    .setEmoji(config.emotes.dwnld_ID)
+    .setEmoji(config.emotes.dwnld)
     .setLabel('MAŁY')
     .setURL(mentioned.displayAvatarURL({dynamic: true}))
 
   const button2 = new MessageButton()
     .setStyle('LINK')
-    .setEmoji(config.emotes.dwnld_ID)
+    .setEmoji(config.emotes.dwnld)
     .setLabel('DUŻY')
     .setURL(mentioned.displayAvatarURL({dynamic: true})+'?size=4096')
 

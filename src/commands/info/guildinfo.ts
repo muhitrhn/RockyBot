@@ -42,7 +42,7 @@ async function main(this: any, interaction: CommandInteraction, bt: MessageButto
 
   const button = new MessageButton()
     .setStyle('PRIMARY')
-    .setEmoji(config.emotes.staff_ID)
+    .setEmoji(config.emotes.staff)
     .setLabel('Moderatorzy')
     .setCustomId('moderators')
 
@@ -92,7 +92,7 @@ async function modders(this: any, interaction: any, bt: MessageButton, embedColo
   const button = new MessageButton()
     .setLabel('Wróć')
     .setStyle('SECONDARY')
-    .setEmoji(config.emotes.arrl_ID)
+    .setEmoji(config.emotes.arrl)
     .setCustomId('back')
 
   const buttonRow = new MessageActionRow().addComponents([button])

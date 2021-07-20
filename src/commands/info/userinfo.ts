@@ -29,7 +29,7 @@ async function main(interaction: CommandInteraction, mentioned: any, bt: any, co
     const button = new MessageButton()
       .setLabel('Administrator')
       .setStyle('DANGER')
-      .setEmoji(config.emotes.grverify_ID)
+      .setEmoji(config.emotes.grverify)
       .setCustomId('ch_perms')
       .setDisabled(true)
 
@@ -61,6 +61,7 @@ async function main(interaction: CommandInteraction, mentioned: any, bt: any, co
 
   //@ts-ignore
   const collector = new InteractionCollector(client, {message: reply, time: 30000, dispose: true})
+  //@ts-ignore
   collector.on('collect', async buttonClick => {
     if (buttonClick.user.id !== interaction.user.id) {
       const replyEmbed = new MessageEmbed().setColor('RED').setDescription(`**${config.emotes.grverify} Nie wywołałeś tej wiadomości**`).setFooter(`🛠️ v${config.version} ┇ ⚡ RockyBot® 2021 Reply Engine`, // @ts-ignore  
@@ -110,7 +111,7 @@ async function chPerms(interaction: CommandInteraction, mentioned: any, bt: any,
   const button = new MessageButton()
     .setLabel('Wróć')
     .setStyle('SECONDARY')
-    .setEmoji(config.emotes.arrl_ID)
+    .setEmoji(config.emotes.arrl)
     .setCustomId('back')
 
   const messageRow = new MessageActionRow().addComponents([button])
@@ -174,7 +175,7 @@ async function globPerms(interaction: CommandInteraction, mentioned: any, bt: an
   const button = new MessageButton()
     .setLabel('Wróć')
     .setStyle('SECONDARY')
-    .setEmoji(config.emotes.arrl_ID)
+    .setEmoji(config.emotes.arrl)
     .setCustomId('back')
 
   const messageRow = new MessageActionRow().addComponents([button])

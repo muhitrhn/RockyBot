@@ -18,7 +18,7 @@ async function execute(interaction: CommandInteraction) {
 
   const button = new MessageButton()
     .setStyle('LINK')
-    .setEmoji(config.emotes.changelog_ID)
+    .setEmoji(config.emotes.changelog)
     .setLabel('CHANGELOG')
     .setURL(config.changelog)
 

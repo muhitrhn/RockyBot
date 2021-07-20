@@ -61,7 +61,7 @@ async function list(interaction: CommandInteraction, page: any, bt: any, embedCo
 
   const button = new MessageButton()
     .setLabel('')
-    .setEmoji(config.emotes.arrl_ID)
+    .setEmoji(config.emotes.arrl)
     .setCustomId('back')
     if (page === 1) {
       button.setStyle('SECONDARY')
@@ -73,7 +73,7 @@ async function list(interaction: CommandInteraction, page: any, bt: any, embedCo
 
   const button2 = new MessageButton()
     .setLabel('')
-    .setEmoji(config.emotes.arrr_ID)
+    .setEmoji(config.emotes.arrr)
     .setCustomId('next')
     if (maxPage - page === 0) {
       button2.setStyle('SECONDARY')

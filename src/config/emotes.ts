@@ -26,15 +26,6 @@ export = {
     arrr: '<a:arrowright:852922342991724564>',
     arrl: '<a:arrowleft:852922321744166912>',
 
-    grverify_ID: '837704119086612502',
-    rverify_ID: '837704198388056175',
-    dwnld_ID: '852962401002717185',
-    arrr_ID: '852922342991724564',
-    arrl_ID: '852922321744166912',
-    changelog_ID: '852894595767337000',
-    siren_ID: '826730448289923072',
-    staff_ID: '843734135972691968',
-
     CMDbudowa: '🏗️',
     CMDkamien: '🪨',
     CMDstonoga: '🛃',
