@@ -5,5 +5,5 @@ export = {
     changelog: 'https://github.com/Bajojajo-xD/RockyBot/blob/main/CHANGELOG.MD',
     github: 'https://github.com/Bajojajo-xD/RockyBot/',
 
-    refreshDiscordCmds: false
+    refreshDiscordCmds: true
 }
