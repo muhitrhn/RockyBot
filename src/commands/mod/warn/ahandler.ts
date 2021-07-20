@@ -1,7 +1,7 @@
 import fs from "fs"
 
 async function options() {
-  const cmds = fs.readdirSync('./dist/commands/mod/warn').filter(file => !file.startsWith('.handler'))
+  const cmds = fs.readdirSync('./dist/commands/mod/warn').filter(file => !file.startsWith('ahandler'))
   let optionsToProv: any = []
   
   for (const file of cmds) {

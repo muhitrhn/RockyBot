@@ -2,8 +2,8 @@ import { CommandInteraction } from "discord.js"
 import fs from "fs"
 import { error } from "../base/cmd"
 
-const name = 'info'
-const description = '❓ Kategoria info'
+const name = 'mod'
+const description = '🛠️ Kategoria moderacja'
 
 async function redirect(interaction: CommandInteraction) {
   try {
@@ -26,13 +26,14 @@ async function redirect(interaction: CommandInteraction) {
   } 
   catch (err) {
     error(interaction, err)
+    console.log(err)
   }
 }
 
 async function createCMD(client: any) {
   let optionsToProv = [], otherHandlers: any, dirr: any
   fs.readdirSync(`./dist/commands/${name}`).filter(files => !files.endsWith('.js')).filter(async dir => {
-    otherHandlers = fs.readdirSync(`./dist/commands/${name}/${dir}`).filter(x => x.startsWith('.handler'))
+    otherHandlers = fs.readdirSync(`./dist/commands/${name}/${dir}`).filter(x => x.startsWith('ahandler'))
     dirr = dir
   })
   
@@ -44,7 +45,7 @@ async function createCMD(client: any) {
     }
   }
 
-  const cmds = fs.readdirSync(`./dist/commands/${name}`).filter(files => !files.startsWith('.handler') && files.endsWith('.js'))
+  const cmds = fs.readdirSync(`./dist/commands/${name}`).filter(files => !files.startsWith('ahandler') && files.endsWith('.js'))
   for (const file of cmds) {
     const { options } = require(`./${file}`)
     optionsToProv.push(options)
@@ -57,6 +58,5 @@ async function createCMD(client: any) {
     options: optionsToProv 
   })
 }
-
 
 export = { name, redirect, createCMD }

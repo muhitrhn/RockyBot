@@ -10,7 +10,7 @@ async function refreshDiscordCmds(client: Client) {
   // client.application?.commands.set([])
 
   fs.readdirSync('./dist/commands').filter(async dirs => {
-    const commands = fs.readdirSync(`./dist/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
+    const commands = fs.readdirSync(`./dist/commands/${dirs}`).filter(files => files.endsWith('.js') && files.startsWith('ahandler'))
 
     for (const file of commands) {
       if (dirs === 'base') return
@@ -31,7 +31,7 @@ async function refreshCache() {
   console.log(chalk.whiteBright('Dodawanie handlerów...'))
 
   fs.readdirSync('./dist/commands').filter(async dirs => {
-    const handlerss = fs.readdirSync(`./dist/commands/${dirs}`).filter(files => files.endsWith('.ts') && files.startsWith('.'))
+    const handlerss = fs.readdirSync(`./dist/commands/${dirs}`).filter(files => files.endsWith('.js') && files.startsWith('ahandler'))
 
     for (const file of handlerss) {
       const handler = require(`../${dirs}/${file}`)
