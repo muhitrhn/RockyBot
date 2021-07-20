@@ -1,3 +1,9 @@
+# 🟢 0.34
+
+|✨ Komenda music jump|✨ Bot|
+|-------------------------------|-------------------------------|
+|📗 `Przeskocz do konkretnego utworu`|📗 `Konwersja do typescript, poprawa kodu`|
+
 # 🟢 0.33
 
 🟢 **Patch 1**
