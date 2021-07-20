@@ -26,7 +26,7 @@
     "@discordjs/voice": "^0.5.4",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
-    "discord-api-types": "discordjs/discord-api-types",
+    "discord-api-types": "^0.21.0-next.f0f44e6.1626784179",
     "discord-image-generation": "^1.4.9",
     "discord.js": "^13.0.0-dev.02f55f0.1626782659",
     "dotenv": "^10.0.0",
@@ -45,9 +45,9 @@
     "ytdl-core": "^4.8.3"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "eslint": "^7.30.0",
     "ts-node": "^10.1.0",
-    "@types/node": "latest",
     "typescript": "^4.3.5"
   }
 }
