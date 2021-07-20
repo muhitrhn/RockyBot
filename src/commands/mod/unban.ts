@@ -26,8 +26,9 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
+  await interaction.guild?.bans.fetch()
   //@ts-ignore
-	const mentioned = await interaction.guild?.bans.fetch(interaction.options.getString('id').trim())
+	const mentioned = interaction.guild?.bans.cache.get(interaction.options.getString('id').trim())
 
   if (!mentioned) {
 		embed.setTitle(`${config.emotes.warn}  Nie znalazłem bana...`)

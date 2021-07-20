@@ -27,8 +27,9 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
+  await interaction.guild?.members.fetch()
   //@ts-ignore
-	const mentioned = await interaction.guild?.members.fetch(interaction.options.getUser('użytkownik'))
+	const mentioned = interaction.guild?.members.cache.get(interaction.options.getUser('użytkownik').id)
 
 	embed.setColor('RANDOM')
 

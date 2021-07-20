@@ -27,16 +27,17 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
+  await interaction.guild?.members.fetch()
   //@ts-ignore
-	const mentioned = await interaction.guild?.members.fetch(interaction.options.getUser('użytkownik'))
+	const mentioned = interaction.guild?.members.cache.get(interaction.options.getUser('użytkownik').id)
 
 	embed.setColor('RANDOM')
 
-	if (!mentioned?.manageable) {
-		embed.setTitle(`${config.emotes.warn}  Moja rola jest za niska...`)
-			.setDescription(`**...aby zdjąć rolę wyciszenia z [${mentioned?.user.tag}](https://discord.com/users/${mentioned?.id})**`)
-			.setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
-			.setColor('#FFC000')
+	if (!mentioned?.manageable || mentioned.permissions.has('MANAGE_MESSAGES')) {
+		embed.setTitle(`${config.emotes.warn}  Użytkownik nie może być wyciszony...`)
+      .setDescription('**..., ma on uprawnienie ZARZĄDZANIE WIADOMOŚCIAMI lub mam za niską rolę**')
+      .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
+      .setColor('#FFC000')
 
 		await interaction.reply({embeds: [embed], ephemeral: true})
     return

@@ -26,17 +26,18 @@ async function execute(interaction: CommandInteraction) {
     return
   }
 
+  await interaction.guild?.members.fetch()
   //@ts-ignore
-	const mentioned = await interaction.guild?.members.fetch(interaction.options.getUser('użytkownik'))
+	const mentioned = interaction.guild?.members.cache.get(interaction.options.getUser('użytkownik').id)
 
   if (!mentioned?.bannable || mentioned?.permissions.has('MANAGE_MESSAGES')) {
     embed.setTitle(`${config.emotes.warn}  Użytkownik nie może być zbanowany...`)
-    .setDescription('**...mam za niską rolę, lub ma On/a uprawnienie ZARZĄDZANIE WIADOMOŚCIAMI**')
-    .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
-    .setColor('#FFC000')
-        
-  await interaction.reply({embeds: [embed], ephemeral: true})
-  return
+      .setDescription('**..., ma on uprawnienie ZARZĄDZANIE WIADOMOŚCIAMI lub mam za niską rolę**')
+      .setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])
+      .setColor('#FFC000')
+          
+    await interaction.reply({embeds: [embed], ephemeral: true})
+    return
 	}
 
 	embed.setColor('RANDOM')

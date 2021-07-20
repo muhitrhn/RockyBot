@@ -19,7 +19,7 @@ async function execute(interaction: CommandInteraction) {
 
 	const mentioned = await interaction.guild?.members.fetch(interaction.options.getUser('użytkownik', true))
 	
-  if (!mentioned?.permissions.has('MANAGE_MESSAGES')) {
+  if (mentioned?.permissions.has('MANAGE_MESSAGES')) {
     embed.setTitle(`${config.emotes.warn}  Użytkownik jest moderatorem...`)
 			.setDescription('**...moderatorzy nie mogą być ostrzeżeni**')
 			.setThumbnail(config.cmds.errorImgs[Math.floor(Math.random() * config.cmds.errorImgs.length)])

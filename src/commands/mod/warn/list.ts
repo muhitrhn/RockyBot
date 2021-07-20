@@ -5,11 +5,12 @@ import { client, config } from '../../..'
 async function execute(interaction: CommandInteraction) {
   await interaction.defer()
 
-  const mentioned = interaction.options.getUser('użytkownik') ? interaction.guild?.members.fetch(interaction.options.getUser('użytkownik', true)) : interaction.member
+  await interaction.guild?.members.fetch()
+  const mentioned = interaction.options.getUser('użytkownik') ? interaction.guild?.members.cache.get(interaction.options.getUser('użytkownik', true).id) : interaction.member
 
 	return list(interaction, mentioned, null, null, null)
 }
-  
+
 async function list(interaction: CommandInteraction, mentioned: any, page: any, bt: any, embedColor: any){
   const embed = new MessageEmbed()
 		.setThumbnail(mentioned.user.displayAvatarURL({ dynamic: true }))
@@ -38,7 +39,7 @@ async function list(interaction: CommandInteraction, mentioned: any, page: any, 
 		num = num + 1
 	})  
 
-	const embedDesc = warns.array().join(' ')
+	const embedDesc = warns.map((x: any) => x).join(' ')
 
 	embed.setTitle(`${config.emotes.world}  Lista warnów użytkownika...`)
 		.setDescription(`**...[${mentioned.user.tag}](https://discord.com/users/${mentioned.user.id})**\n\n` + embedDesc + `${config.emotes.gearspin} ***Strona*** ***${page}***/***${maxPage}***`)
